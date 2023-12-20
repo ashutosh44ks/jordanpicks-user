@@ -1,0 +1,11 @@
+::backdrop {
+  background-image: var(--black);
+}
+dialog {
+  padding: 0.5rem;
+  border: solid 1px var(--lightgrey4);
+  border-radius: 0.75rem;
+}
+dialog:focus {
+  outline: none;
+}

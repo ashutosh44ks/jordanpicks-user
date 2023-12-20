@@ -1,24 +1,73 @@
-import logo from './logo.svg';
-import './App.css';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import { useState, useEffect } from "react";
+import PassContext from "./components/utils/PassContext";
+
+import "react-simple-toasts/dist/theme/success.css";
+import "react-simple-toasts/dist/theme/failure.css";
+import "./App.css";
+import ProtectedRoute from "./components/utils/ProtectedRoute";
+import Layout from "./components/layout";
+import Error from "./pages/Error";
+
+import Auth from "./pages/Auth";
+import Login from "./pages/Auth/components/Login";
+import Register from "./pages/Auth/components/Register";
 
 function App() {
+  const [loggedUser, setLoggedUser] = useState("");
+  const [loading, setLoading] = useState(true);
+  const handleReturningUser = () => {
+    if (localStorage.getItem("jordanToken")) {
+      const decodedToken = jwtDecode(localStorage.getItem("jordanToken"));
+      if (decodedToken.exp * 1000 < Date.now()) {
+        localStorage.removeItem("jordanToken");
+        setLoggedUser("");
+      } else {
+        setLoggedUser("user");
+      }
+    }
+    setLoading(false);
+  };
+  useEffect(() => {
+    handleReturningUser();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+
+  const BrowserRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          path: "/auth",
+          element: <Auth />,
+          children: [
+            {
+              path: "/auth/login",
+              element: <Login />,
+            },
+            {
+              path: "/auth/register",
+              element: <Register />,
+            },
+          ],
+        },
+        {
+          path: "/",
+          element: <ProtectedRoute />,
+          children: [],
+        },
+      ],
+      errorElement: <Error />,
+    },
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PassContext.Provider value={{ loggedUser, setLoggedUser }}>
+      <RouterProvider router={BrowserRouter} />
+    </PassContext.Provider>
   );
 }
 
