@@ -14,6 +14,10 @@ import Auth from "./pages/Auth";
 import Login from "./pages/Auth/components/Login";
 import Register from "./pages/Auth/components/Register";
 
+import About from "./pages/About"
+import Contact from "./pages/Contact"
+import Terms from "./pages/Terms"
+
 function App() {
   const [loggedUser, setLoggedUser] = useState("");
   const [loading, setLoading] = useState(true);
@@ -58,6 +62,18 @@ function App() {
           path: "/",
           element: <ProtectedRoute />,
           children: [],
+        },
+        {
+          path: "/about-us",
+          element: <About />,
+        },
+        {
+          path: "/contact-us",
+          element: <Contact />,
+        },
+        {
+          path: "/terms",
+          element: <Terms />,
         },
       ],
       errorElement: <Error />,
