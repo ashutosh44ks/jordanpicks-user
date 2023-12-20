@@ -61,7 +61,8 @@ h6 {
 }
 
 input,
-select {
+select,
+textarea {
   padding: 0.5rem 1rem;
   border: solid 2px var(--lightgrey);
   border-radius: 0.5rem;
@@ -69,7 +70,8 @@ select {
   transition: all 0.2s ease-in-out;
 }
 input:focus,
-select:focus {
+select:focus,
+textarea:focus {
   outline: none;
   border: solid 2px var(--blue);
 }
