@@ -32,6 +32,11 @@ header .header-tabs:hover {
   background: var(--lightgrey);
   transition: all 0.2s ease-in-out;
 }
+.page-layout-simple {
+  min-height: calc(100vh - 8rem);
+  background: var(--lightgrey);
+  transition: all 0.2s ease-in-out;
+}
 
 footer {
   display: flex;

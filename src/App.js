@@ -8,6 +8,7 @@ import "react-simple-toasts/dist/theme/failure.css";
 import "./App.css";
 import ProtectedRoute from "./components/utils/ProtectedRoute";
 import Layout from "./components/layout";
+import LayoutSimple from "./components/layout/LayoutSimple";
 import Error from "./pages/Error";
 
 import Auth from "./pages/Auth";
@@ -17,6 +18,7 @@ import Register from "./pages/Auth/components/Register";
 import About from "./pages/About"
 import Contact from "./pages/Contact"
 import Terms from "./pages/Terms"
+import Packages from "./pages/Packages";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState("");
@@ -63,6 +65,7 @@ function App() {
           element: <ProtectedRoute />,
           children: [],
         },
+       
         {
           path: "/about-us",
           element: <About />,
@@ -74,6 +77,17 @@ function App() {
         {
           path: "/terms",
           element: <Terms />,
+        },
+      ],
+      errorElement: <Error />,
+    },
+    {
+      path: "/packages",
+      element: <LayoutSimple />,
+      children: [
+        {
+          path: "/packages",
+          element: <Packages />,
         },
       ],
       errorElement: <Error />,
