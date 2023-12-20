@@ -27,7 +27,7 @@ header .header-tabs:hover {
 }
 
 .page-layout {
-  padding: 2rem;
+  padding: 4rem;
   min-height: calc(100vh - 8rem);
   background: var(--lightgrey);
   transition: all 0.2s ease-in-out;

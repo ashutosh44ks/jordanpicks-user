@@ -43,7 +43,10 @@ const Register = () => {
       }}
       className="auth-card"
     >
-      <h4 className="mb-6">Register</h4>
+      <div className="mb-6 flex flex-col justify-center items-center">
+        <h4>Register</h4>
+        <p className="text-grey">See your growth and get betting support!</p>
+      </div>
       <div className="mb-4 w-full">
         <input
           type="text"
@@ -137,7 +140,7 @@ const Register = () => {
         Already have an account ?{" "}
         <span
           className="cursor-pointer text-blue font-medium"
-          onClick={() => navigate("/auth/register")}
+          onClick={() => navigate("/auth/login")}
         >
           Sign In
         </span>

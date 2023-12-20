@@ -4,7 +4,7 @@ import "./auth.css";
 const Login = () => {
 
   return (
-    <div className="min-h-[80vh] mt-8 mb-16 flex justify-center items-center">
+    <div className="min-h-[60vh] mt-8 mb-16 flex justify-center items-start">
       <Outlet />
     </div>
   );

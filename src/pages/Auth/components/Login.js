@@ -35,7 +35,7 @@ const Login = () => {
       }}
       className="auth-card"
     >
-      <h4 className="mb-6">Enter Your Credentials</h4>
+      <h4 className="mb-6">Login</h4>
       <div className="mb-4 w-full">
         <input
           type="email"
@@ -65,9 +65,9 @@ const Login = () => {
         Don't have an account ?{" "}
         <span
           className="cursor-pointer text-blue font-medium"
-          onClick={() => navigate("/auth/login")}
+          onClick={() => navigate("/auth/register")}
         >
-          Login
+          Create now
         </span>
       </div>
     </form>
