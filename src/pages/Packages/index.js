@@ -5,7 +5,6 @@ import "./packages.css";
 import PackageBox from "./components/PackageBox";
 import Modal from "./components/Modal";
 
-
 const Packages = () => {
   const [loading, setLoading] = useState(true);
   const [packages, setPackages] = useState([]);
@@ -78,8 +77,8 @@ const Packages = () => {
             packages.map((item) => <PackageBox item={item} key={item._id} />)
           )}
         </div>
+        {/* <Modal /> */}
       </div>
-      {/* <Modal /> */}
     </div>
   );
 };
