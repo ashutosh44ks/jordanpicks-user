@@ -3,7 +3,6 @@ import Banner from "./components/Banner";
 import api from "../../components/utils/api";
 import "./packages.css";
 import PackageBox from "./components/PackageBox";
-import Modal from "./components/Modal";
 
 const Packages = () => {
   const [loading, setLoading] = useState(true);
@@ -50,12 +49,7 @@ const Packages = () => {
           description: limitDescription(item.description),
         };
       });
-      setPackages([
-        ...updatedData,
-        ...updatedData,
-        ...updatedData,
-        ...updatedData,
-      ]);
+      setPackages(updatedData);
     } catch (error) {
       console.log(error);
     }
@@ -77,7 +71,6 @@ const Packages = () => {
             packages.map((item) => <PackageBox item={item} key={item._id} />)
           )}
         </div>
-        {/* <Modal /> */}
       </div>
     </div>
   );

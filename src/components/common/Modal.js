@@ -2,7 +2,7 @@ import { forwardRef, useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
 import "./modal.css";
 
-const Modal = forwardRef(({ content }, ref) => {
+const Modal = forwardRef(({ content, title }, ref) => {
   const hideDialog = (event) => {
     var rect = ref.current.getBoundingClientRect();
     var isInDialog =
@@ -22,7 +22,7 @@ const Modal = forwardRef(({ content }, ref) => {
   return (
     <dialog ref={ref}>
       <div className="flex justify-between items-center m-4">
-        <h3>Preview Content</h3>
+        <h4>{title}</h4>
         <span
           className="p-2 cursor-pointer scale-150"
           onClick={() => {
@@ -33,10 +33,7 @@ const Modal = forwardRef(({ content }, ref) => {
         </span>
       </div>
       <hr />
-      <div
-        className="m-4 max-h-[75vh] overflow-auto"
-        dangerouslySetInnerHTML={{ __html: content }}
-      ></div>
+      <div className="m-4 max-h-[75vh] overflow-auto">{content}</div>
     </dialog>
   );
 });

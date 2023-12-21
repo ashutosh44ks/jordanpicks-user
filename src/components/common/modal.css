@@ -5,6 +5,8 @@ dialog {
   padding: 0.5rem;
   border: solid 1px var(--lightgrey4);
   border-radius: 0.75rem;
+  min-width: 25rem;
+  max-width: 50rem;
 }
 dialog:focus {
   outline: none;
