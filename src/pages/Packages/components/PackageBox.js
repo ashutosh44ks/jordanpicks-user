@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../../components/common/Button";
 
 const PackageBox = ({ item }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="package-box">
       <div className="package-box-header limit-to-1-line">
@@ -14,7 +17,15 @@ const PackageBox = ({ item }) => {
           <h1 className="mb-4">{item.price.toFixed(2)}</h1>
         </div>
         <div>
-          <Button className="w-32" theme="blue3" rounded="none" size="lg">
+          <Button
+            className="w-32"
+            theme="blue3"
+            rounded="none"
+            size="lg"
+            onClick={() => {
+              navigate("/packages/" + item._id);
+            }}
+          >
             Buy Now
           </Button>
         </div>

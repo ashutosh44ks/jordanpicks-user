@@ -25,6 +25,7 @@ import PaymentMethods from "./pages/MyAccount/components/PaymentMethods";
 import AccountDetails from "./pages/MyAccount/components/AccountDetails";
 import MyWallet from "./pages/MyAccount/components/MyWallet";
 import MyAccount from "./pages/MyAccount";
+import PackageDetails from "./pages/PackageDetails";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState("");
@@ -56,6 +57,10 @@ function App() {
           path: "/packages",
           element: <Packages />,
         },
+        {
+          path: "/packages/:id",
+          element: <PackageDetails />,
+        }
       ],
       errorElement: <Error />,
     },
