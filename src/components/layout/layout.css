@@ -4,7 +4,7 @@ header {
   align-items: center;
   gap: 1.5rem;
   padding: 1rem 4rem;
-  background: var(--black);
+  background: var(--darkblack);
   color: var(--white);
 }
 header .header-tabs {
@@ -45,7 +45,7 @@ footer {
   align-items: center;
   padding: 1rem 4rem;
   padding-top: 4rem;
-  background: var(--black);
+  background: var(--darkblack);
   color: var(--white);
 }
 
