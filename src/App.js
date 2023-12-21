@@ -49,6 +49,28 @@ function App() {
 
   const BrowserRouter = createBrowserRouter([
     {
+      path: "/packages",
+      element: <LayoutSimple />,
+      children: [
+        {
+          path: "/packages",
+          element: <Packages />,
+        },
+      ],
+      errorElement: <Error />,
+    },
+    {
+      path: "/",
+      element: <LayoutSimple />,
+      children: [
+        {
+          path: "/",
+          element: <Packages />,
+        },
+      ],
+      errorElement: <Error />,
+    },
+    {
       path: "/",
       element: <Layout />,
       children: [
@@ -109,17 +131,6 @@ function App() {
         {
           path: "/terms",
           element: <Terms />,
-        },
-      ],
-      errorElement: <Error />,
-    },
-    {
-      path: "/packages",
-      element: <LayoutSimple />,
-      children: [
-        {
-          path: "/packages",
-          element: <Packages />,
         },
       ],
       errorElement: <Error />,
