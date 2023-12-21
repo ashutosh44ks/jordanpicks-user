@@ -5,8 +5,8 @@ const MyWallet = () => {
   const { user } = useOutletContext();
   return (
     <div>
-      <h5>Your wallet balance</h5>
-      <h3>{user.wallet}</h3>
+      <h3>Your wallet balance</h3>
+      <h2>${user.wallet.toFixed(2)}</h2>
     </div>
   );
 };

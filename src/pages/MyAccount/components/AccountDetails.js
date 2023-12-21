@@ -2,10 +2,26 @@ import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import Button from "../../../components/common/Button";
 import api from "../../../components/utils/api";
+import myToast from "../../../components/utils/myToast";
 
 const AccountDetails = () => {
   const { user } = useOutletContext();
-  const handleSaveProfile = async () => {};
+  const handleSaveProfile = async () => {
+    try {
+      const { data } = await api.put("/user/profile", {
+        name,
+        username,
+        email,
+        mobile: phone,
+        current_password: cPass,
+        new_password: newPass,
+      });
+      myToast(data.message, "success");
+    } catch (err) {
+      console.log(err);
+      myToast(err?.response?.data?.error || "Something went wrong", "failure");
+    }
+  };
 
   const [name, setName] = useState(user.name);
   const [username, setUsername] = useState(user.username);
