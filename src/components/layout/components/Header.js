@@ -17,7 +17,7 @@ const Header = () => {
       name: "My Account",
       icon: <RiAccountCircleFill />,
       func: () => {
-        navigate("/my-account");
+        navigate("/my-account/dashboard");
       },
     },
     {
@@ -56,7 +56,7 @@ const Header = () => {
     },
     {
       name: "My Purchases",
-      link: "/my-account/my-purchases",
+      link: "/my-account/orders",
       protected: true,
     },
     {

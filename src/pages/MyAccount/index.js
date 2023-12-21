@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "../../components/utils/api";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Sidebar from "./components/Sidebar";
+import "./myaccount.css";
 
 const MyAccount = () => {
   const [user, setUser] = useState({});
@@ -8,6 +10,7 @@ const MyAccount = () => {
     try {
       const { data } = await api.get("/user/getProfile");
       console.log(data);
+      setUser(data.dta)
     } catch (error) {
       console.log(error);
     }
@@ -17,25 +20,7 @@ const MyAccount = () => {
   }, []);
   return (
     <div className="flex gap-8">
-      <div className="sidebar bg-pink">
-        <ul>
-          <li>
-            <Link to="/my-account/dashboard">Dashboard</Link>
-          </li>
-          <li>
-            <Link to="/my-account/my-wallet">My Wallet</Link>
-          </li>
-          <li>
-            <Link to="/my-account/orders">Orders</Link>
-          </li>
-          <li>
-            <Link to="/my-account/payment-methods">Payment Methods</Link>
-          </li>
-          <li>
-            <Link to="/my-account/account-details">Account Details</Link>
-          </li>
-        </ul>
-      </div>
+      <Sidebar />
       <div>
         <Outlet context={user} />
       </div>

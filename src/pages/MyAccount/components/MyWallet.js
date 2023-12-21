@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
 import { useOutletContext } from "react-router-dom";
 
 const MyWallet = () => {
-  const user = useOutletContext();
+  const { user } = useOutletContext();
   return (
-    <div>MyWallet</div>
-  )
-}
+    <div>
+      <h5>Your wallet balance</h5>
+      <h3>{user.wallet}</h3>
+    </div>
+  );
+};
 
-export default MyWallet
+export default MyWallet;

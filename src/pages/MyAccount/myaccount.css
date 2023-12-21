@@ -1,0 +1,28 @@
+.sidebar {
+  background: var(--darkblack);
+  color: var(--white);
+  box-shadow: 3px 0px 6px 0px rgba(176, 176, 176, 0.1),
+  11px 0px 11px 0px rgba(176, 176, 176, 0.09),
+  24px 0px 15px 0px rgba(176, 176, 176, 0.05),
+  43px 0px 17px 0px rgba(176, 176, 176, 0.01),
+  68px 0px 19px 0px rgba(176, 176, 176, 0);
+  padding: 2rem 0;
+  padding-left: 2rem;
+  border-radius: 0.75rem;
+  width: 15rem;
+}
+.sidebar ul li {
+  margin: 1rem 0;
+  padding: 0.75rem 0.5rem;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+.sidebar ul li.active {
+  background: var(--pink);
+}
+.sidebar ul li:not(.active) {
+  cursor: pointer;
+}
+.sidebar ul li:not(.active):hover {
+  background: var(--grey);
+}
