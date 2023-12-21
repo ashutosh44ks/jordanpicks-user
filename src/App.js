@@ -15,10 +15,16 @@ import Auth from "./pages/Auth";
 import Login from "./pages/Auth/components/Login";
 import Register from "./pages/Auth/components/Register";
 
-import About from "./pages/About"
-import Contact from "./pages/Contact"
-import Terms from "./pages/Terms"
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Terms from "./pages/Terms";
 import Packages from "./pages/Packages";
+import Dashboard from "./pages/MyAccount/components/Dashboard";
+import Orders from "./pages/MyAccount/components/Orders";
+import PaymentMethods from "./pages/MyAccount/components/PaymentMethods";
+import AccountDetails from "./pages/MyAccount/components/AccountDetails";
+import MyWallet from "./pages/MyAccount/components/MyWallet";
+import MyAccount from "./pages/MyAccount";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState("");
@@ -61,9 +67,36 @@ function App() {
           ],
         },
         {
-          path: "/",
+          path: "/my-account",
           element: <ProtectedRoute />,
-          children: [],
+          children: [
+            {
+              path: "/my-account",
+              element: <MyAccount />,
+              children: [
+                {
+                  path: "/my-account/dashboard",
+                  element: <Dashboard />,
+                },
+                {
+                  path: "/my-account/orders",
+                  element: <Orders />,
+                },
+                {
+                  path: "/my-account/my-wallet",
+                  element: <MyWallet />,
+                },
+                {
+                  path: "/my-account/payment-methods",
+                  element: <PaymentMethods />,
+                },
+                {
+                  path: "/my-account/account-details",
+                  element: <AccountDetails />,
+                },
+              ],
+            },
+          ],
         },
         {
           path: "/about-us",
