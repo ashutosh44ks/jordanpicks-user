@@ -13,6 +13,7 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
+      <h3 className="ml-5 mt-1 mb-5">My Account</h3>
       <ul>
         <li
           className={active === "dashboard" ? "active" : ""}

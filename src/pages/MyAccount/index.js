@@ -6,24 +6,25 @@ import "./myaccount.css";
 
 const MyAccount = () => {
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
   const getDashboard = async () => {
+    setLoading(true);
     try {
       const { data } = await api.get("/user/getProfile");
       console.log(data);
-      setUser(data.dta)
+      setUser(data.dta);
     } catch (error) {
       console.log(error);
     }
+    setLoading(false);
   };
   useEffect(() => {
     getDashboard();
   }, []);
   return (
-    <div className="flex gap-8">
+    <div className="flex gap-8 items-start">
       <Sidebar />
-      <div>
-        <Outlet context={user} />
-      </div>
+      <div>{loading ? <h3>Loading...</h3> : <Outlet context={user} />}</div>
     </div>
   );
 };
