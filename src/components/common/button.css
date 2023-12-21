@@ -9,6 +9,13 @@
 .btn.btn-blue:hover {
   background-color: var(--blue2);
 }
+.btn.btn-blue3 {
+  background-color: var(--blue3);
+  color: var(--white);
+}
+.btn.btn-blue3:hover {
+  background-color: var(--blue4);
+}
 .btn.btn-pink {
   background-color: var(--pink);
   color: var(--white);
@@ -19,6 +26,9 @@
 .btn.btn-grey {
   background-color: var(--lightgrey3);
   color: var(--darkgrey);
+}
+.btn.btn-lg {
+  padding: 0.5rem 1.5rem;
 }
 .btn.btn-md {
   padding: 0.5rem 1rem;

@@ -1,0 +1,58 @@
+.banner {
+  height: calc(100vh - 7rem);
+  padding: 6rem 4rem;
+}
+
+.package-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 25rem;
+  border: 1px solid var(--lightgrey3);
+}
+.package-box .package-box-header,
+.package-box .package-box-footer {
+  background: var(--blue3);
+  color: var(--white);
+  width: 100%;
+  text-align: center;
+}
+.package-box .package-box-header {
+  padding: 1.5rem 3rem;
+  position: relative;
+}
+.package-box .package-box-footer {
+  padding: 0.5rem;
+  font-weight: 500;
+}
+.package-box .package-box-header .sticker {
+  background: var(--white);
+  color: var(--black);
+  font-size: 0.8rem;
+  position: absolute;
+  right: 0;
+  transform: rotate(45deg) translate(-0.5rem, -1.5rem);
+  padding: 0rem 1.1rem;
+  z-index: 1;
+  font-weight: 500;
+}
+.package-box .package-box-header .sticker::after {
+  content: "";
+  position: absolute;
+  background: var(--lightgrey);
+  height: 1.75rem;
+  width: 0.75rem;
+  top: -0.5rem;
+  left: -0.11rem;
+  transform: rotate(45deg);
+  border-right: solid 1px var(--lightgrey3);
+}
+.package-box .package-box-body {
+  background: var(--lightblue);
+  width: 100%;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+  z-index: 5;
+}

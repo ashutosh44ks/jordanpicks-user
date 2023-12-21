@@ -65,7 +65,6 @@ function App() {
           element: <ProtectedRoute />,
           children: [],
         },
-       
         {
           path: "/about-us",
           element: <About />,

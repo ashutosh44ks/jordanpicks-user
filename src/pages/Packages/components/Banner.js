@@ -4,11 +4,11 @@ const Banner = () => {
   return (
     <div
       style={{
-        background: `url("./assets/banner.jpg")`,
+        background: `url("./assets/banner.png")`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}
-      className="px-8 py-36 relative"
+      className="banner relative"
     >
       <h2 className="text-white text-center mb-2">
         ELEVATES YOUR BETTING GAME WITH OUR EXCLUSIVE PACKAGES
@@ -29,8 +29,8 @@ const Banner = () => {
         }}
       >
         <iframe
-          width="420"
-          height="315"
+          width="600"
+          height="415"
           src="https://www.youtube.com/embed/2tR6eN--ieU"
           title="Welcome video"
         ></iframe>
