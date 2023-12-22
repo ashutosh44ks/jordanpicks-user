@@ -5,6 +5,7 @@ import dateFormatter from "../../../components/utils/dateFormatter"
 
 const Orders = () => {
   const { user } = useOutletContext();
+  console.log(user.orderHistory)
   return (
     <div>
       <h3>Order History</h3>
@@ -18,7 +19,7 @@ const Orders = () => {
               <td>{index + 1}</td>
               <td>{order.package.name}</td>
               <td>{dateFormatter(order.createdAt)}</td>
-              <td>{order.status}</td>
+              <td>{order.package.result}</td>
             </tr>
           ))
         ) : (

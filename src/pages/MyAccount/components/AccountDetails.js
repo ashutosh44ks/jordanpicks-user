@@ -8,15 +8,13 @@ const AccountDetails = () => {
   const { user } = useOutletContext();
   const handleSaveProfile = async () => {
     try {
-      const { data } = await api.put("/user/profile", {
+      const { data } = await api.patch("/user/updateProfile", {
         name,
-        username,
-        email,
         mobile: phone,
         current_password: cPass,
         new_password: newPass,
       });
-      myToast(data.message, "success");
+      myToast(data.msg, "success");
     } catch (err) {
       console.log(err);
       myToast(err?.response?.data?.error || "Something went wrong", "failure");
@@ -41,6 +39,18 @@ const AccountDetails = () => {
         }}
       >
         <div className="my-4">
+          <label className="font-medium" htmlFor="username">
+            Username
+          </label>
+          <p>{username}</p>
+        </div>
+        <div className="my-4">
+          <label className="font-medium" htmlFor="email">
+            Email
+          </label>
+          <p>{email}</p>
+        </div>
+        <div className="my-4">
           <label className="font-medium" htmlFor="name">
             Name
           </label>
@@ -49,33 +59,7 @@ const AccountDetails = () => {
             name="name"
             id="name"
             value={name}
-            onChange={(e) => setName(e)}
-            className="w-full"
-          />
-        </div>
-        <div className="my-4">
-          <label className="font-medium" htmlFor="username">
-            Username
-          </label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e)}
-            className="w-full"
-          />
-        </div>
-        <div className="my-4">
-          <label className="font-medium" htmlFor="email">
-            Email
-          </label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e)}
+            onChange={(e) => setName(e.target.value)}
             className="w-full"
           />
         </div>
@@ -88,7 +72,7 @@ const AccountDetails = () => {
             name="phone"
             id="phone"
             value={phone}
-            onChange={(e) => setPhone(e)}
+            onChange={(e) => setPhone(e.target.value)}
             className="w-full"
           />
         </div>
@@ -101,7 +85,7 @@ const AccountDetails = () => {
             name="cPass"
             id="cPass"
             value={cPass}
-            onChange={(e) => setCPass(e)}
+            onChange={(e) => setCPass(e.target.value)}
             className="w-full"
           />
         </div>
@@ -114,12 +98,12 @@ const AccountDetails = () => {
             name="newPass"
             id="newPass"
             value={newPass}
-            onChange={(e) => setNewPass(e)}
+            onChange={(e) => setNewPass(e.target.value)}
             className="w-full"
           />
         </div>
         <div className="my-4">
-          <Button theme="pink" rounded="none">
+          <Button theme="pink" rounded="none" type="submit">
             Save Changes
           </Button>
         </div>
