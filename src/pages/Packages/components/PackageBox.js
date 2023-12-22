@@ -14,9 +14,29 @@ const PackageBox = ({ item }) => {
 
   const { diffTimeData } = useCountdown(item.endDate);
 
+  const isExpired = () => {
+    let expired = false;
+    if (diffTimeData.diffDay < 0) {
+      expired = true;
+    } else if (diffTimeData.diffDay === 0) {
+      if (diffTimeData.diffHour < 0) {
+        expired = true;
+      } else if (diffTimeData.diffHour === 0) {
+        if (diffTimeData.diffMin < 0) {
+          expired = true;
+        } else if (diffTimeData.diffMin === 0) {
+          if (diffTimeData.diffSec < 0) {
+            expired = true;
+          }
+        }
+      }
+    }
+    return expired;
+  };
+
   return (
     <>
-      <div className="package-box">
+      <div className={`package-box ${isExpired(diffTimeData) ? "hidden" : ""}`}>
         <div className="package-box-header limit-to-1-line">
           <h3>{item.name.slice(0, 20)}</h3>
           <div className="sticker">JORDAN PICKS</div>

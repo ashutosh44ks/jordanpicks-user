@@ -11,6 +11,9 @@
   width: 25rem;
   border: 1px solid var(--lightgrey3);
 }
+.package-box.hidden {
+  display: none !important;
+}
 .package-box .package-box-header,
 .package-box .package-box-footer {
   background: var(--blue3);
