@@ -6,9 +6,9 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
   return (
     <div className="flex">
       <iframe
-        width="600"
-        height="415"
-        src="https://www.youtube.com/embed/2tR6eN--ieU"
+        width="1024"
+        height="420"
+        src="https://www.youtube.com/embed/v7Iy5ikDy4A"
         title="Welcome video"
       ></iframe>
       <div className="bg-blue2 text-white w-full p-16 flex flex-col justify-center">
