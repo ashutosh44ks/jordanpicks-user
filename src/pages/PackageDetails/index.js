@@ -17,7 +17,7 @@ const PackageDetails = () => {
       const { data } = await api.get(`/user/getPackage/${id}`);
       console.log(data);
       // check for package id in api not userid @ankit
-      setPackageDetails(data.dta);
+      setPackageDetails({ ...data.dta, isBought: data.isBought });
     } catch (error) {
       console.log(error);
     }
@@ -78,11 +78,23 @@ const PackageDetails = () => {
           <div className="my-8">
             <h3>Bets</h3>
             <hr className="my-2" />
-            Bets will shown after purchase only.{" "}
-            <Link to="/contact-us" className="text-blue2 font-medium">
-              Contact us
-            </Link>{" "}
-            for more details.
+            {packageDetails.isBought ? (
+              <ul className="list-disc ml-4">
+                {packageDetails.bets.map((bet, index) => (
+                  <li key={index} className="my-2">
+                    {bet}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div>
+                Bets will shown after purchase only.{" "}
+                <Link to="/contact-us" className="text-blue2 font-medium">
+                  Contact us
+                </Link>{" "}
+                for more details.
+              </div>
+            )}
           </div>
         </div>
       </div>
