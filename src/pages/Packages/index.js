@@ -62,7 +62,7 @@ const Packages = () => {
   return (
     <div>
       <Banner />
-      <div className="pt-64 pb-36 px-16">
+      <div className="pt-72 pb-36 px-16">
         <h2 className="text-center">GET STARTED WITH OUR PACKAGES</h2>
         <div className="my-16 flex flex-wrap gap-x-8 gap-y-16 justify-center">
           {loading ? (
