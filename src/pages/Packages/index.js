@@ -49,7 +49,7 @@ const Packages = () => {
           description: limitDescription(item.description),
         };
       });
-      setPackages(updatedData);
+      setPackages(updatedData.filter((x) => x.result === "pending"));
     } catch (error) {
       console.log(error);
     }
