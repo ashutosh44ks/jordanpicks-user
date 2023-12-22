@@ -24,8 +24,8 @@ const ProfitGuarantee = () => {
         </li>
       </ol>
       <p className="my-4">
-        YOU CAN USE YOUR CREDIT TO BUY ANYTHING ELSE ON
-        <a href="https://jordanspicks.com/index.php" className="text-blue2">
+        YOU CAN USE YOUR CREDIT TO BUY ANYTHING ELSE ON{" "}
+        <a href="https://jordanspicks.com/index.php" className="text-blue2 font-medium">
           JORDAN PICKS
         </a>
       </p>

@@ -15,14 +15,11 @@ const CheckoutForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (!stripe) {
-      return;
-    }
+    if (!stripe) return;
 
     const clientSecret = new URLSearchParams(window.location.search).get(
       "payment_intent_client_secret"
     );
-
     if (!clientSecret) {
       console.log("No client secret found in query string");
       return;
@@ -49,11 +46,9 @@ const CheckoutForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!stripe || !elements) {
-      // Stripe.js hasn't yet loaded.
-      // Make sure to disable form submission until Stripe.js has loaded.
-      return;
-    }
+    // Stripe.js hasn't yet loaded.
+    // Make sure to disable form submission until Stripe.js has loaded.
+    if (!stripe || !elements) return;
 
     setIsLoading(true);
 
@@ -61,7 +56,7 @@ const CheckoutForm = () => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "http://localhost:3000",
+        return_url: process.env.REACT_APP_BASE_URL + "payment/success",
       },
     });
 
@@ -71,11 +66,9 @@ const CheckoutForm = () => {
     // be redirected to an intermediate site first to authorize the payment, then
     // redirected to the `return_url`.
     console.log(error);
-    if (error.type === "card_error" || error.type === "validation_error") {
+    if (error.type === "card_error" || error.type === "validation_error")
       setMessage(error.message);
-    } else {
-      setMessage("An unexpected error occurred.");
-    }
+    else setMessage("An unexpected error occurred.");
 
     setIsLoading(false);
   };
@@ -99,18 +92,26 @@ const CheckoutForm = () => {
 };
 
 const stripePromise = loadStripe(
-  "pk_test_51O7tf8SFrCuULYAC8mpgWT6ZyYvhGdGtIagZ47El6JuDq0bepOjn6sRzzajIHIb6OWJuS8TpNXygxFQuu8SMQG7h00y7WAJk8I"
+  "pk_test_51OQ3f7SDVopylE37M8rsEW3UlKdpt03QjxRuhYTUV6uPr7xgIc3k9VqaRGxMaRYiOvdks1dJDsgVVewYZ60h1NOS00icaIUJSn"
 );
 
-const Test = () => {
+const StripeComponent = ({ amount, packageId, packageName }) => {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("http://localhost:5000/user/createIntent", {
+    fetch(`${process.env.REACT_APP_BASE_API_URL}user/createIntent`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+      body: JSON.stringify({
+        items: [
+          {
+            id: packageId,
+            name: packageName,
+            amount: amount,
+          },
+        ],
+      }),
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
@@ -133,4 +134,4 @@ const Test = () => {
     </>
   );
 };
-export default Test;
+export default StripeComponent;

@@ -1,6 +1,7 @@
 import { useRef, useContext } from "react";
-import PassContext from "../../../components/utils/PassContext";
 import { useNavigate } from "react-router-dom";
+import { useCountdown } from "../../../components/utils/useCountdown";
+import PassContext from "../../../components/utils/PassContext";
 import Button from "../../../components/common/Button";
 import Modal from "../../../components/common/Modal";
 import ProfitGuarantee from "./ProfitGuarantee";
@@ -10,6 +11,8 @@ const PackageBox = ({ item }) => {
 
   const dialogRef = useRef();
   const { loggedUser } = useContext(PassContext);
+
+  const { diffTimeData } = useCountdown(item.endDate);
 
   return (
     <>
@@ -25,7 +28,7 @@ const PackageBox = ({ item }) => {
           </div>
           <div>
             <Button
-              className="w-32"
+              className="w-32 uppercase font-medium"
               theme="blue3"
               rounded="none"
               size="lg"
@@ -51,7 +54,7 @@ const PackageBox = ({ item }) => {
           ></div>
           <div>
             <Button
-              className="w-48"
+              className="w-48 font-medium"
               theme="blue3"
               rounded="none"
               size="lg"
@@ -63,7 +66,16 @@ const PackageBox = ({ item }) => {
             </Button>
           </div>
         </div>
-        <h5 className="package-box-footer">{item.gamePreview}</h5>
+        <div className="package-box-footer">
+          <p>{item.gamePreview}</p>
+          <hr className="my-1 border-lightblue" />
+          <h5>
+            {item._id ? diffTimeData.diffDay : 0} days{" "}
+            {item._id ? diffTimeData.diffHour : 0} hours{" "}
+            {item._id ? diffTimeData.diffMin : 0} mins{" "}
+            {item._id ? diffTimeData.diffSec : 0} secs left
+          </h5>
+        </div>
       </div>
       <Modal
         ref={dialogRef}

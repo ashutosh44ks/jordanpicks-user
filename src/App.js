@@ -26,6 +26,8 @@ import AccountDetails from "./pages/MyAccount/components/AccountDetails";
 import MyWallet from "./pages/MyAccount/components/MyWallet";
 import MyAccount from "./pages/MyAccount";
 import PackageDetails from "./pages/PackageDetails";
+import PaymentSuccess from "./pages/Payment/PaymentSuccess";
+import PaymentFailed from "./pages/Payment/PaymentFailed";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState("");
@@ -49,6 +51,14 @@ function App() {
   if (loading) return <div>Loading...</div>;
 
   const BrowserRouter = createBrowserRouter([
+    {
+      path: "/payment/success",
+      element: <PaymentSuccess />,
+    },
+    {
+      path: "/payment/failed",
+      element: <PaymentFailed />,
+    },
     {
       path: "/packages",
       element: <LayoutSimple />,

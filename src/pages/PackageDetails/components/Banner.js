@@ -1,21 +1,9 @@
-import { useEffect, useState } from "react";
-import api from "../../../components/utils/api";
+import { useCountdown } from "../../../components/utils/useCountdown";
 import Button from "../../../components/common/Button";
 
-const Banner = () => {
-  const [wallet, setWallet] = useState(0);
-  const getProfile = async () => {
-    try {
-      const { data } = await api.get("/user/getProfile");
-      console.log(data);
-      setWallet(data.dta.user.wallet);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getProfile();
-  }, []);
+const Banner = ({ loading, packageDetails, wallet }) => {
+
+  const { diffTimeData } = useCountdown(packageDetails.endDate);
   return (
     <div className="flex">
       <iframe
@@ -25,12 +13,22 @@ const Banner = () => {
         title="Welcome video"
       ></iframe>
       <div className="bg-blue2 text-white w-full p-16 flex flex-col justify-center">
-        <h2 className="mb-4">00 Days 00 Hours 00 Minutes 00 Seconds</h2>
-        <h3 className="mb-2">Package Name</h3>
-        <h1>$ 99.99</h1>
+        <h2 className="mb-4">
+          {loading ? 0 : diffTimeData.diffDay} days{" "}
+          {loading ? 0 : diffTimeData.diffHour} hours{" "}
+          {loading ? 0 : diffTimeData.diffMin} mins{" "}
+          {loading ? 0 : diffTimeData.diffSec} secs left
+        </h2>
+        <h3 className="mb-2">
+          {loading ? "Package Name" : packageDetails.name}
+        </h3>
+        <h1>$ {loading ? 99.99 : packageDetails.price}</h1>
         <div className="my-4">
           <p>Your wallet balance is ${wallet.toFixed(2)}</p>
-          <p>Pay remaining amount of just ${99.99 - wallet}</p>
+          <p>
+            Pay remaining amount of just $
+            {loading ? 99.99 - wallet : packageDetails.price}
+          </p>
         </div>
         <div>
           <Button
