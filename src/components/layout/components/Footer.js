@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import PassContext from "../../utils/PassContext";
 
 const Header = () => {
   const navigate = useNavigate();
-  const { loggedUser, setLoggedUser } = useContext(PassContext);
+  const { loggedUser } = useContext(PassContext);
 
   const routes = [
     {
@@ -14,7 +14,7 @@ const Header = () => {
     },
     {
       name: "My Purchases",
-      link: "/my-account/my-purchases",
+      link: "/my-account/orders",
       protected: true,
     },
     {
@@ -58,10 +58,10 @@ const Header = () => {
           </div>
         ))}
       </div>
-      <hr 
+      <hr
         className="w-full my-4"
         style={{
-          border: "solid 1px var(--grey)"
+          border: "solid 1px var(--grey)",
         }}
       />
       <div className="text-sm">Copyright © 2023. All right reserved</div>
