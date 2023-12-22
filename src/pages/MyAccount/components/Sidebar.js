@@ -33,12 +33,12 @@ const Sidebar = () => {
         >
           Orders
         </li>
-        <li
+        {/* <li
           className={active === "payment-methods" ? "active" : ""}
           onClick={() => navigate("/my-account/payment-methods")}
         >
           Payment Methods
-        </li>
+        </li> */}
         <li
           className={active === "account-details" ? "active" : ""}
           onClick={() => navigate("/my-account/account-details")}

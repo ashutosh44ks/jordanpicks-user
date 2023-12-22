@@ -1,8 +1,10 @@
 import React from "react";
-import "./button.css"
+import "./button.css";
 
 const Button = ({
   className = "",
+  id = "",
+  disabled = false,
   onClick = () => {},
   theme = "blue",
   size = "md",
@@ -15,6 +17,8 @@ const Button = ({
       className={`btn btn-${theme} btn-${size} btn-rounded-${rounded} ${className}`}
       onClick={onClick}
       type={type}
+      disabled={disabled}
+      id={id}
     >
       {children}
     </button>

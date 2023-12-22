@@ -1,6 +1,7 @@
 import React from "react";
 import { useOutletContext } from "react-router-dom";
 import Table from "../../../components/common/Table";
+import dateFormatter from "../../../components/utils/dateFormatter"
 
 const Orders = () => {
   const { user } = useOutletContext();
@@ -16,7 +17,7 @@ const Orders = () => {
             <tr key={order._id}>
               <td>{index + 1}</td>
               <td>{order.package.name}</td>
-              <td>{order.date}</td>
+              <td>{dateFormatter(order.createdAt)}</td>
               <td>{order.status}</td>
             </tr>
           ))

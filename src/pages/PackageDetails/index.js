@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Banner from "./components/Banner";
 import Stripe from "./components/Stripe";
 import api from "../../components/utils/api";
+import Modal from "../../components/common/Modal";
 
 const PackageDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [packageDetails, setPackageDetails] = useState({});
   const [loading, setLoading] = useState(true);
@@ -37,11 +39,30 @@ const PackageDetails = () => {
     getPackageDetails();
   }, []);
 
+  const [paymentRoute, setPaymentRoute] = useState("");
+  const payWithWallet = async () => {
+    try {
+      const { data } = await api.post("/user/walletWithdraw", {
+        packageId: packageDetails._id,
+      });
+      console.log(data);
+      navigate("/my-account/orders");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const dialogRef = useRef();
+  useEffect(() => {
+    if (paymentRoute === "wallet") payWithWallet();
+    else if (paymentRoute === "stripe") dialogRef.current.showModal();
+  }, [paymentRoute]);
+
   return (
     <>
       <div>
         <Banner
           packageDetails={packageDetails}
+          setPaymentRoute={setPaymentRoute}
           wallet={wallet}
           loading={loading}
         />
@@ -65,13 +86,22 @@ const PackageDetails = () => {
           </div>
         </div>
       </div>
-      <div className="my-64">
-        <Stripe
-          amount={wallet - packageDetails.price}
-          packageId={packageDetails._id}
-          packageName={packageDetails.name}
+      {paymentRoute === "stripe" && (
+        <Modal
+          ref={dialogRef}
+          title="Pay with Card"
+          content={
+            <Stripe
+              amount={packageDetails.price}
+              packageId={packageDetails._id}
+              packageName={packageDetails.name}
+            />
+          }
+          closeDialog={() => {
+            setPaymentRoute("");
+          }}
         />
-      </div>
+      )}
     </>
   );
 };

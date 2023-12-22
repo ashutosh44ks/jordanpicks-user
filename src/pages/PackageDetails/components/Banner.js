@@ -1,8 +1,7 @@
 import { useCountdown } from "../../../components/utils/useCountdown";
 import Button from "../../../components/common/Button";
 
-const Banner = ({ loading, packageDetails, wallet }) => {
-
+const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
   const { diffTimeData } = useCountdown(packageDetails.endDate);
   return (
     <div className="flex">
@@ -25,10 +24,6 @@ const Banner = ({ loading, packageDetails, wallet }) => {
         <h1>$ {loading ? 99.99 : packageDetails.price}</h1>
         <div className="my-4">
           <p>Your wallet balance is ${wallet.toFixed(2)}</p>
-          <p>
-            Pay remaining amount of just $
-            {loading ? 99.99 - wallet : packageDetails.price}
-          </p>
         </div>
         <div>
           <Button
@@ -36,9 +31,14 @@ const Banner = ({ loading, packageDetails, wallet }) => {
             size="lg"
             className="w-48"
             rounded="none"
-            onClick={() => {}}
+            onClick={() => {
+              if (wallet >= packageDetails.price) setPaymentRoute("wallet");
+              else setPaymentRoute("stripe");
+            }}
           >
-            Buy Now
+            {wallet >= packageDetails.price
+              ? "Buy with wallet"
+              : "Buy with Card"}
           </Button>
         </div>
       </div>

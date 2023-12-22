@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import api from "../../components/utils/api";
 
 const Payment = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const searchParams = new URLSearchParams(location.search);
   const paymentIntentId = searchParams.get("payment_intent");
@@ -13,6 +14,7 @@ const Payment = () => {
     try {
       const { data } = await api.post("/user/validatePayment", {
         paymentIntentId: paymentIntentId,
+        packageId: id,
       });
       console.log(data);
       setStatus(data.status);
@@ -28,20 +30,16 @@ const Payment = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Payment</h1>
+    <div className="p-16">
+      <h2 className="mb-8">Payment Redirection</h2>
       {status === "" ? (
-        <p>
-          Please wait while we validate your payment. You will be redirected to
-          your dashboard shortly.
-        </p>
+        <p>Please wait while we validate your payment.</p>
       ) : status === "succeeded" ? (
-        <p>
-          Payment Successful. You will be redirected to your dashboard shortly.
-        </p>
+        <p className="font-medium text-blue">Payment Successful</p>
       ) : (
-        <p>Payment Failed. You will be redirected to your dashboard shortly.</p>
+        <p className="font-medium text-red-600">Payment Failed</p>
       )}
+      <p>You will be redirected to your dashboard shortly.</p>
     </div>
   );
 };

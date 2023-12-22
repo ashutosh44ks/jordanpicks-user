@@ -21,13 +21,12 @@ import Terms from "./pages/Terms";
 import Packages from "./pages/Packages";
 import Dashboard from "./pages/MyAccount/components/Dashboard";
 import Orders from "./pages/MyAccount/components/Orders";
-import PaymentMethods from "./pages/MyAccount/components/PaymentMethods";
+// import PaymentMethods from "./pages/MyAccount/components/PaymentMethods";
 import AccountDetails from "./pages/MyAccount/components/AccountDetails";
 import MyWallet from "./pages/MyAccount/components/MyWallet";
 import MyAccount from "./pages/MyAccount";
 import PackageDetails from "./pages/PackageDetails";
-import PaymentSuccess from "./pages/Payment/PaymentSuccess";
-import PaymentFailed from "./pages/Payment/PaymentFailed";
+import Payment from "./pages/Payment";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState("");
@@ -52,14 +51,6 @@ function App() {
 
   const BrowserRouter = createBrowserRouter([
     {
-      path: "/payment/success",
-      element: <PaymentSuccess />,
-    },
-    {
-      path: "/payment/failed",
-      element: <PaymentFailed />,
-    },
-    {
       path: "/packages",
       element: <LayoutSimple />,
       children: [
@@ -69,8 +60,18 @@ function App() {
         },
         {
           path: "/packages/:id",
-          element: <PackageDetails />,
-        }
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: "/packages/:id",
+              element: <PackageDetails />,
+            },
+            {
+              path: "/packages/:id/payment",
+              element: <Payment />,
+            },
+          ],
+        },
       ],
       errorElement: <Error />,
     },
@@ -123,10 +124,10 @@ function App() {
                   path: "/my-account/my-wallet",
                   element: <MyWallet />,
                 },
-                {
-                  path: "/my-account/payment-methods",
-                  element: <PaymentMethods />,
-                },
+                // {
+                //   path: "/my-account/payment-methods",
+                //   element: <PaymentMethods />,
+                // },
                 {
                   path: "/my-account/account-details",
                   element: <AccountDetails />,

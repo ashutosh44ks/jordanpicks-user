@@ -6,8 +6,10 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import Button from "../../../components/common/Button";
+import api from "../../../components/utils/api";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ packageId }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -56,7 +58,8 @@ const CheckoutForm = () => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: process.env.REACT_APP_BASE_URL + "payment/success",
+        return_url:
+          process.env.REACT_APP_BASE_URL + "packages/" + packageId + "/payment",
       },
     });
 
@@ -80,7 +83,11 @@ const CheckoutForm = () => {
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
+      <button
+        className="w-full font-medium mt-4 btn btn-blue btn-md hover:bg-blue2"
+        disabled={isLoading || !stripe || !elements}
+        id="submit"
+      >
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
         </span>
@@ -98,23 +105,22 @@ const stripePromise = loadStripe(
 const StripeComponent = ({ amount, packageId, packageName }) => {
   const [clientSecret, setClientSecret] = useState("");
 
+  const createIntent = async () => {
+    try {
+      const { data } = await api.post("/user/createIntent", {
+        packageId: packageId,
+        description: packageName,
+        amount: amount,
+      });
+      setClientSecret(data.clientSecret);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch(`${process.env.REACT_APP_BASE_API_URL}user/createIntent`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        items: [
-          {
-            id: packageId,
-            name: packageName,
-            amount: amount,
-          },
-        ],
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data.clientSecret));
+    createIntent();
   }, []);
 
   const appearance = {
@@ -128,7 +134,7 @@ const StripeComponent = ({ amount, packageId, packageName }) => {
     <>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm />
+          <CheckoutForm packageId={packageId} />
         </Elements>
       )}
     </>

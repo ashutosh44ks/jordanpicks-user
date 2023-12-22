@@ -2,7 +2,7 @@ import { forwardRef, useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
 import "./modal.css";
 
-const Modal = forwardRef(({ content, title }, ref) => {
+const Modal = forwardRef(({ content, title, closeDialog = () => {} }, ref) => {
   const hideDialog = (event) => {
     var rect = ref.current.getBoundingClientRect();
     var isInDialog =
@@ -12,6 +12,7 @@ const Modal = forwardRef(({ content, title }, ref) => {
       event.clientX <= rect.left + rect.width;
     if (!isInDialog) {
       ref.current.close();
+      closeDialog();
     }
   };
   useEffect(() => {
@@ -27,13 +28,16 @@ const Modal = forwardRef(({ content, title }, ref) => {
           className="p-2 cursor-pointer scale-150"
           onClick={() => {
             ref.current.close();
+            closeDialog();
           }}
         >
           <IoMdClose />
         </span>
       </div>
       <hr />
-      <div className="m-4 max-h-[75vh] overflow-auto">{content}</div>
+      <div className="m-4 max-h-[75vh] overflow-y-auto overflow-x-hidden">
+        {content}
+      </div>
     </dialog>
   );
 });
