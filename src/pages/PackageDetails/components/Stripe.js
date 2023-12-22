@@ -98,9 +98,7 @@ const CheckoutForm = ({ packageId }) => {
   );
 };
 
-const stripePromise = loadStripe(
-  "pk_test_51OQ3f7SDVopylE37M8rsEW3UlKdpt03QjxRuhYTUV6uPr7xgIc3k9VqaRGxMaRYiOvdks1dJDsgVVewYZ60h1NOS00icaIUJSn"
-);
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const StripeComponent = ({ amount, packageId, packageName }) => {
   const [clientSecret, setClientSecret] = useState("");
