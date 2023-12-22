@@ -79,7 +79,14 @@ const Header = () => {
 
   return (
     <header>
-      <img src="/assets/logo.png" alt="logo" className="h-20 w-20" />
+      <img
+        src="/assets/logo.png"
+        alt="logo"
+        className="h-20 w-20 cursor-pointer"
+        onClick={() => {
+          navigate("/");
+        }}
+      />
       <div className="flex gap-6">
         {routes.map((route, index) => (
           <div
