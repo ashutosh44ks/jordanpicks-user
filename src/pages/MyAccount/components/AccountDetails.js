@@ -11,8 +11,8 @@ const AccountDetails = () => {
       const { data } = await api.patch("/user/updateProfile", {
         name,
         mobile: phone,
-        current_password: cPass,
-        new_password: newPass,
+        currentPassword: cPass,
+        newPassword: newPass,
       });
       myToast(data.msg, "success");
     } catch (err) {
