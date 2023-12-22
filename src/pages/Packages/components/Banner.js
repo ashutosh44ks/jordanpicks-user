@@ -31,7 +31,7 @@ const Banner = () => {
         <iframe
           width="600"
           height="415"
-          src="https://www.youtube.com/embed/2tR6eN--ieU"
+          src="https://www.youtube.com/embed/v7Iy5ikDy4A"
           title="Welcome video"
         ></iframe>
       </div>
