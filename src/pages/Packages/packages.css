@@ -59,3 +59,8 @@
   position: relative;
   z-index: 5;
 }
+.package-box .package-box-body .limit-to-5-lines ul,
+.package-box .package-box-body .limit-to-5-lines ol {
+  list-style: revert !important;
+  margin-left: 2rem;
+}
