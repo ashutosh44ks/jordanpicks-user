@@ -13,15 +13,13 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
       ></iframe>
       <div className="bg-blue2 text-white w-full p-16 flex flex-col justify-center">
         <h2 className="mb-4">
-          {loading ? 0 : diffTimeData.diffDay} days{" "}
-          {loading ? 0 : diffTimeData.diffHour} hours{" "}
-          {loading ? 0 : diffTimeData.diffMin} mins{" "}
-          {loading ? 0 : diffTimeData.diffSec} secs left
+          {!loading && diffTimeData.diffDay} days{" "}
+          {!loading && diffTimeData.diffHour} hours{" "}
+          {!loading && diffTimeData.diffMin} mins{" "}
+          {!loading && diffTimeData.diffSec} secs left
         </h2>
-        <h3 className="mb-2">
-          {loading ? "Package Name" : packageDetails.name}
-        </h3>
-        <h1>$ {loading ? 99.99 : packageDetails.price}</h1>
+        <h3 className="mb-2">{!loading && packageDetails.name}</h3>
+        <h1>$ {!loading && packageDetails.price}</h1>
         <div className="my-4">
           <p>Your wallet balance is ${wallet.toFixed(2)}</p>
         </div>
