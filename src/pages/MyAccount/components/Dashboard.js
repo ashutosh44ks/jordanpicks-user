@@ -6,7 +6,7 @@ const Dashboard = () => {
   return (
     <div>
       <h3>Dashboard</h3>
-      <div className="flex flex-gap gap-6 my-8">
+      <div className="flex flex-gap gap-6 my-8 flex-wrap justify-center">
         <div>
           <h4>Total Wins</h4>
           <h2 className="text-center">{user.totalWins}</h2>
