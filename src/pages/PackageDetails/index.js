@@ -42,6 +42,17 @@ const PackageDetails = () => {
   const [paymentRoute, setPaymentRoute] = useState("");
   const payWithWallet = async () => {
     try {
+      // confirm payment first from user only then if he says yes then make the api call
+      const confirmation = window.confirm(
+        `Are you sure you want to pay with wallet?
+        You have $${wallet} in your wallet.
+        $${packageDetails.price} will be deducted from your wallet.
+        `
+      );
+      if (!confirmation) {
+        setPaymentRoute("");
+        return;
+      }
       const { data } = await api.post("/user/walletWithdraw", {
         packageId: packageDetails._id,
       });
