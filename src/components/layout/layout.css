@@ -7,7 +7,8 @@ header {
   background: var(--darkblack);
   color: var(--white);
 }
-header .header-section, footer .footer-section {
+header .header-section,
+footer .footer-section {
   display: flex;
   gap: 1.5rem;
 }
@@ -79,5 +80,10 @@ footer {
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem 1.5rem;
+  }
+}
+@media screen and (max-width: 420px) {
+  header .header-tabs:first-of-type span.hide-on-sm {
+    display: none;
   }
 }

@@ -14,7 +14,11 @@ const Header = () => {
 
   const tabsProtected = [
     {
-      name: "My Account",
+      name: (
+        <>
+          <span className="hide-on-sm">My</span> Account
+        </>
+      ),
       icon: <RiAccountCircleFill />,
       func: () => {
         navigate("/my-account/dashboard");

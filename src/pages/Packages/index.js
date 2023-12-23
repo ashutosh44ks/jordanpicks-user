@@ -65,7 +65,7 @@ const Packages = () => {
         <Banner />
         <div className="w-full flex justify-center">
           <iframe
-            className="relative translate-y-[-10rem]"
+            className="home-welcome-iframe"
             width="600"
             height="415"
             src="https://www.youtube.com/embed/v7Iy5ikDy4A"

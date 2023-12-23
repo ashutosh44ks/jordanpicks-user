@@ -4,6 +4,7 @@ import Banner from "./components/Banner";
 import Stripe from "./components/Stripe";
 import api from "../../components/utils/api";
 import Modal from "../../components/common/Modal";
+import "./packagedetails.css"
 
 const PackageDetails = () => {
   const { id } = useParams();
@@ -77,7 +78,7 @@ const PackageDetails = () => {
           wallet={wallet}
           loading={loading}
         />
-        <div className="p-16">
+        <div className="pack-details">
           <div>
             <h3>Package Details</h3>
             <hr className="my-4" />

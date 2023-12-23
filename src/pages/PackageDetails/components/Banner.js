@@ -4,22 +4,21 @@ import Button from "../../../components/common/Button";
 const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
   const { diffTimeData } = useCountdown(packageDetails.endDate);
   return (
-    <div className="flex">
+    <div className="package-details-banner">
       <iframe
-        width="1024"
         height="420"
         src="https://www.youtube.com/embed/v7Iy5ikDy4A"
         title="Welcome video"
       ></iframe>
       <div className="bg-blue2 text-white w-full p-16 flex flex-col justify-center">
-        <h2 className="mb-4">
+        <h2 className="mb-4 pack-countdown">
           {!loading && diffTimeData.diffDay} days{" "}
           {!loading && diffTimeData.diffHour} hours{" "}
           {!loading && diffTimeData.diffMin} mins{" "}
           {!loading && diffTimeData.diffSec} secs left
         </h2>
-        <h3 className="mb-2">{!loading && packageDetails.name}</h3>
-        <h1>$ {!loading && packageDetails.price}</h1>
+        <h3 className="mb-2 pack-name">{!loading && packageDetails.name}</h3>
+        <h1 className="pack-price">$ {!loading && packageDetails.price}</h1>
         <div className="my-4">
           <p>Your wallet balance is ${wallet.toFixed(2)}</p>
         </div>
