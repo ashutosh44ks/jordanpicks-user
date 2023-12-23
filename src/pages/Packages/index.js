@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Banner from "./components/Banner";
 import api from "../../components/utils/api";
-import "./packages.css";
 import PackageBox from "./components/PackageBox";
+import "./packages.css";
 
 const Packages = () => {
   const [loading, setLoading] = useState(true);
@@ -61,8 +61,19 @@ const Packages = () => {
 
   return (
     <div>
-      <Banner />
-      <div className="pt-72 pb-36 px-16">
+      <div>
+        <Banner />
+        <div className="w-full flex justify-center">
+          <iframe
+            className="relative translate-y-[-10rem]"
+            width="600"
+            height="415"
+            src="https://www.youtube.com/embed/v7Iy5ikDy4A"
+            title="Welcome video"
+          ></iframe>
+        </div>
+      </div>
+      <div className="pb-36 px-16">
         <h2 className="text-center">GET STARTED WITH OUR PACKAGES</h2>
         <div className="my-16 flex flex-wrap gap-x-8 gap-y-16 justify-center">
           {loading ? (

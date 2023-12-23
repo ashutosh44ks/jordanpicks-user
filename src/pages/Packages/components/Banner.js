@@ -8,7 +8,7 @@ const Banner = () => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}
-      className="banner relative"
+      className="banner"
     >
       <h2 className="text-white text-center mb-2">
         ELEVATES YOUR BETTING GAME WITH OUR EXCLUSIVE PACKAGES
@@ -19,22 +19,6 @@ const Banner = () => {
         insights and strategies for success. Take your betting to the next
         level.
       </h5>
-      <div
-        style={{
-          position: "absolute",
-          left: "50%",
-          //   right: "50%",
-          top: "30rem",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <iframe
-          width="600"
-          height="415"
-          src="https://www.youtube.com/embed/v7Iy5ikDy4A"
-          title="Welcome video"
-        ></iframe>
-      </div>
     </div>
   );
 };
