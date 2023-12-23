@@ -55,7 +55,7 @@ const Header = () => {
       protected: false,
     },
     {
-      name: "My Purchases",
+      name: "My Orders",
       link: "/my-account/orders",
       protected: true,
     },
