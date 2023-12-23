@@ -8,48 +8,42 @@ const Packages = () => {
   const [loading, setLoading] = useState(true);
   const [packages, setPackages] = useState([]);
 
-  const limitDescription = (description) => {
-    let htmlTagRegex = /(<[^>]*>.*?<\/[^>]*>)|(<[^>]*>)/g;
-    let matches = description.match(htmlTagRegex);
-    let result = "";
-    let i = 0;
+  // const limitDescription = (description) => {
+  //   let htmlTagRegex = /(<[^>]*>.*?<\/[^>]*>)|(<[^>]*>)/g;
+  //   let matches = description.match(htmlTagRegex);
+  //   let result = "";
+  //   let i = 0;
 
-    while (i < matches.length && result.length + matches[i].length <= 100) {
-      result += matches[i];
-      i++;
-    }
+  //   while (i < matches.length && result.length + matches[i].length <= 100) {
+  //     result += matches[i];
+  //     i++;
+  //   }
 
-    // If the next tag is not complete and adding it would exceed 100 characters
-    if (
-      i < matches.length &&
-      !matches[i].endsWith(">") &&
-      result.length + matches[i].length > 150
-    ) {
-      // Continue adding until a complete tag is found
-      while (i < matches.length && !matches[i].endsWith(">")) {
-        result += matches[i];
-        i++;
-      }
-      // Add the complete tag
-      if (i < matches.length) {
-        result += matches[i];
-      }
-    }
+  //   // If the next tag is not complete and adding it would exceed 100 characters
+  //   if (
+  //     i < matches.length &&
+  //     !matches[i].endsWith(">") &&
+  //     result.length + matches[i].length > 150
+  //   ) {
+  //     // Continue adding until a complete tag is found
+  //     while (i < matches.length && !matches[i].endsWith(">")) {
+  //       result += matches[i];
+  //       i++;
+  //     }
+  //     // Add the complete tag
+  //     if (i < matches.length) {
+  //       result += matches[i];
+  //     }
+  //   }
 
-    return result;
-  };
+  //   return result;
+  // };
 
   const getPackages = async () => {
     setLoading(true);
     try {
       const { data } = await api.get("/user/allPackage");
-      const updatedData = data.dta.map((item) => {
-        return {
-          ...item,
-          description: limitDescription(item.description),
-        };
-      });
-      setPackages(updatedData);
+      setPackages(data.dta);
     } catch (error) {
       console.log(error);
     }

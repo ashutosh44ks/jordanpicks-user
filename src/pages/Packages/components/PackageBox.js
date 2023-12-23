@@ -88,7 +88,7 @@ const PackageBox = ({ item }) => {
         </div>
         <div className="package-box-footer">
           <p>{item.gamePreview}</p>
-          <hr className="my-1 border-lightblue" />
+          <hr className="my-1 mx-6 border-lightblue" />
           <h5>
             {item._id ? diffTimeData.diffDay : 0} days{" "}
             {item._id ? diffTimeData.diffHour : 0} hours{" "}
