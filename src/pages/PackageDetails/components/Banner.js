@@ -24,20 +24,26 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
           <p>Your wallet balance is ${wallet.toFixed(2)}</p>
         </div>
         <div>
-          <Button
-            theme="pink"
-            size="lg"
-            className="w-48"
-            rounded="none"
-            onClick={() => {
-              if (wallet >= packageDetails.price) setPaymentRoute("wallet");
-              else setPaymentRoute("stripe");
-            }}
-          >
-            {wallet >= packageDetails.price
-              ? "Buy with wallet"
-              : "Buy with Card"}
-          </Button>
+          {packageDetails.isBought ? (
+            <Button theme="pink" size="lg" className="w-48 cursor-default" rounded="none">
+              Already Purchased
+            </Button>
+          ) : (
+            <Button
+              theme="pink"
+              size="lg"
+              className="w-48"
+              rounded="none"
+              onClick={() => {
+                if (wallet >= packageDetails.price) setPaymentRoute("wallet");
+                else setPaymentRoute("stripe");
+              }}
+            >
+              {wallet >= packageDetails.price
+                ? "Buy with wallet"
+                : "Buy with Card"}
+            </Button>
+          )}
         </div>
       </div>
     </div>
