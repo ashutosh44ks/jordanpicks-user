@@ -1,6 +1,13 @@
 .banner {
   height: calc(100vh - 12rem);
+  max-height: 30rem;
   padding: 6rem 4rem;
+}
+
+.package-box-container {
+  padding-bottom: 9rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
 }
 
 .package-box {
@@ -63,4 +70,18 @@
 .package-box .package-box-body .limit-to-5-lines ol {
   list-style: revert !important;
   margin-left: 2rem;
+}
+
+@media screen and (max-width: 900px) {
+  .package-box-container {
+    padding-bottom: 9rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+@media screen and (max-width: 500px) {
+  .package-box .package-box-header{
+    padding: 1.5rem;
+    text-align: left;
+  }
 }

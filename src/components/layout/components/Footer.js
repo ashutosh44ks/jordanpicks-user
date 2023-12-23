@@ -39,7 +39,7 @@ const Header = () => {
       <div className="absolute top-[-4rem]">
         <img src="/assets/logo.png" alt="logo" className="h-28 w-28" />
       </div>
-      <div className="flex gap-6">
+      <div className="footer-section">
         {routes.map((route, index) => (
           <div
             key={index}

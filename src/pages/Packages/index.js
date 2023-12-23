@@ -73,7 +73,7 @@ const Packages = () => {
           ></iframe>
         </div>
       </div>
-      <div className="pb-36 px-16">
+      <div className="package-box-container">
         <h2 className="text-center">GET STARTED WITH OUR PACKAGES</h2>
         <div className="my-16 flex flex-wrap gap-x-8 gap-y-16 justify-center">
           {loading ? (

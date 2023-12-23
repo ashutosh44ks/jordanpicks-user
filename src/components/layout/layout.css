@@ -7,6 +7,10 @@ header {
   background: var(--darkblack);
   color: var(--white);
 }
+header .header-section, footer .footer-section {
+  display: flex;
+  gap: 1.5rem;
+}
 header .header-tabs {
   display: flex;
   align-items: center;
@@ -49,14 +53,31 @@ footer {
   color: var(--white);
 }
 
-/* @media screen and (max-width: 880px) {
+@media screen and (max-width: 900px) {
   header {
-    margin-left: 2rem;
+    padding: 1rem 2rem;
+    gap: 1rem;
   }
-  .sidebar.lg {
-    display: none;
+  header .header-section {
+    gap: 1rem;
   }
   .page-layout {
-    margin-left: 2rem;
+    padding: 2rem;
   }
-} */
+  footer {
+    padding: 1rem 2rem;
+    padding-top: 4rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  header .header-section.nav {
+    display: none;
+  }
+}
+@media screen and (max-width: 640px) {
+  footer .footer-section {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem 1.5rem;
+  }
+}

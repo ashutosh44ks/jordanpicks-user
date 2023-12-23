@@ -5,7 +5,6 @@ import dateFormatter from "../../../components/utils/dateFormatter";
 
 const Orders = () => {
   const { user } = useOutletContext();
-  console.log(user.orderHistory);
   return (
     <div>
       <h3>Order History</h3>
@@ -17,12 +16,12 @@ const Orders = () => {
           user.orderHistory.map((order, index) => (
             <tr key={order._id}>
               <td>{index + 1}</td>
-              <td>{order.package.name}</td>
+              <td>{order.package?.name}</td>
               <td>{dateFormatter(order.createdAt)}</td>
-              <td>{order.package.result}</td>
+              <td>{order.package?.result}</td>
               <td>
                 <ul className="list-disc">
-                  {order.package.bets.map((b, index) => (
+                  {order.package && order.package.bets.map((b, index) => (
                     <li key={index}>{b}</li>
                   ))}
                 </ul>

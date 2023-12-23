@@ -69,7 +69,7 @@ const PackageBox = ({ item }) => {
             style={{ borderTop: "1px solid var(--lightgrey3)" }}
           />
           <div
-            className="my-8 limit-to-5-lines break-all h-[10rem]"
+            className="my-8 limit-to-5-lines break-words h-[10rem]"
             dangerouslySetInnerHTML={{ __html: item.description }}
           ></div>
           <div>

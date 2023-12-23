@@ -87,7 +87,7 @@ const Header = () => {
           navigate("/");
         }}
       />
-      <div className="flex gap-6">
+      <div className="header-section nav">
         {routes.map((route, index) => (
           <div
             key={index}
@@ -106,7 +106,7 @@ const Header = () => {
           </div>
         ))}
       </div>
-      <div className="flex gap-6">
+      <div className="header-section">
         {tabs.map((tab, index) => (
           <div key={index} className="header-tabs" onClick={tab.func}>
             {tab.icon}
