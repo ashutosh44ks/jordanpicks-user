@@ -10,7 +10,7 @@ const Banner = () => {
       }}
       className="banner"
     >
-      <h2 className="text-white text-center mb-2">
+      <h2 className="text-white text-center mb-4">
         ELEVATES YOUR BETTING GAME WITH OUR EXCLUSIVE PACKAGES
       </h2>
       <h5 className="text-white text-center">
