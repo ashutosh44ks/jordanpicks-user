@@ -43,7 +43,7 @@ const PackageDetails = () => {
   const [cardDeduction, setCardDeduction] = useState(0);
   const [walletDeduction, setWalletDeduction] = useState(0);
   useEffect(() => {
-    if (wallet && packageDetails._id) {
+    if (wallet!==undefined && packageDetails._id) {
       if (wallet < packageDetails.price) {
         setCardDeduction(packageDetails.price - wallet);
         setWalletDeduction(wallet);

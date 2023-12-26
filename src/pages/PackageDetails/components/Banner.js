@@ -51,8 +51,7 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
               </Button>
               {wallet < packageDetails.price && wallet > 0 && (
                 <p className="my-4">
-                  Pay ${Math.abs(packageDetails.price - wallet)} with wallet and
-                  rest with card
+                  Pay ${wallet} with wallet and rest with card
                 </p>
               )}
             </>
