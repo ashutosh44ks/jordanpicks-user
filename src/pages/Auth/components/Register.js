@@ -17,7 +17,9 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
   const [terms, setTerms] = useState(false);
+  const [loading, setLoading] = useState(false);
   const registerUser = async () => {
+    setLoading(true);
     try {
       const { data } = await api.post(`/user/signin`, {
         name,
@@ -36,12 +38,15 @@ const Register = () => {
       console.log(err);
       myToast(err?.response?.data?.error || "Something went wrong", "failure");
     }
+    setLoading(false);
   };
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        registerUser();
+        if (password !== cPassword)
+          return myToast("Passwords do not match", "failure");
+        else registerUser();
       }}
       className="auth-card"
     >
@@ -128,7 +133,7 @@ const Register = () => {
           className="mr-2"
         />
         <label>
-          I have read and argee to{" "}
+          I have read and agree to{" "}
           <span
             className="cursor-pointer text-blue font-medium"
             onClick={() => navigate("/terms")}
@@ -138,9 +143,15 @@ const Register = () => {
         </label>
       </div>
       <div className="w-full mb-4">
-        <Button theme="pink" className="w-full" type="submit">
-          Create Account
-        </Button>
+        {loading ? (
+          <Button theme="grey" className="w-full" type="button" disabled>
+            Loading...
+          </Button>
+        ) : (
+          <Button theme="pink" className="w-full" type="submit">
+            Create Account
+          </Button>
+        )}
       </div>
       <div className="w-full">
         Already have an account ?{" "}
