@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import Banner from "./components/Banner";
-import Stripe from "./components/Stripe";
 import api from "../../components/utils/api";
+import Stripe from "./components/Stripe";
+import Banner from "./components/Banner";
 import Modal from "../../components/common/Modal";
+import Button from "../../components/common/Button";
 import "./packagedetails.css";
 
 const PackageDetails = () => {
@@ -53,17 +54,6 @@ const PackageDetails = () => {
   const [paymentRoute, setPaymentRoute] = useState("");
   const payWithWallet = async () => {
     try {
-      // confirm payment first from user only then if he says yes then make the api call
-      const confirmation = window.confirm(
-        `Are you sure you want to pay with wallet?
-        You have $${wallet} in your wallet.
-        $${packageDetails.price} will be deducted from your wallet.
-        `
-      );
-      if (!confirmation) {
-        setPaymentRoute("");
-        return;
-      }
       const { data } = await api.post("/user/walletWithdraw", {
         packageId: packageDetails._id,
       });
@@ -75,8 +65,8 @@ const PackageDetails = () => {
   };
   const dialogRef = useRef();
   useEffect(() => {
-    if (paymentRoute === "wallet") payWithWallet();
-    else if (paymentRoute === "stripe") dialogRef.current.showModal();
+    if (paymentRoute === "wallet" || paymentRoute === "stripe")
+      dialogRef.current.showModal();
   }, [paymentRoute]);
 
   return (
@@ -131,6 +121,33 @@ const PackageDetails = () => {
               cardDeduction={cardDeduction}
               walletDeduction={walletDeduction}
             />
+          }
+          closeDialog={() => {
+            setPaymentRoute("");
+          }}
+        />
+      )}
+      {paymentRoute === "wallet" && (
+        <Modal
+          ref={dialogRef}
+          title="Confim Payment"
+          content={
+            <div>
+              <p>Are you sure you want to pay with wallet?</p>
+              <p>
+                After payment, ${packageDetails.price} will be deducted from your
+                wallet.
+              </p>
+              <div className="flex justify-end mt-4">
+                <Button
+                  theme="pink"
+                  rounded="none"
+                  onClick={payWithWallet}
+                >
+                  Confirm
+                </Button>
+              </div>
+            </div>
           }
           closeDialog={() => {
             setPaymentRoute("");
