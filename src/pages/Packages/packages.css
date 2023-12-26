@@ -3,6 +3,12 @@
   max-height: 30rem;
   padding: 6rem 4rem;
 }
+.banner h2 {
+  text-shadow: 3px 4px 7px rgba(0, 0, 0, 0.75);
+}
+.banner h5 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
 
 .package-box-container {
   padding-bottom: 9rem;
@@ -94,7 +100,7 @@
   }
 }
 
-@media screen and (max-height: 950px) and (max-width: 420px)  {
+@media screen and (max-height: 950px) and (max-width: 420px) {
   .home-welcome-iframe {
     position: static;
     margin-bottom: 6rem;
