@@ -24,7 +24,7 @@ const MyAccount = () => {
   return (
     <div className="flex gap-8 items-start">
       <Sidebar />
-      <div>{loading ? <h3>Loading...</h3> : <Outlet context={user} />}</div>
+      <div className="w-full">{loading ? <h3>Loading...</h3> : <Outlet context={user} />}</div>
     </div>
   );
 };

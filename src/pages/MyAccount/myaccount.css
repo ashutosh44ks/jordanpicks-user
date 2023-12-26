@@ -9,7 +9,8 @@
   padding: 2rem 0;
   padding-left: 2rem;
   border-radius: 0.75rem;
-  width: 15rem;
+  width: 20rem;
+  height: 100vh;
 }
 .sidebar ul li {
   margin: 1rem 0;
@@ -25,6 +26,37 @@
 }
 .sidebar ul li:not(.active):hover {
   background: var(--grey);
+}
+
+.dashboard-item {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  position: relative;
+  width: 12rem;
+}
+.dashboard-item label {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transform: scale(1.2);
+  position: absolute;
+  top: -0.75rem;
+  left: 1.5rem;
+}
+.dashboard-item:nth-child(2n) {
+  background-color: var(--pink);
+  color: var(--white);
+}
+.dashboard-item:nth-child(2n) label {
+  background-color: var(--blue);
+  color: var(--white);
+}
+.dashboard-item:nth-child(2n + 1) {
+  background-color: var(--blue);
+  color: var(--white);
+}
+.dashboard-item:nth-child(2n + 1) label {
+  background-color: var(--pink);
+  color: var(--white);
 }
 
 @media screen and (max-width: 480px) {
