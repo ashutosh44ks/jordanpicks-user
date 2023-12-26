@@ -3,7 +3,7 @@ import Button from "../../../components/common/Button";
 
 const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
   const { diffTimeData } = useCountdown(packageDetails.endDate);
-  
+
   return (
     <div className="package-details-banner">
       <iframe
@@ -49,12 +49,12 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
                   ? "Buy with wallet"
                   : "Buy with Card"}
               </Button>
-              <div className="my-4">
-                <p>
+              {wallet < packageDetails.price && wallet > 0 && (
+                <p className="my-4">
                   Pay ${Math.abs(packageDetails.price - wallet)} with wallet and
                   rest with card
                 </p>
-              </div>
+              )}
             </>
           )}
         </div>
