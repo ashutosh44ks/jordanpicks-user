@@ -1,13 +1,14 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import PassContext from "../../../components/utils/PassContext";
 import Button from "../../../components/common/Button";
 import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
 
 const Register = () => {
-  const navigate = useNavigate();
   const { setLoggedUser } = useContext(PassContext);
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +30,8 @@ const Register = () => {
       localStorage.setItem("jordanToken", data.dta.token);
       localStorage.setItem("jordanTokenRefresh", data.dta.refreshToken);
       setLoggedUser("user");
-      navigate("/");
+      if (searchParams.get("redirect")) navigate(searchParams.get("redirect"));
+      else navigate("/");
     } catch (err) {
       console.log(err);
       myToast(err?.response?.data?.error || "Something went wrong", "failure");

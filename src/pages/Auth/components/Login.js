@@ -1,13 +1,14 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import PassContext from "../../../components/utils/PassContext";
 import Button from "../../../components/common/Button";
 import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
 
 const Login = () => {
-  const navigate = useNavigate();
   const { setLoggedUser } = useContext(PassContext);
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +22,8 @@ const Login = () => {
       localStorage.setItem("jordanToken", data.dta.token);
       localStorage.setItem("jordanTokenRefresh", data.dta.refreshToken);
       setLoggedUser("user");
-      navigate("/");
+      if (searchParams.get("redirect")) navigate(searchParams.get("redirect"));
+      else navigate("/");
     } catch (err) {
       console.log(err);
       myToast(err?.response?.data?.error || "Something went wrong", "failure");
@@ -65,7 +67,11 @@ const Login = () => {
         Don't have an account ?{" "}
         <span
           className="cursor-pointer text-blue font-medium"
-          onClick={() => navigate("/auth/register")}
+          onClick={() => {
+            if (searchParams.get("redirect"))
+              navigate(`/auth/register?redirect=${searchParams.get("redirect")}`);
+            else navigate("/auth/register");
+          }}
         >
           Create now
         </span>
