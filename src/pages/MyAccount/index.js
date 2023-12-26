@@ -22,7 +22,7 @@ const MyAccount = () => {
     getDashboard();
   }, []);
   return (
-    <div className="flex gap-8 items-start">
+    <div className="my-account-layout">
       <Sidebar />
       <div className="w-full">{loading ? <h3>Loading...</h3> : <Outlet context={user} />}</div>
     </div>

@@ -59,7 +59,13 @@
   color: var(--white);
 }
 
-@media screen and (max-width: 480px) {
+.my-account-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+@media screen and (max-width: 640px) {
   .sidebar {
     padding-left: 1rem;
   }
@@ -71,5 +77,14 @@
     margin-left: 1rem;
     font-size: 1.25rem;
   }
-    
+}
+@media screen and (max-width: 480px) {
+  .sidebar {
+    height: auto;
+    width: 100%;
+    padding: 2rem 1rem;
+  }
+  .my-account-layout {
+    flex-direction: column;
+  }
 }
