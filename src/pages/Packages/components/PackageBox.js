@@ -53,12 +53,7 @@ const PackageBox = ({ item }) => {
               rounded="none"
               size="lg"
               onClick={() => {
-                const url = "/packages/" + item._id;
-                if (!loggedUser) {
-                  navigate(`/auth/login?redirect=${url}`);
-                  return;
-                }
-                navigate(url);
+                navigate("/packages/" + item._id);
               }}
             >
               Buy Now
@@ -69,7 +64,7 @@ const PackageBox = ({ item }) => {
             style={{ borderTop: "1px solid var(--lightgrey3)" }}
           />
           <div
-            className="my-8 limit-to-5-lines break-words h-[10rem]"
+            className="my-8 limit-to-5-lines break-words h-[9rem]"
             dangerouslySetInnerHTML={{ __html: item.description }}
           ></div>
           <div>
