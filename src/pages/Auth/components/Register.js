@@ -47,7 +47,11 @@ const Register = () => {
     >
       <div className="mb-6 flex flex-col justify-center items-center">
         <h4>Register</h4>
-        <p className="text-grey">See your growth and get betting support!</p>
+        <p className="text-grey">
+          Register now and get
+          <span className="text-pink font-medium"> $25 bonus!</span>
+        </p>
+        <p className="text-grey">See your growth and get betting support</p>
       </div>
       <div className="mb-4 w-full">
         <input
