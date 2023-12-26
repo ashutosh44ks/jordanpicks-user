@@ -27,6 +27,7 @@ import MyWallet from "./pages/MyAccount/components/MyWallet";
 import MyAccount from "./pages/MyAccount";
 import PackageDetails from "./pages/PackageDetails";
 import Payment from "./pages/Payment";
+import AddReward from "./pages/AddReward";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState("");
@@ -135,6 +136,16 @@ function App() {
               ],
             },
           ],
+        },
+        {
+            path: "/",
+            element: <ProtectedRoute />,
+            children: [
+              {
+                path: "/add-reward",
+                element: <AddReward />,
+              },
+            ],
         },
         {
           path: "/about-us",
