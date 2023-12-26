@@ -7,7 +7,7 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
     <div className="package-details-banner">
       <iframe
         height="420"
-        src="https://www.youtube.com/embed/v7Iy5ikDy4A"
+        src={packageDetails.videoURL}
         title="Welcome video"
       ></iframe>
       <div className="bg-blue2 text-white w-full p-16 flex flex-col justify-center">
