@@ -16,14 +16,15 @@ const Orders = () => {
           user.orderHistory.map((order, index) => (
             <tr key={order._id}>
               <td>{index + 1}</td>
-              <td>{order.package?.name}</td>
+              <td>{order.desc}</td>
               <td>{dateFormatter(order.createdAt)}</td>
               <td>{order.package?.result}</td>
               <td>
                 <ul className="list-disc">
-                  {order.package && order.package.bets.map((b, index) => (
-                    <li key={index}>{b}</li>
-                  ))}
+                  {order.package &&
+                    order.package.bets.map((b, index) => (
+                      <li key={index}>{b}</li>
+                    ))}
                 </ul>
               </td>
             </tr>
