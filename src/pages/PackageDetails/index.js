@@ -4,7 +4,7 @@ import Banner from "./components/Banner";
 import Stripe from "./components/Stripe";
 import api from "../../components/utils/api";
 import Modal from "../../components/common/Modal";
-import "./packagedetails.css"
+import "./packagedetails.css";
 
 const PackageDetails = () => {
   const { id } = useParams();
@@ -17,7 +17,6 @@ const PackageDetails = () => {
     try {
       const { data } = await api.get(`/user/getPackage/${id}`);
       console.log(data);
-      // check for package id in api not userid @ankit
       setPackageDetails({ ...data.dta, isBought: data.isBought });
     } catch (error) {
       console.log(error);
@@ -39,6 +38,17 @@ const PackageDetails = () => {
     getProfile();
     getPackageDetails();
   }, []);
+
+  const [cardDeduction, setCardDeduction] = useState(0);
+  const [walletDeduction, setWalletDeduction] = useState(0);
+  useEffect(() => {
+    if (wallet && packageDetails._id) {
+      if (wallet < packageDetails.price) {
+        setCardDeduction(packageDetails.price - wallet);
+        setWalletDeduction(wallet);
+      }
+    }
+  }, [packageDetails, wallet]);
 
   const [paymentRoute, setPaymentRoute] = useState("");
   const payWithWallet = async () => {
@@ -116,9 +126,10 @@ const PackageDetails = () => {
           title="Pay with Card"
           content={
             <Stripe
-              amount={packageDetails.price}
               packageId={packageDetails._id}
               packageName={packageDetails.name}
+              cardDeduction={cardDeduction}
+              walletDeduction={walletDeduction}
             />
           }
           closeDialog={() => {

@@ -3,6 +3,7 @@ import Button from "../../../components/common/Button";
 
 const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
   const { diffTimeData } = useCountdown(packageDetails.endDate);
+  
   return (
     <div className="package-details-banner">
       <iframe
@@ -10,7 +11,7 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
         src={packageDetails.videoURL}
         title="Welcome video"
       ></iframe>
-      <div className="bg-blue2 text-white w-full p-16 flex flex-col justify-center">
+      <div className="bg-blue2 text-white w-full px-16 h-[420px] flex flex-col justify-center">
         <h2 className="mb-4 pack-countdown">
           {!loading && diffTimeData.diffDay} days{" "}
           {!loading && diffTimeData.diffHour} hours{" "}
@@ -24,24 +25,37 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
         </div>
         <div>
           {packageDetails.isBought ? (
-            <Button theme="pink" size="lg" className="w-48 cursor-default" rounded="none">
-              Already Purchased
-            </Button>
-          ) : (
             <Button
               theme="pink"
               size="lg"
-              className="w-48"
+              className="w-48 cursor-default"
               rounded="none"
-              onClick={() => {
-                if (wallet >= packageDetails.price) setPaymentRoute("wallet");
-                else setPaymentRoute("stripe");
-              }}
             >
-              {wallet >= packageDetails.price
-                ? "Buy with wallet"
-                : "Buy with Card"}
+              Already Purchased
             </Button>
+          ) : (
+            <>
+              <Button
+                theme="pink"
+                size="lg"
+                className="w-48"
+                rounded="none"
+                onClick={() => {
+                  if (wallet >= packageDetails.price) setPaymentRoute("wallet");
+                  else setPaymentRoute("stripe");
+                }}
+              >
+                {wallet >= packageDetails.price
+                  ? "Buy with wallet"
+                  : "Buy with Card"}
+              </Button>
+              <div className="my-4">
+                <p>
+                  Pay ${Math.abs(packageDetails.price - wallet)} with wallet and
+                  rest with card
+                </p>
+              </div>
+            </>
           )}
         </div>
       </div>
