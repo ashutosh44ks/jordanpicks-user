@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../../components/utils/api";
 import myToast from "../../components/utils/myToast";
 import Button from "../../components/common/Button";
+import "./contact.css";
 
 const Contact = () => {
   const [fName, setFName] = useState("");
@@ -26,7 +27,7 @@ const Contact = () => {
     }
   };
   return (
-    <div>
+    <div className="contact-page">
       <div>
         <h2 className="text-center mb-4">How can we help you?</h2>
         <h4 className="text-center">Get In Touch!</h4>
@@ -38,7 +39,7 @@ const Contact = () => {
           sendMsg();
         }}
       >
-        <div className="mb-4">
+        <div className="input-group">
           <input
             className="min-w-[20rem] w-full"
             type="text"
@@ -47,8 +48,6 @@ const Contact = () => {
             placeholder="First Name"
             required
           />
-        </div>
-        <div className="mb-4">
           <input
             className="min-w-[20rem] w-full"
             type="text"
@@ -58,7 +57,7 @@ const Contact = () => {
             required
           />
         </div>
-        <div className="mb-4">
+        <div className="input-group">
           <input
             className="min-w-[20rem] w-full"
             type="text"
@@ -70,8 +69,6 @@ const Contact = () => {
             placeholder="Mobile No."
             required
           />
-        </div>
-        <div className="mb-4">
           <input
             className="min-w-[20rem] w-full"
             type="email"

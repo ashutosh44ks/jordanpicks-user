@@ -1,0 +1,11 @@
+.contact-page form .input-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .contact-page form .input-group {
+    flex-direction: column;
+  }
+}
