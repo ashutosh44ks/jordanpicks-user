@@ -9,6 +9,13 @@ const Dashboard = () => {
   return (
     <div>
       <h3>Dashboard</h3>
+      {!user?.user?.bonus && (
+        <div className="mt-4 mb-8 text-sm bg-white rounded-xl p-4 w-full border border-lightgrey4">
+          You have
+          <span className="font-medium text-pink"> $25 bonus </span>
+          (check registered email to claim bonus)
+        </div>
+      )}
       <div className="flex flex-gap gap-6 my-8 flex-wrap">
         <div className="dashboard-item">
           <label>
