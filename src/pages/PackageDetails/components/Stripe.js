@@ -108,7 +108,7 @@ const StripeComponent = ({
 
   const createIntent = async () => {
     try {
-      const { data } = await api.post("/user/createIntent", {
+      const { data } = await api.post("/user/createIntentPackage", {
         packageId: packageId,
         description: packageName,
         amount: cardDeduction,

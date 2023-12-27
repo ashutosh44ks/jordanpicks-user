@@ -54,7 +54,7 @@ const PackageDetails = () => {
   const [paymentRoute, setPaymentRoute] = useState("");
   const payWithWallet = async () => {
     try {
-      const { data } = await api.post("/user/walletWithdraw", {
+      const { data } = await api.post("/user/walletWithdrawPackage", {
         packageId: packageDetails._id,
       });
       console.log(data);

@@ -14,7 +14,7 @@ const Payment = () => {
   const [status, setStatus] = useState("");
   const validatePayment = async () => {
     try {
-      const { data } = await api.post("/user/validatePayment", {
+      const { data } = await api.post("/user/validatePaymentPackage", {
         paymentIntentId: paymentIntentId,
         packageId: id,
         walletDeduction,
