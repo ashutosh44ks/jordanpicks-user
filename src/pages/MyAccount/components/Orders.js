@@ -18,11 +18,15 @@ const Orders = () => {
               <td>{index + 1}</td>
               <td>{order.desc}</td>
               <td>{dateFormatter(order.createdAt)}</td>
-              <td>{order.package?.result}</td>
+              <td>{order.package?.result || order.vslPackage?.result}</td>
               <td>
                 <ul className="list-disc">
                   {order.package &&
                     order.package.bets.map((b, index) => (
+                      <li key={index}>{b}</li>
+                    ))}
+                  {order.vslPackage &&
+                    order.vslPackage.bets.map((b, index) => (
                       <li key={index}>{b}</li>
                     ))}
                 </ul>
