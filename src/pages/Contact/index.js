@@ -90,7 +90,7 @@ const Contact = () => {
           />
         </div>
         <div>
-          <Button theme="pink" type="submit" rounded="none" className="w-full">
+          <Button theme="pink" type="submit" rounded="none" className="w-full md:w-[8rem]">
             Send
           </Button>
         </div>
