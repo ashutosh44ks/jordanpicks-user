@@ -1,0 +1,22 @@
+.vsl-divider {
+  background-color: var(--darkblack);
+  color: var(--white);
+  padding: 2rem 4rem;
+}
+
+@media screen and (max-width: 640px) {
+  .vsl-divider h2 {
+    font-size: 1.75rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .vsl-divider {
+    padding: 2rem;
+  }
+  .vsl-divider h2 {
+    font-size: 1.5rem;
+  }
+  .vsl-divider h4 {
+    font-size: 1rem;
+  }
+}

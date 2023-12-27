@@ -21,12 +21,13 @@ import Terms from "./pages/Terms";
 import Packages from "./pages/Packages";
 import Dashboard from "./pages/MyAccount/components/Dashboard";
 import Orders from "./pages/MyAccount/components/Orders";
-// import PaymentMethods from "./pages/MyAccount/components/PaymentMethods";
 import AccountDetails from "./pages/MyAccount/components/AccountDetails";
 import MyWallet from "./pages/MyAccount/components/MyWallet";
 import MyAccount from "./pages/MyAccount";
 import PackageDetails from "./pages/PackageDetails";
+import VSLPackageDetails from "./pages/VSLPackageDetails";
 import Payment from "./pages/Payment";
+import VSLPayment from "./pages/VSLPayment";
 import AddReward from "./pages/AddReward";
 
 function App() {
@@ -70,6 +71,27 @@ function App() {
             {
               path: "/packages/:id/payment",
               element: <Payment />,
+            },
+          ],
+        },
+      ],
+      errorElement: <Error />,
+    },
+    {
+      path: "/vsl-packages",
+      element: <LayoutSimple />,
+      children: [
+        {
+          path: "/vsl-packages/:id",
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: "/vsl-packages/:id",
+              element: <VSLPackageDetails />,
+            },
+            {
+              path: "/vsl-packages/:id/payment",
+              element: <VSLPayment />,
             },
           ],
         },
@@ -138,14 +160,14 @@ function App() {
           ],
         },
         {
-            path: "/",
-            element: <ProtectedRoute />,
-            children: [
-              {
-                path: "/add-reward",
-                element: <AddReward />,
-              },
-            ],
+          path: "/",
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: "/add-reward",
+              element: <AddReward />,
+            },
+          ],
         },
         {
           path: "/about-us",
