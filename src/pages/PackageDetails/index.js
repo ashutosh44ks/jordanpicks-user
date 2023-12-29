@@ -52,7 +52,9 @@ const PackageDetails = () => {
   }, [packageDetails, wallet]);
 
   const [paymentRoute, setPaymentRoute] = useState("");
+  const [walletLoading, setWalletLoading] = useState(true);
   const payWithWallet = async () => {
+    setWalletLoading(true);
     try {
       const { data } = await api.post("/user/walletWithdrawPackage", {
         packageId: packageDetails._id,
@@ -62,6 +64,7 @@ const PackageDetails = () => {
     } catch (err) {
       console.log(err);
     }
+    setWalletLoading(false);
   };
   const dialogRef = useRef();
   useEffect(() => {
@@ -143,6 +146,7 @@ const PackageDetails = () => {
                   theme="pink"
                   rounded="none"
                   onClick={payWithWallet}
+                  disabled={walletLoading}
                 >
                   Confirm
                 </Button>
