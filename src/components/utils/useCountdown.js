@@ -23,9 +23,7 @@ export const useCountdown = (endDate) => {
     diffSec: 0,
   });
   const getTimer = (timeStamp) => {
-    const diffDay = Math.floor(
-      (timeStamp % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24)
-    );
+    const diffDay = Math.floor(timeStamp / (1000 * 60 * 60 * 24));
     const diffHour = Math.floor(
       (timeStamp % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
     );
