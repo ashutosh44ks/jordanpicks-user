@@ -52,7 +52,7 @@ const PackageDetails = () => {
   }, [packageDetails, wallet]);
 
   const [paymentRoute, setPaymentRoute] = useState("");
-  const [walletLoading, setWalletLoading] = useState(true);
+  const [walletLoading, setWalletLoading] = useState(false);
   const payWithWallet = async () => {
     setWalletLoading(true);
     try {
