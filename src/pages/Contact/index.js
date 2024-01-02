@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import PassContext from "../../components/utils/PassContext";
 import api from "../../components/utils/api";
 import myToast from "../../components/utils/myToast";
 import Button from "../../components/common/Button";
 import "./contact.css";
 
 const Contact = () => {
+  const { loggedUser } = useContext(PassContext);
+
   const [fName, setFName] = useState("");
   const [lName, setLName] = useState("");
   const [email, setEmail] = useState("");
@@ -26,6 +29,23 @@ const Contact = () => {
       myToast(err?.response?.data?.error || "Something went wrong", "failure");
     }
   };
+  const getProfile = async () => {
+    try {
+      const { data } = await api.get("/user/getProfile");
+      console.log(data);
+      if (data?.dta?.user?._id) {
+        setFName(data.dta.user.name.split(" ")[0]);
+        setLName(data.dta.user.name.split(" ")[1] || "");
+        setEmail(data.dta.user.email);
+        setPhone(data.dta.user.mobile);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    if (loggedUser) getProfile();
+  }, []);
   return (
     <div className="contact-page">
       <div>
@@ -90,7 +110,12 @@ const Contact = () => {
           />
         </div>
         <div>
-          <Button theme="pink" type="submit" rounded="none" className="w-full md:w-[8rem]">
+          <Button
+            theme="pink"
+            type="submit"
+            rounded="none"
+            className="w-full md:w-[8rem]"
+          >
             Send
           </Button>
         </div>
