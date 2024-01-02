@@ -29,6 +29,20 @@ const Login = () => {
       myToast(err?.response?.data?.error || "Something went wrong", "failure");
     }
   };
+
+  const sendForgotPasswordLink = async () => {
+    try {
+      const { data } = await api.post(`/user/forgotPassword`, {
+        email,
+      });
+      console.log(data);
+      myToast(data.msg, "success");
+    } catch (err) {
+      console.log(err);
+      myToast(err?.response?.data?.error || "Something went wrong", "failure");
+    }
+  };
+
   return (
     <form
       onSubmit={(e) => {
@@ -48,7 +62,7 @@ const Login = () => {
           required
         />
       </div>
-      <div className="mb-4 w-full">
+      <div className="mb-3 w-full">
         <input
           type="text"
           placeholder="Password"
@@ -57,19 +71,29 @@ const Login = () => {
           className="w-full min-w-[20rem]"
           required
         />
+        <div className="w-full flex justify-end">
+          <span
+            className="cursor-pointer text-blue font-medium text-sm mt-1"
+            onClick={sendForgotPasswordLink}
+          >
+            Forgot Password ?
+          </span>
+        </div>
       </div>
       <div className="w-full mb-4">
         <Button theme="pink" className="w-full" type="submit">
           Login
         </Button>
       </div>
-      <div className="w-full">
+      <div className="w-full text-sm">
         Don't have an account ?{" "}
         <span
           className="cursor-pointer text-blue font-medium"
           onClick={() => {
             if (searchParams.get("redirect"))
-              navigate(`/auth/register?redirect=${searchParams.get("redirect")}`);
+              navigate(
+                `/auth/register?redirect=${searchParams.get("redirect")}`
+              );
             else navigate("/auth/register");
           }}
         >

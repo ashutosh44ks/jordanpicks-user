@@ -29,6 +29,7 @@ import VSLPackageDetails from "./pages/VSLPackageDetails";
 import Payment from "./pages/Payment";
 import VSLPayment from "./pages/VSLPayment";
 import AddReward from "./pages/AddReward";
+import ForgotPassword from "./pages/Auth/components/ForgotPassword";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState("");
@@ -124,6 +125,10 @@ function App() {
             {
               path: "/auth/register",
               element: <Register />,
+            },
+            {
+              path: "/auth/forgot-password",
+              element: <ForgotPassword />,
             },
           ],
         },
