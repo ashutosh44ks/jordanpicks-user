@@ -30,19 +30,6 @@ const Login = () => {
     }
   };
 
-  const sendForgotPasswordLink = async () => {
-    try {
-      const { data } = await api.post(`/user/forgotPassword`, {
-        email,
-      });
-      console.log(data);
-      myToast(data.msg, "success");
-    } catch (err) {
-      console.log(err);
-      myToast(err?.response?.data?.error || "Something went wrong", "failure");
-    }
-  };
-
   return (
     <form
       onSubmit={(e) => {
@@ -74,7 +61,9 @@ const Login = () => {
         <div className="w-full flex justify-end">
           <span
             className="cursor-pointer text-blue font-medium text-sm mt-1"
-            onClick={sendForgotPasswordLink}
+            onClick={()=>{
+              navigate("/auth/forgot-password")
+            }}
           >
             Forgot Password ?
           </span>

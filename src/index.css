@@ -78,3 +78,6 @@ textarea:focus {
   outline: none;
   border: solid 2px var(--blue);
 }
+input:disabled {
+  color: var(--grey);
+}
