@@ -30,6 +30,7 @@ import Payment from "./pages/Payment";
 import VSLPayment from "./pages/VSLPayment";
 // import AddReward from "./pages/AddReward";
 import ForgotPassword from "./pages/Auth/components/ForgotPassword";
+import Onboarding from "./pages/Onboarding";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState("");
@@ -174,6 +175,10 @@ function App() {
         //     },
         //   ],
         // },
+        {
+          path: "/onboarding",
+          element: <Onboarding />,
+        },
         {
           path: "/about-us",
           element: <About />,
