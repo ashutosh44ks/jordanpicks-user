@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PassContext from "../../utils/PassContext";
+import Button from "../../common/Button";
 import {
   RiLoginBoxLine,
   RiUserAddFill,
@@ -109,6 +110,17 @@ const Header = () => {
             {route.name}
           </div>
         ))}
+        {!loggedUser && (
+          <Button
+            theme="pink"
+            className="w-64"
+            onClick={() => {
+              navigate("/auth/register");
+            }}
+          >
+            Claim your FREE $25 now!
+          </Button>
+        )}
       </div>
       <div className="header-section">
         {tabs.map((tab, index) => (

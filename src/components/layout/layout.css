@@ -10,6 +10,7 @@ header {
 header .header-section,
 footer .footer-section {
   display: flex;
+  align-items: center;
   gap: 1.5rem;
 }
 header .header-tabs {
@@ -54,7 +55,12 @@ footer {
   color: var(--white);
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1040px) {
+  header .header-section > div:first-of-type:not(.header-tabs) {
+    display: none;
+  }
+}
+@media screen and (max-width: 950px) {
   header {
     padding: 1rem 2rem;
     gap: 1rem;
@@ -70,7 +76,7 @@ footer {
     padding-top: 4rem;
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 840px) {
   header .header-section.nav {
     display: none;
   }
