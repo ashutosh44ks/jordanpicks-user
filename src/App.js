@@ -28,7 +28,7 @@ import PackageDetails from "./pages/PackageDetails";
 import VSLPackageDetails from "./pages/VSLPackageDetails";
 import Payment from "./pages/Payment";
 import VSLPayment from "./pages/VSLPayment";
-import AddReward from "./pages/AddReward";
+// import AddReward from "./pages/AddReward";
 import ForgotPassword from "./pages/Auth/components/ForgotPassword";
 
 function App() {
@@ -164,16 +164,16 @@ function App() {
             },
           ],
         },
-        {
-          path: "/",
-          element: <ProtectedRoute />,
-          children: [
-            {
-              path: "/add-reward",
-              element: <AddReward />,
-            },
-          ],
-        },
+        // {
+        //   path: "/",
+        //   element: <ProtectedRoute />,
+        //   children: [
+        //     {
+        //       path: "/add-reward",
+        //       element: <AddReward />,
+        //     },
+        //   ],
+        // },
         {
           path: "/about-us",
           element: <About />,
