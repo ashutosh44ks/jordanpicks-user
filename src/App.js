@@ -21,6 +21,7 @@ import Terms from "./pages/Terms";
 import Packages from "./pages/Packages";
 import Dashboard from "./pages/MyAccount/components/Dashboard";
 import Orders from "./pages/MyAccount/components/Orders";
+import MyPackages from "./pages/MyAccount/components/MyPackages";
 import AccountDetails from "./pages/MyAccount/components/AccountDetails";
 import MyWallet from "./pages/MyAccount/components/MyWallet";
 import MyAccount from "./pages/MyAccount";
@@ -153,10 +154,10 @@ function App() {
                   path: "/my-account/my-wallet",
                   element: <MyWallet />,
                 },
-                // {
-                //   path: "/my-account/payment-methods",
-                //   element: <PaymentMethods />,
-                // },
+                {
+                  path: "/my-account/my-packages",
+                  element: <MyPackages />,
+                },
                 {
                   path: "/my-account/account-details",
                   element: <AccountDetails />,
