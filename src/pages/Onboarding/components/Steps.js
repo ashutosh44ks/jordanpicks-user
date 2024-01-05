@@ -10,6 +10,9 @@ const Steps = ({ page }) => {
             Find the package that suits your preferences and budget.
           </h4>
         </div>
+        <div>
+          <img src="/assets/step1.jpg" alt="step1" />
+        </div>
       </div>
     );
   if (page === 2)
@@ -20,6 +23,9 @@ const Steps = ({ page }) => {
           <h4 className="text-center">
             Purchase the package and get instant access to the picks.
           </h4>
+        </div>
+        <div>
+          <img src="/assets/step2.jpg" alt="step2" />
         </div>
       </div>
     );
@@ -32,6 +38,9 @@ const Steps = ({ page }) => {
             If you don’t win, we’ll refund you with a website credit. No strings
             attached.
           </h4>
+        </div>
+        <div>
+          <img src="/assets/step3.jpg" alt="step3" />
         </div>
       </div>
     );
