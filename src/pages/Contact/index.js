@@ -24,6 +24,11 @@ const Contact = () => {
         message: msg,
       });
       myToast(data.msg, "success");
+      setFName("");
+      setLName("");
+      setEmail("");
+      setPhone("");
+      setMsg("");
     } catch (err) {
       console.log(err);
       myToast(err?.response?.data?.error || "Something went wrong", "failure");
