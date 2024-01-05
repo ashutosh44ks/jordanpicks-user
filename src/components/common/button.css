@@ -27,6 +27,10 @@
   background-color: var(--lightgrey3);
   color: var(--black);
 }
+.btn[disabled]:hover {
+  background-color: var(--lightgrey3);
+  color: var(--black);
+}
 .btn.btn-grey {
   background-color: var(--lightgrey3);
   color: var(--darkgrey);
