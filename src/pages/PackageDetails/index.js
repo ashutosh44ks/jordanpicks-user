@@ -5,6 +5,7 @@ import Stripe from "./components/Stripe";
 import Banner from "./components/Banner";
 import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
+import SkeletonLines from "../../components/common/SkeletonLines";
 import "./packagedetails.css";
 
 const PackageDetails = () => {
@@ -43,7 +44,7 @@ const PackageDetails = () => {
   const [cardDeduction, setCardDeduction] = useState(0);
   const [walletDeduction, setWalletDeduction] = useState(0);
   useEffect(() => {
-    if (wallet!==undefined && packageDetails._id) {
+    if (wallet !== undefined && packageDetails._id) {
       if (wallet < packageDetails.price) {
         setCardDeduction(packageDetails.price - wallet);
         setWalletDeduction(wallet);
@@ -85,10 +86,14 @@ const PackageDetails = () => {
           <div>
             <h3>Package Details</h3>
             <hr className="my-4" />
-            <div
-              className="limit-to-5-lines"
-              dangerouslySetInnerHTML={{ __html: packageDetails.description }}
-            ></div>
+            {loading ? (
+              <SkeletonLines lines={5} />
+            ) : (
+              <div
+                className="limit-to-5-lines"
+                dangerouslySetInnerHTML={{ __html: packageDetails.description }}
+              ></div>
+            )}
           </div>
           <div className="my-8">
             <h3>Bets</h3>
@@ -138,8 +143,8 @@ const PackageDetails = () => {
             <div>
               <p>Are you sure you want to pay with wallet?</p>
               <p>
-                After payment, ${packageDetails.price} will be deducted from your
-                wallet.
+                After payment, ${packageDetails.price} will be deducted from
+                your wallet.
               </p>
               <div className="flex justify-end mt-4">
                 <Button
