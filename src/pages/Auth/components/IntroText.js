@@ -4,7 +4,7 @@ const IntroText = () => {
   return (
     <div>
       <div className="mb-8">
-        <h2 className="text-center mb-2">
+        <h2 className="text-center mb-2 break-all">
           🎉 Welcome to
           <span className="text-pink">{" "}Jordanspicks.com</span>
         </h2>

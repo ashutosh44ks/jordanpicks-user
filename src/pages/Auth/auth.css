@@ -8,3 +8,47 @@
   align-items: center;
   justify-content: center;
 }
+.auth-card.reg {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.reg-banner {
+  width: 75%;
+  height: 37rem;
+  background: url("./bg-reg.jpg") no-repeat center center;
+  background-size: cover;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+.auth-card.reg form {
+  width: 25%;
+  min-width: 30rem;
+}
+
+@media screen and (max-width: 640px) {
+  .reg-banner {
+    display: none;
+  }
+  .auth-card.reg {
+    justify-content: center;
+  }
+  .auth-card.reg form {
+    width: 100%;
+    min-width: inherit;
+  }
+}
+@media screen and (max-width: 450px) {
+  .auth-card.reg form input {
+    width: 100%;
+    min-width: inherit;
+  }
+  .reg-step h3 {
+    font-size: 1.45rem;
+  }
+  .reg-step h4 {
+    font-size: 1.1rem;
+  }
+}

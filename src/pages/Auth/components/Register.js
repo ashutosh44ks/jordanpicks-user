@@ -4,6 +4,13 @@ import PassContext from "../../../components/utils/PassContext";
 import Button from "../../../components/common/Button";
 import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
+import IntroText from "./IntroText";
+import Card from "../../../components/common/Card";
+import Steps from "./Steps";
+import {
+  IoIosArrowDropright,
+  IoIosArrowDropleft,
+} from "react-icons/io";
 
 const Register = () => {
   const { setLoggedUser } = useContext(PassContext);
@@ -40,129 +47,156 @@ const Register = () => {
     }
     setLoading(false);
   };
+  const [page, setPage] = useState(1);
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (password !== cPassword)
-          return myToast("Passwords do not match", "failure");
-        else registerUser();
-      }}
-      className="auth-card"
-    >
-      <div className="mb-6 flex flex-col justify-center items-center">
-        <h4>Register</h4>
-        <p className="text-grey">
-          Register now and get
-          <span className="text-pink font-medium"> $25 bonus!</span>
-        </p>
-        <p className="text-grey">See your growth and get betting support</p>
-      </div>
-      <div className="mb-4 w-full">
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full min-w-[20rem]"
-          required
-        />
-      </div>
-      <div className="mb-4 w-full">
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="w-full min-w-[20rem]"
-          required
-        />
-      </div>
-      <div className="mb-4 w-full">
-        <input
-          type="text"
-          placeholder="Mobile No."
-          value={phone}
-          onChange={(e) => {
-            if (!isNaN(e.target.value)) setPhone(e.target.value);
+    <div>
+      <Card size="lg">
+        <IntroText />
+      </Card>
+      <div className="auth-card reg my-10">
+        <div className="reg-banner" />
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (password !== cPassword)
+              return myToast("Passwords do not match", "failure");
+            else registerUser();
           }}
-          className="w-full min-w-[20rem]"
-          maxLength={10}
-          required
-        />
-      </div>
-      <div className="mb-4 w-full">
-        <input
-          type="email"
-          placeholder="Email address"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full min-w-[20rem]"
-          required
-        />
-      </div>
-      <div className="mb-4 w-full">
-        <input
-          type="text"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full min-w-[20rem]"
-          required
-        />
-      </div>
-      <div className="mb-4 w-full">
-        <input
-          type="text"
-          placeholder="Confirm Password"
-          value={cPassword}
-          onChange={(e) => setCPassword(e.target.value)}
-          className="w-full min-w-[20rem]"
-          required
-        />
-      </div>
-      <div className="mb-4 w-full">
-        <input
-          type="checkbox"
-          value={terms}
-          onChange={(e) => {
-            if (e.target.checked) setTerms(false);
-            else setTerms(true);
-          }}
-          required
-          className="mr-2"
-        />
-        <label>
-          I have read and agree to{" "}
-          <span
-            className="cursor-pointer text-blue font-medium"
-            onClick={() => navigate("/terms")}
-          >
-            Terms and Conditions
-          </span>
-        </label>
-      </div>
-      <div className="w-full mb-4">
-        {loading ? (
-          <Button theme="grey" className="w-full" type="button" disabled>
-            Loading...
-          </Button>
-        ) : (
-          <Button theme="pink" className="w-full" type="submit">
-            Create Account
-          </Button>
-        )}
-      </div>
-      <div className="w-full">
-        Already have an account ?{" "}
-        <span
-          className="cursor-pointer text-blue font-medium"
-          onClick={() => navigate("/auth/login")}
         >
-          Sign In
-        </span>
+          <div className="mb-6 flex flex-col justify-center items-center">
+            <h4>Register</h4>
+            {/* <p className="text-grey">
+              Register now and get
+              <span className="text-pink font-medium"> $25 bonus!</span>
+            </p> */}
+            <p className="text-grey text-center">See your growth and get betting support</p>
+          </div>
+          <div className="mb-4 w-full">
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full min-w-[20rem]"
+              required
+            />
+          </div>
+          <div className="mb-4 w-full">
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full min-w-[20rem]"
+              required
+            />
+          </div>
+          <div className="mb-4 w-full">
+            <input
+              type="text"
+              placeholder="Mobile No."
+              value={phone}
+              onChange={(e) => {
+                if (!isNaN(e.target.value)) setPhone(e.target.value);
+              }}
+              className="w-full min-w-[20rem]"
+              maxLength={10}
+              required
+            />
+          </div>
+          <div className="mb-4 w-full">
+            <input
+              type="email"
+              placeholder="Email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full min-w-[20rem]"
+              required
+            />
+          </div>
+          <div className="mb-4 w-full">
+            <input
+              type="text"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full min-w-[20rem]"
+              required
+            />
+          </div>
+          <div className="mb-4 w-full">
+            <input
+              type="text"
+              placeholder="Confirm Password"
+              value={cPassword}
+              onChange={(e) => setCPassword(e.target.value)}
+              className="w-full min-w-[20rem]"
+              required
+            />
+          </div>
+          <div className="mb-4 w-full">
+            <input
+              type="checkbox"
+              value={terms}
+              onChange={(e) => {
+                if (e.target.checked) setTerms(false);
+                else setTerms(true);
+              }}
+              required
+              className="mr-2"
+            />
+            <label>
+              I have read and agree to{" "}
+              <span
+                className="cursor-pointer text-blue font-medium"
+                onClick={() => navigate("/terms")}
+              >
+                Terms and Conditions
+              </span>
+            </label>
+          </div>
+          <div className="w-full mb-4">
+            {loading ? (
+              <Button theme="grey" className="w-full" type="button" disabled>
+                Loading...
+              </Button>
+            ) : (
+              <Button theme="pink" className="w-full" type="submit">
+                Create Account
+              </Button>
+            )}
+          </div>
+          <div className="w-full">
+            Already have an account ?{" "}
+            <span
+              className="cursor-pointer text-blue font-medium"
+              onClick={() => navigate("/auth/login")}
+            >
+              Sign In
+            </span>
+          </div>
+        </form>
       </div>
-    </form>
+      <Card size="lg" className="my-10 relative">
+        <div className="flex justify-between items-center gap-4 w-full absolute top-[2.1rem] px-8">
+          <div
+            className="p-4 cursor-pointer"
+            onClick={() => setPage((page) => page - 1)}
+          >
+            <IoIosArrowDropleft className="text-2xl lg:text-3xl text-blue" />
+          </div>
+          {page !== 3 && (
+            <div
+              className="p-4 cursor-pointer"
+              onClick={() => setPage((page) => page + 1)}
+            >
+              <IoIosArrowDropright className="text-2xl lg:text-3xl text-pink" />
+            </div>
+          )}
+        </div>
+        <Steps page={page} />
+      </Card>
+    </div>
   );
 };
 
