@@ -118,7 +118,7 @@ const Header = () => {
               navigate("/auth/register");
             }}
           >
-            Claim your FREE $25 now!
+            Claim your FREE $25 bonus!
           </Button>
         )}
       </div>
