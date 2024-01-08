@@ -21,8 +21,6 @@ const MyPackages = () => {
                 <ul className="list-disc">
                   {p.bets.length > 0 &&
                     p.bets.map((b, index) => <li key={index}>{b}</li>)}
-                  {p.bets.length > 0 &&
-                    p.bets.map((b, index) => <li key={index}>{b}</li>)}
                 </ul>
               </td>
             </tr>
