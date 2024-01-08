@@ -7,10 +7,7 @@ import myToast from "../../../components/utils/myToast";
 import IntroText from "./IntroText";
 import Card from "../../../components/common/Card";
 import Steps from "./Steps";
-import {
-  IoIosArrowDropright,
-  IoIosArrowDropleft,
-} from "react-icons/io";
+import { IoIosArrowDropright, IoIosArrowDropleft } from "react-icons/io";
 
 const Register = () => {
   const { setLoggedUser } = useContext(PassContext);
@@ -69,7 +66,9 @@ const Register = () => {
               Register now and get
               <span className="text-pink font-medium"> $25 bonus!</span>
             </p> */}
-            <p className="text-grey text-center">See your growth and get betting support</p>
+            <p className="text-grey text-center">
+              See your growth and get betting support
+            </p>
           </div>
           <div className="mb-4 w-full">
             <input
@@ -179,12 +178,16 @@ const Register = () => {
       </div>
       <Card size="lg" className="my-10 relative">
         <div className="flex justify-between items-center gap-4 w-full absolute top-[2.1rem] px-8">
-          <div
-            className="p-4 cursor-pointer"
-            onClick={() => setPage((page) => page - 1)}
-          >
-            <IoIosArrowDropleft className="text-2xl lg:text-3xl text-blue" />
-          </div>
+          {page === 1 ? (
+            <span></span>
+          ) : (
+            <div
+              className="p-4 cursor-pointer"
+              onClick={() => setPage((page) => page - 1)}
+            >
+              <IoIosArrowDropleft className="text-2xl lg:text-3xl text-blue" />
+            </div>
+          )}
           {page !== 3 && (
             <div
               className="p-4 cursor-pointer"
