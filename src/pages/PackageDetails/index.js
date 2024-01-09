@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import api from "../../components/utils/api";
+import myToast from "../../components/utils/myToast";
 import Stripe from "./components/Stripe";
 import Banner from "./components/Banner";
 import Modal from "../../components/common/Modal";
@@ -64,6 +65,7 @@ const PackageDetails = () => {
       navigate("/my-account/orders");
     } catch (err) {
       console.log(err);
+      myToast(err?.response?.data?.error || "Something went wrong", "failure")
     }
     setWalletLoading(false);
   };
