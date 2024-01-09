@@ -37,7 +37,7 @@ const Register = () => {
       localStorage.setItem("jordanTokenRefresh", data.dta.refreshToken);
       setLoggedUser("user");
       if (searchParams.get("redirect")) navigate(searchParams.get("redirect"));
-      else navigate("/onboarding");
+      else navigate("/");
     } catch (err) {
       console.log(err);
       myToast(err?.response?.data?.error || "Something went wrong", "failure");
