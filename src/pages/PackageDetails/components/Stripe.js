@@ -110,7 +110,6 @@ const StripeComponent = ({
     try {
       const { data } = await api.post("/user/createIntentPackage", {
         packageId: packageId,
-        description: packageName,
         amount: cardDeduction.toFixed(2),
       });
       setClientSecret(data.clientSecret);
