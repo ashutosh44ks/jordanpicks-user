@@ -100,7 +100,6 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const StripeComponent = ({
   packageId,
-  packageName,
   cardDeduction,
   walletDeduction,
 }) => {
@@ -110,7 +109,6 @@ const StripeComponent = ({
     try {
       const { data } = await api.post("/user/createIntentVslPackage", {
         packageId: packageId,
-        description: packageName,
         amount: cardDeduction.toFixed(2),
       });
       setClientSecret(data.clientSecret);
