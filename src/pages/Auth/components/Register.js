@@ -148,7 +148,12 @@ const Register = () => {
               I have read and agree to{" "}
               <span
                 className="cursor-pointer text-blue font-medium"
-                onClick={() => navigate("/terms")}
+                onClick={() => {
+                  window.open(
+                    "https://www.jordanspicks.com/terms",
+                    "_blank"
+                  );
+                }}
               >
                 Terms and Conditions
               </span>
