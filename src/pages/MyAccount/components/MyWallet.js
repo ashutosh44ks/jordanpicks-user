@@ -2,7 +2,8 @@ import React from "react";
 import { useOutletContext } from "react-router-dom";
 
 const MyWallet = () => {
-  const { user } = useOutletContext();
+  const { userData } = useOutletContext();
+  const user = userData?.user;
   return (
     <div className="bg-white rounded-xl p-6 w-full border border-lightgrey4">
       <div className="mb-4">
@@ -11,7 +12,7 @@ const MyWallet = () => {
           You can use your wallet balance to buy our packages.
         </p>
       </div>
-      <h2>${user.wallet.toFixed(2)}</h2>
+      <h2>${user?.wallet?.toFixed(2)}</h2>
     </div>
   );
 };

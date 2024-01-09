@@ -5,7 +5,7 @@ import { AiFillCloseSquare } from "react-icons/ai";
 import { TiEquals } from "react-icons/ti";
 
 const Dashboard = () => {
-  const user = useOutletContext();
+  const { userData } = useOutletContext();
   return (
     <div>
       <h3>Dashboard</h3>
@@ -21,21 +21,21 @@ const Dashboard = () => {
           <label>
             <RiAwardFill />
           </label>
-          <h2 className="text-center">{user?.result?.totalWins}</h2>
+          <h2 className="text-center">{userData?.result?.totalWins}</h2>
           <p className="text-center font-medium">Total Wins</p>
         </div>
         <div className="dashboard-item">
           <label>
             <AiFillCloseSquare />
           </label>
-          <h2 className="text-center">{user?.result?.totalLosses}</h2>
+          <h2 className="text-center">{userData?.result?.totalLosses}</h2>
           <p className="text-center font-medium">Total Losses</p>
         </div>
         <div className="dashboard-item">
           <label>
             <TiEquals />
           </label>
-          <h2 className="text-center">{user?.result?.totalTies}</h2>
+          <h2 className="text-center">{userData?.result?.totalTies}</h2>
           <p className="text-center font-medium">Total Ties</p>
         </div>
       </div>

@@ -4,7 +4,8 @@ import Table from "../../../components/common/Table";
 import dateFormatter from "../../../components/utils/dateFormatter";
 
 const Orders = () => {
-  const { user } = useOutletContext();
+  const { userData } = useOutletContext();
+  const user = userData?.user;
   return (
     <div>
       <h3>Order History</h3>
@@ -12,8 +13,8 @@ const Orders = () => {
         tHead={["S.No.", "Description", "Date", "Price"]}
         wrapperClass="my-8"
       >
-        {user.orderHistory.length > 0 ? (
-          user.orderHistory.map((order, index) => (
+        {user?.orderHistory?.length > 0 ? (
+          user?.orderHistory?.map((order, index) => (
             <tr key={order._id}>
               <td>{index + 1}</td>
               <td>{order.desc}</td>

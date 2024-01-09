@@ -24,7 +24,13 @@ const MyAccount = () => {
   return (
     <div className="my-account-layout">
       <Sidebar />
-      <div className="w-full">{loading ? <h3>Loading...</h3> : <Outlet context={user} />}</div>
+      <div className="w-full">
+        {loading ? (
+          <h3>Loading...</h3>
+        ) : (
+          <Outlet context={{ userData: user, getDashboard }} />
+        )}
+      </div>
     </div>
   );
 };

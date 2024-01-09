@@ -3,7 +3,8 @@ import { useOutletContext } from "react-router-dom";
 import Table from "../../../components/common/Table";
 
 const MyPackages = () => {
-  const { user } = useOutletContext();
+  const { userData } = useOutletContext();
+  const user = userData?.user;
   return (
     <div>
       <h3>My Packages</h3>
@@ -11,8 +12,8 @@ const MyPackages = () => {
         tHead={["S.No.", "Package Name", "Result", "Bets"]}
         wrapperClass="my-8"
       >
-        {user.package.length > 0 ? (
-          user.package.map((p, index) => (
+        {user?.package?.length > 0 ? (
+          user?.package?.map((p, index) => (
             <tr key={p._id}>
               <td>{index + 1}</td>
               <td>{p.name}</td>

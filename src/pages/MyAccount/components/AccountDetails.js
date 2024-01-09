@@ -5,16 +5,20 @@ import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
 
 const AccountDetails = () => {
-  const { user } = useOutletContext();
+  const { userData, getDashboard } = useOutletContext();
+  const user = userData?.user;
   const handleSaveProfile = async () => {
+    let passObj = {};
+    if (cPass !== "" && newPass !== "")
+      passObj = { currentPassword: cPass, newPassword: newPass };
     try {
       const { data } = await api.patch("/user/updateProfile", {
         name,
         mobile: phone,
-        currentPassword: cPass,
-        newPassword: newPass,
+        ...passObj,
       });
       myToast(data.msg, "success");
+      getDashboard();
     } catch (err) {
       console.log(err);
       myToast(err?.response?.data?.error || "Something went wrong", "failure");
@@ -22,8 +26,6 @@ const AccountDetails = () => {
   };
 
   const [name, setName] = useState(user.name);
-  const [username, setUsername] = useState(user.username);
-  const [email, setEmail] = useState(user.email);
   const [phone, setPhone] = useState(user.mobile);
   const [cPass, setCPass] = useState("");
   const [newPass, setNewPass] = useState("");
@@ -42,13 +44,13 @@ const AccountDetails = () => {
           <label className="font-medium" htmlFor="username">
             Username
           </label>
-          <p>{username}</p>
+          <p>{user?.username}</p>
         </div>
         <div className="my-4">
           <label className="font-medium" htmlFor="email">
             Email
           </label>
-          <p>{email}</p>
+          <p>{user?.email}</p>
         </div>
         <div className="my-4">
           <label className="font-medium" htmlFor="name">
