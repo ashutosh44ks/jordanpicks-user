@@ -15,7 +15,7 @@ const Error = () => {
       <p className="color-black my-2">({err.data})</p>
       <Link to="/" className="my-4">
         <Button theme="pink" rounded="none">
-          Go to Dashboard
+          Go to Home
         </Button>
       </Link>
     </div>
