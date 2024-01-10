@@ -4,6 +4,7 @@ import PassContext from "../../../components/utils/PassContext";
 import Button from "../../../components/common/Button";
 import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
   const { setLoggedUser } = useContext(PassContext);
@@ -30,6 +31,8 @@ const Login = () => {
     }
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <form
       onSubmit={(e) => {
@@ -50,19 +53,27 @@ const Login = () => {
         />
       </div>
       <div className="mb-3 w-full">
-        <input
-          type="text"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full min-w-[20rem]"
-          required
-        />
+        <div className="relative">
+          <input
+            type={showPassword ? "text" : "password"}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full min-w-[20rem] pr-9"
+            required
+          />
+          <span
+            className="absolute right-0 text-xl cursor-pointer p-3"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+          </span>
+        </div>
         <div className="w-full flex justify-end">
           <span
             className="cursor-pointer text-blue font-medium text-sm mt-1"
-            onClick={()=>{
-              navigate("/auth/forgot-password")
+            onClick={() => {
+              navigate("/auth/forgot-password");
             }}
           >
             Forgot Password ?
