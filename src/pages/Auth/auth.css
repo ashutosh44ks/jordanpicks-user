@@ -19,9 +19,9 @@
 .reg-banner {
   width: 75%;
   height: 37rem;
-  background: url("./bg-reg.jpg") no-repeat;
-  background-size: cover;
-  background-position: bottom;
+  background: url("./bg-reg.png") no-repeat, var(--darkblack);
+  background-size: contain;
+  background-position: center;
   border-radius: 0.5rem 0 0 0.5rem;
 }
 .auth-card.reg form {
