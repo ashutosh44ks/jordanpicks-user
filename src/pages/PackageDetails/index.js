@@ -110,7 +110,7 @@ const PackageDetails = () => {
               </ul>
             ) : (
               <div>
-                Bets will shown after purchase only.{" "}
+                Bets will shown here after purchase only.{" "}
                 <Link to="/contact-us" className="text-blue2 font-medium">
                   Contact us
                 </Link>{" "}
