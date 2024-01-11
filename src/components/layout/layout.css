@@ -31,6 +31,9 @@ header .header-tabs svg {
 header .header-tabs:hover {
   background: var(--lightgrey4);
 }
+.bonus-banner-header {
+  display: none;
+}
 
 .page-layout {
   padding: 4rem;
@@ -79,6 +82,9 @@ footer {
 @media screen and (max-width: 840px) {
   header .header-section.nav {
     display: none;
+  }
+  .bonus-banner-header {
+    display: block;
   }
 }
 @media screen and (max-width: 640px) {

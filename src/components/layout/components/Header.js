@@ -83,54 +83,66 @@ const Header = () => {
   }, [loggedUser]);
 
   return (
-    <header>
-      <img
-        src="/assets/logo.png"
-        alt="logo"
-        className="h-20 w-20 cursor-pointer"
+    <>
+      <header>
+        <img
+          src="/assets/logo.png"
+          alt="logo"
+          className="h-20 w-20 cursor-pointer"
+          onClick={() => {
+            navigate("/");
+          }}
+        />
+        <div className="header-section nav">
+          {routes.map((route, index) => (
+            <div
+              key={index}
+              className={
+                route.protected
+                  ? loggedUser
+                    ? "cursor-pointer"
+                    : "hidden"
+                  : "cursor-pointer"
+              }
+              onClick={() => {
+                navigate(route.link);
+              }}
+            >
+              {route.name}
+            </div>
+          ))}
+          {!loggedUser && (
+            <Button
+              theme="pink"
+              className="w-64"
+              onClick={() => {
+                navigate("/auth/register");
+              }}
+            >
+              Claim your FREE $25 bonus!
+            </Button>
+          )}
+        </div>
+        <div className="header-section">
+          {tabs.map((tab, index) => (
+            <div key={index} className="header-tabs" onClick={tab.func}>
+              {tab.icon}
+              {tab.name}
+            </div>
+          ))}
+        </div>
+      </header>
+      <Button
+        theme="pink"
+        className="w-full bonus-banner-header"
+        rounded="none"
         onClick={() => {
-          navigate("/");
+          navigate("/auth/register");
         }}
-      />
-      <div className="header-section nav">
-        {routes.map((route, index) => (
-          <div
-            key={index}
-            className={
-              route.protected
-                ? loggedUser
-                  ? "cursor-pointer"
-                  : "hidden"
-                : "cursor-pointer"
-            }
-            onClick={() => {
-              navigate(route.link);
-            }}
-          >
-            {route.name}
-          </div>
-        ))}
-        {!loggedUser && (
-          <Button
-            theme="pink"
-            className="w-64"
-            onClick={() => {
-              navigate("/auth/register");
-            }}
-          >
-            Claim your FREE $25 bonus!
-          </Button>
-        )}
-      </div>
-      <div className="header-section">
-        {tabs.map((tab, index) => (
-          <div key={index} className="header-tabs" onClick={tab.func}>
-            {tab.icon}
-            {tab.name}
-          </div>
-        ))}
-      </div>
-    </header>
+      >
+        Claim your FREE $25 bonus!
+      </Button>
+    </>
   );
 };
 
