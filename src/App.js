@@ -40,6 +40,7 @@ function App() {
       const decodedToken = jwtDecode(localStorage.getItem("jordanToken"));
       if (decodedToken.exp * 1000 < Date.now()) {
         localStorage.removeItem("jordanToken");
+        localStorage.removeItem("jordanTokenRefresh");
         setLoggedUser("");
       } else {
         setLoggedUser("user");
