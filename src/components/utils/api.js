@@ -9,22 +9,21 @@ const api = axios.create({
 });
 
 const updateToken = async () => {
-  // const refreshToken = localStorage.getItem("JordanTokenRefresh");
-  // const { role } = jwtDecode(localStorage.getItem("jordanToken"));
-  // try {
-  //   const { data } = await axios.post(
-  //     `${process.env.REACT_APP_BASE_API_URL}/${role}/refreshToken`, {}, {
-  //       headers: {
-  //         refreshToken: refreshToken,
-  //       },
-  //     }
-  //   );
-  //   localStorage.setItem("jordanToken", data.token);
-  // } catch (e) {
-  //   console.log(e);
+  const refreshToken = localStorage.getItem("jordanTokenRefresh");
+  try {
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_BASE_API_URL}user/refreshToken`,
+      {
+        refreshToken,
+      }
+    );
+    localStorage.setItem("jordanToken", data.dta);
+    console.log("token updated")
+  } catch (e) {
+    console.log(e);
     localStorage.removeItem("jordanToken");
-    // localStorage.removeItem("JordanTokenRefresh");
-  // }
+    localStorage.removeItem("jordanTokenRefresh");
+  }
 };
 
 // Add a request interceptor
