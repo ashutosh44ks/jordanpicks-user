@@ -132,16 +132,18 @@ const Header = () => {
           ))}
         </div>
       </header>
-      <Button
-        theme="pink"
-        className="w-full bonus-banner-header"
-        rounded="none"
-        onClick={() => {
-          navigate("/auth/register");
-        }}
-      >
-        Claim your FREE $25 bonus!
-      </Button>
+      {!loggedUser && (
+        <Button
+          theme="pink"
+          className="w-full bonus-banner-header"
+          rounded="none"
+          onClick={() => {
+            navigate("/auth/register");
+          }}
+        >
+          Claim your FREE $25 bonus!
+        </Button>
+      )}
     </>
   );
 };
