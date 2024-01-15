@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { useState, useEffect } from "react";
 import PassContext from "./components/utils/PassContext";
+import updateToken from "./components/utils/updateToken";
 
 import "react-simple-toasts/dist/theme/success.css";
 import "react-simple-toasts/dist/theme/failure.css";
@@ -39,9 +40,7 @@ function App() {
     if (localStorage.getItem("jordanToken")) {
       const decodedToken = jwtDecode(localStorage.getItem("jordanToken"));
       if (decodedToken.exp * 1000 < Date.now()) {
-        localStorage.removeItem("jordanToken");
-        localStorage.removeItem("jordanTokenRefresh");
-        setLoggedUser("");
+        updateToken(true, setLoggedUser);
       } else {
         setLoggedUser("user");
       }

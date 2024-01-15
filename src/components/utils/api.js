@@ -1,4 +1,5 @@
 import axios from "axios";
+import updateToken from "./updateToken";
 import { jwtDecode } from "jwt-decode";
 
 const api = axios.create({
@@ -8,24 +9,6 @@ const api = axios.create({
   },
 });
 
-const updateToken = async () => {
-  const refreshToken = localStorage.getItem("jordanTokenRefresh");
-  try {
-    const { data } = await axios.post(
-      `${process.env.REACT_APP_BASE_API_URL}user/refreshToken`,
-      {
-        refreshToken,
-      }
-    );
-    localStorage.setItem("jordanToken", data.dta);
-    console.log("token updated")
-  } catch (e) {
-    console.log(e);
-    localStorage.removeItem("jordanToken");
-    localStorage.removeItem("jordanTokenRefresh");
-  }
-};
-
 // Add a request interceptor
 api.interceptors.request.use(
   async function (config) {
@@ -33,7 +16,7 @@ api.interceptors.request.use(
     if (!localStorage.getItem("jordanToken")) return config;
     const { exp } = jwtDecode(localStorage.getItem("jordanToken"));
     if (Date.now() >= exp * 1000) {
-      await updateToken();
+      await updateToken(false, null);
     }
     Object.assign(config.headers, {
       Authorization: "Bearer " + localStorage.getItem("jordanToken"),
