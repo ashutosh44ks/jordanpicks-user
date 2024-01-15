@@ -37,7 +37,13 @@ const Payment = () => {
     <div className="p-16">
       <h2 className="mb-8">Payment Redirection</h2>
       {status === "" ? (
-        <p>Please wait while we validate your payment.</p>
+        <div className="mb-4">
+          <p>Please wait while we validate your payment.</p>
+          <p>
+            Do NOT refresh the page or go back. In case of any issues, please
+            contact us.
+          </p>
+        </div>
       ) : status === "succeeded" ? (
         <p className="font-medium text-blue">Payment Successful</p>
       ) : (
