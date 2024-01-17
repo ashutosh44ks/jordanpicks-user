@@ -5,13 +5,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
 :root {
+  --darkblack: #0C0C0C;
+  --white: #FAFAFA;
   --lightgrey: #f3f3f6;
   --lightgrey2: #fcfcfd;
   --lightgrey3: #d9d6d6;
   --lightgrey4: #ebebeb;
-  --white: #ffffff;
   --black: #333;
-  --darkblack: #1d1d1d;
   --grey: #656569;
   --darkgrey: #515151;
   --lightblue: #e7f4f7;
@@ -26,7 +26,8 @@
 }
 
 body {
-  color: var(--black);
+  color: var(--white);
+  background: var(--darkblack);
   font-family: "Inter", sans-serif;
 }
 
