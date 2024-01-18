@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import "./breadcrumbs.css";
 
 const Breadcrumbs = () => {
   const location = useLocation();
@@ -7,16 +8,18 @@ const Breadcrumbs = () => {
   const pathnames = location.pathname
     .split("/")
     .filter((path) => path !== "" && path.length !== 24);
+
+  if (pathnames.length === 0) return null;
   return (
-    <ul className="flex gap-2 text-sm">
-      <li>Admin</li>
-      <li>/</li>
+    <ul className="breadcrumbs-container">
+      <li>Home</li>
+      <li>·</li>
       {pathnames.length > 0 ? (
         pathnames.map((path, index) => (
           <ul className="flex gap-2 text-sm" key={path}>
             <li
               className={`capitalize ${
-                index + 1 !== pathnames.length ? "cursor-pointer" : ""
+                index + 1 !== pathnames.length ? "cursor-pointer" : "text-pink"
               }`}
               onClick={() => {
                 if (index + 1 !== pathnames.length) {
@@ -27,7 +30,7 @@ const Breadcrumbs = () => {
             >
               {path.replaceAll("-", " ")}
             </li>
-            {index + 1 !== pathnames.length && <li>/</li>}
+            {index + 1 !== pathnames.length && <li>·</li>}
           </ul>
         ))
       ) : (

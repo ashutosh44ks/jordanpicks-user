@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import api from "../../utils/api";
+// import api from "../../utils/api";
 import PassContext from "../../utils/PassContext";
+import Breadcrumbs from "../../common/Breadcrumbs";
 import Button from "../../common/Button";
 import Sidebar from "./Sidebar";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -151,6 +152,7 @@ const Header = () => {
           {showSidebar ? <MdClose /> : <GiHamburgerMenu />}
         </div>
       </header>
+      <Breadcrumbs />
       <Sidebar
         showSidebar={showSidebar}
         activeRoute={activeRoute}

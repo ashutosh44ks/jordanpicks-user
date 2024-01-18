@@ -4,14 +4,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        lightgrey: "#f3f3f6",
-        lightgrey2: "#fcfcfd",
-        lightgrey3: "#d9d6d6",
-        lightgrey4: "#ebebeb",
-        white: "#FAFAFA",
-        black: "#333",
         darkblack: "#0C0C0C",
         dark: "#1A1A1A",
+        white: "#FAFAFA",
+        pink: "#e91e63",
+        pink2: "#ff0057",
+        lightgrey2: "#c4c4c4",
+        // old ui
+        lightgrey: "#f3f3f6",
+        lightgrey3: "#d9d6d6",
+        lightgrey4: "#ebebeb",
+        black: "#333",
         grey: "#656569",
         darkgrey: "#515151",
         lightblue: "#e7f4f7",
@@ -21,8 +24,6 @@ module.exports = {
         blue4: "#008d9d",
         green: "#56c568",
         goldenyellow: "#f2be5e",
-        pink: "#e91e63",
-        pink2: "#ff0057",
       },
       screens: {
         "2xs": "380px",

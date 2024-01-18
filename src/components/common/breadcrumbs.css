@@ -1,0 +1,23 @@
+.breadcrumbs-container {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--lightgrey2);
+  padding: 0 8rem;
+}
+
+@media screen and (max-width: 1440px) {
+  .breadcrumbs-container {
+    padding: 0 6rem;
+  }
+}
+@media screen and (max-width: 1280px) {
+  .breadcrumbs-container {
+    padding: 0 4rem;
+  }
+}
+@media screen and (max-width: 950px) {
+  .breadcrumbs-container {
+    padding: 0 2rem;
+  }
+}
