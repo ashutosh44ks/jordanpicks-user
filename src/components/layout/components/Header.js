@@ -146,7 +146,7 @@ const Header = () => {
           )}
         </div>
         <div
-          className="p-6 text-xl sm:hidden text-white cursor-pointer"
+          className="p-4 sm:p-6 text-xl sm:hidden text-white cursor-pointer"
           onClick={() => setShowSidebar(!showSidebar)}
         >
           {showSidebar ? <MdClose /> : <GiHamburgerMenu />}

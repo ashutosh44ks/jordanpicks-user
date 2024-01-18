@@ -58,7 +58,7 @@ header .header-section .user-dd-menu-trigger:hover .user-dd-menu {
 }
 
 .page-layout {
-  padding: 4rem;
+  padding: 4rem 8rem;
   min-height: calc(100vh - 8rem);
   transition: all 0.2s ease-in-out;
 }
@@ -91,12 +91,21 @@ footer .route-item:hover {
   header {
     padding: 1rem 6rem;
   }
+  .page-layout {
+    padding: 4rem 6rem;
+  }
   footer {
     padding: 1rem 6rem;
   }
 }
 @media screen and (max-width: 1280px) {
   header {
+    padding: 1rem 4rem;
+  }
+  .page-layout {
+    padding: 4rem 4rem;
+  }
+  footer {
     padding: 1rem 4rem;
   }
 }
@@ -126,5 +135,14 @@ footer .route-item:hover {
 @media screen and (max-width: 480px) {
   footer .route-item {
     padding: 0.5rem 0.5rem;
+  }
+  header {
+    padding: 1rem 1rem;
+  }
+  .page-layout {
+    padding: 4rem 1rem;
+  }
+  footer {
+    padding: 1rem 1rem;
   }
 }
