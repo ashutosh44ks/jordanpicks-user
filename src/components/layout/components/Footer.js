@@ -1,70 +1,60 @@
-import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import PassContext from "../../utils/PassContext";
+import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 
 const Header = () => {
   const navigate = useNavigate();
-  const { loggedUser } = useContext(PassContext);
 
   const routes = [
     {
-      name: "Packages",
-      link: "/packages",
-      protected: false,
-    },
-    {
-      name: "My Orders",
-      link: "/my-account/orders",
-      protected: true,
-    },
-    {
       name: "About Us",
       link: "/about-us",
-      protected: false,
     },
     {
       name: "Contact Us",
       link: "/contact-us",
-      protected: false,
+    },
+    {
+      name: "FAQs",
+      link: "#",
     },
     {
       name: "Terms & Conditions",
       link: "/terms",
-      protected: false,
     },
+  ];
+  const socials = [
+    <FaFacebookF />,
+    <FaTwitter />,
+    <FaInstagram />,
+    <FaYoutube />,
   ];
 
   return (
-    <footer className="relative">
-      <div className="absolute top-[-4rem]">
-        <img src="/assets/logo.png" alt="logo" className="h-28 w-28" />
+    <footer>
+      <div className="flex justify-between items-center gap-x-8 w-full flex-col md:flex-row">
+        <img src="/assets/nLogo.png" alt="logo" className="h-16" />
+        <ul className="xs:flex">
+          {routes.map((route) => (
+            <li
+              key={route.name}
+              className="route-item"
+              onClick={() => navigate(route.link)}
+            >
+              {route.name}
+            </li>
+          ))}
+        </ul>
       </div>
-      <div className="footer-section">
-        {routes.map((route, index) => (
-          <div
-            key={index}
-            className={
-              route.protected
-                ? loggedUser
-                  ? "cursor-pointer"
-                  : "hidden"
-                : "cursor-pointer"
-            }
-            onClick={() => {
-              navigate(route.link);
-            }}
-          >
-            {route.name}
-          </div>
-        ))}
+      <div className="flex justify-between items-center gap-x-8 gap-y-2 w-full flex-col-reverse md:flex-row">
+        <p>Copyright Jordanspicks. All Rights Reserved.</p>
+        <ul className="flex items-center">
+          {socials.map((social, index) => (
+            <li key={index} className="route-item">
+              {social}
+            </li>
+          ))}
+        </ul>
       </div>
-      <hr
-        className="w-full my-4"
-        style={{
-          border: "solid 1px var(--grey)",
-        }}
-      />
-      <div className="text-sm">Copyright © 2023. All right reserved</div>
     </footer>
   );
 };

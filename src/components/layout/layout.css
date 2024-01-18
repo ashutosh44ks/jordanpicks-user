@@ -7,8 +7,7 @@ header {
   background: var(--darkblack);
   color: var(--white);
 }
-header .header-section,
-footer .footer-section {
+header .header-section {
   display: flex;
   align-items: center;
   gap: 1.5rem;
@@ -73,14 +72,26 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1rem 4rem;
-  padding-top: 4rem;
-  background: var(--darkblack);
-  color: var(--white);
+  padding: 1rem 8rem;
+  color: var(--lightgrey3);
+  background: var(--darkblack2);
+  font-size: 0.85rem;
+}
+footer .route-item {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+}
+footer .route-item:hover {
+  color: var(--pink);
 }
 
 @media screen and (max-width: 1440px) {
   header {
+    padding: 1rem 6rem;
+  }
+  footer {
     padding: 1rem 6rem;
   }
 }
@@ -102,7 +113,9 @@ footer {
   }
   footer {
     padding: 1rem 2rem;
-    padding-top: 4rem;
+  }
+  footer .route-item {
+    padding: 0.5rem 0.75rem;
   }
 }
 @media screen and (max-width: 768px) {
@@ -110,10 +123,8 @@ footer {
     display: none;
   }
 }
-@media screen and (max-width: 640px) {
-  footer .footer-section {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem 1.5rem;
+@media screen and (max-width: 480px) {
+  footer .route-item {
+    padding: 0.5rem 0.5rem;
   }
 }

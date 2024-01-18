@@ -6,14 +6,15 @@
 
 :root {
   --darkblack: #0c0c0c;
+  --darkblack2: #0f0f0f;
   --dark: #1a1a1a;
   --white: #fafafa;
   --pink: #e91e63;
   --pink2: #ff0057;
   --lightgrey2: #c4c4c4;
+  --lightgrey3: #d4d4d4;
   /* old ui colors */
   --lightgrey: #f3f3f6;
-  --lightgrey3: #d9d6d6;
   --lightgrey4: #ebebeb;
   --black: #333;
   --grey: #656569;
