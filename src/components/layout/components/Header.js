@@ -1,149 +1,162 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import api from "../../utils/api";
 import PassContext from "../../utils/PassContext";
 import Button from "../../common/Button";
-import {
-  RiLoginBoxLine,
-  RiUserAddFill,
-  RiAccountCircleFill,
-  RiLogoutBoxFill,
-} from "react-icons/ri";
+import Sidebar from "./Sidebar";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { FaRegUserCircle } from "react-icons/fa";
+import { MdKeyboardArrowDown, MdClose } from "react-icons/md";
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { loggedUser, setLoggedUser } = useContext(PassContext);
 
-  const tabsProtected = [
-    {
-      name: (
-        <>
-          <span className="hide-on-sm">My</span> Account
-        </>
-      ),
-      icon: <RiAccountCircleFill />,
-      func: () => {
-        navigate("/my-account/dashboard");
-      },
-    },
-    {
-      name: "Logout",
-      icon: <RiLogoutBoxFill />,
-      func: () => {
-        localStorage.removeItem("jordanToken");
-        localStorage.removeItem("jordanTokenRefresh");
-        setLoggedUser("");
-        navigate("/auth/login");
-      },
-    },
-  ];
-  const tabsPublic = [
-    {
-      name: "Login",
-      icon: <RiLoginBoxLine />,
-      func: () => {
-        navigate("/auth/login");
-      },
-    },
-    {
-      name: "Register",
-      icon: <RiUserAddFill />,
-      func: () => {
-        navigate("/auth/register");
-      },
-    },
-  ];
+  const [wallet, setWallet] = useState(0);
+  const getWallet = async () => {
+    setWallet(25.2345678);
+    // try {
+    //   const { data } = await api.get("/user/getWallet");
+    //   console.log(data);
+    //   setWallet(data.dta);
+    // } catch (err) {
+    //   console.log(err);
+    // }
+  };
+
+  const logout = () => {
+    localStorage.removeItem("jordanToken");
+    localStorage.removeItem("jordanTokenRefresh");
+    setLoggedUser("");
+    navigate("/auth/login");
+  };
 
   const routes = [
     {
-      name: "Packages",
-      link: "/packages",
-      protected: false,
-    },
-    {
-      name: "My Orders",
-      link: "/my-account/orders",
-      protected: true,
-    },
-    {
-      name: "About Us",
-      link: "/about-us",
-      protected: false,
+      name: "Home",
+      link: "/",
     },
     {
       name: "Contact Us",
       link: "/contact-us",
-      protected: false,
+    },
+    {
+      name: "FAQs",
+      link: "#",
     },
   ];
 
-  const [tabs, setTabs] = useState([]);
+  const [showSidebar, setShowSidebar] = useState(false);
   useEffect(() => {
-    if (loggedUser) setTabs(tabsProtected);
-    else setTabs(tabsPublic);
+    if (showSidebar) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "unset";
+  }, [showSidebar]);
+
+  const [activeRoute, setActiveRoute] = useState("");
+  useEffect(() => {
+    setActiveRoute(location.pathname);
+    if (showSidebar) setShowSidebar(false);
+  }, [location]);
+
+  useEffect(() => {
+    if (loggedUser) getWallet();
   }, [loggedUser]);
 
   return (
     <>
       <header>
         <img
-          src="/assets/logo.png"
+          src="/assets/nLogo.png"
           alt="logo"
-          className="h-20 w-20 cursor-pointer"
+          className="h-20 cursor-pointer"
           onClick={() => {
             navigate("/");
           }}
         />
-        <div className="header-section nav">
-          {routes.map((route, index) => (
-            <div
-              key={index}
-              className={
-                route.protected
-                  ? loggedUser
-                    ? "cursor-pointer"
-                    : "hidden"
-                  : "cursor-pointer"
-              }
-              onClick={() => {
-                navigate(route.link);
-              }}
-            >
-              {route.name}
+        <div className="hidden sm:flex items-center md:gap-10 lg:gap-16">
+          <div className="header-section nav">
+            {routes.map((route, index) => (
+              <div
+                key={index}
+                className={
+                  activeRoute === route.link ? "active" : "cursor-pointer"
+                }
+                onClick={() => {
+                  navigate(route.link);
+                }}
+              >
+                {route.name}
+              </div>
+            ))}
+          </div>
+          {!loggedUser ? (
+            <div className="header-section">
+              <Button
+                theme="transparent"
+                onClick={() => {
+                  navigate("/auth/login");
+                }}
+              >
+                Login
+              </Button>
+              <Button
+                theme="pink"
+                onClick={() => {
+                  navigate("/auth/register");
+                }}
+              >
+                Register
+              </Button>
             </div>
-          ))}
-          {!loggedUser && (
-            <Button
-              theme="pink"
-              className="w-64"
-              onClick={() => {
-                navigate("/auth/register");
-              }}
-            >
-              Claim your FREE $25 bonus!
-            </Button>
+          ) : (
+            <div className="header-section">
+              <Button
+                theme="dark"
+                onClick={() => {
+                  navigate("/my-account/dashboard");
+                }}
+                className="font-medium"
+              >
+                ${wallet.toFixed(2)} USD
+              </Button>
+              <div className="flex gap-2 items-center user-dd-menu-trigger py-4">
+                <FaRegUserCircle />
+                <div className="flex gap-1 items-center">
+                  User Name
+                  <MdKeyboardArrowDown className="text-xl" />
+                </div>
+                <ul className="user-dd-menu">
+                  <li
+                    className="cursor-pointer px-4 py-2 hover:bg-pink"
+                    onClick={() => navigate("/my-account/my-profile")}
+                  >
+                    My Profile
+                  </li>
+                  <li
+                    className="cursor-pointer px-4 py-2 hover:bg-pink rounded-bl-sm rounded-br-sm"
+                    onClick={logout}
+                  >
+                    Logout
+                  </li>
+                </ul>
+              </div>
+            </div>
           )}
         </div>
-        <div className="header-section">
-          {tabs.map((tab, index) => (
-            <div key={index} className="header-tabs" onClick={tab.func}>
-              {tab.icon}
-              {tab.name}
-            </div>
-          ))}
+        <div
+          className="p-6 text-xl sm:hidden text-white cursor-pointer"
+          onClick={() => setShowSidebar(!showSidebar)}
+        >
+          {showSidebar ? <MdClose /> : <GiHamburgerMenu />}
         </div>
       </header>
-      {!loggedUser && (
-        <Button
-          theme="pink"
-          className="w-full bonus-banner-header"
-          rounded="none"
-          onClick={() => {
-            navigate("/auth/register");
-          }}
-        >
-          Claim your FREE $25 bonus!
-        </Button>
-      )}
+      <Sidebar
+        showSidebar={showSidebar}
+        activeRoute={activeRoute}
+        loggedUser={loggedUser}
+        logout={logout}
+      />
     </>
   );
 };

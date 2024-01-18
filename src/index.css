@@ -5,13 +5,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
 :root {
-  --darkblack: #0C0C0C;
-  --white: #FAFAFA;
+  --darkblack: #0c0c0c;
+  --white: #fafafa;
   --lightgrey: #f3f3f6;
   --lightgrey2: #fcfcfd;
   --lightgrey3: #d9d6d6;
   --lightgrey4: #ebebeb;
   --black: #333;
+  --dark: #1a1a1a;
   --grey: #656569;
   --darkgrey: #515151;
   --lightblue: #e7f4f7;

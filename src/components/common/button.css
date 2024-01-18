@@ -23,6 +23,10 @@
 .btn.btn-pink:hover {
   background-color: var(--pink2);
 }
+.btn.btn-dark {
+  background-color: var(--dark);
+  color: var(--white);
+}
 .btn[disabled] {
   background-color: var(--lightgrey3);
   color: var(--black);
