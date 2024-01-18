@@ -14,16 +14,14 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [cPassword, setCPassword] = useState("");
   const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
   const [terms, setTerms] = useState(false);
   const [loading, setLoading] = useState(false);
   const registerUser = async () => {
     setLoading(true);
     try {
-      const { data } = await api.post(`/user/signin`, {
+      const { data } = await api.post(`/user/signup`, {
         name,
-        username,
         email,
         mobile: phone,
         password,
