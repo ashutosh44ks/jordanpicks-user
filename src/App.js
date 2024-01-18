@@ -124,14 +124,14 @@ function App() {
               element: <Login />,
             },
             {
+              path: "/auth/register",
+              element: <Register />,
+            },
+            {
               path: "/auth/forgot-password",
               element: <ForgotPassword />,
             },
           ],
-        },
-        {
-          path: "/auth/register",
-          element: <Register />,
         },
         {
           path: "/my-account",
