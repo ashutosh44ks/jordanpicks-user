@@ -98,6 +98,7 @@ const Header = () => {
                 onClick={() => {
                   navigate("/auth/login");
                 }}
+                size="md-rect"
               >
                 Login
               </Button>
@@ -106,6 +107,7 @@ const Header = () => {
                 onClick={() => {
                   navigate("/auth/register");
                 }}
+                size="md-rect"
               >
                 Register
               </Button>

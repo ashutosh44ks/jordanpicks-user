@@ -2,26 +2,19 @@
   text-align: center;
   transition: 0.3s all ease-in-out;
 }
-.btn.btn-blue {
-  background-color: var(--blue);
-  color: var(--white);
-}
-.btn.btn-blue:hover {
-  background-color: var(--blue2);
-}
-.btn.btn-blue3 {
-  background-color: var(--blue3);
-  color: var(--white);
-}
-.btn.btn-blue3:hover {
-  background-color: var(--blue4);
-}
 .btn.btn-pink {
   background-color: var(--pink);
   color: var(--white);
 }
 .btn.btn-pink:hover {
   background-color: var(--pink2);
+}
+.btn.btn-lightgrey {
+  background-color: var(--lightgrey3);
+  color: var(--darkblack);
+}
+.btn.btn-lightgrey:hover {
+  background-color: var(--lightgrey);
 }
 .btn.btn-dark {
   background-color: var(--dark);
@@ -40,9 +33,12 @@
   color: var(--darkgrey);
 }
 .btn.btn-lg {
-  padding: 0.5rem 1.5rem;
+  padding: 0.75rem 1.5rem;
 }
 .btn.btn-md {
+  padding: 0.75rem 1rem;
+}
+.btn.btn-md-rect {
   padding: 0.5rem 1rem;
 }
 .btn.btn-sm {
@@ -54,4 +50,18 @@
 }
 .btn.btn-rounded-sm {
   border-radius: 0.25rem;
+}
+.btn.btn-blue {
+  background-color: var(--blue);
+  color: var(--white);
+}
+.btn.btn-blue:hover {
+  background-color: var(--blue2);
+}
+.btn.btn-blue3 {
+  background-color: var(--blue3);
+  color: var(--white);
+}
+.btn.btn-blue3:hover {
+  background-color: var(--blue4);
 }
