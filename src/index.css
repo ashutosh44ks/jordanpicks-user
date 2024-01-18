@@ -77,6 +77,12 @@ textarea {
   background: transparent;
   transition: all 0.2s ease-in-out;
 }
+input.type2,
+select.type2,
+textarea.type2 {
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
 input:focus,
 select:focus,
 textarea:focus {
