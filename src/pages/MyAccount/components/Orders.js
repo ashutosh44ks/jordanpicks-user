@@ -8,9 +8,8 @@ const Orders = () => {
   const user = userData?.user;
   return (
     <div>
-      <h3>Order History</h3>
       <Table
-        tHead={["S.No.", "Description", "Date", "Price"]}
+        tHead={["S.No.", "Package Name", "Date", "Type", "Price", "Method"]}
         wrapperClass="my-8"
       >
         {user?.orderHistory?.length > 0 ? (
@@ -19,7 +18,9 @@ const Orders = () => {
               <td>{index + 1}</td>
               <td>{order.desc}</td>
               <td>{dateFormatter(order.createdAt)}</td>
+              <td>Debit/Credit</td>
               <td>{order?.price?.toFixed(2)}</td>
+              <td>Card/Wallet</td>
             </tr>
           ))
         ) : (

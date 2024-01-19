@@ -141,20 +141,12 @@ function App() {
               element: <MyAccount />,
               children: [
                 {
-                  path: "/my-account/dashboard",
-                  element: <Dashboard />,
-                },
-                {
-                  path: "/my-account/orders",
-                  element: <Orders />,
-                },
-                {
-                  path: "/my-account/my-wallet",
-                  element: <MyWallet />,
-                },
-                {
                   path: "/my-account/my-packages",
                   element: <MyPackages />,
+                },
+                {
+                  path: "/my-account/transactions",
+                  element: <Orders />,
                 },
                 {
                   path: "/my-account/account-details",

@@ -7,9 +7,8 @@ const MyPackages = () => {
   const user = userData?.user;
   return (
     <div>
-      <h3>My Packages</h3>
       <Table
-        tHead={["S.No.", "Package Name", "Result", "Bets"]}
+        tHead={["S.No.", "Package Name", "Date", "Price", "Bets", "Result"]}
         wrapperClass="my-8"
       >
         {user?.package?.length > 0 ? (
@@ -17,13 +16,15 @@ const MyPackages = () => {
             <tr key={p._id}>
               <td>{index + 1}</td>
               <td>{p.name}</td>
-              <td>{p.result}</td>
+              <td>date of buy</td>
+              <td>${p.price}</td>
               <td>
                 <ul className="list-disc">
                   {p.bets.length > 0 &&
                     p.bets.map((b, index) => <li key={index}>{b}</li>)}
                 </ul>
               </td>
+              <td className="capitalize">{p.result}</td>
             </tr>
           ))
         ) : (

@@ -135,7 +135,7 @@ const Header = () => {
                 <ul className="user-dd-menu">
                   <li
                     className="cursor-pointer px-4 py-2 hover:bg-pink"
-                    onClick={() => navigate("/my-account/my-profile")}
+                    onClick={() => navigate("/my-account/account-details")}
                   >
                     My Profile
                   </li>

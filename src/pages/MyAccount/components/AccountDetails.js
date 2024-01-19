@@ -9,13 +9,23 @@ const AccountDetails = () => {
   const { userData, getDashboard } = useOutletContext();
   const user = userData?.user;
   const handleSaveProfile = async () => {
+    try {
+      const { data } = await api.patch("/user/updateProfile", {
+        name,
+      });
+      myToast(data.msg, "success");
+      getDashboard();
+    } catch (err) {
+      console.log(err);
+      myToast(err?.response?.data?.error || "Something went wrong", "failure");
+    }
+  };
+  const handleChangePassword = async () => {
     let passObj = {};
     if (cPass !== "" && newPass !== "")
       passObj = { currentPassword: cPass, newPassword: newPass };
     try {
       const { data } = await api.patch("/user/updateProfile", {
-        name,
-        mobile: phone,
         ...passObj,
       });
       myToast(data.msg, "success");
@@ -27,35 +37,22 @@ const AccountDetails = () => {
   };
 
   const [name, setName] = useState(user.name);
-  const [phone, setPhone] = useState(user.mobile);
   const [cPass, setCPass] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
   const [newPass, setNewPass] = useState("");
 
   return (
-    <div>
-      <h3>Account Details</h3>
+    <div className="my-8 flex gap-16 md:flex-row flex-col">
       <form
-        className="my-8"
         onSubmit={(e) => {
           e.preventDefault();
           handleSaveProfile();
         }}
       >
+        <h5 className="font-medium">Personal Details</h5>
         <div className="my-4">
-          <label className="font-medium" htmlFor="username">
-            Username
-          </label>
-          <p>{user?.username}</p>
-        </div>
-        <div className="my-4">
-          <label className="font-medium" htmlFor="email">
-            Email
-          </label>
-          <p>{user?.email}</p>
-        </div>
-        <div className="my-4">
-          <label className="font-medium" htmlFor="name">
-            Name
+          <label className="text-sm text-lightgrey2" htmlFor="name">
+            Your Name
           </label>
           <input
             type="text"
@@ -63,47 +60,65 @@ const AccountDetails = () => {
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full"
+            className="w-full type2 mt-1"
           />
         </div>
         <div className="my-4">
-          <label className="font-medium" htmlFor="phone">
+          <label className="text-sm text-lightgrey2" htmlFor="email">
+            Email
+          </label>
+          <input value={user.email} className="w-full type2 mt-1" disabled />
+        </div>
+        <div className="my-4">
+          <label className="text-sm text-lightgrey2" htmlFor="phone">
             Phone
           </label>
-          <input
-            type="tel"
-            name="phone"
-            id="phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className="w-full"
-          />
+          <input value={user.mobile} className="w-full type2 mt-1" disabled />
+        </div>
+        <div>
+          <Button
+            className="font-medium w-full"
+            theme="pink"
+            rounded="sm"
+            size="md-rect"
+            type="submit"
+          >
+            Save Changes
+          </Button>
+        </div>
+      </form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleChangePassword();
+        }}
+      >
+        <div className="flex justify-between">
+          <h5 className="font-medium">Change Your Password</h5>
+          <span
+            className="cursor-pointer text-pink font-medium text-sm"
+            onClick={() => {
+              navigate("/auth/forgot-password");
+            }}
+          >
+            Forgot Password?
+          </span>
         </div>
         <div className="my-4">
-          <div className="flex justify-between items-center">
-            <label className="font-medium" htmlFor="cPass">
-              Current Password
-            </label>
-            <span
-              className="cursor-pointer text-blue font-medium text-sm mt-1"
-              onClick={() => {
-                navigate("/auth/forgot-password");
-              }}
-            >
-              Forgot Password ? Reset it
-            </span>
-          </div>
+          <label className="text-sm text-lightgrey2" htmlFor="cPass">
+            Current Password
+          </label>
           <input
             type="password"
             name="cPass"
             id="cPass"
             value={cPass}
             onChange={(e) => setCPass(e.target.value)}
-            className="w-full"
+            className="w-full type2 mt-1"
           />
         </div>
         <div className="my-4">
-          <label className="font-medium" htmlFor="newPass">
+          <label className="text-sm text-lightgrey2" htmlFor="newPass">
             New Password
           </label>
           <input
@@ -112,11 +127,30 @@ const AccountDetails = () => {
             id="newPass"
             value={newPass}
             onChange={(e) => setNewPass(e.target.value)}
-            className="w-full"
+            className="w-full type2 mt-1"
           />
         </div>
         <div className="my-4">
-          <Button theme="pink" rounded="none" type="submit">
+          <label className="text-sm text-lightgrey2" htmlFor="confirmPass">
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            name="confirmPass"
+            id="confirmPass"
+            value={confirmPass}
+            onChange={(e) => setConfirmPass(e.target.value)}
+            className="w-full type2 mt-1"
+          />
+        </div>
+        <div>
+          <Button
+            className="font-medium w-full"
+            theme="pink"
+            rounded="sm"
+            size="md-rect"
+            type="submit"
+          >
             Save Changes
           </Button>
         </div>
