@@ -31,7 +31,7 @@ const Header = () => {
 
   return (
     <footer>
-      <div className="flex justify-between items-center gap-x-8 w-full flex-col md:flex-row">
+      <div className="flex justify-between items-center gap-x-8 w-full flex-col md:flex-row mb-4">
         <img src="/assets/nLogo.png" alt="logo" className="h-16" />
         <ul className="xs:flex">
           {routes.map((route) => (
