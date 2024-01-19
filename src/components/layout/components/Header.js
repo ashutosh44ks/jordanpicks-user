@@ -70,7 +70,7 @@ const Header = () => {
         <img
           src="/assets/nLogo.png"
           alt="logo"
-          className="h-20 cursor-pointer"
+          className="h-[4.5rem] cursor-pointer"
           onClick={() => {
             navigate("/");
           }}

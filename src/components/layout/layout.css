@@ -29,7 +29,8 @@ header .header-section.nav .active::after,
 header .header-section .user-dd-menu {
   display: none;
   position: absolute;
-  right: 3.5rem;
+  z-index: 11;
+  right: 7.5rem;
   top: 5rem;
   width: 9rem;
   background: var(--darkblack);
@@ -87,6 +88,9 @@ footer .route-item:hover {
   header {
     padding: 1rem 6rem;
   }
+  header .header-section .user-dd-menu {
+    right: 5.5rem;
+  }
   .page-layout {
     padding: 4rem 6rem;
   }
@@ -97,6 +101,9 @@ footer .route-item:hover {
 @media screen and (max-width: 1280px) {
   header {
     padding: 1rem 4rem;
+  }
+  header .header-section .user-dd-menu {
+    right: 3.5rem;
   }
   .page-layout {
     padding: 4rem 4rem;
@@ -112,6 +119,9 @@ footer .route-item:hover {
   }
   header .header-section {
     gap: 1rem;
+  }
+  header .header-section .user-dd-menu {
+    right: 1.5rem;
   }
   .page-layout {
     padding: 4rem 2rem;
