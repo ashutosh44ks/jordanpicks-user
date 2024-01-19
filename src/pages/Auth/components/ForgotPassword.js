@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
 import Button from "../../../components/common/Button";
+import { AiOutlineLoading } from "react-icons/ai";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -56,9 +57,14 @@ const ForgotPassword = () => {
           e.preventDefault();
           initiateResetPass();
         }}
-        className="auth-card"
+        className="max-w-[26rem]"
       >
-        <h4 className="mb-6">Reset Password</h4>
+        <div className="mb-6">
+          <h2 className="font-medium text-center mb-2">Reset Password</h2>
+          <p className="text-center text-lightgrey2">
+            Enter your registered email to receive a password reset OTP
+          </p>
+        </div>
         <div className="mb-4 w-full">
           <input
             type="email"
@@ -71,11 +77,12 @@ const ForgotPassword = () => {
         </div>
         <div className="w-full">
           <Button
-            theme="blue"
-            className="w-full"
+            theme="pink"
+            className="w-full flex gap-2 justify-center items-center font-medium"
             type="submit"
             disabled={loading}
           >
+            {loading && <AiOutlineLoading className="animate-spin" size={16} />}
             Send OTP
           </Button>
         </div>
@@ -83,7 +90,7 @@ const ForgotPassword = () => {
           <div className="w-full flex justify-end gap-1 font-medium text-sm mt-2">
             Did not receive OTP?
             <span
-              className="cursor-pointer text-blue"
+              className="cursor-pointer text-pink"
               onClick={() => {
                 initiateResetPass();
               }}
@@ -101,9 +108,14 @@ const ForgotPassword = () => {
           e.preventDefault();
           resetPassword();
         }}
-        className="auth-card"
+        className="max-w-[26rem]"
       >
-        <h4 className="mb-6">Reset Password</h4>
+        <div className="mb-6">
+          <h2 className="font-medium text-center mb-2">Reset Password</h2>
+          <p className="text-center text-lightgrey2">
+            Enter the OTP sent to your email and your new password
+          </p>
+        </div>
         <div className="mb-4 w-full">
           <input
             type="email"
