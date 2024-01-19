@@ -47,22 +47,20 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
               Already Purchased
             </Button>
           ) : (
-            <>
-              <Button
-                theme="pink"
-                size="md"
-                className="w-full font-semibold"
-                rounded="md"
-                onClick={() => {
-                  if (wallet >= packageDetails.price) setPaymentRoute("wallet");
-                  else setPaymentRoute("stripe");
-                }}
-              >
-                {wallet >= packageDetails.price
-                  ? "Buy Now with Wallet"
-                  : "Buy Now with Card"}
-              </Button>
-            </>
+            <Button
+              theme="pink"
+              size="md"
+              className="w-full font-semibold"
+              rounded="md"
+              onClick={() => {
+                if (wallet >= packageDetails.price) setPaymentRoute("wallet");
+                else setPaymentRoute("stripe");
+              }}
+            >
+              {wallet >= packageDetails.price
+                ? "Buy Now with Wallet"
+                : "Buy Now with Card"}
+            </Button>
           )}
         </div>
       </div>
