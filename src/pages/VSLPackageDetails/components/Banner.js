@@ -10,66 +10,58 @@ const Banner = ({
   return (
     <div className="package-details-banner">
       <iframe
-        height="420"
+        height="360"
         src={packageDetails.videoURL}
         title="Welcome video"
       ></iframe>
-      <div className="bg-blue2 text-white w-full px-16 h-[420px] flex flex-col justify-center">
-        <h3>{!loading && packageDetails.saleTitle}</h3>
-        <h2 className="mb-2 pack-name">{!loading && packageDetails.name}</h2>
+      <div className="w-full py-4">
+        <p className="font-medium">{!loading && packageDetails.saleTitle}</p>
+        <h3 className="mb-2 pack-name">{!loading && packageDetails.name}</h3>
         <div className="flex gap-4 items-end">
-          <h5 className="pack-price line-through relative top-[-1px]">
+          <h2 className="pack-price line-through relative top-[-1px]">
             $ {!loading && packageDetails.actPrice}
-          </h5>
-          <h3 className="pack-price">
+          </h2>
+          <h1 className="pack-price">
             $ {!loading && packageDetails.discountedPrice}
-          </h3>
+          </h1>
         </div>
-        <div className="my-4">
-          <p>Your wallet balance is ${wallet.toFixed(2)}</p>
-        </div>
+        <p className="mt-4 mb-8 text-lightgrey2 text-sm">
+          (After using your wallet balance ${wallet.toFixed(2)})
+        </p>
         {isLive ? (
           <div>
             {packageDetails.isBought ? (
               <Button
-                theme="pink"
+                theme="lightgrey"
                 size="lg"
-                className="w-48 cursor-default"
-                rounded="none"
+                className="w-full font-semibold cursor-default"
+                rounded="md"
               >
                 Already Purchased
               </Button>
             ) : (
-              <>
-                <Button
-                  theme="pink"
-                  size="lg"
-                  className="w-48"
-                  rounded="none"
-                  onClick={() => {
-                    if (wallet >= packageDetails.discountedPrice)
-                      setPaymentRoute("wallet");
-                    else setPaymentRoute("stripe");
-                  }}
-                >
-                  {wallet >= packageDetails.discountedPrice
-                    ? "Buy with wallet"
-                    : "Buy with Card"}
-                </Button>
-                {wallet < packageDetails.discountedPrice && wallet > 0 && (
-                  <p className="my-4">
-                    Pay ${Math.abs(packageDetails.discountedPrice - wallet).toFixed(2)} with wallet
-                    and rest with card
-                  </p>
-                )}
-              </>
+              <Button
+                theme="pink"
+                size="md"
+                className="w-full font-semibold"
+                rounded="md"
+                onClick={() => {
+                  if (wallet >= packageDetails.discountedPrice)
+                    setPaymentRoute("wallet");
+                  else setPaymentRoute("stripe");
+                }}
+              >
+                {wallet >= packageDetails.discountedPrice
+                  ? "Buy Now with Wallet"
+                  : "Buy Now with Card"}
+              </Button>
             )}
           </div>
         ) : (
           <Button
             theme="pink"
             size="lg"
-            className="w-48 cursor-default"
+            className="w-full cursor-default font-semibold"
             rounded="none"
           >
             Coming soon...
