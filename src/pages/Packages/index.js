@@ -5,6 +5,7 @@ import Steps from "./components/Steps";
 import PackageBox from "./components/PackageBox";
 import { RiLoader4Line } from "react-icons/ri";
 import "./packages.css";
+import Testimonials from "./components/Testimonials";
 
 const Packages = () => {
   const [loading, setLoading] = useState(true);
@@ -59,7 +60,16 @@ const Packages = () => {
     <div>
       <Banner />
       <Steps />
-      <div className="my-16 flex flex-wrap gap-x-8 gap-y-16 justify-center">
+      <div className="my-20 flex flex-wrap gap-x-8 gap-y-16 justify-center">
+        <div>
+          <h2 className="font-medium text-center mb-2">
+            Get Started with <span className="text-pink">Our Packages</span>
+          </h2>
+          <p className="text-center text-lightgrey2">
+            Embark on your winning adventure now! Explore our tailored packages
+            to kickstart your gaming journey with an unbeatable edge.
+          </p>
+        </div>
         {loading
           ? [1, 2, 3, 4].map((item) => (
               <div className="package-box skeleton" key={item}>
@@ -68,6 +78,7 @@ const Packages = () => {
             ))
           : packages.map((item) => <PackageBox item={item} key={item._id} />)}
       </div>
+      <Testimonials />
     </div>
   );
 };
