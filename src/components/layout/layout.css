@@ -72,7 +72,6 @@ footer {
   padding: 1rem 8rem;
   color: var(--lightgrey3);
   background: var(--darkblack2);
-  font-size: 0.85rem;
 }
 footer .route-item {
   padding: 0.5rem 1rem;

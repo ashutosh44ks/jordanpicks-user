@@ -32,7 +32,7 @@ const Header = () => {
   return (
     <footer>
       <div className="flex justify-between items-center gap-x-8 w-full flex-col md:flex-row md:mb-4">
-        <img src="/assets/nLogo.png" alt="logo" className="h-16" />
+        <img src="/assets/nLogo.png" alt="logo" className="h-20" />
         <ul className="xs:flex">
           {routes.map((route) => (
             <li
@@ -46,7 +46,7 @@ const Header = () => {
         </ul>
       </div>
       <div className="flex justify-between items-center gap-x-8 gap-y-2 w-full flex-col-reverse md:flex-row">
-        <p>Copyright Jordanspicks. All Rights Reserved.</p>
+        <p className="text-sm">Copyright Jordanspicks. All Rights Reserved.</p>
         <ul className="flex items-center">
           {socials.map((social, index) => (
             <li key={index} className="route-item">
