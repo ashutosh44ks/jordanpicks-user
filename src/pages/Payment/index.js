@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import api from "../../components/utils/api";
+import { RiCheckboxCircleLine } from "react-icons/ri";
+import { RxCrossCircled } from "react-icons/rx";
+import { GoDotFill } from "react-icons/go";
 
 const Payment = () => {
   const location = useLocation();
@@ -23,33 +26,79 @@ const Payment = () => {
       console.log(data);
       setStatus(data.status);
       setTimeout(() => {
-        navigate("/my-account/orders");
+        navigate("/my-account/transactions");
       }, 5000);
     } catch (error) {
       console.log(error);
+      setStatus("failed");
     }
   };
+  const [numberOfDots, setNumberOfDots] = useState(0);
   useEffect(() => {
     validatePayment();
+    const myInterval = setInterval(() => {
+      setNumberOfDots((numberOfDots) => (numberOfDots + 1) % 4);
+    }, 1000);
+    return () => {
+      clearInterval(myInterval);
+    };
   }, []);
 
   return (
-    <div className="p-16">
-      <h2 className="mb-8">Payment Redirection</h2>
+    <div className="flex flex-col items-center">
+      <h2 className="mb-8">
+        Payment <span className="text-pink">Validation</span>
+      </h2>
       {status === "" ? (
-        <div className="mb-4">
-          <p>Please wait while we validate your payment.</p>
-          <p>
-            Do NOT refresh the page or go back. In case of any issues, please
-            contact us.
+        <div>
+          <h3 className="flex justify-center mb-2">
+            <GoDotFill className="text-pink" />
+            <GoDotFill
+              className={`text-pink ${
+                numberOfDots >= 1 ? "opacity-100" : "opacity-50"
+              }`}
+            />
+            <GoDotFill
+              className={`text-pink ${
+                numberOfDots >= 2 ? "opacity-100" : "opacity-50"
+              }`}
+            />
+            <GoDotFill
+              className={`text-pink ${
+                numberOfDots >= 3 ? "opacity-100" : "opacity-50"
+              }`}
+            />
+          </h3>
+          <p className="text-center">
+            Please wait while we validate your payment.
           </p>
+          <p className="text-center">Do NOT refresh the page or go back.</p>
         </div>
       ) : status === "succeeded" ? (
-        <p className="font-medium text-blue">Payment Successful</p>
+        <div>
+          <h3 className="font-medium flex justify-center items-center gap-2 mb-2">
+            <RiCheckboxCircleLine className="text-pink" />
+            Payment Successful
+          </h3>
+          <p className="text-center text-lightgrey2">
+            You will be redirected to your dashboard shortly.
+          </p>
+        </div>
       ) : (
-        <p className="font-medium text-red-600">Payment Failed</p>
+        <div>
+          <h3 className="font-medium flex justify-center items-center gap-2 mb-2">
+            <RxCrossCircled className="text-pink" />
+            Payment Failed
+          </h3>
+          <p className="text-center text-lightgrey2">
+            Please copy the url and mention it while you raise an issue in the
+            support page.
+          </p>
+          <p className="text-center text-lightgrey2">
+            We will get back to you shortly.
+          </p>
+        </div>
       )}
-      <p>You will be redirected to your dashboard shortly.</p>
     </div>
   );
 };
