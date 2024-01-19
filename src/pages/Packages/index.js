@@ -58,15 +58,6 @@ const Packages = () => {
     <div>
       <div>
         <Banner />
-        <div className="w-full flex justify-center">
-          <iframe
-            className="home-welcome-iframe"
-            width="600"
-            height="415"
-            src="https://www.youtube.com/embed/v7Iy5ikDy4A"
-            title="Welcome video"
-          ></iframe>
-        </div>
       </div>
       <div className="package-box-container">
         <h2 className="text-center">GET STARTED WITH OUR PACKAGES</h2>

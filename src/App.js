@@ -9,7 +9,6 @@ import "react-simple-toasts/dist/theme/failure.css";
 import "./App.css";
 import ProtectedRoute from "./components/utils/ProtectedRoute";
 import Layout from "./components/layout";
-import LayoutSimple from "./components/layout/LayoutSimple";
 import Error from "./pages/Error";
 
 import Auth from "./pages/Auth";
@@ -56,7 +55,7 @@ function App() {
   const BrowserRouter = createBrowserRouter([
     {
       path: "/packages",
-      element: <LayoutSimple />,
+      element: <Layout />,
       children: [
         {
           path: "/packages",
@@ -81,7 +80,7 @@ function App() {
     },
     {
       path: "/vsl-packages",
-      element: <LayoutSimple />,
+      element: <Layout />,
       children: [
         {
           path: "/vsl-packages/:id",
@@ -102,7 +101,7 @@ function App() {
     },
     {
       path: "/",
-      element: <LayoutSimple />,
+      element: <Layout />,
       children: [
         {
           path: "/",
