@@ -23,13 +23,13 @@ const ProfitGuarantee = () => {
           Please wait for 24 hours after a game for us to give you the credit.
         </li>
       </ol>
-      <p className="my-4">
+      <p className="my-4 mx-3">
         YOU CAN USE YOUR CREDIT TO BUY ANYTHING ELSE ON{" "}
-        <a href="https://www.jordanspicks.com" className="text-blue2 font-medium">
+        <a href="https://www.jordanspicks.com" className="text-pink font-medium">
           JORDANS PICKS
         </a>
       </p>
-      <p>
+      <p className="mx-3">
         <span className="font-semibold">For Example:</span> If you buy a package
         for $14.99 and it does not make money, you will get a $14.99 credit in
         your account. You can use that credit to buy something else later.

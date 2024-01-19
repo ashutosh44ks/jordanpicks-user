@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { TbCircleFilled } from "react-icons/tb";
 
 const BtnGrp = ({ activeIndex }) => {
@@ -15,12 +16,14 @@ const BtnGrp = ({ activeIndex }) => {
 };
 
 const Banner = () => {
+  const navigate = useNavigate();
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [hover, setHover] = useState(false);
   useEffect(() => {
     const myInterval = setInterval(() => {
       if (!hover) setActiveIndex(activeIndex === 0 ? 1 : 0);
-    }, 1000);
+    }, 4000);
     return () => {
       clearInterval(myInterval);
     };
@@ -38,15 +41,16 @@ const Banner = () => {
         <img
           src="/assets/slider0.png"
           alt="banner0"
-          className={`${commonStyle} ${
-            activeIndex === 0 ? "-translate-x-full" : "translate-x-0"
+          className={`${commonStyle} cursor-pointer ${
+            activeIndex === 0 ? "translate-x-0" : "-translate-x-full"
           }`}
+          onClick={() => navigate("/auth/register")}
         />
         <img
           src="/assets/slider1.png"
           alt="banner1"
           className={`${commonStyle} ${
-            activeIndex === 1 ? "translate-x-0" : "-translate-x-full"
+            activeIndex === 1 ? "-translate-x-full" : "translate-x-0"
           }`}
         />
       </div>
