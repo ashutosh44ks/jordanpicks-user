@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import api from "../../components/utils/api";
 import { Outlet } from "react-router-dom";
+import api from "../../components/utils/api";
 import Tabs from "./components/Tabs";
 import "./myaccount.css";
 

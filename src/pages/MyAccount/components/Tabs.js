@@ -15,7 +15,7 @@ const Sidebar = () => {
   return (
     <div>
       <h3 className="font-medium">My Account</h3>
-      <div className="flex gap-6 my-8">
+      <div className="flex gap-2 sm:gap-6 my-8 flex-wrap">
         <Button
           theme={active === "my-packages" ? "pink" : "transparent"}
           size="md-rect"
