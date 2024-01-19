@@ -7,6 +7,7 @@ import Banner from "./components/Banner";
 import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
 import SkeletonLines from "../../components/common/SkeletonLines";
+import ProfitGuarantee from "../Packages/components/ProfitGuarantee";
 import "./packagedetails.css";
 
 const PackageDetails = () => {
@@ -65,7 +66,7 @@ const PackageDetails = () => {
       navigate("/my-account/orders");
     } catch (err) {
       console.log(err);
-      myToast(err?.response?.data?.error || "Something went wrong", "failure")
+      myToast(err?.response?.data?.error || "Something went wrong", "failure");
     }
     setWalletLoading(false);
   };
@@ -86,8 +87,7 @@ const PackageDetails = () => {
         />
         <div className="pack-details">
           <div>
-            <h3>Package Details</h3>
-            <hr className="my-4" />
+            <h4 className="mb-2">Package Details</h4>
             {loading ? (
               <SkeletonLines lines={5} />
             ) : (
@@ -98,8 +98,7 @@ const PackageDetails = () => {
             )}
           </div>
           <div className="my-8">
-            <h3>Bets</h3>
-            <hr className="my-2" />
+            <h4 className="mb-2">Bets</h4>
             {packageDetails.isBought ? (
               <ul className="list-disc ml-4">
                 {packageDetails.bets.map((bet, index) => (
@@ -111,12 +110,16 @@ const PackageDetails = () => {
             ) : (
               <div>
                 Bets will shown here after purchase only.{" "}
-                <Link to="/contact-us" className="text-blue2 font-medium">
+                <Link to="/contact-us" className="text-pink font-medium">
                   Contact us
                 </Link>{" "}
                 for more details.
               </div>
             )}
+          </div>
+          <div className="text-lightgrey2">
+            <h4 className="mb-2 font-medium text-pink">Profit Guarantee Rule</h4>
+            <ProfitGuarantee />
           </div>
         </div>
       </div>

@@ -7,29 +7,42 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
   return (
     <div className="package-details-banner">
       <iframe
-        height="420"
+        height="360"
         src={packageDetails.videoURL}
         title="Welcome video"
       ></iframe>
-      <div className="bg-blue2 text-white w-full px-16 h-[420px] flex flex-col justify-center">
-        <h2 className="mb-4 pack-countdown">
+      <div className="w-full py-4">
+        <h4 className="font-medium text-pink">
           {!loading && diffTimeData.diffDay} days{" "}
           {!loading && diffTimeData.diffHour} hours{" "}
           {!loading && diffTimeData.diffMin} mins{" "}
           {!loading && diffTimeData.diffSec} secs left
-        </h2>
-        <h3 className="mb-2 pack-name">{!loading && packageDetails.name}</h3>
-        <h1 className="pack-price">$ {!loading && packageDetails.price}</h1>
-        <div className="my-4">
-          <p>Your wallet balance is ${wallet.toFixed(2)}</p>
+        </h4>
+        <h3 className="my-8">{!loading && packageDetails.name}</h3>
+        <div className="flex gap-4 items-end">
+          {wallet > 0 && wallet < packageDetails.price && (
+            <div className="flex items-start line-through">
+              <h6 className="mt-1">$</h6>
+              <h2>{!loading && packageDetails.price}</h2>
+            </div>
+          )}
+          <div className="flex items-start">
+            <h4 className="mt-1">$</h4>
+            <h1 className="text-pink">
+              {!loading && (packageDetails.price - wallet).toFixed(2)}
+            </h1>
+          </div>
         </div>
+        <p className="mt-4 mb-8 text-lightgrey2 text-sm">
+          (After using your wallet balance ${wallet.toFixed(2)})
+        </p>
         <div>
           {packageDetails.isBought ? (
             <Button
-              theme="pink"
+              theme="lightgrey"
               size="lg"
-              className="w-48 cursor-default"
-              rounded="none"
+              className="w-full font-semibold cursor-default"
+              rounded="md"
             >
               Already Purchased
             </Button>
@@ -37,23 +50,18 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
             <>
               <Button
                 theme="pink"
-                size="lg"
-                className="w-48"
-                rounded="none"
+                size="md"
+                className="w-full font-semibold"
+                rounded="md"
                 onClick={() => {
                   if (wallet >= packageDetails.price) setPaymentRoute("wallet");
                   else setPaymentRoute("stripe");
                 }}
               >
                 {wallet >= packageDetails.price
-                  ? "Buy with wallet"
-                  : "Buy with Card"}
+                  ? "Buy Now with Wallet"
+                  : "Buy Now with Card"}
               </Button>
-              {wallet < packageDetails.price && wallet > 0 && (
-                <p className="my-4">
-                  Pay ${wallet.toFixed(2)} with wallet and rest with card
-                </p>
-              )}
             </>
           )}
         </div>
