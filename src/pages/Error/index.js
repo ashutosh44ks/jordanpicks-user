@@ -6,15 +6,17 @@ const Error = () => {
 
   return (
     <div className="lg:p-32 md:p-16 p-8 flex flex-col justify-center items-center h-screen">
-      <h1>Error</h1>
-      {err.status && (
-        <h3>
-          {err.status}: {err.statusText}
-        </h3>
-      )}
-      <p className="color-black my-2">({err.data})</p>
-      <Link to="/" className="my-4">
-        <Button theme="pink" rounded="none">
+      <div className="mb-6">
+        <h2 className="font-medium text-center mb-2">Error</h2>
+        {err.status && (
+          <h3 className="text-center">
+            {err.status}: {err.statusText}
+          </h3>
+        )}
+        <p className="text-center text-lightgrey2 my-2">({err.data})</p>
+      </div>
+      <Link to="/">
+        <Button theme="pink" rounded="md" >
           Go to Home
         </Button>
       </Link>
