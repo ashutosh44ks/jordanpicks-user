@@ -14,13 +14,16 @@ const Header = () => {
   const location = useLocation();
   const { loggedUser, setLoggedUser } = useContext(PassContext);
 
+  const [name, setName] = useState("User Name");
   const [wallet, setWallet] = useState(0);
   const getWallet = async () => {
     setWallet(25.2345678);
+    setName("User Name");
     // try {
     //   const { data } = await api.get("/user/getWallet");
     //   console.log(data);
     //   setWallet(data.dta);
+    //   setName(data.name);
     // } catch (err) {
     //   console.log(err);
     // }
@@ -126,7 +129,7 @@ const Header = () => {
               <div className="flex gap-2 items-center user-dd-menu-trigger py-4">
                 <FaRegUserCircle />
                 <div className="flex gap-1 items-center">
-                  User Name
+                  {name}
                   <MdKeyboardArrowDown className="text-xl" />
                 </div>
                 <ul className="user-dd-menu">
