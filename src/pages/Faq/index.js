@@ -6,33 +6,34 @@ import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 const Faq = () => {
   const accordianData = [
     {
-      title: "Is there a free trial available?",
+      title: "What are packages?",
       content:
-        "Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible.",
+        "Packages are groups of bets, carefully chosen by our team at JordansPicks. You can use these to make your own bet slips.",
     },
     {
-      title: "Can I change my plan later?",
+      title: "When can I see the bets?",
       content:
-        "Yes, you can upgrade or downgrade your plan at any time. If you choose to upgrade, you’ll pay a pro-rated amount for the rest of the month. If you choose to downgrade, you’ll be credited on the next invoice.",
+        "After buying a package, you can see the bets. They will show up in 'Your Account' and on the package page.",
     },
     {
-      title: "What is your cancellation policy?",
+      title: "What if I don't win?",
       content:
-        "You can cancel your subscription at any time. You’ll continue to have access to your account until the end of your current billing period.",
+        "We promise a 100% profit guarantee. If you don't win, we'll refund your purchase amount to your JordansPicks account. You can use this for buying more packages.",
     },
     {
-      title: "Can other info be added to an invoice?",
+      title: "How do I pay?",
       content:
-        "Yes, you can add any custom information to an invoice, including your business name, address, and logo.",
+        "You can pay for your package with any major credit card. We use Stripe to make sure your payment is safe.",
     },
     {
-      title: "How does billing work?",
+      title: "What if I paid but didn't get the package?",
       content:
-        "You can pay for your subscription with any major credit card. We’ll automatically charge you every month or year, depending on your plan.",
+        "If this happens, please contact us. We'll sort it out as soon as we can. It would be helpful if you could send us the URL you were sent to after payment.",
     },
     {
-      title: "How do I change my account email?",
-      content: "You can change your account email by contacting us.",
+      title: "How can I change my email address?",
+      content:
+        "To change your email, please get in touch with us. We'll check your identity and then update your email address.",
     },
   ];
   const [active, setActive] = useState(-1);
@@ -67,7 +68,9 @@ const Faq = () => {
               </div>
               <p
                 className={`${
-                  active === index ? "h-16" : "h-0"
+                  active === index
+                    ? "h-24 sm:h-20 md:h-16 lg:h-12 xl:h-8"
+                    : "h-0"
                 } overflow-hidden`}
                 style={{
                   transition: "height ease-in-out 0.5s",
