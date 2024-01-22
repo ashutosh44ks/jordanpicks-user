@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { useCountdown } from "../../components/utils/useCountdown";
 import api from "../../components/utils/api";
 import myToast from "../../components/utils/myToast";
 import Stripe from "./components/Stripe";
@@ -8,7 +7,6 @@ import Banner from "./components/Banner";
 import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
 import ProfitGuarantee from "../Packages/components/ProfitGuarantee";
-import { PiShootingStarBold } from "react-icons/pi";
 import "./vslpackagedetails.css";
 
 const PackageDetails = () => {
@@ -79,9 +77,6 @@ const PackageDetails = () => {
       dialogRef.current.showModal();
   }, [paymentRoute]);
 
-  const startTimer = useCountdown(packageDetails.startDate);
-  const endTimer = useCountdown(packageDetails.endDate);
-
   return (
     <>
       <div>
@@ -92,35 +87,6 @@ const PackageDetails = () => {
           loading={loading}
           isLive={isLive}
         />
-        <div className="vsl-divider">
-          <div className="flex justify-between items-center gap-2">
-            <PiShootingStarBold className="text-3xl" />
-            <h2>Limited Time Offer</h2>
-            <PiShootingStarBold
-              className="text-3xl"
-              style={{
-                transform: "scale(-1, 1)",
-              }}
-            />
-          </div>
-          <div className="flex justify-center mt-2">
-            {isLive ? (
-              <h4 className="text-center">
-                Ends in {!loading && endTimer?.diffTimeData?.diffDay} days{" "}
-                {!loading && endTimer?.diffTimeData?.diffHour} hours{" "}
-                {!loading && endTimer?.diffTimeData?.diffMin} mins{" "}
-                {!loading && endTimer?.diffTimeData?.diffSec} secs
-              </h4>
-            ) : (
-              <h4 className="text-center">
-                Starts in {!loading && startTimer?.diffTimeData?.diffDay} days{" "}
-                {!loading && startTimer?.diffTimeData?.diffHour} hours{" "}
-                {!loading && startTimer?.diffTimeData?.diffMin} mins{" "}
-                {!loading && startTimer?.diffTimeData?.diffSec} secs
-              </h4>
-            )}
-          </div>
-        </div>
         <div className="pack-details">
           <div>
             <h4 className="mb-2">Package Details</h4>

@@ -1,3 +1,4 @@
+import { useCountdown } from "../../../components/utils/useCountdown";
 import Button from "../../../components/common/Button";
 
 const Banner = ({
@@ -7,6 +8,8 @@ const Banner = ({
   setPaymentRoute,
   isLive,
 }) => {
+  const startTimer = useCountdown(packageDetails.startDate);
+  const endTimer = useCountdown(packageDetails.endDate);
   return (
     <div className="package-details-banner">
       <iframe
@@ -15,19 +18,48 @@ const Banner = ({
         title="Welcome video"
       ></iframe>
       <div className="w-full py-4">
-        <p className="font-medium">{!loading && packageDetails.saleTitle}</p>
+        <p className="font-medium text-pink mb-2">
+          {!loading && packageDetails.saleTitle}
+        </p>
         <h3 className="mb-2 pack-name">{!loading && packageDetails.name}</h3>
         <div className="flex gap-4 items-end">
-          <h2 className="pack-price line-through relative top-[-1px]">
-            $ {!loading && packageDetails.actPrice}
-          </h2>
-          <h1 className="pack-price">
-            $ {!loading && packageDetails.discountedPrice}
-          </h1>
+          <div className="flex items-start line-through">
+            <h6 className="mt-1">$</h6>
+            <h2>{!loading && packageDetails.actPrice}</h2>
+          </div>
+          <div className="flex items-start">
+            <h4 className="mt-1">$</h4>
+            <h1 className="text-pink">
+              {!loading && (packageDetails.discountedPrice - wallet).toFixed(2)}
+            </h1>
+          </div>
         </div>
-        <p className="mt-4 mb-8 text-lightgrey2 text-sm">
+        <p className="my-4 text-lightgrey2 text-sm">
           (After using your wallet balance ${wallet.toFixed(2)})
         </p>
+        <h4 className="font-medium mb-8">
+          {isLive ? (
+            <h4>
+              Offer ends in{" "}
+              <span className="text-pink">
+                {!loading && endTimer?.diffTimeData?.diffDay} days{" "}
+                {!loading && endTimer?.diffTimeData?.diffHour} hours{" "}
+                {!loading && endTimer?.diffTimeData?.diffMin} mins{" "}
+                {!loading && endTimer?.diffTimeData?.diffSec} secs
+              </span>
+            </h4>
+          ) : (
+            <h4>
+              Offer starts in{" "}
+              <span className="text-pink">
+                {!loading && startTimer?.diffTimeData?.diffDay} days{" "}
+                {!loading && startTimer?.diffTimeData?.diffHour} hours{" "}
+                {!loading && startTimer?.diffTimeData?.diffMin} mins{" "}
+                {!loading && startTimer?.diffTimeData?.diffSec} secs
+              </span>
+            </h4>
+          )}
+        </h4>
         {isLive ? (
           <div>
             {packageDetails.isBought ? (
