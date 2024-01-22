@@ -47,7 +47,7 @@ const Header = () => {
     },
     {
       name: "FAQs",
-      link: "#",
+      link: "/faq",
     },
   ];
 

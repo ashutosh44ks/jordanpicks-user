@@ -19,11 +19,11 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Packages from "./pages/Packages";
-import Dashboard from "./pages/MyAccount/components/Dashboard";
+// import Dashboard from "./pages/MyAccount/components/Dashboard";
 import Orders from "./pages/MyAccount/components/Orders";
 import MyPackages from "./pages/MyAccount/components/MyPackages";
 import AccountDetails from "./pages/MyAccount/components/AccountDetails";
-import MyWallet from "./pages/MyAccount/components/MyWallet";
+// import MyWallet from "./pages/MyAccount/components/MyWallet";
 import MyAccount from "./pages/MyAccount";
 import PackageDetails from "./pages/PackageDetails";
 import VSLPackageDetails from "./pages/VSLPackageDetails";
@@ -31,6 +31,7 @@ import Payment from "./pages/Payment";
 import VSLPayment from "./pages/VSLPayment";
 // import AddReward from "./pages/AddReward";
 import ForgotPassword from "./pages/Auth/components/ForgotPassword";
+import Faq from "./pages/Faq";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState("");
@@ -166,6 +167,10 @@ function App() {
         //     },
         //   ],
         // },
+        {
+          path: "/faq",
+          element: <Faq />,
+        },
         {
           path: "/about-us",
           element: <About />,

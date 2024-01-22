@@ -18,8 +18,8 @@ const Sidebar = ({ showSidebar, activeRoute, loggedUser, logout }) => {
     },
     {
       name: "FAQs",
-      link: "#",
-      func: () => navigate("#"),
+      link: "/faq",
+      func: () => navigate("/faq"),
       show: true,
     },
     {
