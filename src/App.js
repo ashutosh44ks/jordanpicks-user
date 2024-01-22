@@ -51,66 +51,9 @@ function App() {
     handleReturningUser();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return null;
 
   const BrowserRouter = createBrowserRouter([
-    {
-      path: "/packages",
-      element: <Layout />,
-      children: [
-        {
-          path: "/packages",
-          element: <Packages />,
-        },
-        {
-          path: "/packages/:id",
-          element: <ProtectedRoute />,
-          children: [
-            {
-              path: "/packages/:id",
-              element: <PackageDetails />,
-            },
-            {
-              path: "/packages/:id/payment",
-              element: <Payment />,
-            },
-          ],
-        },
-      ],
-      errorElement: <Error />,
-    },
-    {
-      path: "/vsl-packages",
-      element: <Layout />,
-      children: [
-        {
-          path: "/vsl-packages/:id",
-          element: <ProtectedRoute />,
-          children: [
-            {
-              path: "/vsl-packages/:id",
-              element: <VSLPackageDetails />,
-            },
-            {
-              path: "/vsl-packages/:id/payment",
-              element: <VSLPayment />,
-            },
-          ],
-        },
-      ],
-      errorElement: <Error />,
-    },
-    {
-      path: "/",
-      element: <Layout />,
-      children: [
-        {
-          path: "/",
-          element: <Packages />,
-        },
-      ],
-      errorElement: <Error />,
-    },
     {
       path: "/",
       element: <Layout />,
@@ -130,6 +73,42 @@ function App() {
             {
               path: "/auth/forgot-password",
               element: <ForgotPassword />,
+            },
+          ],
+        },
+        {
+          path: "/",
+          element: <Packages />,
+        },
+        {
+          path: "/packages",
+          element: <Packages />,
+        },
+        {
+          path: "/packages/:id",
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: "/packages/:id",
+              element: <PackageDetails />,
+            },
+            {
+              path: "/packages/:id/payment",
+              element: <Payment />,
+            },
+          ],
+        },
+        {
+          path: "/vsl-packages/:id",
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: "/vsl-packages/:id",
+              element: <VSLPackageDetails />,
+            },
+            {
+              path: "/vsl-packages/:id/payment",
+              element: <VSLPayment />,
             },
           ],
         },
@@ -157,16 +136,6 @@ function App() {
             },
           ],
         },
-        // {
-        //   path: "/",
-        //   element: <ProtectedRoute />,
-        //   children: [
-        //     {
-        //       path: "/add-reward",
-        //       element: <AddReward />,
-        //     },
-        //   ],
-        // },
         {
           path: "/faq",
           element: <Faq />,
