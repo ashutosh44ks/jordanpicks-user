@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useWindowWidth } from "../../../components/utils/useWindowWidth";
 import { TbCircleFilled } from "react-icons/tb";
 
 const BtnGrp = ({ activeIndex }) => {
@@ -17,6 +18,7 @@ const BtnGrp = ({ activeIndex }) => {
 
 const Banner = () => {
   const navigate = useNavigate();
+  const width = useWindowWidth();
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [hover, setHover] = useState(false);
@@ -30,6 +32,19 @@ const Banner = () => {
   }, [activeIndex]);
 
   const commonStyle = "transform transition-transform duration-500 ease-in-out";
+
+  if (width < 480) {
+    return (
+      <div className="transform -translate-y-16">
+        <img
+          src="/assets/slider-mobile.png"
+          alt="banner-mobile"
+          className={`${commonStyle} cursor-pointer w-full`}
+          onClick={() => navigate("/auth/register")}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="transform -translate-y-16">
