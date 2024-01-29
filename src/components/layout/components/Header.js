@@ -118,7 +118,7 @@ const Header = () => {
               <Button
                 theme="dark"
                 onClick={() => {
-                  navigate("/my-account/dashboard");
+                  navigate("/my-account/transactions");
                 }}
                 className="font-medium"
               >
