@@ -1,13 +1,24 @@
-import { useState } from "react";
-import { useOutletContext, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../../../components/common/Button";
 import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
 
 const AccountDetails = () => {
   const navigate = useNavigate();
-  const { userData, getDashboard } = useOutletContext();
-  const user = userData?.user;
+  const [user, setUser] = useState({});
+  const getDashboard = async () => {
+    try {
+      const { data } = await api.get("/user/getProfile");
+      console.log(data);
+      setUser(data.dta.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getDashboard();
+  }, []);
 
   const [name, setName] = useState(user.name);
   const [mobile, setMobile] = useState(user.mobile);
