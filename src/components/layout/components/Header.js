@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-// import api from "../../utils/api";
+import api from "../../utils/api";
 import PassContext from "../../utils/PassContext";
 import Breadcrumbs from "../../common/Breadcrumbs";
 import Button from "../../common/Button";
@@ -17,16 +17,14 @@ const Header = () => {
   const [name, setName] = useState("User Name");
   const [wallet, setWallet] = useState(0);
   const getWallet = async () => {
-    setWallet(25.2345678);
-    setName("User Name");
-    // try {
-    //   const { data } = await api.get("/user/getWallet");
-    //   console.log(data);
-    //   setWallet(data.dta);
-    //   setName(data.name);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      const { data } = await api.get("/user/getProfileShort");
+      console.log(data);
+      setWallet(data.dta.wallet);
+      setName(data.dta.name);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const logout = () => {
