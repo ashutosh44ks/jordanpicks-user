@@ -8,10 +8,18 @@ const AccountDetails = () => {
   const navigate = useNavigate();
   const { userData, getDashboard } = useOutletContext();
   const user = userData?.user;
+
+  const [name, setName] = useState(user.name);
+  const [mobile, setMobile] = useState(user.mobile);
+  const [currentPass, setCurrentPass] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
+  const [newPass, setNewPass] = useState("");
+
   const handleSaveProfile = async () => {
     try {
       const { data } = await api.patch("/user/updateProfile", {
         name,
+        mobile,
       });
       myToast(data.msg, "success");
       getDashboard();
@@ -22,11 +30,16 @@ const AccountDetails = () => {
   };
   const handleChangePassword = async () => {
     let passObj = {};
-    if (cPass !== "" && newPass !== "")
-      passObj = { currentPassword: cPass, newPassword: newPass };
+    if (currentPass !== "" && newPass !== "" && confirmPass !== "") {
+      if (newPass !== confirmPass)
+        return myToast("Passwords do not match", "failure");
+      passObj = { currentPassword: currentPass, newPassword: newPass };
+    }
     try {
       const { data } = await api.patch("/user/updateProfile", {
         ...passObj,
+        name: user.name,
+        mobile: user.mobile,
       });
       myToast(data.msg, "success");
       getDashboard();
@@ -35,11 +48,6 @@ const AccountDetails = () => {
       myToast(err?.response?.data?.error || "Something went wrong", "failure");
     }
   };
-
-  const [name, setName] = useState(user.name);
-  const [cPass, setCPass] = useState("");
-  const [confirmPass, setConfirmPass] = useState("");
-  const [newPass, setNewPass] = useState("");
 
   return (
     <div className="my-8 flex gap-16 md:flex-row flex-col">
@@ -105,15 +113,15 @@ const AccountDetails = () => {
           </span>
         </div>
         <div className="my-4">
-          <label className="text-sm text-lightgrey2" htmlFor="cPass">
+          <label className="text-sm text-lightgrey2" htmlFor="currentPass">
             Current Password
           </label>
           <input
             type="password"
-            name="cPass"
-            id="cPass"
-            value={cPass}
-            onChange={(e) => setCPass(e.target.value)}
+            name="currentPass"
+            id="currentPass"
+            value={currentPass}
+            onChange={(e) => setCurrentPass(e.target.value)}
             className="w-full type2 mt-1"
           />
         </div>
