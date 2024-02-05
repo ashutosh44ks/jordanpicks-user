@@ -46,7 +46,12 @@ const Packages = () => {
     setLoading(true);
     try {
       const { data } = await api.get("/user/allPackage");
-      setPackages(data.dta);
+      console.log(data.dta);
+      // show only packages that have not expired
+      const temp = data.dta.filter(
+        (item) => +new Date(item.endDate) >= +new Date()
+      );
+      setPackages(temp);
     } catch (error) {
       console.log(error);
     }
@@ -60,7 +65,7 @@ const Packages = () => {
     <div>
       <Banner />
       <Steps />
-      <div className="my-20 flex flex-wrap gap-x-8 gap-y-16 justify-center">
+      <div className="my-20">
         <div>
           <h2 className="font-medium text-center mb-2">
             Get Started with <span className="text-pink">Our Packages</span>
@@ -70,13 +75,18 @@ const Packages = () => {
             to kickstart your gaming journey with an unbeatable edge.
           </p>
         </div>
-        {loading
-          ? [1, 2, 3, 4].map((item) => (
-              <div className="package-box skeleton" key={item}>
-                <RiLoader4Line className="text-4xl animate-spin text-grey" />
-              </div>
-            ))
-          : packages.map((item) => <PackageBox item={item} key={item._id} />)}
+        <div className="flex flex-wrap gap-x-8 gap-y-16 justify-center mt-16">
+          {loading
+            ? [1, 2, 3, 4].map((item) => (
+                <div
+                  className="package-box skeleton flex justify-center items-center"
+                  key={item}
+                >
+                  <RiLoader4Line className="text-4xl animate-spin text-grey" />
+                </div>
+              ))
+            : packages.map((item) => <PackageBox item={item} key={item._id} />)}
+        </div>
       </div>
       {/* Removed by Client */}
       {/* <Testimonials /> */}
