@@ -4,40 +4,64 @@ import Button from "../../components/common/Button";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
 
 const Faq = () => {
+  const navigate = useNavigate();
+
   const accordianData = [
     {
       title: "What are packages?",
       content:
-        "Packages are groups of bets, carefully chosen by our team at JordansPicks. You can use these to make your own bet slips.",
+        "Depending on the packages these can be single or multiple picks carefully chosen by our team at Jordans Picks.",
     },
     {
-      title: "When can I see the bets?",
-      content:
-        "After buying a package, you can see the bets. They will show up in 'Your Account' and on the package page.",
+      title: "How do I see my packages/picks?",
+      content: (
+        <>
+          After purchasing a package you can see the picks in{" "}
+          <span
+            className="text-pink cursor-pointer"
+            onClick={() => navigate("/my-account/my-packages")}
+          >
+            Your Account
+          </span>
+        </>
+      ),
     },
     {
-      title: "What if I don't win?",
-      content:
-        "We promise a 100% profit guarantee. If you don't win, we'll refund your purchase amount to your JordansPicks account. You can use this for buying more packages.",
+      title: "What if the pick(s) don't win?",
+      content: (
+        <>
+          With our{" "}
+          <span
+            className="text-pink cursor-pointer"
+            onClick={() => navigate("/my-account/my-packages")}
+          >
+            Profit Guarantee
+          </span>{" "}
+          if the Package you selected doesn’t win or have a winning percentage
+          you will receive a full website credit back to your JordansPicks
+          account wallet,
+        </>
+      ),
     },
-    {
-      title: "How do I pay?",
-      content:
-        "You can pay for your package with any major credit card. We use Stripe to make sure your payment is safe.",
-    },
-    {
-      title: "What if I paid but didn't get the package?",
-      content:
-        "If this happens, please contact us. We'll sort it out as soon as we can. It would be helpful if you could send us the URL you were sent to after payment.",
-    },
-    {
-      title: "How can I change my email address?",
-      content:
-        "To change your email, please get in touch with us. We'll check your identity and then update your email address.",
-    },
+    // Removed by client 
+    // {
+    //   title: "How do I pay?",
+    //   content:
+    //     "You can pay for your package with any major credit card. We use Stripe to make sure your payment is safe.",
+    // },
+    // {
+    //   title: "What if I paid but didn't get the package?",
+    //   content:
+    //     "If this happens, please contact us. We'll sort it out as soon as we can. It would be helpful if you could send us the URL you were sent to after payment.",
+    // },
+    // {
+    //   title: "How can I change my email address?",
+    //   content:
+    //     "To change your email, please get in touch with us. We'll check your identity and then update your email address.",
+    // },
   ];
   const [active, setActive] = useState(-1);
-  const navigate = useNavigate();
+
   return (
     <div>
       <div>
@@ -68,12 +92,10 @@ const Faq = () => {
               </div>
               <p
                 className={`${
-                  active === index
-                    ? "h-24 sm:h-20 md:h-16 lg:h-12 xl:h-8"
-                    : "h-0"
+                  active === index ? "max-h-screen" : "max-h-0"
                 } overflow-hidden`}
                 style={{
-                  transition: "height ease-in-out 0.5s",
+                  transition: "max-height ease-in-out 0.5s",
                 }}
               >
                 {item.content}
@@ -86,7 +108,7 @@ const Faq = () => {
         ))}
       </div>
       <div className="flex flex-col justify-center items-center my-10">
-        <img src="/assets/avatar-grp.png" alt="avatar" />
+        {/* <img src="/assets/avatar-grp.png" alt="avatar" /> */}
         <div className="my-6">
           <h5 className="text-center text-pink mb-2">Still have questions?</h5>
           <p className="text-center">
