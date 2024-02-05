@@ -78,7 +78,8 @@ const Packages = () => {
             ))
           : packages.map((item) => <PackageBox item={item} key={item._id} />)}
       </div>
-      <Testimonials />
+      {/* Removed by Client */}
+      {/* <Testimonials /> */}
     </div>
   );
 };
