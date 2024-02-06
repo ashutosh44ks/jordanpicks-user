@@ -15,7 +15,7 @@ const Header = () => {
     },
     {
       name: "FAQs",
-      link: "#",
+      link: "/faq",
     },
     {
       name: "Terms & Conditions",
@@ -32,7 +32,12 @@ const Header = () => {
   return (
     <footer>
       <div className="flex justify-between items-center gap-x-8 w-full flex-col md:flex-row md:mb-4">
-        <img src="/assets/nLogo.png" alt="logo" className="h-20" />
+        <img
+          src="/assets/nLogo.png"
+          alt="logo"
+          className="h-20 cursor-pointer"
+          onClick={() => navigate("/")}
+        />
         <ul className="xs:flex">
           {routes.map((route) => (
             <li
