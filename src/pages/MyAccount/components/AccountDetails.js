@@ -6,12 +6,20 @@ import myToast from "../../../components/utils/myToast";
 
 const AccountDetails = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState({});
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [currentPass, setCurrentPass] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
+  const [newPass, setNewPass] = useState("");
+
   const getDashboard = async () => {
     try {
       const { data } = await api.get("/user/getProfile");
       console.log(data);
-      setUser(data.dta.user);
+      setName(data.dta.user.name);
+      setMobile(data.dta.user.mobile);
+      setEmail(data.dta.user.email);
     } catch (error) {
       console.log(error);
     }
@@ -19,12 +27,6 @@ const AccountDetails = () => {
   useEffect(() => {
     getDashboard();
   }, []);
-
-  const [name, setName] = useState(user.name);
-  const [mobile, setMobile] = useState(user.mobile);
-  const [currentPass, setCurrentPass] = useState("");
-  const [confirmPass, setConfirmPass] = useState("");
-  const [newPass, setNewPass] = useState("");
 
   const handleSaveProfile = async () => {
     try {
@@ -49,8 +51,8 @@ const AccountDetails = () => {
     try {
       const { data } = await api.patch("/user/updateProfile", {
         ...passObj,
-        name: user.name,
-        mobile: user.mobile,
+        name,
+        mobile,
       });
       myToast(data.msg, "success");
       getDashboard();
@@ -86,13 +88,13 @@ const AccountDetails = () => {
           <label className="text-sm text-lightgrey2" htmlFor="email">
             Email
           </label>
-          <input value={user.email} className="w-full type2 mt-1" disabled />
+          <input value={email} className="w-full type2 mt-1" disabled />
         </div>
         <div className="my-4">
           <label className="text-sm text-lightgrey2" htmlFor="phone">
             Phone
           </label>
-          <input value={user.mobile} className="w-full type2 mt-1" disabled />
+          <input value={mobile} className="w-full type2 mt-1" disabled />
         </div>
         <div>
           <Button
