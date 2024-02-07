@@ -19,11 +19,10 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Packages from "./pages/Packages";
-// import Dashboard from "./pages/MyAccount/components/Dashboard";
 import Orders from "./pages/MyAccount/components/Orders";
 import MyPackages from "./pages/MyAccount/components/MyPackages";
 import AccountDetails from "./pages/MyAccount/components/AccountDetails";
-// import MyWallet from "./pages/MyAccount/components/MyWallet";
+import Referrals from "./pages/MyAccount/components/Referrals";
 import MyAccount from "./pages/MyAccount";
 import PackageDetails from "./pages/PackageDetails";
 import VSLPackageDetails from "./pages/VSLPackageDetails";
@@ -131,6 +130,10 @@ function App() {
                 {
                   path: "/my-account/account-details",
                   element: <AccountDetails />,
+                },
+                {
+                  path: "/my-account/referrals",
+                  element: <Referrals />,
                 },
               ],
             },
