@@ -31,8 +31,6 @@ import VSLPayment from "./pages/VSLPayment";
 // import AddReward from "./pages/AddReward";
 import ForgotPassword from "./pages/Auth/components/ForgotPassword";
 import Faq from "./pages/Faq";
-import Store from "./pages/Store";
-import VerifyAccount from "./pages/Auth/components/Verify";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState("");
@@ -74,10 +72,6 @@ function App() {
             {
               path: "/auth/forgot-password",
               element: <ForgotPassword />,
-            },
-            {
-              path: "/auth/verify-account",
-              element: <VerifyAccount />,
             },
           ],
         },
@@ -144,10 +138,6 @@ function App() {
               ],
             },
           ],
-        },
-        {
-          path: "/store",
-          element: <Store />,
         },
         {
           path: "/faq",
