@@ -68,7 +68,7 @@ const Packages = () => {
       <div className="my-20">
         <div>
           <h2 className="font-medium text-center mb-2">
-            Get Started with <span className="text-pink">Our Packages</span>
+            Get Started with <span className="text-yellow">Our Packages</span>
           </h2>
           <p className="text-center text-lightgrey2">
             Embark on your winning adventure now! Explore our tailored packages

@@ -6,7 +6,7 @@ const Testimonials = () => {
     <div className="my-20">
       <div className="mb-6">
         <h2 className="font-medium text-center mb-2">
-          Don’t just take <span className="text-pink">Our Words</span>
+          Don’t just take <span className="text-yellow">Our Words</span>
         </h2>
         <p className="text-center text-lightgrey2">
           See the proof in every play. Our results speak volumes, so join us and

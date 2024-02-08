@@ -68,7 +68,7 @@ const Header = () => {
           </p>
         </div>
         <div className="md:w-1/4 flex justify-end">
-          <div className="py-3 px-4 border-2 border-pink rounded-full text-pink flex flex-col items-center">
+          <div className="py-3 px-4 border-2 border-yellow rounded-full text-yellow flex flex-col items-center">
             <div className="font-bold text-xl">21+</div>
             <div className="text-xs">ONLY</div>
           </div>

@@ -111,7 +111,7 @@ const Login = () => {
         </span>
       </div>
       <div className="w-full">
-        <Button theme="pink" className="w-full font-semibold" type="submit">
+        <Button theme="yellow" className="w-full font-semibold" type="submit">
           Sign In
         </Button>
       </div>

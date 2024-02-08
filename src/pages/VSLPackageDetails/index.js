@@ -110,7 +110,7 @@ const PackageDetails = () => {
             ) : (
               <div>
                 Bets will shown here after purchase only.{" "}
-                <Link to="/contact-us" className="text-pink font-medium">
+                <Link to="/contact-us" className="text-yellow font-medium">
                   Contact us
                 </Link>{" "}
                 for more details.
@@ -118,7 +118,7 @@ const PackageDetails = () => {
             )}
           </div>
           <div className="text-lightgrey2">
-            <h4 className="mb-2 font-medium text-pink">
+            <h4 className="mb-2 font-medium text-yellow">
               Profit Guarantee Rule
             </h4>
             <ProfitGuarantee />
@@ -155,7 +155,7 @@ const PackageDetails = () => {
               </p>
               <div className="flex justify-end mt-4">
                 <Button
-                  theme="pink"
+                  theme="yellow"
                   rounded="none"
                   onClick={payWithWallet}
                   disabled={walletLoading}

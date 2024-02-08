@@ -18,7 +18,7 @@ const Faq = () => {
         <>
           After purchasing a package you can see the picks in{" "}
           <span
-            className="text-pink cursor-pointer"
+            className="text-yellow cursor-pointer"
             onClick={() => navigate("/my-account/my-packages")}
           >
             Your Account
@@ -32,7 +32,7 @@ const Faq = () => {
         <>
           With our{" "}
           <span
-            className="text-pink cursor-pointer"
+            className="text-yellow cursor-pointer"
             onClick={() => navigate("/my-account/my-packages")}
           >
             Profit Guarantee
@@ -65,7 +65,7 @@ const Faq = () => {
   return (
     <div>
       <div>
-        <p className="text-center text-pink">Frequently asked questions</p>
+        <p className="text-center text-yellow">Frequently asked questions</p>
         <h2 className="text-center font-medium my-4">
           Everything you need to know.
         </h2>
@@ -84,9 +84,9 @@ const Faq = () => {
                 <h4 className="font-medium py-1">{item.title}</h4>
                 <span className="text-2xl">
                   {active === index ? (
-                    <AiOutlineMinusCircle className="text-pink" />
+                    <AiOutlineMinusCircle className="text-yellow" />
                   ) : (
-                    <AiOutlinePlusCircle className="text-pink" />
+                    <AiOutlinePlusCircle className="text-yellow" />
                   )}
                 </span>
               </div>
@@ -110,14 +110,14 @@ const Faq = () => {
       <div className="flex flex-col justify-center items-center my-10">
         {/* <img src="/assets/avatar-grp.png" alt="avatar" /> */}
         <div className="my-6">
-          <h5 className="text-center text-pink mb-2">Still have questions?</h5>
+          <h5 className="text-center text-yellow mb-2">Still have questions?</h5>
           <p className="text-center">
             Can’t find the answer you’re looking for? Please chat to our
             friendly team.
           </p>
         </div>
         <Button
-          theme="pink"
+          theme="yellow"
           size="md-rect"
           onClick={() => {
             navigate("/contact-us");

@@ -37,12 +37,12 @@
 //       <p>Use this bonus to buy more packages and win more.</p>
 //       <div className="my-8">
 //         {loading ? (
-//           <Button theme="pink" rounded="none" disabled>
+//           <Button theme="yellow" rounded="none" disabled>
 //             Adding bonus...
 //           </Button>
 //         ) : (
 //           <Button
-//             theme="pink"
+//             theme="yellow"
 //             rounded="none"
 //             onClick={() => navigate("/packages")}
 //           >

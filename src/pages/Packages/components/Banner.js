@@ -7,10 +7,10 @@ import { useWindowWidth } from "../../../components/utils/useWindowWidth";
 //   return (
 //     <div className="flex items-center justify-center gap-2 my-4 text-xs">
 //       <TbCircleFilled
-//         className={activeIndex === 0 ? "text-pink" : "text-white"}
+//         className={activeIndex === 0 ? "text-yellow" : "text-white"}
 //       />
 //       <TbCircleFilled
-//         className={activeIndex === 1 ? "text-pink" : "text-white"}
+//         className={activeIndex === 1 ? "text-yellow" : "text-white"}
 //       />
 //     </div>
 //   );

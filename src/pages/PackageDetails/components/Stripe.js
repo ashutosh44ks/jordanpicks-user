@@ -82,7 +82,7 @@ const CheckoutForm = ({ packageId, cardDeduction, walletDeduction }) => {
     <form id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" options={paymentElementOptions} />
       <button
-        className="w-full font-medium mt-4 btn btn-pink btn-md hover:bg-pink2 rounded-md"
+        className="w-full font-medium mt-4 btn btn-yellow btn-md hover:bg-yellow2 rounded-md"
         disabled={isLoading || !stripe || !elements}
         id="submit"
       >

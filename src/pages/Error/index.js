@@ -16,7 +16,7 @@ const Error = () => {
         <p className="text-center text-lightgrey2 my-2">({err.data})</p>
       </div>
       <Link to="/">
-        <Button theme="pink" rounded="md" >
+        <Button theme="yellow" rounded="md" >
           Go to Home
         </Button>
       </Link>

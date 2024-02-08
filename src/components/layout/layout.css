@@ -19,7 +19,7 @@ header .header-section.nav .active::after,
   width: 1rem;
   position: absolute;
   height: 0.1rem;
-  background: var(--pink);
+  background: var(--yellow);
 }
 .routes-sidebar .active::after {
   left: 50%;
@@ -80,7 +80,7 @@ footer .route-item {
   text-align: center;
 }
 footer .route-item:hover {
-  color: var(--pink);
+  color: var(--yellow);
 }
 
 @media screen and (max-width: 1440px) {

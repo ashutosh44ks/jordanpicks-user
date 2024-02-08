@@ -88,7 +88,7 @@ const VerifyAccount = () => {
         </div>
         <div className="w-full">
           <Button
-            theme="pink"
+            theme="yellow"
             className="w-full flex gap-2 justify-center items-center font-medium"
             type="submit"
             disabled={loading}
@@ -101,7 +101,7 @@ const VerifyAccount = () => {
           <div className="w-full flex justify-end gap-1 font-medium text-sm mt-2">
             Did not receive OTP?
             <span
-              className="cursor-pointer text-pink"
+              className="cursor-pointer text-yellow"
               onClick={() => {
                 initiateVerify();
               }}
@@ -147,7 +147,7 @@ const VerifyAccount = () => {
           />
         </div>
         <div className="w-full mb-4">
-          <Button theme="pink" className="w-full" type="submit">
+          <Button theme="yellow" className="w-full" type="submit">
             Submit
           </Button>
         </div>

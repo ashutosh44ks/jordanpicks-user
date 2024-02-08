@@ -13,7 +13,7 @@
   left: 1.5rem;
 }
 .dashboard-item:nth-child(2n) {
-  background-color: var(--pink);
+  background-color: var(--yellow);
   color: var(--white);
 }
 .dashboard-item:nth-child(2n) label {
@@ -25,6 +25,6 @@
   color: var(--white);
 }
 .dashboard-item:nth-child(2n + 1) label {
-  background-color: var(--pink);
+  background-color: var(--yellow);
   color: var(--white);
 } */

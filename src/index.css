@@ -11,22 +11,13 @@
   --dark2: #121212;
   --black: #333;
   --white: #fafafa;
-  --pink: #e91e63;
-  --pink2: #ff0057;
+  --yellow: #e91e63;
+  --yellow2: #ff0057;
   --lightgrey: #ebebeb;
   --lightgrey2: #c4c4c4;
   --lightgrey3: #d4d4d4;
-  /* old ui colors */
-  --lightgrey4: #f3f3f6;
-  --grey: #656569;
-  --darkgrey: #515151;
-  --lightblue: #e7f4f7;
-  --blue: #4071b8;
-  --blue2: #2e5aac;
-  --blue3: #276b75;
-  --blue4: #008d9d;
-  --green: #56c568;
-  --goldenyellow: #f2be5e;
+  --yellow: #fdee30;
+  --yellow2: #FFD700;
 }
 
 body {
@@ -88,7 +79,7 @@ input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border: solid 1px var(--pink);
+  border: solid 1px var(--yellow);
 }
 input::placeholder,
 select::placeholder,

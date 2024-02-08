@@ -17,7 +17,7 @@ const Sidebar = () => {
       <h3 className="font-medium">My Account</h3>
       <div className="flex gap-2 sm:gap-6 my-8 flex-wrap">
         <Button
-          theme={active === "my-packages" ? "pink" : "transparent"}
+          theme={active === "my-packages" ? "yellow" : "transparent"}
           size="md-rect"
           rounded="sm"
           onClick={() => navigate("/my-account/my-packages")}
@@ -25,7 +25,7 @@ const Sidebar = () => {
           My Packages
         </Button>
         <Button
-          theme={active === "transactions" ? "pink" : "transparent"}
+          theme={active === "transactions" ? "yellow" : "transparent"}
           size="md-rect"
           rounded="sm"
           onClick={() => navigate("/my-account/transactions")}
@@ -33,7 +33,7 @@ const Sidebar = () => {
           Transactions
         </Button>
         <Button
-          theme={active === "account-details" ? "pink" : "transparent"}
+          theme={active === "account-details" ? "yellow" : "transparent"}
           size="md-rect"
           rounded="sm"
           onClick={() => navigate("/my-account/account-details")}
@@ -41,7 +41,7 @@ const Sidebar = () => {
           Account Details
         </Button>
         <Button
-          theme={active === "referrals" ? "pink" : "transparent"}
+          theme={active === "referrals" ? "yellow" : "transparent"}
           size="md-rect"
           rounded="sm"
           onClick={() => navigate("/my-account/referrals")}

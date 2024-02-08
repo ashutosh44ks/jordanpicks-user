@@ -11,7 +11,7 @@ const Steps = () => {
       imgPath: "/assets/step1.png",
       title: (
         <>
-          1. Select a <span className="text-pink">Package</span>
+          1. Select a <span className="text-yellow">Package</span>
         </>
       ),
       desc: "Tailor your winning journey by choosing the perfect package that suits your betting ambitions and preferences.",
@@ -20,7 +20,7 @@ const Steps = () => {
       imgPath: "/assets/step2.png",
       title: (
         <>
-          2. Receive <span className="text-pink">Expert Tips</span>
+          2. Receive <span className="text-yellow">Expert Tips</span>
         </>
       ),
       desc: "Gain a competitive edge with insights from our seasoned experts, arming you with strategies for success.",
@@ -29,7 +29,7 @@ const Steps = () => {
       imgPath: "/assets/step3.png",
       title: (
         <>
-          3. Apply to <span className="text-pink">Bets and Win!</span>
+          3. Apply to <span className="text-yellow">Bets and Win!</span>
         </>
       ),
       desc: "Put your newfound knowledge into action as you apply our expert tips to your bets, paving the way for triumphant victories!",
@@ -42,10 +42,10 @@ const Steps = () => {
       <div>
         <h3 className="text-center">
           Swift
-          <span className="text-pink"> Wins </span>, Effortless
-          <span className="text-pink"> Play </span>
+          <span className="text-yellow"> Wins </span>, Effortless
+          <span className="text-yellow"> Play </span>
           on Our
-          <span className="text-pink"> Platform!</span>
+          <span className="text-yellow"> Platform!</span>
         </h3>
         <div className="flex flex-col md:flex-row gap-6 xl:gap-8 my-8 md:overflow-auto">
           {data.map((item) => (
@@ -62,7 +62,7 @@ const Steps = () => {
         </p>
         <div className="flex justify-center gap-6 xl:gap-8 flex-wrap mt-8">
           <Button
-            theme="pink"
+            theme="yellow"
             size="md-rect"
             rounded="md"
             className="font-medium"

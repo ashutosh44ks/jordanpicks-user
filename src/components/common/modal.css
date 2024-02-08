@@ -3,7 +3,7 @@
   background: rgba(0, 0, 0, 0.5);
 }
 dialog {
-  border: solid 1px var(--pink);
+  border: solid 1px var(--yellow);
   background: var(--darkblack);
   color: var(--white);
   border-radius: 0.75rem;

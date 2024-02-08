@@ -41,14 +41,14 @@ const Store = () => {
               <h2 className="mb-4 text-center">{p.name}</h2>
               <div className="flex justify-center items-start mb-4">
                 <h4 className="mt-1">$</h4>
-                <h1 className="text-pink">{p.price}</h1>
+                <h1 className="text-yellow">{p.price}</h1>
               </div>
               <hr className="my-6 mx-6 border-black" />
               <h5 className="my-4 font-normal text-center">
                 You'll get {p.credit} web credit
               </h5>
               <Button
-                theme="pink"
+                theme="yellow"
                 size="md-rect"
                 className="w-full"
                 onClick={() => {

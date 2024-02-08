@@ -45,24 +45,24 @@ const Payment = () => {
   return (
     <div className="flex flex-col items-center">
       <h2 className="mb-8">
-        Payment <span className="text-pink">Validation</span>
+        Payment <span className="text-yellow">Validation</span>
       </h2>
       {status === "" ? (
         <div>
           <h3 className="flex justify-center mb-2">
-            <GoDotFill className="text-pink" />
+            <GoDotFill className="text-yellow" />
             <GoDotFill
-              className={`text-pink ${
+              className={`text-yellow ${
                 numberOfDots >= 1 ? "opacity-100" : "opacity-50"
               }`}
             />
             <GoDotFill
-              className={`text-pink ${
+              className={`text-yellow ${
                 numberOfDots >= 2 ? "opacity-100" : "opacity-50"
               }`}
             />
             <GoDotFill
-              className={`text-pink ${
+              className={`text-yellow ${
                 numberOfDots >= 3 ? "opacity-100" : "opacity-50"
               }`}
             />
@@ -75,7 +75,7 @@ const Payment = () => {
       ) : status === "succeeded" ? (
         <div>
           <h3 className="font-medium flex justify-center items-center gap-2 mb-2">
-            <RiCheckboxCircleLine className="text-pink" />
+            <RiCheckboxCircleLine className="text-yellow" />
             Payment Successful
           </h3>
           <p className="text-center text-lightgrey2">
@@ -85,7 +85,7 @@ const Payment = () => {
       ) : (
         <div>
           <h3 className="font-medium flex justify-center items-center gap-2 mb-2">
-            <RxCrossCircled className="text-pink" />
+            <RxCrossCircled className="text-yellow" />
             Payment Failed
           </h3>
           <p className="text-center text-lightgrey2">

@@ -104,7 +104,7 @@ const Header = () => {
                 Login
               </Button>
               <Button
-                theme="pink"
+                theme="yellow"
                 onClick={() => {
                   navigate("/auth/register");
                 }}
@@ -132,19 +132,19 @@ const Header = () => {
                 </div>
                 <ul className="user-dd-menu">
                   <li
-                    className="cursor-pointer px-4 py-2 hover:bg-pink"
+                    className="cursor-pointer px-4 py-2 hover:bg-yellow hover:text-darkblack font-medium"
                     onClick={() => navigate("/my-account/account-details")}
                   >
                     My Profile
                   </li>
                   <li
-                    className="cursor-pointer px-4 py-2 hover:bg-pink"
+                    className="cursor-pointer px-4 py-2 hover:bg-yellow hover:text-darkblack font-medium"
                     onClick={() => navigate("/my-account/referrals")}
                   >
                     Referrals
                   </li>
                   <li
-                    className="cursor-pointer px-4 py-2 hover:bg-pink rounded-bl-sm rounded-br-sm"
+                    className="cursor-pointer px-4 py-2 hover:bg-yellow hover:text-darkblack font-medium rounded-bl-sm rounded-br-sm"
                     onClick={logout}
                   >
                     Logout

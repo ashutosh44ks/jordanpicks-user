@@ -57,7 +57,7 @@ const Contact = () => {
   return (
     <div className="contact-page">
       <div>
-        <p className="text-center text-pink">Contact Us</p>
+        <p className="text-center text-yellow">Contact Us</p>
         <h2 className="text-center font-medium my-4">Get in Touch</h2>
         <p className="text-center text-lightgrey2">
           We’d love to hear from you. Please fill out this form.
@@ -152,7 +152,7 @@ const Contact = () => {
           <label>
             You agree to our friendly{" "}
             <span
-              className="cursor-pointer text-pink font-medium"
+              className="cursor-pointer text-yellow font-medium"
               onClick={() => {
                 window.open("https://www.jordanspicks.com/terms", "_blank");
               }}
@@ -163,7 +163,7 @@ const Contact = () => {
         </div>
         <div>
           <Button
-            theme="pink"
+            theme="yellow"
             type="submit"
             className="w-full"
           >

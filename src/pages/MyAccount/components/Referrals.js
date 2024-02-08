@@ -29,7 +29,7 @@ const Referrals = () => {
 
   return (
     <div>
-      <div className="mb-10 flex justify-center items-center flex-col border border-pink rounded-lg p-4 md:p-6">
+      <div className="mb-10 flex justify-center items-center flex-col border border-yellow rounded-lg p-4 md:p-6">
         <h3 className="mb-4 font-medium">Our Referral Program</h3>
         <p className="text-center">
           We value our community and want to reward you for bringing your
@@ -39,7 +39,7 @@ const Referrals = () => {
           is our way of saying thank you for helping us grow.
         </p>
         <Button
-          theme="pink"
+          theme="yellow"
           className="mt-4 flex items-center gap-2"
           size="md-rect"
           onClick={() => {

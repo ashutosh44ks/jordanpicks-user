@@ -3,7 +3,7 @@ import React from "react";
 const About = () => {
   return (
     <div>
-      <p className="text-center text-pink mb-4">Who we are</p>
+      <p className="text-center text-yellow mb-4">Who we are</p>
       <h2 className="text-center mb-8">
         Jordanspicks Puts Integrity First in Sports Betting
       </h2>

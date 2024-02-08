@@ -124,7 +124,7 @@ const Register = () => {
         <label>
           I have read and agree to{" "}
           <span
-            className="cursor-pointer text-pink font-medium"
+            className="cursor-pointer text-yellow font-medium"
             onClick={() => {
               window.open("https://www.jordanspicks.com/terms", "_blank");
             }}
@@ -139,7 +139,7 @@ const Register = () => {
             Loading...
           </Button>
         ) : (
-          <Button theme="pink" className="w-full font-semibold" type="submit">
+          <Button theme="yellow" className="w-full font-semibold" type="submit">
             Create Account
           </Button>
         )}

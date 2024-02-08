@@ -99,7 +99,7 @@ const AccountDetails = () => {
         <div>
           <Button
             className="font-medium w-full"
-            theme="pink"
+            theme="yellow"
             rounded="sm"
             size="md-rect"
             type="submit"
@@ -117,7 +117,7 @@ const AccountDetails = () => {
         <div className="flex justify-between">
           <h5 className="font-medium">Change Your Password</h5>
           <span
-            className="cursor-pointer text-pink font-medium text-sm"
+            className="cursor-pointer text-yellow font-medium text-sm"
             onClick={() => {
               navigate("/auth/forgot-password");
             }}
@@ -167,7 +167,7 @@ const AccountDetails = () => {
         <div>
           <Button
             className="font-medium w-full"
-            theme="pink"
+            theme="yellow"
             rounded="sm"
             size="md-rect"
             type="submit"

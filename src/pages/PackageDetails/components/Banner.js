@@ -12,7 +12,7 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
         title="Welcome video"
       ></iframe>
       <div className="w-full py-4">
-        <h4 className="font-medium text-pink">
+        <h4 className="font-medium text-yellow">
           {!loading && diffTimeData.diffDay} days{" "}
           {!loading && diffTimeData.diffHour} hours{" "}
           {!loading && diffTimeData.diffMin} mins{" "}
@@ -28,7 +28,7 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
           )}
           <div className="flex items-start">
             <h4 className="mt-1">$</h4>
-            <h1 className="text-pink">
+            <h1 className="text-yellow">
               {!loading && (packageDetails.price - wallet).toFixed(2)}
             </h1>
           </div>
@@ -48,7 +48,7 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
             </Button>
           ) : (
             <Button
-              theme="pink"
+              theme="yellow"
               size="md"
               className="w-full font-semibold"
               rounded="md"

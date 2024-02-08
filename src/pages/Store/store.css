@@ -16,7 +16,7 @@
 }
 .package-box .package-box-header {
   border-radius: 1rem 1rem 0 0;
-  background: var(--pink);
+  background: var(--yellow);
   color: var(--white);
   width: 100%;
   text-align: center;

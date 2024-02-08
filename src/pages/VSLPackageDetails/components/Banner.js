@@ -18,7 +18,7 @@ const Banner = ({
         title="Welcome video"
       ></iframe>
       <div className="w-full py-4">
-        <p className="font-medium text-pink mb-2">
+        <p className="font-medium text-yellow mb-2">
           {!loading && packageDetails.saleTitle}
         </p>
         <h3 className="mb-2 pack-name">{!loading && packageDetails.name}</h3>
@@ -29,7 +29,7 @@ const Banner = ({
           </div>
           <div className="flex items-start">
             <h4 className="mt-1">$</h4>
-            <h1 className="text-pink">
+            <h1 className="text-yellow">
               {!loading && (packageDetails.discountedPrice - wallet).toFixed(2)}
             </h1>
           </div>
@@ -41,7 +41,7 @@ const Banner = ({
           {isLive ? (
             <h4>
               Offer ends in{" "}
-              <span className="text-pink">
+              <span className="text-yellow">
                 {!loading && endTimer?.diffTimeData?.diffDay} days{" "}
                 {!loading && endTimer?.diffTimeData?.diffHour} hours{" "}
                 {!loading && endTimer?.diffTimeData?.diffMin} mins{" "}
@@ -51,7 +51,7 @@ const Banner = ({
           ) : (
             <h4>
               Offer starts in{" "}
-              <span className="text-pink">
+              <span className="text-yellow">
                 {!loading && startTimer?.diffTimeData?.diffDay} days{" "}
                 {!loading && startTimer?.diffTimeData?.diffHour} hours{" "}
                 {!loading && startTimer?.diffTimeData?.diffMin} mins{" "}
@@ -73,7 +73,7 @@ const Banner = ({
               </Button>
             ) : (
               <Button
-                theme="pink"
+                theme="yellow"
                 size="md"
                 className="w-full font-semibold"
                 rounded="md"
@@ -91,7 +91,7 @@ const Banner = ({
           </div>
         ) : (
           <Button
-            theme="pink"
+            theme="yellow"
             size="lg"
             className="w-full cursor-default font-semibold"
             rounded="none"
