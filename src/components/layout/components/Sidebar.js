@@ -35,6 +35,12 @@ const Sidebar = ({ showSidebar, activeRoute, loggedUser, logout }) => {
       show: !loggedUser,
     },
     {
+      name: "My Account",
+      link: "/my-account",
+      func: () => navigate("/my-account/my-packages"),
+      show: loggedUser,
+    },
+    {
       name: "Logout",
       func: logout,
       link: "#",
