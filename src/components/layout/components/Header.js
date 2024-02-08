@@ -144,6 +144,12 @@ const Header = () => {
                     Referrals
                   </li>
                   <li
+                    className="cursor-pointer px-4 py-2 hover:bg-yellow hover:text-darkblack font-medium"
+                    onClick={() => navigate("/store")}
+                  >
+                    Store
+                  </li>
+                  <li
                     className="cursor-pointer px-4 py-2 hover:bg-yellow hover:text-darkblack font-medium rounded-bl-sm rounded-br-sm"
                     onClick={logout}
                   >

@@ -57,7 +57,7 @@ const CheckoutForm = ({ cardDeduction, webCredit }) => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${process.env.REACT_APP_BASE_URL}web-credit/payment?cardDeduction=${cardDeduction}&webCredit=${webCredit}`,
+        return_url: `${process.env.REACT_APP_BASE_URL}store/payment?cardDeduction=${cardDeduction}&webCredit=${webCredit}`,
       },
     });
 
@@ -106,7 +106,7 @@ const StripeComponent = ({
 
   const createIntent = async () => {
     try {
-      const { data } = await api.post("/user/createIntentWebCredit", {
+      const { data } = await api.post("/user/createIntentStore", {
         webCredit: webCredit,
         amount: cardDeduction.toFixed(2),
       });

@@ -28,9 +28,12 @@ import PackageDetails from "./pages/PackageDetails";
 import VSLPackageDetails from "./pages/VSLPackageDetails";
 import Payment from "./pages/Payment";
 import VSLPayment from "./pages/VSLPayment";
+import StorePayment from "./pages/Store/Payment";
 // import AddReward from "./pages/AddReward";
 import ForgotPassword from "./pages/Auth/components/ForgotPassword";
 import Faq from "./pages/Faq";
+import Store from "./pages/Store";
+import VerifyAccount from "./pages/Auth/components/Verify";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState("");
@@ -72,6 +75,10 @@ function App() {
             {
               path: "/auth/forgot-password",
               element: <ForgotPassword />,
+            },
+            {
+              path: "/auth/verify-account",
+              element: <VerifyAccount />,
             },
           ],
         },
@@ -136,6 +143,20 @@ function App() {
                   element: <Referrals />,
                 },
               ],
+            },
+          ],
+        },
+        {
+          path: "/store",
+          element: <Store />,
+        },
+        {
+          path: "/store",
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: "/store/payment",
+              element: <StorePayment />,
             },
           ],
         },

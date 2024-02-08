@@ -1,12 +1,10 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import PassContext from "../../../components/utils/PassContext";
 import Button from "../../../components/common/Button";
 import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
 
 const Register = () => {
-  const { setLoggedUser } = useContext(PassContext);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -27,11 +25,7 @@ const Register = () => {
         password,
       });
       console.log(data);
-      localStorage.setItem("jordanToken", data.dta.token);
-      localStorage.setItem("jordanTokenRefresh", data.dta.refreshToken);
-      setLoggedUser("user");
-      if (searchParams.get("redirect")) navigate(searchParams.get("redirect"));
-      else navigate("/");
+      navigate(`/auth/verify?email=${email}`);
     } catch (err) {
       console.log(err);
       myToast(err?.response?.data?.error || "Something went wrong", "failure");
@@ -135,7 +129,12 @@ const Register = () => {
       </div>
       <div className="w-full mb-4">
         {loading ? (
-          <Button theme="grey" className="w-full font-semibold" type="button" disabled>
+          <Button
+            theme="grey"
+            className="w-full font-semibold"
+            type="button"
+            disabled
+          >
             Loading...
           </Button>
         ) : (
