@@ -44,10 +44,9 @@ const Register = () => {
     >
       <div className="mb-6 flex flex-col justify-center items-center">
         <div className="mb-6">
-          <h2 className="font-medium text-center mb-2">Register yourself</h2>
+          <h2 className="font-medium text-center mb-2">Register Your Account</h2>
           <p className="text-center text-lightgrey2">
-            Secure Your Spot in the Game! Register now and step into the heart
-            of the action.
+            Secure Your Spot! After registering you'll instantly receive your $25 bonus credits
           </p>
         </div>
       </div>
