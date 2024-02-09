@@ -31,7 +31,7 @@ const Store = () => {
         </p>
         <div className="my-8 flex flex-wrap gap-8">
           {store.map((p, i) => (
-            <div key={i} className="p-6 my-4 rounded-lg bg-dark2">
+            <div key={i} className="p-6 my-4 rounded-2xl bg-dark2 border border-yellow">
               <h2 className="mb-4 text-center">{p.name}</h2>
               <div className="flex justify-center items-start mb-4">
                 <h4 className="mt-1">$</h4>
