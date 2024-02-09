@@ -8,13 +8,13 @@ const Store = () => {
   const [store, setStore] = useState([]);
   const getStore = async () => {
     try {
-      const {data} = await api.get("/user/allStore?page=1");
-      console.log(data)
+      const { data } = await api.get("/user/allStore?page=1");
+      console.log(data);
       setStore(data.dta);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   useEffect(() => {
     getStore();
   }, []);
@@ -31,7 +31,10 @@ const Store = () => {
         </p>
         <div className="my-8 flex flex-wrap gap-8">
           {store.map((p, i) => (
-            <div key={i} className="p-6 my-4 rounded-2xl bg-dark2 border border-yellow">
+            <div
+              key={i}
+              className="p-4 my-4 rounded-2xl bg-dark2 border border-yellow"
+            >
               <h2 className="mb-4 text-center">{p.name}</h2>
               <div className="flex justify-center items-start mb-4">
                 <h4 className="mt-1">$</h4>
@@ -47,6 +50,7 @@ const Store = () => {
                 className="w-full"
                 onClick={() => {
                   setOpenModal(p);
+                  dialogRef.current.showModal();
                 }}
               >
                 Buy
@@ -55,22 +59,14 @@ const Store = () => {
           ))}
         </div>
       </div>
-      {openModal.price > 0 && (
-        <Modal
-          ref={dialogRef}
-          title="Pay with Card"
-          content={
-            <Stripe
-              webCredit={openModal.credits}
-              cardDeduction={openModal.price}
-            />
-          }
-          closeDialog={() => {
-            dialogRef.current.closeDialog();
-            setOpenModal({});
-          }}
-        />
-      )}
+      <Modal
+        ref={dialogRef}
+        title="Pay with Card"
+        content={<Stripe storeId={openModal._id} />}
+        closeDialog={() => {
+          setOpenModal({});
+        }}
+      />
     </>
   );
 };

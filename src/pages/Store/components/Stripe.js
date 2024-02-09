@@ -8,7 +8,7 @@ import {
 } from "@stripe/react-stripe-js";
 import api from "../../../components/utils/api";
 
-const CheckoutForm = ({ cardDeduction, webCredit }) => {
+const CheckoutForm = ({ storeId }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -57,7 +57,7 @@ const CheckoutForm = ({ cardDeduction, webCredit }) => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${process.env.REACT_APP_BASE_URL}store/payment?cardDeduction=${cardDeduction}&webCredit=${webCredit}`,
+        return_url: `${process.env.REACT_APP_BASE_URL}store/payment?storeId=${storeId}`,
       },
     });
 
@@ -77,6 +77,8 @@ const CheckoutForm = ({ cardDeduction, webCredit }) => {
   const paymentElementOptions = {
     layout: "tabs",
   };
+
+  console.log(storeId)
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
@@ -98,17 +100,13 @@ const CheckoutForm = ({ cardDeduction, webCredit }) => {
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
-const StripeComponent = ({
-  webCredit,
-  cardDeduction,
-}) => {
+const StripeComponent = ({ storeId }) => {
   const [clientSecret, setClientSecret] = useState("");
 
   const createIntent = async () => {
     try {
       const { data } = await api.post("/user/createIntentStore", {
-        webCredit: webCredit,
-        amount: cardDeduction.toFixed(2),
+        storeId,
       });
       setClientSecret(data.clientSecret);
     } catch (err) {
@@ -132,10 +130,7 @@ const StripeComponent = ({
     <>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm
-            webCredit={webCredit}
-            cardDeduction={cardDeduction}
-          />
+          <CheckoutForm storeId={storeId} />
         </Elements>
       )}
     </>

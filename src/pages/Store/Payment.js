@@ -11,15 +11,13 @@ const Payment = () => {
 
   const searchParams = new URLSearchParams(location.search);
   const paymentIntentId = searchParams.get("payment_intent");
-  const cardDeduction = searchParams.get("cardDeduction");
-  const webCredit = searchParams.get("webCredit");
+  const storeId = searchParams.get("storeId");
   const [status, setStatus] = useState("");
   const validatePayment = async () => {
     try {
       const { data } = await api.post("/user/validatePaymentStore", {
         paymentIntentId: paymentIntentId,
-        webCredit,
-        cardDeduction,
+        storeId: storeId,
       });
       console.log(data);
       setStatus(data.status);
