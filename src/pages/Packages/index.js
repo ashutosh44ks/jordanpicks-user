@@ -3,13 +3,14 @@ import api from "../../components/utils/api";
 import Banner from "./components/Banner";
 import Steps from "./components/Steps";
 import PackageBox from "./components/PackageBox";
+// import Testimonials from "./components/Testimonials";
 import { RiLoader4Line } from "react-icons/ri";
 import "./packages.css";
-import Testimonials from "./components/Testimonials";
 
 const Packages = () => {
   const [loading, setLoading] = useState(true);
   const [packages, setPackages] = useState([]);
+  const [filteredPackages, setFilteredPackages] = useState([]);
 
   // const limitDescription = (description) => {
   //   let htmlTagRegex = /(<[^>]*>.*?<\/[^>]*>)|(<[^>]*>)/g;
@@ -61,6 +62,17 @@ const Packages = () => {
     getPackages();
   }, []);
 
+  const sports = ["All", "NBA", "NHL", "NFL", "NCAAB", "Others"];
+  const [activeSportsIndex, setActiveSportsIndex] = useState(0);
+
+  useEffect(() => {
+    if (activeSportsIndex === 0) setFilteredPackages(packages);
+    else
+      setFilteredPackages(
+        packages.filter((item) => item.sports === sports[activeSportsIndex])
+      );
+  }, [activeSportsIndex, packages]);
+
   return (
     <div>
       <Banner />
@@ -75,17 +87,57 @@ const Packages = () => {
             to kickstart your gaming journey with an unbeatable edge.
           </p>
         </div>
-        <div className="flex flex-wrap gap-x-8 gap-y-16 justify-center mt-16">
-          {loading
-            ? [1, 2, 3, 4].map((item) => (
+        <div className="flex justify-center mt-12">
+          <div className="border border-yellow rounded-lg flex items-center">
+            {sports.map((sport, index) => (
+              <>
                 <div
-                  className="package-box skeleton flex justify-center items-center"
-                  key={item}
+                  className={`py-2 px-6 ${
+                    activeSportsIndex === index
+                      ? "bg-yellow text-darkblack font-medium"
+                      : "cursor-pointer hover:bg-dark"
+                  } ${index === 0 ? "rounded-l-lg" : ""} ${
+                    index === sports.length - 1 ? "rounded-r-lg" : ""
+                  }`}
+                  onClick={() => setActiveSportsIndex(index)}
+                  key={sport}
                 >
-                  <RiLoader4Line className="text-4xl animate-spin text-grey" />
+                  {sport}
                 </div>
-              ))
-            : packages.map((item) => <PackageBox item={item} key={item._id} />)}
+                {index !== sports.length - 1 && (
+                  <div
+                    key={sport + "divider"}
+                    className={
+                      activeSportsIndex === index ||
+                      activeSportsIndex === index + 1
+                        ? `invisible`
+                        : `text-white`
+                    }
+                  >
+                    |
+                  </div>
+                )}
+              </>
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-x-8 gap-y-16 justify-center mt-16">
+          {loading ? (
+            [1, 2, 3, 4].map((item) => (
+              <div
+                className="package-box skeleton flex justify-center items-center"
+                key={item}
+              >
+                <RiLoader4Line className="text-4xl animate-spin text-grey" />
+              </div>
+            ))
+          ) : filteredPackages.length > 0 ? (
+            filteredPackages.map((item) => (
+              <PackageBox item={item} key={item._id} />
+            ))
+          ) : (
+            <div className="text-lightgrey2">No packages available for this sport</div>
+          )}
         </div>
       </div>
       {/* Removed by Client */}
