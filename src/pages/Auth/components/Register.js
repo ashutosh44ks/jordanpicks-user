@@ -25,7 +25,7 @@ const Register = () => {
         password,
       });
       console.log(data);
-      navigate(`/auth/verify?email=${email}`);
+      navigate(`/auth/verify-account?email=${email}`);
     } catch (err) {
       console.log(err);
       myToast(err?.response?.data?.error || "Something went wrong", "failure");

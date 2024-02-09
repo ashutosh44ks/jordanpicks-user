@@ -20,19 +20,17 @@ const VerifyAccount = () => {
   const verifyAccount = async () => {
     try {
       const { data } = await api.post(`/user/verifyAccount`, {
-        emailInput,
+        email: emailInput,
         otp: +otp,
       });
       console.log(data);
       myToast(data.msg, "success");
       if (loggedUser === "user") navigate("/");
       else {
-        localStorage.setItem("jordanToken", data.dta.token);
-        localStorage.setItem("jordanTokenRefresh", data.dta.refreshToken);
-        setLoggedUser("user");
+        myToast("Please login to continue", "success");
         if (searchParams.get("redirect"))
-          navigate(searchParams.get("redirect"));
-        else navigate("/");
+          navigate("/auth/login?redirect=" + searchParams.get("redirect"));
+        else navigate("/auth/login");
       }
     } catch (err) {
       console.log(err);
@@ -46,7 +44,7 @@ const VerifyAccount = () => {
     setLoading(true);
     try {
       const { data } = await api.post(`/user/generateOTP`, {
-        emailInput,
+        email: emailInput,
       });
       console.log(data);
       myToast(data.msg, "success");
