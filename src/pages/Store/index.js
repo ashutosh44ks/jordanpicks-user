@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import api from "../../components/utils/api";
-import myToast from "../../components/utils/myToast";
 import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
 import Stripe from "./components/Stripe";
@@ -9,9 +8,9 @@ const Store = () => {
   const [store, setStore] = useState([]);
   const getStore = async () => {
     try {
-      const {data} = await api.get("/user/getStore");
+      const {data} = await api.get("/user/allStore?page=1");
       console.log(data)
-      // setStore(data.dta);
+      setStore(data.dta);
     } catch (error) {
       console.log(error)
     }
