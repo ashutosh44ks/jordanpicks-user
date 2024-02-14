@@ -29,7 +29,11 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
           <div className="flex items-start">
             <h4 className="mt-1">$</h4>
             <h1 className="text-yellow">
-              {!loading && (packageDetails.price - wallet).toFixed(2)}
+              {!loading &&
+                (packageDetails.price - wallet <= 0
+                  ? packageDetails.price
+                  : packageDetails.price - wallet
+                ).toFixed(2)}
             </h1>
           </div>
         </div>
