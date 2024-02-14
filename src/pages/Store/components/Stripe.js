@@ -78,8 +78,6 @@ const CheckoutForm = ({ storeId }) => {
     layout: "tabs",
   };
 
-  console.log(storeId)
-
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" options={paymentElementOptions} />
@@ -116,8 +114,8 @@ const StripeComponent = ({ storeId }) => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    createIntent();
-  }, []);
+    if (storeId) createIntent();
+  }, [storeId]);
 
   const appearance = {
     theme: "night",
@@ -126,6 +124,7 @@ const StripeComponent = ({ storeId }) => {
     clientSecret,
     appearance,
   };
+
   return (
     <>
       {clientSecret && (
