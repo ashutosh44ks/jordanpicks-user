@@ -137,12 +137,12 @@ const Header = () => {
                   >
                     My Profile
                   </li>
-                  <li
+                  {/* <li
                     className="cursor-pointer px-4 py-2 hover:bg-yellow hover:text-darkblack font-medium"
                     onClick={() => navigate("/my-account/referrals")}
                   >
                     Referrals
-                  </li>
+                  </li> */}
                   <li
                     className="cursor-pointer px-4 py-2 hover:bg-yellow hover:text-darkblack font-medium"
                     onClick={() => navigate("/store")}
