@@ -1,35 +1,56 @@
-import React from "react";
-import { useOutletContext } from "react-router-dom";
+import { useState, useEffect } from "react";
+import api from "../../../components/utils/api";
 import Table from "../../../components/common/Table";
 import dateFormatter from "../../../components/utils/dateFormatter";
+import Pagination from "../../../components/common/Pagination";
 
 const Orders = () => {
-  const { userData } = useOutletContext();
-  const user = userData?.user;
+  const [myTransactions, setMyTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const getTransactions = async () => {
+    setLoading(true);
+    try {
+      const { data } = await api.get(`/user/getTransactions?page=${page}`);
+      console.log(data);
+      setMyTransactions(data.dta);
+      setTotalPages(data.totalPages);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
+  };
+  useEffect(() => {
+    getTransactions();
+  }, [page]);
+
   return (
     <div>
-      <h3>Order History</h3>
       <Table
-        tHead={["S.No.", "Description", "Date", "Price"]}
+        tHead={["S.No.", "Package Name", "Date", "Type", "Price", "Method"]}
         wrapperClass="my-8"
       >
-        {user?.orderHistory?.length > 0 ? (
-          user?.orderHistory?.map((order, index) => (
-            <tr key={order._id}>
+        {!loading ? (
+          myTransactions.map((transaction, index) => (
+            <tr key={transaction._id}>
               <td>{index + 1}</td>
-              <td>{order.desc}</td>
-              <td>{dateFormatter(order.createdAt)}</td>
-              <td>{order?.price?.toFixed(2)}</td>
+              <td>{transaction?.package?.name || transaction.desc}</td>
+              <td>{dateFormatter(transaction.createdAt)}</td>
+              <td>{transaction.type}</td>
+              <td>{transaction?.price?.toFixed(2)}</td>
+              <td>{transaction.method}</td>
             </tr>
           ))
         ) : (
           <tr>
-            <td className="text-center" colSpan="5">
-              No orders found
+            <td className="text-center" colSpan="6">
+              Loading...
             </td>
           </tr>
         )}
       </Table>
+      <Pagination lastPage={totalPages} page={page} setPage={setPage} />
     </div>
   );
 };

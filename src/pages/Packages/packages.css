@@ -1,86 +1,35 @@
-.banner {
-  height: calc(100vh - 12rem);
-  max-height: 30rem;
-  padding: 6rem 4rem;
-}
-.banner h2 {
-  text-shadow: 3px 4px 7px rgba(0, 0, 0, 0.75);
-}
-.banner h5 {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.package-box-container {
-  padding-bottom: 9rem;
-  padding-left: 4rem;
-  padding-right: 4rem;
-}
-
 .package-box.skeleton {
   background: var(--lightgrey);
   border: 1px solid var(--lightgrey3);
   border-radius: 0.5rem;
-  height: 36rem;
+  height: 31rem;
   width: 25rem;
   margin: 0.5rem;
   animation: skeleton 1s infinite alternate;
 }
 
 .package-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   width: 25rem;
-  border: 1px solid var(--lightgrey3);
+  border: solid 1px var(--yellow);
+  border-radius: 1rem;
 }
 .package-box.hidden {
   display: none !important;
 }
-.package-box .package-box-header,
-.package-box .package-box-footer {
-  background: var(--blue3);
-  color: var(--white);
+.package-box .package-box-header {
+  border-radius: 1rem 1rem 0 0;
+  background: var(--yellow);
+  color: var(--darkblack);
   width: 100%;
   text-align: center;
-}
-.package-box .package-box-header {
-  padding: 1.5rem 3rem;
-  position: relative;
-}
-.package-box .package-box-footer {
-  padding: 0.5rem;
+  padding: 1.5rem 1.8rem;
   font-weight: 500;
-}
-.package-box .package-box-header .sticker {
-  background: var(--white);
-  color: var(--black);
-  font-size: 0.8rem;
-  position: absolute;
-  right: 0;
-  transform: rotate(45deg) translate(-0.5rem, -1.5rem);
-  padding: 0rem 1.1rem;
-  z-index: 1;
-  font-weight: 500;
-}
-.package-box .package-box-header .sticker::after {
-  content: "";
-  position: absolute;
-  background: var(--lightgrey);
-  height: 1.75rem;
-  width: 0.75rem;
-  top: -0.5rem;
-  left: -0.11rem;
-  transform: rotate(45deg);
-  border-right: solid 1px var(--lightgrey3);
+  font-size: 1.15rem;
 }
 .package-box .package-box-body {
-  background: var(--lightblue);
-  width: 100%;
-  text-align: center;
+  border-radius: 0 0 1rem 1rem;
+  background: var(--dark2);
   padding: 2rem;
-  position: relative;
-  z-index: 5;
 }
 .package-box .package-box-body .limit-to-5-lines ul,
 .package-box .package-box-body .limit-to-5-lines ol {
@@ -93,13 +42,6 @@
   top: -10rem;
 }
 
-@media screen and (max-width: 900px) {
-  .package-box-container {
-    padding-bottom: 9rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
 @media screen and (max-width: 500px) {
   .package-box .package-box-header {
     padding: 1.5rem;

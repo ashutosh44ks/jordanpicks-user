@@ -123,7 +123,7 @@ const StripeComponent = ({
   }, []);
 
   const appearance = {
-    theme: "stripe",
+    theme: "night",
   };
   const options = {
     clientSecret,

@@ -9,7 +9,6 @@ import "react-simple-toasts/dist/theme/failure.css";
 import "./App.css";
 import ProtectedRoute from "./components/utils/ProtectedRoute";
 import Layout from "./components/layout";
-import LayoutSimple from "./components/layout/LayoutSimple";
 import Error from "./pages/Error";
 
 import Auth from "./pages/Auth";
@@ -20,18 +19,21 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Packages from "./pages/Packages";
-import Dashboard from "./pages/MyAccount/components/Dashboard";
 import Orders from "./pages/MyAccount/components/Orders";
 import MyPackages from "./pages/MyAccount/components/MyPackages";
 import AccountDetails from "./pages/MyAccount/components/AccountDetails";
-import MyWallet from "./pages/MyAccount/components/MyWallet";
+import Referrals from "./pages/MyAccount/components/Referrals";
 import MyAccount from "./pages/MyAccount";
 import PackageDetails from "./pages/PackageDetails";
 import VSLPackageDetails from "./pages/VSLPackageDetails";
 import Payment from "./pages/Payment";
 import VSLPayment from "./pages/VSLPayment";
+import StorePayment from "./pages/Store/Payment";
 // import AddReward from "./pages/AddReward";
 import ForgotPassword from "./pages/Auth/components/ForgotPassword";
+import Faq from "./pages/Faq";
+import Store from "./pages/Store";
+import VerifyAccount from "./pages/Auth/components/Verify";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState("");
@@ -51,13 +53,39 @@ function App() {
     handleReturningUser();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return null;
 
   const BrowserRouter = createBrowserRouter([
     {
-      path: "/packages",
-      element: <LayoutSimple />,
+      path: "/",
+      element: <Layout />,
       children: [
+        {
+          path: "/auth",
+          element: <Auth />,
+          children: [
+            {
+              path: "/auth/login",
+              element: <Login />,
+            },
+            {
+              path: "/auth/register",
+              element: <Register />,
+            },
+            {
+              path: "/auth/forgot-password",
+              element: <ForgotPassword />,
+            },
+            {
+              path: "/auth/verify-account",
+              element: <VerifyAccount />,
+            },
+          ],
+        },
+        {
+          path: "/",
+          element: <Packages />,
+        },
         {
           path: "/packages",
           element: <Packages />,
@@ -76,13 +104,6 @@ function App() {
             },
           ],
         },
-      ],
-      errorElement: <Error />,
-    },
-    {
-      path: "/vsl-packages",
-      element: <LayoutSimple />,
-      children: [
         {
           path: "/vsl-packages/:id",
           element: <ProtectedRoute />,
@@ -97,42 +118,6 @@ function App() {
             },
           ],
         },
-      ],
-      errorElement: <Error />,
-    },
-    {
-      path: "/",
-      element: <LayoutSimple />,
-      children: [
-        {
-          path: "/",
-          element: <Packages />,
-        },
-      ],
-      errorElement: <Error />,
-    },
-    {
-      path: "/",
-      element: <Layout />,
-      children: [
-        {
-          path: "/auth",
-          element: <Auth />,
-          children: [
-            {
-              path: "/auth/login",
-              element: <Login />,
-            },
-            {
-              path: "/auth/forgot-password",
-              element: <ForgotPassword />,
-            },
-          ],
-        },
-        {
-          path: "/auth/register",
-          element: <Register />,
-        },
         {
           path: "/my-account",
           element: <ProtectedRoute />,
@@ -142,39 +127,43 @@ function App() {
               element: <MyAccount />,
               children: [
                 {
-                  path: "/my-account/dashboard",
-                  element: <Dashboard />,
-                },
-                {
-                  path: "/my-account/orders",
-                  element: <Orders />,
-                },
-                {
-                  path: "/my-account/my-wallet",
-                  element: <MyWallet />,
-                },
-                {
                   path: "/my-account/my-packages",
                   element: <MyPackages />,
+                },
+                {
+                  path: "/my-account/transactions",
+                  element: <Orders />,
                 },
                 {
                   path: "/my-account/account-details",
                   element: <AccountDetails />,
                 },
+                {
+                  path: "/my-account/referrals",
+                  element: <Referrals />,
+                },
               ],
             },
           ],
         },
-        // {
-        //   path: "/",
-        //   element: <ProtectedRoute />,
-        //   children: [
-        //     {
-        //       path: "/add-reward",
-        //       element: <AddReward />,
-        //     },
-        //   ],
-        // },
+        {
+          path: "/store",
+          element: <Store />,
+        },
+        {
+          path: "/store",
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: "/store/payment",
+              element: <StorePayment />,
+            },
+          ],
+        },
+        {
+          path: "/faq",
+          element: <Faq />,
+        },
         {
           path: "/about-us",
           element: <About />,

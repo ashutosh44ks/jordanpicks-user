@@ -3,6 +3,7 @@ import PassContext from "../../components/utils/PassContext";
 import api from "../../components/utils/api";
 import myToast from "../../components/utils/myToast";
 import Button from "../../components/common/Button";
+import { IoIosArrowDown } from "react-icons/io";
 import "./contact.css";
 
 const Contact = () => {
@@ -51,77 +52,122 @@ const Contact = () => {
   useEffect(() => {
     if (loggedUser) getProfile();
   }, []);
+
+  const [terms, setTerms] = useState(false);
   return (
     <div className="contact-page">
       <div>
-        <h2 className="text-center mb-4">How can we help you?</h2>
-        <h4 className="text-center">Get In Touch!</h4>
+        <p className="text-center text-yellow">Contact Us</p>
+        <h2 className="text-center font-medium my-4">Get in Touch</h2>
+        <p className="text-center text-lightgrey2">
+          We’d love to hear from you. Please fill out this form.
+        </p>
       </div>
       <form
-        className="my-8"
+        className="my-10"
         onSubmit={(e) => {
           e.preventDefault();
           sendMsg();
         }}
       >
         <div className="input-group">
-          <input
-            className="min-w-[20rem] w-full"
-            type="text"
-            value={fName}
-            onChange={(e) => setFName(e.target.value)}
-            placeholder="First Name"
-            required
-          />
-          <input
-            className="min-w-[20rem] w-full"
-            type="text"
-            value={lName}
-            onChange={(e) => setLName(e.target.value)}
-            placeholder="Last Name"
-            required
-          />
+          <div>
+            <div className="text-sm mb-2 text-lightgrey2">First Name</div>
+            <input
+              className="min-w-[20rem] w-full type2"
+              type="text"
+              value={fName}
+              onChange={(e) => setFName(e.target.value)}
+              placeholder="First Name"
+              required
+            />
+          </div>
+          <div>
+            <div className="text-sm mb-2 text-lightgrey2">Last Name</div>
+            <input
+              className="min-w-[20rem] w-full type2"
+              type="text"
+              value={lName}
+              onChange={(e) => setLName(e.target.value)}
+              placeholder="Last Name"
+              required
+            />
+          </div>
         </div>
-        <div className="input-group">
-          <input
-            className="min-w-[20rem] w-full"
-            type="text"
-            value={phone}
-            onChange={(e) => {
-              if (!isNaN(e.target.value)) setPhone(e.target.value);
-            }}
-            maxLength={10}
-            placeholder="Mobile No."
-            required
-          />
-          <input
-            className="min-w-[20rem] w-full"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            required
-          />
+        <div className="mb-5">
+          <div className="text-sm mb-2 text-lightgrey2">Email</div>
+          <div>
+            <input
+              className="min-w-[20rem] w-full type2"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@email.com"
+              required
+            />
+          </div>
         </div>
-        <div className="mb-4">
+        <div>
+          <div className="text-sm mb-2 text-lightgrey2">Phone Number</div>
+          <div className="input-group">
+            <div className="absolute px-4 py-3 text-lightgrey2">US +1</div>
+            <input
+              style={{
+                paddingLeft: "4rem",
+              }}
+              className="min-w-[20rem] w-full type2"
+              type="text"
+              value={phone}
+              onChange={(e) => {
+                if (!isNaN(e.target.value)) setPhone(e.target.value);
+              }}
+              maxLength={10}
+              placeholder="(555) 000-0000"
+              required
+            />
+          </div>
+        </div>
+        <div>
+          <div className="text-sm mb-2 text-lightgrey2">Message</div>
           <textarea
-            className="min-w-[20rem] w-full"
+            className="min-w-[20rem] w-full type2"
             type="text"
             value={msg}
             onChange={(e) => setMsg(e.target.value)}
-            placeholder="Message"
-            rows={8}
+            rows={5}
             required
           />
         </div>
+        <div className="my-4 w-full text-lightgrey2">
+          <input
+            type="checkbox"
+            value={terms}
+            onChange={(e) => {
+              if (e.target.checked) setTerms(false);
+              else setTerms(true);
+            }}
+            required
+            className="mr-2"
+          />
+          <label>
+            You agree to our friendly{" "}
+            <span
+              className="cursor-pointer text-yellow font-medium"
+              onClick={() => {
+                window.open("https://www.jordanspicks.com/terms", "_blank");
+              }}
+            >
+              privacy policy
+            </span>
+          </label>
+        </div>
         <div>
           <Button
-            theme="pink"
+            theme="yellow"
             type="submit"
-            rounded="none"
-            className="w-full md:w-[8rem]"
+            className="w-full"
           >
-            Send
+            Send Message
           </Button>
         </div>
       </form>

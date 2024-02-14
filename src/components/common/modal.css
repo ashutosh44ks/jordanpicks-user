@@ -1,13 +1,28 @@
 ::backdrop {
-  background-image: var(--black);
+  /* using variables here is not supported yet */
+  background: rgba(0, 0, 0, 0.5);
 }
 dialog {
-  padding: 0.5rem;
-  border: solid 1px var(--lightgrey4);
+  border: solid 1px var(--yellow);
+  background: var(--darkblack);
+  color: var(--white);
   border-radius: 0.75rem;
   min-width: 25rem;
   max-width: 50rem;
 }
 dialog:focus {
   outline: none;
+}
+@media screen and (max-width: 640px) {
+  dialog iframe {
+    width: 22rem;
+  }
+}
+@media screen and (max-width: 420px) {
+  dialog iframe {
+    width: 18rem;
+  }
+  dialog {
+    min-width: 20rem;
+  }
 }

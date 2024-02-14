@@ -18,13 +18,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid var(--lightgrey);
+  border: 1px solid var(--black);
   border-radius: 0.5rem;
+  color: var(--white);
 }
 .pagination .pagination-num.active {
-  background-color: var(--blue);
+  background-color: var(--yellow);
+  color: var(--darkblack);
+}
+.pagination .pagination-btn {
   color: var(--white);
 }
 .pagination .disabled.pagination-btn {
-  color: var(--lightgrey3);
+  color: var(--black);
 }

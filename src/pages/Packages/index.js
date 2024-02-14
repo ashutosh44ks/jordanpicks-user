@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
-import Banner from "./components/Banner";
 import api from "../../components/utils/api";
+import Banner from "./components/Banner";
+import Steps from "./components/Steps";
 import PackageBox from "./components/PackageBox";
+// import Testimonials from "./components/Testimonials";
 import { RiLoader4Line } from "react-icons/ri";
 import "./packages.css";
 
 const Packages = () => {
   const [loading, setLoading] = useState(true);
   const [packages, setPackages] = useState([]);
+  const [filteredPackages, setFilteredPackages] = useState([]);
 
   // const limitDescription = (description) => {
   //   let htmlTagRegex = /(<[^>]*>.*?<\/[^>]*>)|(<[^>]*>)/g;
@@ -44,7 +47,12 @@ const Packages = () => {
     setLoading(true);
     try {
       const { data } = await api.get("/user/allPackage");
-      setPackages(data.dta);
+      console.log(data.dta);
+      // show only packages that have not expired
+      const temp = data.dta.filter(
+        (item) => +new Date(item.endDate) >= +new Date()
+      );
+      setPackages(temp);
     } catch (error) {
       console.log(error);
     }
@@ -54,32 +62,86 @@ const Packages = () => {
     getPackages();
   }, []);
 
+  const sports = ["All", "NBA", "NHL", "NFL", "NCAAB", "Others"];
+  const [activeSportsIndex, setActiveSportsIndex] = useState(0);
+
+  useEffect(() => {
+    if (activeSportsIndex === 0) setFilteredPackages(packages);
+    else
+      setFilteredPackages(
+        packages.filter((item) => item.sports === sports[activeSportsIndex])
+      );
+  }, [activeSportsIndex, packages]);
+
   return (
     <div>
-      <div>
-        <Banner />
-        <div className="w-full flex justify-center">
-          <iframe
-            className="home-welcome-iframe"
-            width="600"
-            height="415"
-            src="https://www.youtube.com/embed/v7Iy5ikDy4A"
-            title="Welcome video"
-          ></iframe>
+      <Banner />
+      <Steps />
+      <div className="my-20">
+        <div>
+          <h2 className="font-medium text-center mb-2">
+            Get Started with <span className="text-yellow">Our Packages</span>
+          </h2>
+          <p className="text-center text-lightgrey2">
+            Embark on your winning adventure now! Explore our tailored packages
+            to kickstart your gaming journey with an unbeatable edge.
+          </p>
         </div>
-      </div>
-      <div className="package-box-container">
-        <h2 className="text-center">GET STARTED WITH OUR PACKAGES</h2>
-        <div className="my-16 flex flex-wrap gap-x-8 gap-y-16 justify-center">
-          {loading
-            ? [1, 2, 3, 4].map((item) => (
-                <div className="package-box skeleton" key={item}>
-                  <RiLoader4Line className="text-4xl animate-spin text-grey" />
+        <div className="flex justify-center mt-12">
+          <div className="border border-yellow rounded-lg flex items-center">
+            {sports.map((sport, index) => (
+              <>
+                <div
+                  className={`py-2 px-6 ${
+                    activeSportsIndex === index
+                      ? "bg-yellow text-darkblack font-medium"
+                      : "cursor-pointer hover:bg-dark"
+                  } ${index === 0 ? "rounded-l-lg" : ""} ${
+                    index === sports.length - 1 ? "rounded-r-lg" : ""
+                  }`}
+                  onClick={() => setActiveSportsIndex(index)}
+                  key={sport}
+                >
+                  {sport}
                 </div>
-              ))
-            : packages.map((item) => <PackageBox item={item} key={item._id} />)}
+                {index !== sports.length - 1 && (
+                  <div
+                    key={sport + "divider"}
+                    className={
+                      activeSportsIndex === index ||
+                      activeSportsIndex === index + 1
+                        ? `invisible`
+                        : `text-white`
+                    }
+                  >
+                    |
+                  </div>
+                )}
+              </>
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-x-8 gap-y-16 justify-center mt-16">
+          {loading ? (
+            [1, 2, 3, 4].map((item) => (
+              <div
+                className="package-box skeleton flex justify-center items-center"
+                key={item}
+              >
+                <RiLoader4Line className="text-4xl animate-spin text-grey" />
+              </div>
+            ))
+          ) : filteredPackages.length > 0 ? (
+            filteredPackages.map((item) => (
+              <PackageBox item={item} key={item._id} />
+            ))
+          ) : (
+            <div className="text-lightgrey2">No packages available for this sport</div>
+          )}
         </div>
       </div>
+      {/* Removed by Client */}
+      {/* <Testimonials /> */}
     </div>
   );
 };

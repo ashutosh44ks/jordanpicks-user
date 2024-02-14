@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import PassContext from "../../../components/utils/PassContext";
 import Button from "../../../components/common/Button";
@@ -13,6 +13,13 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("jordanUser"));
+    if (user) {
+      setEmail(user.email);
+      setPassword(user.password);
+    }
+  }, []);
   const loginUser = async () => {
     try {
       const { data } = await api.post(`/user/login`, {
@@ -22,6 +29,13 @@ const Login = () => {
       console.log(data);
       localStorage.setItem("jordanToken", data.dta.token);
       localStorage.setItem("jordanTokenRefresh", data.dta.refreshToken);
+      localStorage.setItem(
+        "jordanUser",
+        JSON.stringify({
+          email,
+          password,
+        })
+      );
       setLoggedUser("user");
       if (searchParams.get("redirect")) navigate(searchParams.get("redirect"));
       else navigate("/");
@@ -32,6 +46,7 @@ const Login = () => {
   };
 
   const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
   return (
     <form
@@ -39,10 +54,16 @@ const Login = () => {
         e.preventDefault();
         loginUser();
       }}
-      className="auth-card"
+      className="max-w-[26rem]"
     >
-      <h4 className="mb-6">Login</h4>
-      <div className="mb-4 w-full">
+      <div className="mb-6">
+        <h2 className="font-medium text-center mb-2">Welcome Back!</h2>
+        <p className="text-center text-lightgrey2">
+          Welcome Back to the Winning Zone! Your Next Jackpot Awaits - Let the
+          Games Begin!
+        </p>
+      </div>
+      <div className="mb-6 w-full">
         <input
           type="email"
           placeholder="Email address"
@@ -52,43 +73,58 @@ const Login = () => {
           required
         />
       </div>
-      <div className="mb-3 w-full">
-        <div className="relative">
-          <input
-            type={showPassword ? "text" : "password"}
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full min-w-[20rem] pr-9"
-            required
-          />
-          <span
-            className="absolute right-0 text-xl cursor-pointer p-3"
-            onClick={() => setShowPassword(!showPassword)}
-          >
-            {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
-          </span>
-        </div>
-        <div className="w-full flex justify-end">
-          <span
-            className="cursor-pointer text-blue font-medium text-sm mt-1"
-            onClick={() => {
-              navigate("/auth/forgot-password");
-            }}
-          >
-            Forgot Password ?
-          </span>
-        </div>
+      <div className="relative mb-4 w-full">
+        <input
+          type={showPassword ? "text" : "password"}
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full min-w-[20rem] pr-14"
+          required
+        />
+        <span
+          className="absolute right-0 text-xl cursor-pointer p-5"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+        </span>
       </div>
-      <div className="w-full mb-4">
-        <Button theme="pink" className="w-full" type="submit">
-          Login
+      <div className="w-full flex justify-between mb-4">
+        <span
+          className="text-sm flex gap-2 items-center"
+          onClick={() => {}}
+        >
+          <input
+            type="checkbox"
+            checked={rememberMe}
+            onChange={(e) => setRememberMe(e.target.checked)}
+          />
+          Remember Me
+        </span>
+        <span
+          className="cursor-pointer text-sm"
+          onClick={() => {
+            navigate("/auth/forgot-password");
+          }}
+        >
+          Forgot Password ?
+        </span>
+      </div>
+      <div className="w-full">
+        <Button theme="yellow" className="w-full font-semibold" type="submit">
+          Sign In
         </Button>
       </div>
-      <div className="w-full text-sm">
-        Don't have an account ?{" "}
-        <span
-          className="cursor-pointer text-blue font-medium"
+      <div className="flex items-center gap-2 my-4">
+        <hr className="w-full border-black" />
+        <span className="text-sm">or</span>
+        <hr className="w-full border-black" />
+      </div>
+      <div className="w-full">
+        <Button
+          theme="lightgrey"
+          className="w-full font-semibold"
+          type="button"
           onClick={() => {
             if (searchParams.get("redirect"))
               navigate(
@@ -97,8 +133,8 @@ const Login = () => {
             else navigate("/auth/register");
           }}
         >
-          Create now
-        </span>
+          Register
+        </Button>
       </div>
     </form>
   );

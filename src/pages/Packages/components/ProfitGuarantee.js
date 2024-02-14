@@ -3,7 +3,7 @@ import React from "react";
 const ProfitGuarantee = () => {
   return (
     <>
-      <ol className="list-decimal ml-8">
+      <ol className="list-decimal ml-5">
         <li className="my-2">
           Profit Guaranteed Picks are a way to get your money back if you lose.
           You buy a package of picks and bet on each one separately. These are
@@ -25,7 +25,7 @@ const ProfitGuarantee = () => {
       </ol>
       <p className="my-4">
         YOU CAN USE YOUR CREDIT TO BUY ANYTHING ELSE ON{" "}
-        <a href="https://www.jordanspicks.com" className="text-blue2 font-medium">
+        <a href="https://www.jordanspicks.com" className="text-yellow font-medium">
           JORDANS PICKS
         </a>
       </p>

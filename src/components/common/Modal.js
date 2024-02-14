@@ -22,7 +22,8 @@ const Modal = forwardRef(({ content, title, closeDialog = () => {} }, ref) => {
   }, []);
   return (
     <dialog ref={ref}>
-      <div className="flex justify-between items-center m-4">
+      <div className="flex justify-between items-center px-4 py-2 bg-yellow text-darkblack">
+        <span></span>
         <h4>{title}</h4>
         <span
           className="p-2 cursor-pointer scale-150"
@@ -34,8 +35,7 @@ const Modal = forwardRef(({ content, title, closeDialog = () => {} }, ref) => {
           <IoMdClose />
         </span>
       </div>
-      <hr />
-      <div className="m-4 max-h-[75vh] overflow-y-auto overflow-x-hidden">
+      <div className="px-6 py-8 max-h-[75vh] overflow-y-auto overflow-x-hidden">
         {content}
       </div>
     </dialog>
