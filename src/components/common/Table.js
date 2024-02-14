@@ -12,7 +12,17 @@ const Table = ({ tHead = [], wrapperClass = "", children }) => {
             ))}
           </tr>
         </thead>
-        <tbody>{children}</tbody>
+        <tbody>
+          {children.length > 0 ? (
+            children
+          ) : (
+            <tr>
+              <td colSpan={tHead.length} className="text-center">
+                No Data Found
+              </td>
+            </tr>
+          )}
+        </tbody>
       </table>
     </div>
   );
