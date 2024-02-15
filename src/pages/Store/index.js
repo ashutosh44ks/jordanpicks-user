@@ -35,7 +35,7 @@ const Store = () => {
               key={i}
               className="p-4 my-4 rounded-2xl bg-dark2 border border-yellow"
             >
-              <h2 className="mb-4 text-center">{p.name}</h2>
+              <h2 className="mt-2 mb-4 mx-2 text-center">{p.name}</h2>
               <div className="flex justify-center items-start mb-4">
                 <h4 className="mt-1">$</h4>
                 <h1 className="text-yellow">{p.price}</h1>
