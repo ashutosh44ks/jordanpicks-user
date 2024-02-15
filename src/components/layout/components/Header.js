@@ -8,14 +8,17 @@ import Sidebar from "./Sidebar";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdKeyboardArrowDown, MdClose } from "react-icons/md";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { loggedUser, setLoggedUser } = useContext(PassContext);
 
+  const [prevLocation, setPrevLocation] = useState("");
   const [name, setName] = useState("User Name");
   const [wallet, setWallet] = useState(0);
+  const [walletChangeTrigger, setWalletChangeTrigger] = useState(false);
   const getWallet = async () => {
     try {
       const { data } = await api.get("/user/getProfileShort");
@@ -25,6 +28,7 @@ const Header = () => {
     } catch (err) {
       console.log(err);
     }
+    setWalletChangeTrigger(false);
   };
 
   const logout = () => {
@@ -59,6 +63,13 @@ const Header = () => {
   useEffect(() => {
     setActiveRoute(location.pathname);
     if (showSidebar) setShowSidebar(false);
+    if (
+      prevLocation.includes("payment") &&
+      !location.pathname.includes("payment")
+    ) {
+      getWallet();
+    }
+    setPrevLocation(location.pathname);
   }, [location]);
 
   useEffect(() => {
@@ -122,7 +133,11 @@ const Header = () => {
                 }}
                 className="font-medium"
               >
-                ${wallet.toFixed(2)} USD
+                {location.pathname.includes("payment") ? (
+                  <AiOutlineLoading3Quarters className="animate-spin text-white" />
+                ) : (
+                  `$${wallet.toFixed(2)} USD`
+                )}
               </Button>
               <div className="flex gap-2 items-center user-dd-menu-trigger py-4">
                 <FaRegUserCircle />

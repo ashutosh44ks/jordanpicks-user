@@ -45,7 +45,7 @@ function App() {
         const userId = await updateToken();
         setLoggedUser(userId);
       } else {
-        console.log("back user", decodedToken,  decodedToken.id);
+        console.log("back user", decodedToken, decodedToken.id);
         setLoggedUser(decodedToken.id);
       }
     }
