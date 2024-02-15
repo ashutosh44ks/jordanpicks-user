@@ -24,6 +24,7 @@
 .btn[disabled] {
   background-color: var(--lightgrey3);
   color: var(--black);
+  cursor: default;
 }
 .btn[disabled]:hover {
   background-color: var(--lightgrey3);

@@ -18,7 +18,7 @@ const Button = ({
       onClick={onClick}
       type={type}
       disabled={disabled}
-      id={id}
+      {...(id && { id })}
     >
       {children}
     </button>
