@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Button from "../../../components/common/Button";
 import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const Register = () => {
   const [searchParams] = useSearchParams();
@@ -44,9 +45,12 @@ const Register = () => {
     >
       <div className="mb-6 flex flex-col justify-center items-center">
         <div className="mb-6">
-          <h2 className="font-medium text-center mb-2">Register Your Account</h2>
+          <h2 className="font-medium text-center mb-2">
+            Register Your Account
+          </h2>
           <p className="text-center text-lightgrey2">
-            Secure Your Spot! After registering you'll instantly receive your $25 bonus credits
+            Secure Your Spot! After registering you'll instantly receive your
+            $25 bonus credits
           </p>
         </div>
       </div>
@@ -127,20 +131,18 @@ const Register = () => {
         </label>
       </div>
       <div className="w-full mb-4">
-        {loading ? (
-          <Button
-            theme="grey"
-            className="w-full font-semibold"
-            type="button"
-            disabled
-          >
-            Loading...
-          </Button>
-        ) : (
-          <Button theme="yellow" className="w-full font-semibold" type="submit">
-            Create Account
-          </Button>
-        )}
+        <Button
+          theme="yellow"
+          className="w-full font-semibold flex justify-center"
+          type="submit"
+          disabled={loading}
+        >
+          {loading ? (
+            <AiOutlineLoading3Quarters className="animate-spin text-2xl" />
+          ) : (
+            "Create Account"
+          )}
+        </Button>
       </div>
       <div className="flex items-center gap-2 my-4">
         <hr className="w-full border-black" />
