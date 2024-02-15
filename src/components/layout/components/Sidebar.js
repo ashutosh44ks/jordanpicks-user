@@ -26,25 +26,25 @@ const Sidebar = ({ showSidebar, activeRoute, loggedUser, logout }) => {
       name: "Login",
       link: "/auth/login",
       func: () => navigate("/auth/login"),
-      show: !loggedUser,
+      show: loggedUser === "",
     },
     {
       name: "Register",
       link: "/auth/register",
       func: () => navigate("/auth/register"),
-      show: !loggedUser,
+      show: loggedUser === "",
     },
     {
       name: "My Account",
       link: "/my-account",
       func: () => navigate("/my-account/my-packages"),
-      show: loggedUser,
+      show: loggedUser !== "",
     },
     {
       name: "Logout",
       func: logout,
       link: "#",
-      show: loggedUser,
+      show: loggedUser !== "",
     },
   ];
   return (

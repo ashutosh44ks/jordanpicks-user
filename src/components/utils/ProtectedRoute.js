@@ -10,7 +10,7 @@ const ProtectedRoute = () => {
   const { loggedUser, setLoggedUser } = useContext(PassContext);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    if (loggedUser !== "user") {
+    if (loggedUser === "") {
       // if User is not logged in
       // Check if user has a token and refresh token
       if (
@@ -21,14 +21,14 @@ const ProtectedRoute = () => {
         const decodedToken = jwtDecode(localStorage.getItem("jordanToken"));
         if (decodedToken.exp * 1000 < Date.now()) {
           // if token is expired, update token
-          updateToken(false, null);
+          updateToken();
         } else {
-          // if token is not expired, set loggedUser to "user"
-          setLoggedUser("user");
+          // if token is not expired, set loggedUser to userId or "user"
+          console.log(decodedToken.id);
+          setLoggedUser(decodedToken.id);
         }
         setLoading(false);
-      }
-      else {
+      } else {
         // if user doesn't have a token and refresh token, set loading to false and direct to login page
         setLoading(false);
         navigate(`/auth/login?redirect=${location.pathname + location.search}`);

@@ -16,7 +16,7 @@ api.interceptors.request.use(
     if (!localStorage.getItem("jordanToken")) return config;
     const { exp } = jwtDecode(localStorage.getItem("jordanToken"));
     if (Date.now() >= exp * 1000) {
-      await updateToken(false, null);
+      await updateToken();
     }
     Object.assign(config.headers, {
       Authorization: "Bearer " + localStorage.getItem("jordanToken"),
@@ -30,12 +30,21 @@ api.interceptors.request.use(
 );
 
 // Add a response interceptor
-// axios.interceptors.response.use(function (response) {
-//   // Do something with response data
-//   return response;
-// }, function (error) {
-//   // Do something with response error
-//   return Promise.reject(error);
-// });
+api.interceptors.response.use(
+  // Any status code that lie within the range of 2xx cause this function to trigger
+  function (response) {
+    return response;
+  },
+  // Any status codes that falls outside the range of 2xx cause this function to trigger
+  async function (error) {
+    const originalRequest = error.config;
+    if (error.response && error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      await updateToken();
+      return api(originalRequest);
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default api;

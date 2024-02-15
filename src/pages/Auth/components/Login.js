@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import PassContext from "../../../components/utils/PassContext";
 import Button from "../../../components/common/Button";
 import api from "../../../components/utils/api";
@@ -36,7 +37,9 @@ const Login = () => {
           password,
         })
       );
-      setLoggedUser("user");
+      const decodedToken = jwtDecode(data.dta.token);
+      console.log(decodedToken.id);
+      setLoggedUser(decodedToken.id);
       if (searchParams.get("redirect")) navigate(searchParams.get("redirect"));
       else navigate("/");
     } catch (err) {
@@ -90,10 +93,7 @@ const Login = () => {
         </span>
       </div>
       <div className="w-full flex justify-between mb-4">
-        <span
-          className="text-sm flex gap-2 items-center"
-          onClick={() => {}}
-        >
+        <span className="text-sm flex gap-2 items-center" onClick={() => {}}>
           <input
             type="checkbox"
             checked={rememberMe}

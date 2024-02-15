@@ -50,8 +50,8 @@ const Contact = () => {
     }
   };
   useEffect(() => {
-    if (loggedUser) getProfile();
-  }, []);
+    if (loggedUser !== "") getProfile();
+  }, [loggedUser]);
 
   const [terms, setTerms] = useState(false);
   return (
@@ -162,11 +162,7 @@ const Contact = () => {
           </label>
         </div>
         <div>
-          <Button
-            theme="yellow"
-            type="submit"
-            className="w-full"
-          >
+          <Button theme="yellow" type="submit" className="w-full">
             Send Message
           </Button>
         </div>

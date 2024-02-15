@@ -62,7 +62,7 @@ const Header = () => {
   }, [location]);
 
   useEffect(() => {
-    if (loggedUser) getWallet();
+    if (loggedUser !== "") getWallet();
   }, [loggedUser]);
 
   return (
@@ -92,7 +92,7 @@ const Header = () => {
               </div>
             ))}
           </div>
-          {!loggedUser ? (
+          {loggedUser === "" ? (
             <div className="header-section">
               <Button
                 theme="transparent"

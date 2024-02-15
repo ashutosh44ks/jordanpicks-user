@@ -38,13 +38,15 @@ import VerifyAccount from "./pages/Auth/components/Verify";
 function App() {
   const [loggedUser, setLoggedUser] = useState("");
   const [loading, setLoading] = useState(true);
-  const handleReturningUser = () => {
+  const handleReturningUser = async () => {
     if (localStorage.getItem("jordanToken")) {
       const decodedToken = jwtDecode(localStorage.getItem("jordanToken"));
       if (decodedToken.exp * 1000 < Date.now()) {
-        updateToken(true, setLoggedUser);
+        const userId = await updateToken();
+        setLoggedUser(userId);
       } else {
-        setLoggedUser("user");
+        console.log("back user", decodedToken,  decodedToken.id);
+        setLoggedUser(decodedToken.id);
       }
     }
     setLoading(false);
@@ -91,16 +93,16 @@ function App() {
           element: <Packages />,
         },
         {
+          path: "/packages/:id/payment",
+          element: <Payment />,
+        },
+        {
           path: "/packages/:id",
           element: <ProtectedRoute />,
           children: [
             {
               path: "/packages/:id",
               element: <PackageDetails />,
-            },
-            {
-              path: "/packages/:id/payment",
-              element: <Payment />,
             },
           ],
         },
@@ -112,11 +114,11 @@ function App() {
               path: "/vsl-packages/:id",
               element: <VSLPackageDetails />,
             },
-            {
-              path: "/vsl-packages/:id/payment",
-              element: <VSLPayment />,
-            },
           ],
+        },
+        {
+          path: "/vsl-packages/:id/payment",
+          element: <VSLPayment />,
         },
         {
           path: "/my-account",
@@ -151,14 +153,8 @@ function App() {
           element: <Store />,
         },
         {
-          path: "/store",
-          element: <ProtectedRoute />,
-          children: [
-            {
-              path: "/store/payment",
-              element: <StorePayment />,
-            },
-          ],
+          path: "/store/payment",
+          element: <StorePayment />,
         },
         {
           path: "/faq",

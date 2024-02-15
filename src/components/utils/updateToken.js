@@ -1,6 +1,7 @@
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
-const updateToken = async (runSetter, setter) => {
+const updateToken = async () => {
   const refreshToken = localStorage.getItem("jordanTokenRefresh");
   try {
     const { data } = await axios.post(
@@ -10,13 +11,14 @@ const updateToken = async (runSetter, setter) => {
       }
     );
     localStorage.setItem("jordanToken", data.dta);
+    const decodedToken = jwtDecode(data.dta);
     console.log("token updated");
-    if (runSetter) setter("user");
+    return decodedToken.id;
   } catch (e) {
     console.log(e);
     localStorage.removeItem("jordanToken");
     localStorage.removeItem("jordanTokenRefresh");
-    if (runSetter) setter("");
+    return null;
   }
 };
 

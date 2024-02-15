@@ -9,7 +9,7 @@ import { AiOutlineLoading } from "react-icons/ai";
 const VerifyAccount = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { loggedUser, setLoggedUser } = useContext(PassContext);
+  const { loggedUser } = useContext(PassContext);
 
   const [emailInput, setEmailInput] = useState("");
   useEffect(() => {
@@ -25,7 +25,7 @@ const VerifyAccount = () => {
       });
       console.log(data);
       myToast(data.msg, "success");
-      if (loggedUser === "user") navigate("/");
+      if (loggedUser !== "") navigate("/");
       else {
         myToast("Please login to continue", "success");
         if (searchParams.get("redirect"))
