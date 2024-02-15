@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   PaymentElement,
@@ -7,8 +7,14 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import api from "../../../components/utils/api";
+import PassContext from "../../../components/utils/PassContext";
 
-const CheckoutForm = ({ packageId, cardDeduction, walletDeduction }) => {
+const CheckoutForm = ({
+  packageId,
+  cardDeduction,
+  walletDeduction,
+  loggedUser,
+}) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -57,7 +63,7 @@ const CheckoutForm = ({ packageId, cardDeduction, walletDeduction }) => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${process.env.REACT_APP_BASE_URL}vsl-packages/${packageId}/payment?cardDeduction=${cardDeduction}&walletDeduction=${walletDeduction}`,
+        return_url: `${process.env.REACT_APP_BASE_URL}vsl-packages/${packageId}/payment?cardDeduction=${cardDeduction}&walletDeduction=${walletDeduction}&id=${loggedUser}`,
       },
     });
 
@@ -98,11 +104,8 @@ const CheckoutForm = ({ packageId, cardDeduction, walletDeduction }) => {
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
-const StripeComponent = ({
-  packageId,
-  cardDeduction,
-  walletDeduction,
-}) => {
+const StripeComponent = ({ packageId, cardDeduction, walletDeduction }) => {
+  const { loggedUser } = useContext(PassContext);
   const [clientSecret, setClientSecret] = useState("");
 
   const createIntent = async () => {
@@ -137,6 +140,7 @@ const StripeComponent = ({
             packageId={packageId}
             cardDeduction={cardDeduction}
             walletDeduction={walletDeduction}
+            loggedUser={loggedUser}
           />
         </Elements>
       )}

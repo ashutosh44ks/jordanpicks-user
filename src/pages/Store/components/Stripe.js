@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   PaymentElement,
@@ -7,8 +7,9 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import api from "../../../components/utils/api";
+import PassContext from "../../../components/utils/PassContext";
 
-const CheckoutForm = ({ storeId }) => {
+const CheckoutForm = ({ storeId, loggedUser }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -57,7 +58,7 @@ const CheckoutForm = ({ storeId }) => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${process.env.REACT_APP_BASE_URL}store/payment?storeId=${storeId}`,
+        return_url: `${process.env.REACT_APP_BASE_URL}store/payment?storeId=${storeId}&userId=${loggedUser}`,
       },
     });
 
@@ -99,6 +100,7 @@ const CheckoutForm = ({ storeId }) => {
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const StripeComponent = ({ storeId }) => {
+  const { loggedUser } = useContext(PassContext);
   const [clientSecret, setClientSecret] = useState("");
 
   const createIntent = async () => {
@@ -129,7 +131,7 @@ const StripeComponent = ({ storeId }) => {
     <>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm storeId={storeId} />
+          <CheckoutForm storeId={storeId} loggedUser={loggedUser} />
         </Elements>
       )}
     </>
