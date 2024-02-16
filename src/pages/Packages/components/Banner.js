@@ -35,9 +35,9 @@ const Banner = () => {
 
   if (width < 480) {
     return (
-      <div className="transform -translate-y-16">
+      <div className="transform -translate-y-10">
         <img
-          src="/assets/slider-mobile.png"
+          src="/assets/slider0-mobile.jpg"
           alt="banner-mobile"
           className="cursor-pointer w-full"
           onClick={() => navigate("/auth/register")}
@@ -47,9 +47,9 @@ const Banner = () => {
   }
 
   return (
-    <div className="transform -translate-y-16">
+    <div className="transform -translate-y-10">
       <img
-        src="/assets/slider0.png"
+        src="/assets/slider0.jpg"
         alt="banner0"
         className="cursor-pointer w-full"
         onClick={() => navigate("/auth/register")}
