@@ -88,16 +88,16 @@ const Packages = () => {
           </p>
         </div>
         <div className="flex justify-center mt-12">
-          <div className="border border-yellow rounded-lg flex items-center">
+          <div className="border border-yellow rounded-lg flex items-center xs:flex-row flex-col">
             {sports.map((sport, index) => (
               <>
                 <div
-                  className={`py-2 px-6 ${
+                  className={`py-2 px-6 text-center w-full xs:w-auto ${
                     activeSportsIndex === index
                       ? "bg-yellow text-darkblack font-medium"
                       : "cursor-pointer hover:bg-dark"
-                  } ${index === 0 ? "rounded-l-lg" : ""} ${
-                    index === sports.length - 1 ? "rounded-r-lg" : ""
+                  } ${index === 0 ? "rounded-l-lg xs:rounded-r-none rounded-r-lg" : ""} ${
+                    index === sports.length - 1 ? "rounded-r-lg xs:rounded-l-none rounded-l-lg" : ""
                   }`}
                   onClick={() => setActiveSportsIndex(index)}
                   key={sport}
@@ -108,10 +108,10 @@ const Packages = () => {
                   <div
                     key={sport + "divider"}
                     className={
-                      activeSportsIndex === index ||
+                      (activeSportsIndex === index ||
                       activeSportsIndex === index + 1
                         ? `invisible`
-                        : `text-white`
+                        : `text-white`) + " hidden xs:block"
                     }
                   >
                     |
@@ -136,7 +136,9 @@ const Packages = () => {
               <PackageBox item={item} key={item._id} />
             ))
           ) : (
-            <div className="text-lightgrey2">No packages available for this sport</div>
+            <div className="text-lightgrey2">
+              No packages available for this sport
+            </div>
           )}
         </div>
       </div>
