@@ -64,7 +64,7 @@ const PackageDetails = () => {
         packageId: packageDetails._id,
       });
       console.log(data);
-      navigate("/my-account/orders");
+      navigate("/my-account/transactions");
     } catch (err) {
       console.log(err);
       myToast(err?.response?.data?.error || "Something went wrong", "failure");
