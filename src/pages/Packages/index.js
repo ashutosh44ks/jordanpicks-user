@@ -70,9 +70,20 @@ const Packages = () => {
     }
     setSpecialLoading(false);
   };
+  const [discountPer, setDiscountPer] = useState(0);
+  const getProfileShort = async () => {
+    try {
+      const { data } = await api.get("/user/getProfileShort");
+      console.log(data.dta);
+      setDiscountPer(data.dta.defaultDiscount)
+    } catch (error) {
+      console.log(error);
+    }
+  }
   useEffect(() => {
     getPackages();
     getSpecialPackages();
+    getProfileShort();
   }, []);
 
   const sports = ["All", "NBA", "NHL", "NFL", "NCAAB", "Others"];
@@ -112,6 +123,7 @@ const Packages = () => {
         <PackageContainer
           loading={loading}
           filteredPackages={filteredPackages}
+          discountPer={discountPer}
         />
       </div>
       <div className="my-20">
