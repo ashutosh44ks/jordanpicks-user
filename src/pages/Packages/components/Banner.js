@@ -1,6 +1,8 @@
 // import { useState, useEffect } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useWindowWidth } from "../../../components/utils/useWindowWidth";
+import PassContext from "../../../components/utils/PassContext";
 // import { TbCircleFilled } from "react-icons/tb";
 
 // const BtnGrp = ({ activeIndex }) => {
@@ -19,6 +21,7 @@ import { useWindowWidth } from "../../../components/utils/useWindowWidth";
 const Banner = () => {
   const navigate = useNavigate();
   const width = useWindowWidth();
+  const { loggedUser } = useContext(PassContext);
 
   // const [activeIndex, setActiveIndex] = useState(0);
   // const [hover, setHover] = useState(false);
@@ -33,14 +36,24 @@ const Banner = () => {
 
   // const commonStyle = "transform transition-transform duration-500 ease-in-out";
 
+  const handleClick = () => {
+    if (loggedUser && document.querySelector("#special"))
+      document.querySelector("#special").scrollIntoView();
+    else navigate("/auth/register");
+  };
+
   if (width < 480) {
     return (
       <div className="transform -translate-y-10">
         <img
-          src="/assets/slider0-mobile.jpg"
+          src={
+            loggedUser
+              ? "/assets/slider1-mobile.jpg"
+              : "/assets/slider0-mobile.jpg"
+          }
           alt="banner-mobile"
           className="cursor-pointer w-full"
-          onClick={() => navigate("/auth/register")}
+          onClick={handleClick}
         />
       </div>
     );
@@ -49,10 +62,10 @@ const Banner = () => {
   return (
     <div className="transform -translate-y-10">
       <img
-        src="/assets/slider0.jpg"
-        alt="banner0"
+        src={loggedUser ? "/assets/slider1.jpg" : "/assets/slider0.jpg"}
+        alt="banner-desktop"
         className="cursor-pointer w-full"
-        onClick={() => navigate("/auth/register")}
+        onClick={handleClick}
       />
     </div>
   );

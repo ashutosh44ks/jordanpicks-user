@@ -3,7 +3,10 @@ import { RiLoader4Line } from "react-icons/ri";
 
 const SpecialPackageContainer = ({ loading, specialPackages }) => {
   return (
-    <div className="flex flex-wrap gap-x-8 gap-y-16 justify-center mt-16">
+    <div
+      className="flex flex-wrap gap-x-8 gap-y-16 justify-center mt-16"
+      id="special"
+    >
       {loading ? (
         [1, 2].map((item) => (
           <div
