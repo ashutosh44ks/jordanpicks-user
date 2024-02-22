@@ -35,7 +35,13 @@ const Orders = () => {
           myTransactions.map((transaction, index) => (
             <tr key={transaction._id}>
               <td>{index + 1}</td>
-              <td>{transaction?.package?.name || transaction.desc}</td>
+              <td>
+                {transaction?.package?.name ||
+                  transaction?.store?.name ||
+                  transaction?.vslPackage?.name ||
+                  transaction?.specialPackage?.name ||
+                  transaction.desc}
+              </td>
               <td>{dateFormatter(transaction.createdAt)}</td>
               <td>{transaction.type}</td>
               <td>{transaction?.price?.toFixed(2)}</td>
