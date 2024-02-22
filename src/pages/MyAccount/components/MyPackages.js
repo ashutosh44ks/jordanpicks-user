@@ -27,7 +27,7 @@ const MyPackages = () => {
   return (
     <div>
       <Table
-        tHead={["S.No.", "Package Name", "Price", "Bets", "Result"]}
+        tHead={["S.No.", "Package Name", "Price", "Bets/Links", "Result"]}
         wrapperClass="my-8"
       >
         {!loading ? (
@@ -38,8 +38,13 @@ const MyPackages = () => {
               <td>${p.price}</td>
               <td>
                 <ul className="list-disc">
-                  {p.bets.length > 0 &&
+                  {console.log(p.bets, p.links)}
+                  {p.bets !== undefined &&
+                    p.bets.length > 0 &&
                     p.bets.map((b, index) => <li key={index}>{b}</li>)}
+                  {p.links !== undefined &&
+                    p.links.length > 0 &&
+                    p.links.map((l, index) => <li key={index}>{l}</li>)}
                 </ul>
               </td>
               <td className="capitalize">{p.result}</td>
