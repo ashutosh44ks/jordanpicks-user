@@ -25,9 +25,11 @@ import AccountDetails from "./pages/MyAccount/components/AccountDetails";
 import Referrals from "./pages/MyAccount/components/Referrals";
 import MyAccount from "./pages/MyAccount";
 import PackageDetails from "./pages/PackageDetails";
+import SpecialPackageDetails from "./pages/SpecialPackageDetails";
 import VSLPackageDetails from "./pages/VSLPackageDetails";
 import Payment from "./pages/Payment";
 import VSLPayment from "./pages/VSLPayment";
+import SpecialPayment from "./pages/SpecialPackageDetails/Payment";
 import StorePayment from "./pages/Store/Payment";
 // import AddReward from "./pages/AddReward";
 import ForgotPassword from "./pages/Auth/components/ForgotPassword";
@@ -105,6 +107,20 @@ function App() {
               element: <PackageDetails />,
             },
           ],
+        },
+        {
+          path: "/special-packages/:id",
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: "/special-packages/:id",
+              element: <SpecialPackageDetails />,
+            },
+          ],
+        },
+        {
+          path: "/special-packages/:id/payment",
+          element: <SpecialPayment />,
         },
         {
           path: "/vsl-packages/:id",

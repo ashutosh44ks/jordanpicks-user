@@ -3,14 +3,17 @@ import api from "../../components/utils/api";
 import Banner from "./components/Banner";
 import Steps from "./components/Steps";
 import PackageContainer from "./components/PackageContainer";
+import SpecialPackageContainer from "./components/SpecialPackageContainer";
 import PackageMenu from "./components/PackageMenu";
 // import Testimonials from "./components/Testimonials";
 import "./packages.css";
 
 const Packages = () => {
   const [loading, setLoading] = useState(true);
+  const [specialLoading, setSpecialLoading] = useState(true);
   const [packages, setPackages] = useState([]);
   const [filteredPackages, setFilteredPackages] = useState([]);
+  const [specialPackages, setSpecialPackages] = useState([]);
 
   // const limitDescription = (description) => {
   //   let htmlTagRegex = /(<[^>]*>.*?<\/[^>]*>)|(<[^>]*>)/g;
@@ -44,7 +47,6 @@ const Packages = () => {
   // };
 
   const getPackages = async () => {
-    setLoading(true);
     try {
       const { data } = await api.get("/user/allPackage");
       console.log(data.dta);
@@ -58,20 +60,33 @@ const Packages = () => {
     }
     setLoading(false);
   };
+  const getSpecialPackages = async () => {
+    try {
+      const { data } = await api.get("/user/allSpecialPackages");
+      console.log(data.dta);
+      setSpecialPackages(data.dta);
+    } catch (error) {
+      console.log(error);
+    }
+    setSpecialLoading(false);
+  };
   useEffect(() => {
     getPackages();
+    getSpecialPackages();
   }, []);
 
   const sports = ["All", "NBA", "NHL", "NFL", "NCAAB", "Others"];
   const [activeSportsIndex, setActiveSportsIndex] = useState(0);
 
   useEffect(() => {
-    if (activeSportsIndex === 0) setFilteredPackages(packages);
-    else
-      setFilteredPackages(
-        packages.filter((item) => item.sports === sports[activeSportsIndex])
-      );
-  }, [activeSportsIndex, packages]);
+    if (!loading) {
+      if (activeSportsIndex === 0) setFilteredPackages([...packages]);
+      else
+        setFilteredPackages(
+          packages.filter((item) => item.sports === sports[activeSportsIndex])
+        );
+    }
+  }, [activeSportsIndex, loading]);
 
   return (
     <div>
@@ -92,11 +107,28 @@ const Packages = () => {
             sports={sports}
             activeSportsIndex={activeSportsIndex}
             setActiveSportsIndex={setActiveSportsIndex}
-            />
+          />
         </div>
         <PackageContainer
           loading={loading}
           filteredPackages={filteredPackages}
+        />
+      </div>
+      <div className="my-20">
+        <div>
+          <h2 className="font-medium text-center mb-2">
+            Get exclusive JordansPicks content using our{" "}
+            <span className="text-yellow">Premium Packages</span>
+          </h2>
+          <p className="text-center text-lightgrey2">
+            These packages are designed to give you the best of the best. Get
+            access to our premium picks and take your gaming experience to the
+            next level.
+          </p>
+        </div>
+        <SpecialPackageContainer
+          loading={specialLoading}
+          specialPackages={specialPackages}
         />
       </div>
       {/* Removed by Client */}
