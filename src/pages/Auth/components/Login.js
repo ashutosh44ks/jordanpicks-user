@@ -21,6 +21,7 @@ const Login = () => {
       setPassword(user.password);
     }
   }, []);
+  const [rememberMe, setRememberMe] = useState(false);
   const loginUser = async () => {
     try {
       const { data } = await api.post(`/user/login`, {
@@ -30,13 +31,14 @@ const Login = () => {
       console.log(data);
       localStorage.setItem("jordanToken", data.dta.token);
       localStorage.setItem("jordanTokenRefresh", data.dta.refreshToken);
-      localStorage.setItem(
-        "jordanUser",
-        JSON.stringify({
-          email,
-          password,
-        })
-      );
+      if (rememberMe)
+        localStorage.setItem(
+          "jordanUser",
+          JSON.stringify({
+            email,
+            password,
+          })
+        );
       const decodedToken = jwtDecode(data.dta.token);
       setLoggedUser({ ...loggedUser, _id: decodedToken.id });
       if (searchParams.get("redirect")) navigate(searchParams.get("redirect"));
@@ -48,7 +50,6 @@ const Login = () => {
   };
 
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
 
   return (
     <form
