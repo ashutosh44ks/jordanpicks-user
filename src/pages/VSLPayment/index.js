@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useLocation, useParams } from "react-router-dom";
+import PassContext from "../../components/utils/PassContext";
 import axios from "axios";
 import PaymentUI from "../Payment/components/PaymentUI";
 
 const Payment = () => {
   const location = useLocation();
+  const { getProfileShort } = useContext(PassContext);
   const { id } = useParams();
 
   const searchParams = new URLSearchParams(location.search);
@@ -26,6 +28,7 @@ const Payment = () => {
       );
       console.log(data);
       setStatus(data.status);
+      getProfileShort();
     } catch (error) {
       console.log(error);
       setStatus("failed");

@@ -63,7 +63,7 @@ const CheckoutForm = ({
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${process.env.REACT_APP_BASE_URL}vsl-packages/${packageId}/payment?cardDeduction=${cardDeduction}&walletDeduction=${walletDeduction}&id=${loggedUser}`,
+        return_url: `${process.env.REACT_APP_BASE_URL}vsl-packages/${packageId}/payment?cardDeduction=${cardDeduction}&walletDeduction=${walletDeduction}&id=${loggedUser._id}`,
       },
     });
 

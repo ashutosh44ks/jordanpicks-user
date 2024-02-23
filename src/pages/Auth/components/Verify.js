@@ -25,7 +25,7 @@ const VerifyAccount = () => {
       });
       console.log(data);
       myToast(data.msg, "success");
-      if (loggedUser !== "") navigate("/");
+      if (loggedUser._id !== "") navigate("/");
       else {
         myToast("Please login to continue", "success");
         if (searchParams.get("redirect"))

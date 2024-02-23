@@ -1,6 +1,7 @@
+import { useState, useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import { useState, useEffect } from "react";
+import api from "./components/utils/api";
 import PassContext from "./components/utils/PassContext";
 import updateToken from "./components/utils/updateToken";
 
@@ -38,17 +39,22 @@ import Store from "./pages/Store";
 import VerifyAccount from "./pages/Auth/components/Verify";
 
 function App() {
-  const [loggedUser, setLoggedUser] = useState("");
+  const [loggedUser, setLoggedUser] = useState({
+    _id: "",
+    name: "",
+    wallet: 0,
+    defaultDiscount: 0,
+  });
   const [loading, setLoading] = useState(true);
   const handleReturningUser = async () => {
     if (localStorage.getItem("jordanToken")) {
       const decodedToken = jwtDecode(localStorage.getItem("jordanToken"));
       if (decodedToken.exp * 1000 < Date.now()) {
         const userId = await updateToken();
-        setLoggedUser(userId);
+        setLoggedUser({ ...loggedUser, _id: userId });
       } else {
         console.log("back user", decodedToken, decodedToken.id);
-        setLoggedUser(decodedToken.id);
+        setLoggedUser({ ...loggedUser, _id: decodedToken.id });
       }
     }
     setLoading(false);
@@ -56,6 +62,21 @@ function App() {
   useEffect(() => {
     handleReturningUser();
   }, []);
+
+  const getProfileShort = async () => {
+    try {
+      const { data } = await api.get("/user/getProfileShort");
+      console.log(data);
+      setLoggedUser({
+        _id: data.dta._id,
+        wallet: data.dta.wallet,
+        name: data.dta.name,
+        defaultDiscount: data.dta.defaultDiscount,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   if (loading) return null;
 
@@ -194,7 +215,9 @@ function App() {
   ]);
 
   return (
-    <PassContext.Provider value={{ loggedUser, setLoggedUser }}>
+    <PassContext.Provider
+      value={{ loggedUser, setLoggedUser, getProfileShort }}
+    >
       <RouterProvider router={BrowserRouter} />
     </PassContext.Provider>
   );

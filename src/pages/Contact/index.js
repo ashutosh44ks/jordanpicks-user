@@ -50,7 +50,7 @@ const Contact = () => {
     }
   };
   useEffect(() => {
-    if (loggedUser !== "") getProfile();
+    if (loggedUser._id !== "") getProfile();
   }, [loggedUser]);
 
   const [terms, setTerms] = useState(false);

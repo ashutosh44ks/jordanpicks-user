@@ -8,7 +8,7 @@ import myToast from "../../../components/utils/myToast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
-  const { setLoggedUser } = useContext(PassContext);
+  const { loggedUser, setLoggedUser } = useContext(PassContext);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -38,8 +38,7 @@ const Login = () => {
         })
       );
       const decodedToken = jwtDecode(data.dta.token);
-      console.log(decodedToken.id);
-      setLoggedUser(decodedToken.id);
+      setLoggedUser({ ...loggedUser, _id: decodedToken.id });
       if (searchParams.get("redirect")) navigate(searchParams.get("redirect"));
       else navigate("/");
     } catch (err) {

@@ -1,6 +1,38 @@
 import { useCountdown } from "../../../components/utils/useCountdown";
 import Button from "../../../components/common/Button";
 
+const RenderPrice = ({ price, loading, wallet, defaultDiscount }) => {
+  if (loading) return null;
+
+  if (defaultDiscount === 0)
+    return (
+      <div className="flex items-start">
+        <h4 className="mt-1">$</h4>
+        <h1 className="text-yellow">
+          {(price - wallet <= 0 ? price : price - wallet).toFixed(2)}
+        </h1>
+      </div>
+    );
+  else {
+    const newPrice = price - price * (defaultDiscount / 100);
+    return (
+      <>
+        <div className="flex items-start line-through">
+          <h4 className="mt-1">$</h4>
+          <h1 className="text-yellow">
+            {(price - wallet <= 0 ? price : price - wallet).toFixed(2)}
+          </h1>
+        </div>
+        <div className="flex items-start">
+          <h4 className="mt-1">$</h4>
+          <h1 className="text-yellow">
+            {(newPrice - wallet <= 0 ? newPrice : newPrice - wallet).toFixed(2)}
+          </h1>
+        </div>
+      </>
+    );
+  }
+};
 const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
   const { diffTimeData } = useCountdown(packageDetails.endDate);
 
@@ -26,20 +58,19 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
               <h2>{!loading && packageDetails.price}</h2>
             </div>
           )}
-          <div className="flex items-start">
-            <h4 className="mt-1">$</h4>
-            <h1 className="text-yellow">
-              {!loading &&
-                (packageDetails.price - wallet <= 0
-                  ? packageDetails.price
-                  : packageDetails.price - wallet
-                ).toFixed(2)}
-            </h1>
-          </div>
+          <RenderPrice
+            price={packageDetails.price}
+            loading={loading}
+            defaultDiscount={packageDetails.defaultDiscount}
+            wallet={wallet}
+          />
         </div>
-        <p className="mt-4 mb-8 text-lightgrey2 text-sm">
-          (After using your wallet balance ${wallet.toFixed(2)})
-        </p>
+        <div className="mt-4 mb-8 text-lightgrey2 text-sm">
+          {packageDetails.defaultDiscount > 0 && (
+            <p>{packageDetails.defaultDiscount}% premium discount applied</p>
+          )}
+          <p>(After using your wallet balance of ${wallet.toFixed(2)})</p>
+        </div>
         <div>
           {packageDetails.isBought ? (
             <Button

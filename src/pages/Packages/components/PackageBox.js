@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useCountdown } from "../../../components/utils/useCountdown";
 import Button from "../../../components/common/Button";
 
-const PackageBox = ({ item, discountPer }) => {
+const PackageBox = ({ item }) => {
   const navigate = useNavigate();
+  const { loggedUser } = useContext(PassContext);
 
   const { diffTimeData } = useCountdown(item.endDate);
 
@@ -22,17 +23,20 @@ const PackageBox = ({ item, discountPer }) => {
           <div className="flex justify-center items-center gap-4 mb-4">
             <div
               className={`flex items-start ${
-                discountPer !== 0 ? "line-through" : ""
+                loggedUser.defaultDiscount !== 0 ? "line-through" : ""
               }`}
             >
               <h4 className="mt-1">$</h4>
               <h1 className="text-yellow">{item.price.toFixed(2)}</h1>
             </div>
-            {discountPer !== 0 && (
+            {loggedUser.defaultDiscount !== 0 && (
               <div className="flex items-start">
                 <h4 className="mt-1">$</h4>
                 <h1 className="text-yellow">
-                  {(item.price - item.price * (discountPer / 100)).toFixed(2)}
+                  {(
+                    item.price -
+                    item.price * (loggedUser.defaultDiscount / 100)
+                  ).toFixed(2)}
                 </h1>
               </div>
             )}

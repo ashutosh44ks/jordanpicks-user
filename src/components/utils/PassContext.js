@@ -1,8 +1,14 @@
 import React from "react";
 
 const PassContext = React.createContext({
-  loggedUser: "",
+  loggedUser: {
+    _id: "",
+    name: "",
+    wallet: 0,
+    defaultDiscount: 0,
+  },
   setLoggedUser: () => {},
+  getProfileShort: () => {},
 });
 
 export default PassContext;

@@ -10,7 +10,7 @@ const ProtectedRoute = () => {
   const { loggedUser, setLoggedUser } = useContext(PassContext);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    if (loggedUser === "") {
+    if (loggedUser._id === "") {
       // if User is not logged in
       // Check if user has a token and refresh token
       if (
@@ -25,7 +25,7 @@ const ProtectedRoute = () => {
         } else {
           // if token is not expired, set loggedUser to userId or "user"
           console.log(decodedToken.id);
-          setLoggedUser(decodedToken.id);
+          setLoggedUser({ ...loggedUser, _id: decodedToken.id });
         }
         setLoading(false);
       } else {

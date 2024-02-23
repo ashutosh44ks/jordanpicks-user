@@ -1,7 +1,7 @@
 import PackageBox from "./PackageBox";
 import { RiLoader4Line } from "react-icons/ri";
 
-const PackageContainer = ({ loading, filteredPackages, discountPer }) => {
+const PackageContainer = ({ loading, filteredPackages }) => {
   return (
     <div className="flex flex-wrap gap-x-8 gap-y-16 justify-center mt-16">
       {loading ? (
@@ -15,7 +15,7 @@ const PackageContainer = ({ loading, filteredPackages, discountPer }) => {
         ))
       ) : filteredPackages.length > 0 ? (
         filteredPackages.map((item) => (
-          <PackageBox item={item} key={item._id} discountPer={discountPer} />
+          <PackageBox item={item} key={item._id} />
         ))
       ) : (
         <div className="text-lightgrey2">

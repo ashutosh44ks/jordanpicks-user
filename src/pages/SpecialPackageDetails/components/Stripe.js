@@ -58,7 +58,7 @@ const CheckoutForm = ({ packageId, loggedUser }) => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${process.env.REACT_APP_BASE_URL}special-packages/${packageId}/payment?userId=${loggedUser}`,
+        return_url: `${process.env.REACT_APP_BASE_URL}special-packages/${packageId}/payment?userId=${loggedUser._id}`,
       },
     });
 

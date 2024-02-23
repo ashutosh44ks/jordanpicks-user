@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import PassContext from "../../components/utils/PassContext";
 import api from "../../components/utils/api";
 import myToast from "../../components/utils/myToast";
 import Stripe from "./components/Stripe";
@@ -12,6 +13,7 @@ import "./packagedetails.css";
 
 const PackageDetails = () => {
   const { id } = useParams();
+  const { loggedUser, getProfileShort } = useContext(PassContext);
   const navigate = useNavigate();
 
   const [packageDetails, setPackageDetails] = useState({});
@@ -21,38 +23,38 @@ const PackageDetails = () => {
     try {
       const { data } = await api.get(`/user/getPackage/${id}`);
       console.log(data);
-      setPackageDetails({ ...data.dta, isBought: data.isBought });
+      setPackageDetails({
+        ...data.dta,
+        isBought: data.isBought,
+        defaultDiscount: loggedUser.defaultDiscount,
+      });
     } catch (error) {
       console.log(error);
     }
     setLoading(false);
   };
-  const [wallet, setWallet] = useState(0);
-  const getProfile = async () => {
-    try {
-      const { data } = await api.get("/user/getProfile");
-      console.log(data);
-      setWallet(data.dta.user.wallet);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
-    getProfile();
-    getPackageDetails();
-  }, []);
+    if (loggedUser._id) getPackageDetails();
+  }, [loggedUser]);
 
   const [cardDeduction, setCardDeduction] = useState(0);
   const [walletDeduction, setWalletDeduction] = useState(0);
   useEffect(() => {
-    if (wallet !== undefined && packageDetails._id) {
-      if (wallet < packageDetails.price) {
-        setCardDeduction(packageDetails.price - wallet);
-        setWalletDeduction(wallet);
+    if (
+      loggedUser.wallet !== undefined &&
+      loggedUser.defaultDiscount !== undefined &&
+      packageDetails._id
+    ) {
+      const newPrice =
+        packageDetails.price -
+        packageDetails.price * (loggedUser.defaultDiscount / 100);
+      if (loggedUser.wallet < newPrice) {
+        setCardDeduction(newPrice - loggedUser.wallet);
+        setWalletDeduction(loggedUser.wallet);
       }
     }
-  }, [packageDetails, wallet]);
+  }, [packageDetails, loggedUser.wallet, loggedUser.defaultDiscount]);
 
   const [paymentRoute, setPaymentRoute] = useState("");
   const [walletLoading, setWalletLoading] = useState(false);
@@ -61,8 +63,12 @@ const PackageDetails = () => {
     try {
       const { data } = await api.post("/user/walletWithdrawPackage", {
         packageId: packageDetails._id,
+        amount:
+          packageDetails.price -
+          packageDetails.price * (loggedUser.defaultDiscount / 100),
       });
       console.log(data);
+      getProfileShort();
       navigate("/my-account/transactions");
     } catch (err) {
       console.log(err);
@@ -82,7 +88,7 @@ const PackageDetails = () => {
         <Banner
           packageDetails={packageDetails}
           setPaymentRoute={setPaymentRoute}
-          wallet={wallet}
+          wallet={loggedUser.wallet}
           loading={loading}
         />
         <div className="pack-details">
@@ -118,7 +124,9 @@ const PackageDetails = () => {
             )}
           </div>
           <div className="text-lightgrey2">
-            <h4 className="mb-2 font-medium text-yellow">Profit Guarantee Rule</h4>
+            <h4 className="mb-2 font-medium text-yellow">
+              Profit Guarantee Rule
+            </h4>
             <ProfitGuarantee />
           </div>
         </div>
@@ -148,13 +156,18 @@ const PackageDetails = () => {
             <div>
               <p>Are you sure you want to pay with wallet?</p>
               <p>
-                After payment, ${packageDetails.price} will be deducted from
-                your wallet.
+                After payment, $
+                {packageDetails.price -
+                  packageDetails.price *
+                    (loggedUser.defaultDiscount / 100)}{" "}
+                will be deducted from your wallet.
               </p>
               <div className="flex justify-end mt-4">
                 <Button
                   theme="yellow"
-                  rounded="none"
+                  size="md"
+                  className="w-full font-semibold"
+                  rounded="md"
                   onClick={payWithWallet}
                   disabled={walletLoading}
                 >

@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import api from "../../utils/api";
 import PassContext from "../../utils/PassContext";
 import Breadcrumbs from "../../common/Breadcrumbs";
 import Button from "../../common/Button";
@@ -13,28 +12,18 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { loggedUser, setLoggedUser } = useContext(PassContext);
-
-  const [prevLocation, setPrevLocation] = useState("");
-  const [name, setName] = useState("User Name");
-  const [wallet, setWallet] = useState(0);
-  const [walletChangeTrigger, setWalletChangeTrigger] = useState(false);
-  const getWallet = async () => {
-    try {
-      const { data } = await api.get("/user/getProfileShort");
-      console.log(data);
-      setWallet(data.dta.wallet);
-      setName(data.dta.name);
-    } catch (err) {
-      console.log(err);
-    }
-    setWalletChangeTrigger(false);
-  };
+  const { loggedUser, setLoggedUser, getProfileShort } =
+    useContext(PassContext);
 
   const logout = () => {
     localStorage.removeItem("jordanToken");
     localStorage.removeItem("jordanTokenRefresh");
-    setLoggedUser("");
+    setLoggedUser({
+      _id: "",
+      name: "",
+      wallet: 0,
+      defaultDiscount: 0,
+    });
     navigate("/auth/login");
   };
 
@@ -63,18 +52,11 @@ const Header = () => {
   useEffect(() => {
     setActiveRoute(location.pathname);
     if (showSidebar) setShowSidebar(false);
-    if (
-      prevLocation.includes("payment") &&
-      !location.pathname.includes("payment")
-    ) {
-      getWallet();
-    }
-    setPrevLocation(location.pathname);
   }, [location]);
 
   useEffect(() => {
-    if (loggedUser !== "") getWallet();
-  }, [loggedUser]);
+    if (loggedUser._id !== "") getProfileShort();
+  }, [loggedUser._id]);
 
   return (
     <>
@@ -103,7 +85,7 @@ const Header = () => {
               </div>
             ))}
           </div>
-          {loggedUser === "" ? (
+          {loggedUser._id === "" ? (
             <div className="header-section">
               <Button
                 theme="transparent"
@@ -136,13 +118,13 @@ const Header = () => {
                 {location.pathname.includes("payment") ? (
                   <AiOutlineLoading3Quarters className="animate-spin text-white" />
                 ) : (
-                  `$${wallet.toFixed(2)} USD`
+                  `$${loggedUser?.wallet?.toFixed(2)} USD`
                 )}
               </Button>
               <div className="flex gap-2 items-center user-dd-menu-trigger py-4">
                 <FaRegUserCircle />
                 <div className="flex gap-1 items-center">
-                  {name}
+                  {loggedUser.name}
                   <MdKeyboardArrowDown className="text-xl" />
                 </div>
                 <ul className="user-dd-menu">
