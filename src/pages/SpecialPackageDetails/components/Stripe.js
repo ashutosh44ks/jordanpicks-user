@@ -9,7 +9,7 @@ import {
 import api from "../../../components/utils/api";
 import PassContext from "../../../components/utils/PassContext";
 
-const CheckoutForm = ({ packageId, loggedUser }) => {
+const CheckoutForm = ({ packageId, loggedUser, plan }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -58,7 +58,7 @@ const CheckoutForm = ({ packageId, loggedUser }) => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${process.env.REACT_APP_BASE_URL}special-packages/${packageId}/payment?userId=${loggedUser._id}`,
+        return_url: `${process.env.REACT_APP_BASE_URL}special-packages/${packageId}/payment?plan=${plan}&userId=${loggedUser._id}`,
       },
     });
 
@@ -99,7 +99,7 @@ const CheckoutForm = ({ packageId, loggedUser }) => {
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
-const StripeComponent = ({ packageId }) => {
+const StripeComponent = ({ packageId, plan }) => {
   const { loggedUser } = useContext(PassContext);
   const [clientSecret, setClientSecret] = useState("");
 
@@ -107,6 +107,7 @@ const StripeComponent = ({ packageId }) => {
     try {
       const { data } = await api.post("/user/createIntentSpecialPackage", {
         packageId: packageId,
+        plan,
       });
       setClientSecret(data.clientSecret);
     } catch (err) {
@@ -116,8 +117,8 @@ const StripeComponent = ({ packageId }) => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    if (packageId) createIntent();
-  }, [packageId]);
+    if (packageId && plan) createIntent();
+  }, [packageId, plan]);
 
   const appearance = {
     theme: "night",
@@ -130,7 +131,11 @@ const StripeComponent = ({ packageId }) => {
     <>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm packageId={packageId} loggedUser={loggedUser} />
+          <CheckoutForm
+            packageId={packageId}
+            loggedUser={loggedUser}
+            plan={plan}
+          />
         </Elements>
       )}
     </>

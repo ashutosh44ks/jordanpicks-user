@@ -26,6 +26,10 @@
   font-weight: 500;
   font-size: 1.15rem;
 }
+.special.package-box .package-box-header {
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+}
 .package-box .package-box-body {
   border-radius: 0 0 1rem 1rem;
   background: var(--dark2);

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useParams, Link,  } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import api from "../../components/utils/api";
 import Stripe from "./components/Stripe";
 import Banner from "./components/Banner";
@@ -30,13 +30,15 @@ const PackageDetails = () => {
   }, []);
 
   const dialogRef = useRef();
+  const [selectedPlan, setSelectedPlan] = useState("");
 
   return (
     <>
       <div>
         <Banner
           packageDetails={packageDetails}
-          showModal={() => {
+          showModal={(plan) => {
+            setSelectedPlan(plan);
             dialogRef.current.showModal();
           }}
           loading={loading}
@@ -84,8 +86,14 @@ const PackageDetails = () => {
       <Modal
         ref={dialogRef}
         title="Pay with Card"
-        content={<Stripe packageId={packageDetails._id}
-        packageName={packageDetails.name} />}
+        closeDialog={() => setSelectedPlan("")}
+        content={
+          <Stripe
+            packageId={packageDetails._id}
+            plan={selectedPlan}
+            packageName={packageDetails.name}
+          />
+        }
       />
     </>
   );
