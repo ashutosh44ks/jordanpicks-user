@@ -33,10 +33,10 @@ const MyPackages = () => {
         {!loading ? (
           myPackages.map((p, index) => (
             <tr key={p._id}>
-              <td>{index + 1}</td>
-              <td>{p.name}</td>
-              <td>${p.price}</td>
-              <td>
+              <td className="border-b-2 border-dark">{index + 1}</td>
+              <td className="border-b-2 border-dark">{p.name}</td>
+              <td className="border-b-2 border-dark">${p.price}</td>
+              <td className="border-b-2 border-dark">
                 <ul className="list-disc">
                   {console.log(p.bets, p.links)}
                   {p.bets !== undefined &&
@@ -47,7 +47,9 @@ const MyPackages = () => {
                     p.links.map((l, index) => <li key={index}>{l}</li>)}
                 </ul>
               </td>
-              <td className="capitalize">{p.result}</td>
+              <td className="capitalize border-b-2 border-dark">
+                {p.result === "win" ? "profit" : p.result}
+              </td>
             </tr>
           ))
         ) : (

@@ -34,18 +34,18 @@ const Orders = () => {
         {!loading ? (
           myTransactions.map((transaction, index) => (
             <tr key={transaction._id}>
-              <td>{index + 1}</td>
-              <td>
+              <td className="border-b-2 border-dark">{index + 1}</td>
+              <td className="border-b-2 border-dark">
                 {transaction?.package?.name ||
                   transaction?.store?.name ||
                   transaction?.vslPackage?.name ||
                   transaction?.specialPackage?.name ||
                   transaction.desc}
               </td>
-              <td>{dateFormatter(transaction.createdAt)}</td>
-              <td>{transaction.type}</td>
-              <td>{transaction?.price?.toFixed(2)}</td>
-              <td>{transaction.method}</td>
+              <td className="border-b-2 border-dark">{dateFormatter(transaction.createdAt)}</td>
+              <td className="border-b-2 border-dark">{transaction.type}</td>
+              <td className="border-b-2 border-dark">{transaction?.price?.toFixed(2)}</td>
+              <td className="border-b-2 border-dark">{transaction.method}</td>
             </tr>
           ))
         ) : (
