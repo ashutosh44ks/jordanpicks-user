@@ -23,6 +23,7 @@ const Header = () => {
       name: "",
       wallet: 0,
       defaultDiscount: 0,
+      cart: [],
     });
     navigate("/auth/login");
   };
@@ -136,9 +137,9 @@ const Header = () => {
                   </li>
                   {/* <li
                     className="cursor-pointer px-4 py-2 hover:bg-yellow hover:text-darkblack font-medium"
-                    onClick={() => navigate("/my-account/referrals")}
+                    onClick={() => navigate("/cart")}
                   >
-                    Referrals
+                    Cart
                   </li> */}
                   <li
                     className="cursor-pointer px-4 py-2 hover:bg-yellow hover:text-darkblack font-medium"

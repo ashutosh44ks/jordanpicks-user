@@ -1,4 +1,6 @@
+import { useUserContext } from "../../../components/utils/useUserContext";
 import { useCountdown } from "../../../components/utils/useCountdown";
+import api from "../../../components/utils/api";
 import Button from "../../../components/common/Button";
 
 const RenderPrice = ({ price, loading, wallet, defaultDiscount }) => {
@@ -35,6 +37,17 @@ const RenderPrice = ({ price, loading, wallet, defaultDiscount }) => {
 };
 const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
   const { diffTimeData } = useCountdown(packageDetails.endDate);
+  const { loggedUser, getProfileShort } = useUserContext();
+
+  const addToCart = async (packageId) => {
+    try {
+      const { data } = await api.post("/user/addItemToCart", { packageId });
+      console.log(data);
+      getProfileShort();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="package-details-banner">
@@ -71,7 +84,7 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
           )}
           <p>(After using your wallet balance of ${wallet.toFixed(2)})</p>
         </div>
-        <div>
+        <div className="flex flex-col gap-4 items-center">
           {packageDetails.isBought ? (
             <Button
               theme="lightgrey"
@@ -82,20 +95,49 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
               Already Purchased
             </Button>
           ) : (
-            <Button
-              theme="yellow"
-              size="md"
-              className="w-full font-semibold"
-              rounded="md"
-              onClick={() => {
-                if (wallet >= packageDetails.price) setPaymentRoute("wallet");
-                else setPaymentRoute("stripe");
-              }}
-            >
-              {wallet >= packageDetails.price
-                ? "Buy Now with Wallet"
-                : "Buy Now with Card"}
-            </Button>
+            <>
+              <Button
+                theme="yellow"
+                size="md"
+                className="w-full font-semibold"
+                rounded="md"
+                onClick={() => {
+                  if (wallet >= packageDetails.price) setPaymentRoute("wallet");
+                  else setPaymentRoute("stripe");
+                }}
+              >
+                {wallet >= packageDetails.price
+                  ? "Buy Now with Wallet"
+                  : "Buy Now with Card"}
+              </Button>
+              <Button
+                theme={
+                  loggedUser.cart.find(
+                    (cartItem) => cartItem._id === packageDetails._id
+                  )
+                    ? "lightgrey"
+                    : "yellow"
+                }
+                size="md"
+                className="w-full font-semibold"
+                rounded="md"
+                onClick={() => {
+                  if (
+                    loggedUser.cart.find(
+                      (cartItem) => cartItem._id === packageDetails._id
+                    )
+                  )
+                    return;
+                  addToCart(packageDetails._id);
+                }}
+              >
+                {loggedUser.cart.find(
+                  (cartItem) => cartItem._id === packageDetails._id
+                )
+                  ? "Added to Cart"
+                  : "Add to Cart"}
+              </Button>
+            </>
           )}
         </div>
       </div>

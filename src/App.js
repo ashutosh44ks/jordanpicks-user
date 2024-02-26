@@ -37,6 +37,8 @@ import ForgotPassword from "./pages/Auth/components/ForgotPassword";
 import Faq from "./pages/Faq";
 import Store from "./pages/Store";
 import VerifyAccount from "./pages/Auth/components/Verify";
+import Cart from "./pages/Cart";
+import CartPayment from "./pages/Cart/Payment";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState({
@@ -44,6 +46,7 @@ function App() {
     name: "",
     wallet: 0,
     defaultDiscount: 0,
+    cart: [],
   });
   const [loading, setLoading] = useState(true);
   const handleReturningUser = async () => {
@@ -72,6 +75,7 @@ function App() {
         wallet: data.dta.wallet,
         name: data.dta.name,
         defaultDiscount: data.dta.defaultDiscount,
+        cart: data.dta.cart || [],
       });
     } catch (err) {
       console.log(err);
@@ -186,8 +190,22 @@ function App() {
           ],
         },
         {
-          path: "/store",
-          element: <Store />,
+          path: "/",
+          element: <ProtectedRoute />,
+          children: [
+            {
+              path: "/cart",
+              element: <Cart />,
+            },
+            {
+              path: "/store",
+              element: <Store />,
+            },
+          ],
+        },
+        {
+          path: "/cart/payment",
+          element: <CartPayment />,
         },
         {
           path: "/store/payment",
