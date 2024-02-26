@@ -24,7 +24,7 @@ const RenderBannerPrice = ({ loading, packageDetails, showModal }) => {
               {!loading && packageDetails?.monthlyPrice?.toFixed(2)}
             </h1>
           </div>
-          <p className="text-sm">monthly subscription</p>
+          <p className="text-sm">/month</p>
         </div>
         <Button
           theme="yellow"
@@ -35,7 +35,7 @@ const RenderBannerPrice = ({ loading, packageDetails, showModal }) => {
             showModal("monthly");
           }}
         >
-          Buy Now with Card
+          Buy Subscription
         </Button>
       </div>
       <div className="mt-8 mb-6 flex justify-center items-center flex-col relative text-lightgrey2">
@@ -52,7 +52,7 @@ const RenderBannerPrice = ({ loading, packageDetails, showModal }) => {
               {!loading && packageDetails?.yearlyPrice?.toFixed(2)}
             </h1>
           </div>
-          <p className="text-sm">yearly subscription</p>
+          <p className="text-sm">/year</p>
         </div>
         <Button
           theme="yellow"
@@ -63,7 +63,7 @@ const RenderBannerPrice = ({ loading, packageDetails, showModal }) => {
             showModal("yearly");
           }}
         >
-          Buy Yearly Subscription
+          Buy Subscription
         </Button>
       </div>
     </>
