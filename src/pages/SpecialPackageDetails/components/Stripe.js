@@ -103,7 +103,7 @@ const StripeComponent = ({ packageId, plan }) => {
   const { loggedUser } = useContext(PassContext);
   const [clientSecret, setClientSecret] = useState("");
 
-  const createIntent = async () => {
+  const createSubscription = async () => {
     try {
       const { data } = await api.post("/user/createIntentSpecialPackage", {
         packageId: packageId,
@@ -117,7 +117,7 @@ const StripeComponent = ({ packageId, plan }) => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    if (packageId && plan) createIntent();
+    if (packageId && plan) createSubscription();
   }, [packageId, plan]);
 
   const appearance = {
