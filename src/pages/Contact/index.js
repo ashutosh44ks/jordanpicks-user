@@ -172,7 +172,7 @@ const Contact = () => {
               window.open("https://t.me/jordanspicks", "_blank");
             }}
           >
-            <RiTelegramFill /> Chat with us on Telegram
+            <RiTelegramFill className="text-2xl"/> Chat with us on Telegram
           </button>
         </div>
       </form>
