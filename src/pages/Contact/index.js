@@ -3,7 +3,7 @@ import PassContext from "../../components/utils/PassContext";
 import api from "../../components/utils/api";
 import myToast from "../../components/utils/myToast";
 import Button from "../../components/common/Button";
-import { IoIosArrowDown } from "react-icons/io";
+import { RiTelegramFill } from "react-icons/ri";
 import "./contact.css";
 
 const Contact = () => {
@@ -165,6 +165,15 @@ const Contact = () => {
           <Button theme="yellow" type="submit" className="w-full">
             Send Message
           </Button>
+          <button
+            className="w-full mt-4 bg-[#1c93e3] text-white flex justify-center items-center gap-2 py-3 rounded-lg font-medium"
+            type="button"
+            onClick={() => {
+              window.open("https://t.me/jordanspicks", "_blank");
+            }}
+          >
+            <RiTelegramFill /> Chat with us on Telegram
+          </button>
         </div>
       </form>
     </div>
