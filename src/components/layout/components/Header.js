@@ -8,6 +8,8 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MdKeyboardArrowDown, MdClose } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { TbShoppingCartDollar } from "react-icons/tb";
+import { PiWallet } from "react-icons/pi";
 
 const Menu = ({ route, activeRoute }) => {
   const navigate = useNavigate();
@@ -70,10 +72,6 @@ const Header = () => {
       name: "Store",
       link: "/store",
     },
-    {
-      name: "Cart",
-      link: "/cart",
-    },
   ];
 
   const [showSidebar, setShowSidebar] = useState(false);
@@ -103,16 +101,16 @@ const Header = () => {
             navigate("/");
           }}
         />
-        <div className="hidden sm:flex items-center md:gap-10 lg:gap-16">
-          <div className="header-section nav">
-            {loggedUser._id === ""
-              ? publicRoutes.map((route) => (
-                  <Menu route={route} activeRoute={activeRoute} />
-                ))
-              : protectedRoutes.map((route) => (
-                  <Menu route={route} activeRoute={activeRoute} />
-                ))}
-          </div>
+        <div className="header-section nav">
+          {loggedUser._id === ""
+            ? publicRoutes.map((route) => (
+                <Menu route={route} activeRoute={activeRoute} />
+              ))
+            : protectedRoutes.map((route) => (
+                <Menu route={route} activeRoute={activeRoute} />
+              ))}
+        </div>
+        <div className="hidden sm:block">
           {loggedUser._id === "" ? (
             <div className="header-section">
               <Button
@@ -141,15 +139,22 @@ const Header = () => {
                 onClick={() => {
                   navigate("/my-account/transactions");
                 }}
-                className="font-medium"
+                className="font-medium flex items-center gap-2"
               >
+                <PiWallet />
                 {location.pathname.includes("payment") ? (
                   <AiOutlineLoading3Quarters className="animate-spin text-white" />
                 ) : (
                   `$${loggedUser?.wallet?.toFixed(2)}`
                 )}{" "}
-                Wallet Credits
+                credits
               </Button>
+              {loggedUser.id !== "" && (
+                <div className="flex gap-2 items-center cursor-pointer">
+                  <TbShoppingCartDollar />
+                  Cart
+                </div>
+              )}
               <div className="flex gap-2 items-center user-dd-menu-trigger py-4">
                 <FaRegUserCircle />
                 <div className="flex gap-1 items-center">

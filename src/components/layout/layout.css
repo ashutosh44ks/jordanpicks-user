@@ -111,6 +111,11 @@ footer .route-item:hover {
     padding: 1rem 4rem;
   }
 }
+@media screen and (max-width: 1024px) {
+  header .header-section {
+    gap: 1rem;
+  }
+}
 @media screen and (max-width: 950px) {
   header {
     padding: 1rem 2rem;
@@ -132,9 +137,12 @@ footer .route-item:hover {
     padding: 0.5rem 0.75rem;
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   header .header-section.nav {
     display: none;
+  }
+  header .header-section {
+    gap: 1.5rem;
   }
 }
 @media screen and (max-width: 480px) {
