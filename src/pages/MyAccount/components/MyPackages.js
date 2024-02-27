@@ -38,13 +38,18 @@ const MyPackages = () => {
               <td className="border-b-2 border-dark">${p.price}</td>
               <td className="border-b-2 border-dark">
                 <ul className="list-disc">
-                  {console.log(p.bets, p.links)}
                   {p.bets !== undefined &&
                     p.bets.length > 0 &&
                     p.bets.map((b, index) => <li key={index}>{b}</li>)}
                   {p.links !== undefined &&
                     p.links.length > 0 &&
-                    p.links.map((l, index) => <li key={index}>{l}</li>)}
+                    p.links.map((l, index) => (
+                      <li key={index}>
+                        <a href={l} rel="noreferrer" target="_blank">
+                          {l}
+                        </a>
+                      </li>
+                    ))}
                 </ul>
               </td>
               <td className="capitalize border-b-2 border-dark">

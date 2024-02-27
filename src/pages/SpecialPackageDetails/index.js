@@ -61,7 +61,9 @@ const PackageDetails = () => {
               <ul className="list-disc ml-4">
                 {packageDetails.links.map((link, index) => (
                   <li key={index} className="my-2">
-                    {link}
+                    <a href={link} rel="noreferrer" target="_blank">
+                      {link}
+                    </a>
                   </li>
                 ))}
               </ul>
