@@ -24,10 +24,25 @@ const MyPackages = () => {
     getMyPackages();
   }, [page]);
 
+  const updateResultTerminalogy = (result) => {
+    switch (result) {
+      case "win":
+        return "profitiable";
+      case "lose":
+        return "unprofitable";
+      case "tie":
+        return "break even";
+      case undefined:
+        return "-";
+      default:
+        return result;
+    }
+  };
+
   return (
     <div>
       <Table
-        tHead={["S.No.", "Package Name", "Price", "Bets/Links", "Result"]}
+        tHead={["S.No.", "Package Name", "Bets/Links", "Result"]}
         wrapperClass="my-8"
       >
         {!loading ? (
@@ -35,7 +50,6 @@ const MyPackages = () => {
             <tr key={p._id}>
               <td className="border-b-2 border-dark">{index + 1}</td>
               <td className="border-b-2 border-dark">{p.name}</td>
-              <td className="border-b-2 border-dark">${p.price}</td>
               <td className="border-b-2 border-dark">
                 <ul className="list-disc">
                   {p.bets !== undefined &&
@@ -53,7 +67,7 @@ const MyPackages = () => {
                 </ul>
               </td>
               <td className="capitalize border-b-2 border-dark">
-                {p.result === "win" ? "profit" : p.result}
+                {updateResultTerminalogy(p.result)}
               </td>
             </tr>
           ))
