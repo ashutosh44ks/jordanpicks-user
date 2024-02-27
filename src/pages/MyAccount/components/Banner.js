@@ -5,9 +5,14 @@ import PassContext from "../../../components/utils/PassContext";
 const Banner = () => {
   const width = useWindowWidth();
   const { loggedUser } = useContext(PassContext);
-  
-  if (loggedUser.defaultDiscount !== 0) 
+
+  if (loggedUser.defaultDiscount !== 0) {
+    //  show banner strip saying "We're offering all Penthouse Club members a discount of 20% on all standard packages*"
+    if (width < 480) {
+      return null;
+    }
     return null;
+  }
 
   if (width < 480) {
     return (
