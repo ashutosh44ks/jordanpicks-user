@@ -35,9 +35,21 @@ const Sidebar = ({ showSidebar, activeRoute, loggedUser, logout }) => {
       show: loggedUser._id === "",
     },
     {
-      name: "My Account",
-      link: "/my-account",
+      name: "My Packages",
+      link: "/my-packages",
       func: () => navigate("/my-account/my-packages"),
+      show: loggedUser._id !== "",
+    },
+    {
+      name: "Cart",
+      link: "/cart",
+      func: () => navigate("/cart"),
+      show: loggedUser._id !== "",
+    },
+    {
+      name: "Store",
+      link: "/store",
+      func: () => navigate("/store"),
       show: loggedUser._id !== "",
     },
     {
@@ -54,7 +66,7 @@ const Sidebar = ({ showSidebar, activeRoute, loggedUser, logout }) => {
           key={index}
           className={`${route.show ? "block" : "hidden"} ${
             activeRoute === route.link ? "active" : "cursor-pointer"
-          } text-center py-8 text-2xl`}
+          } text-center py-4 text-xl`}
           onClick={route.func}
         >
           {route.name}
