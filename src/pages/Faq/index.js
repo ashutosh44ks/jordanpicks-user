@@ -31,19 +31,14 @@ const Faq = () => {
       content: (
         <>
           With our{" "}
-          <span
-            className="text-yellow cursor-pointer"
-            onClick={() => navigate("/my-account/my-packages")}
-          >
-            Profit Guarantee
-          </span>{" "}
+          <span className="text-yellow">Profit Guarantee</span>{" "}
           if the Package you selected doesn’t win or have a winning percentage
           you will receive a full website credit back to your JordansPicks
           account wallet,
         </>
       ),
     },
-    // Removed by client 
+    // Removed by client
     // {
     //   title: "How do I pay?",
     //   content:
@@ -110,7 +105,9 @@ const Faq = () => {
       <div className="flex flex-col justify-center items-center my-10">
         {/* <img src="/assets/avatar-grp.png" alt="avatar" /> */}
         <div className="my-6">
-          <h5 className="text-center text-yellow mb-2">Still have questions?</h5>
+          <h5 className="text-center text-yellow mb-2">
+            Still have questions?
+          </h5>
           <p className="text-center">
             Can’t find the answer you’re looking for? Please chat to our
             friendly team.
