@@ -9,6 +9,21 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { MdKeyboardArrowDown, MdClose } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
+const Menu = ({ route, activeRoute }) => {
+  const navigate = useNavigate();
+  return (
+    <div
+      key={route.link}
+      className={activeRoute === route.link ? "active" : "cursor-pointer"}
+      onClick={() => {
+        navigate(route.link);
+      }}
+    >
+      {route.name}
+    </div>
+  );
+};
+
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,7 +43,7 @@ const Header = () => {
     navigate("/auth/login");
   };
 
-  const routes = [
+  const publicRoutes = [
     {
       name: "Home",
       link: "/",
@@ -40,6 +55,24 @@ const Header = () => {
     {
       name: "FAQs",
       link: "/faq",
+    },
+  ];
+  const protectedRoutes = [
+    {
+      name: "Home",
+      link: "/",
+    },
+    {
+      name: "My Packages",
+      link: "/my-account/my-packages",
+    },
+    {
+      name: "Store",
+      link: "/store",
+    },
+    {
+      name: "Cart",
+      link: "/cart",
     },
   ];
 
@@ -72,19 +105,13 @@ const Header = () => {
         />
         <div className="hidden sm:flex items-center md:gap-10 lg:gap-16">
           <div className="header-section nav">
-            {routes.map((route, index) => (
-              <div
-                key={index}
-                className={
-                  activeRoute === route.link ? "active" : "cursor-pointer"
-                }
-                onClick={() => {
-                  navigate(route.link);
-                }}
-              >
-                {route.name}
-              </div>
-            ))}
+            {loggedUser._id === ""
+              ? publicRoutes.map((route) => (
+                  <Menu route={route} activeRoute={activeRoute} />
+                ))
+              : protectedRoutes.map((route) => (
+                  <Menu route={route} activeRoute={activeRoute} />
+                ))}
           </div>
           {loggedUser._id === "" ? (
             <div className="header-section">
@@ -119,8 +146,9 @@ const Header = () => {
                 {location.pathname.includes("payment") ? (
                   <AiOutlineLoading3Quarters className="animate-spin text-white" />
                 ) : (
-                  `$${loggedUser?.wallet?.toFixed(2)} USD`
-                )}
+                  `$${loggedUser?.wallet?.toFixed(2)}`
+                )}{" "}
+                Wallet Credits
               </Button>
               <div className="flex gap-2 items-center user-dd-menu-trigger py-4">
                 <FaRegUserCircle />
