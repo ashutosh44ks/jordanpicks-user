@@ -22,9 +22,9 @@ const Sidebar = () => {
         <Button
           theme="dark"
           onClick={() => {
-            navigate("/my-account/transactions");
+            navigate("/store");
           }}
-          className="font-medium flex items-center gap-2 cursor-default"
+          className="font-medium flex items-center gap-2"
         >
           <PiWallet />${loggedUser?.wallet?.toFixed(2)}
           {" "}credits
