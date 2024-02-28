@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import { useUserContext } from "../../../components/utils/useUserContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import Button from "../../../components/common/Button";
+import { PiWallet } from "react-icons/pi";
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { loggedUser } = useUserContext();
 
   const [active, setActive] = useState("dashboard");
   useEffect(() => {
@@ -14,7 +17,19 @@ const Sidebar = () => {
 
   return (
     <div>
-      <h3 className="font-medium">My Account</h3>
+      <div className="flex justify-between gap-4 items-center">
+        <h3 className="font-medium">My Account</h3>
+        <Button
+          theme="dark"
+          onClick={() => {
+            navigate("/my-account/transactions");
+          }}
+          className="font-medium flex items-center gap-2 cursor-default"
+        >
+          <PiWallet />${loggedUser?.wallet?.toFixed(2)}
+          {" "}credits
+        </Button>
+      </div>
       <div className="flex gap-2 sm:gap-6 my-8 flex-wrap">
         <Button
           theme={active === "my-packages" ? "yellow" : "transparent"}
