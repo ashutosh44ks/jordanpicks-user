@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../components/utils/useUserContext";
 import api from "../../components/utils/api";
 import myToast from "../../components/utils/myToast";
+import dateFormatter from "../../components/utils/dateFormatter";
 import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
 import Stripe from "./components/Stripe";
@@ -13,12 +14,18 @@ const Cart = () => {
   const { loggedUser, setLoggedUser, getProfileShort } = useUserContext();
 
   const [cart, setCart] = useState([]);
+  const [expiredItemCount, setExpiredItemCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const getCart = async () => {
     try {
       const { data } = await api.get("/user/getCart");
       console.log(data);
+      const temp = data.dta.filter(
+        (item) =>
+          +new Date(item.endDate) >= +new Date() && item.status === "active"
+      );
       setCart(data.dta);
+      setExpiredItemCount(data.dta.length - temp.length);
     } catch (error) {
       console.log(error);
     }
@@ -145,6 +152,14 @@ const Cart = () => {
     <>
       <div>
         <h3 className="font-medium">My Cart</h3>
+        <p className="my-2">
+          {expiredItemCount > 0 && (
+            <span className="text-red">
+              {expiredItemCount} package{expiredItemCount > 1 ? "s" : ""} in
+              your cart has expired. Please remove them to continue.
+            </span>
+          )}
+        </p>
         <div>
           {cart.map((item) => (
             <div key={item._id} className="my-4 bg-dark rounded-lg p-4">
@@ -161,6 +176,12 @@ const Cart = () => {
               <div>
                 ${item.price} | {item.sports} - {item.category}
               </div>
+              {+new Date(item.endDate) >= +new Date() &&
+              item.status === "active" ? (
+                <div>Expires on {dateFormatter(item.endDate)}</div>
+              ) : (
+                <div>Expired</div>
+              )}
             </div>
           ))}
         </div>
@@ -206,6 +227,12 @@ const Cart = () => {
                 className=""
                 size="md-rect"
                 onClick={() => {
+                  // check for any expired packages
+                  if (expiredItemCount > 0)
+                    return myToast(
+                      "Please remove expired items from your count",
+                      "failure"
+                    );
                   if (loggedUser.wallet >= grandTotal)
                     setPaymentRoute("wallet");
                   else setPaymentRoute("stripe");
