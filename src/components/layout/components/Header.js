@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import PassContext from "../../utils/PassContext";
 import Breadcrumbs from "../../common/Breadcrumbs";
 import Button from "../../common/Button";
@@ -12,17 +12,14 @@ import { TbShoppingCartDollar } from "react-icons/tb";
 import { PiWallet } from "react-icons/pi";
 
 const Menu = ({ route, activeRoute }) => {
-  const navigate = useNavigate();
   return (
-    <div
+    <Link
       key={route.link}
-      className={activeRoute === route.link ? "active" : "cursor-pointer"}
-      onClick={() => {
-        navigate(route.link);
-      }}
+      className={activeRoute === route.link ? "active" : ""}
+      to={route.link}
     >
       {route.name}
-    </div>
+    </Link>
   );
 };
 
@@ -150,10 +147,10 @@ const Header = () => {
                 credits
               </Button>
               {loggedUser.id !== "" && (
-                <div className="flex gap-2 items-center cursor-pointer">
+                <Link className="flex gap-2 items-center" to="/cart">
                   <TbShoppingCartDollar />
                   Cart
-                </div>
+                </Link>
               )}
               <div className="flex gap-2 items-center user-dd-menu-trigger py-4">
                 <FaRegUserCircle />
@@ -168,12 +165,6 @@ const Header = () => {
                   >
                     My Profile
                   </li>
-                  {/* <li
-                    className="cursor-pointer px-4 py-2 hover:bg-yellow hover:text-darkblack font-medium"
-                    onClick={() => navigate("/cart")}
-                  >
-                    Cart
-                  </li> */}
                   <li
                     className="cursor-pointer px-4 py-2 hover:bg-yellow hover:text-darkblack font-medium"
                     onClick={() => navigate("/store")}
