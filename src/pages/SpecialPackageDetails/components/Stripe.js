@@ -8,8 +8,11 @@ import {
 } from "@stripe/react-stripe-js";
 import api from "../../../components/utils/api";
 import PassContext from "../../../components/utils/PassContext";
+import myToast from "../../../components/utils/myToast";
+import Button from "../../../components/common/Button";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-const CheckoutForm = ({ packageId, loggedUser, plan }) => {
+const CheckoutForm = ({ packageId, loggedUser }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -58,7 +61,7 @@ const CheckoutForm = ({ packageId, loggedUser, plan }) => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${process.env.REACT_APP_BASE_URL}special-packages/${packageId}/payment?plan=${plan}&userId=${loggedUser._id}`,
+        return_url: `${process.env.REACT_APP_BASE_URL}special-packages/${packageId}/payment?userId=${loggedUser._id}`,
       },
     });
 
@@ -82,15 +85,21 @@ const CheckoutForm = ({ packageId, loggedUser, plan }) => {
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <button
-        className="w-full font-medium mt-4 btn btn-yellow btn-md hover:bg-yellow2 rounded-md"
-        disabled={isLoading || !stripe || !elements}
+      <Button
+        theme="yellow"
+        className="w-full font-medium mt-4 flex justify-center"
         id="submit"
+        disabled={isLoading || !stripe || !elements}
+        type="submit"
       >
         <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+          {isLoading ? (
+            <AiOutlineLoading3Quarters className="animate-spin text-2xl" />
+          ) : (
+            "Pay now"
+          )}
         </span>
-      </button>
+      </Button>
       {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
     </form>
@@ -99,26 +108,26 @@ const CheckoutForm = ({ packageId, loggedUser, plan }) => {
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
-const StripeComponent = ({ packageId, plan }) => {
+const StripeComponent = ({ packageId }) => {
   const { loggedUser } = useContext(PassContext);
   const [clientSecret, setClientSecret] = useState("");
 
-  const createSubscription = async () => {
+  const createIntent = async () => {
     try {
       const { data } = await api.post("/user/createIntentSpecialPackage", {
         packageId: packageId,
-        plan,
       });
       setClientSecret(data.clientSecret);
     } catch (err) {
       console.log(err);
+      myToast(err?.response?.data?.error, "failure");
     }
   };
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    if (packageId && plan) createSubscription();
-  }, [packageId, plan]);
+    if (packageId) createIntent();
+  }, [packageId]);
 
   const appearance = {
     theme: "night",
@@ -131,11 +140,7 @@ const StripeComponent = ({ packageId, plan }) => {
     <>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm
-            packageId={packageId}
-            loggedUser={loggedUser}
-            plan={plan}
-          />
+          <CheckoutForm packageId={packageId} loggedUser={loggedUser} />
         </Elements>
       )}
     </>

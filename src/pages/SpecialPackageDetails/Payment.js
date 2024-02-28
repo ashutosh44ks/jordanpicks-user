@@ -10,7 +10,6 @@ const Payment = () => {
   const searchParams = new URLSearchParams(location.search);
   const paymentIntentId = searchParams.get("payment_intent");
   const userId = searchParams.get("userId");
-  const plan = searchParams.get("plan");
   const [status, setStatus] = useState("");
   const validatePayment = async () => {
     try {
@@ -19,7 +18,6 @@ const Payment = () => {
         {
           paymentIntentId: paymentIntentId,
           packageId: id,
-          plan,
         }
       );
       console.log(data);

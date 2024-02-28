@@ -30,15 +30,13 @@ const PackageDetails = () => {
   }, []);
 
   const dialogRef = useRef();
-  const [selectedPlan, setSelectedPlan] = useState("");
 
   return (
     <>
       <div>
         <Banner
           packageDetails={packageDetails}
-          showModal={(plan) => {
-            setSelectedPlan(plan);
+          showModal={() => {
             dialogRef.current.showModal();
           }}
           loading={loading}
@@ -61,9 +59,7 @@ const PackageDetails = () => {
               <ul className="list-disc ml-4">
                 {packageDetails.links.map((link, index) => (
                   <li key={index} className="my-2">
-                    <a href={link} rel="noreferrer" target="_blank">
-                      {link}
-                    </a>
+                    {link}
                   </li>
                 ))}
               </ul>
@@ -88,11 +84,9 @@ const PackageDetails = () => {
       <Modal
         ref={dialogRef}
         title="Pay with Card"
-        closeDialog={() => setSelectedPlan("")}
         content={
           <Stripe
             packageId={packageDetails._id}
-            plan={selectedPlan}
             packageName={packageDetails.name}
           />
         }
