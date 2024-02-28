@@ -10,6 +10,8 @@ const Payment = () => {
 
   const searchParams = new URLSearchParams(location.search);
   const paymentIntentId = searchParams.get("payment_intent");
+  const cardDeduction = searchParams.get("cardDeduction");
+  const walletDeduction = searchParams.get("walletDeduction");
   const userId = searchParams.get("userId");
   const [status, setStatus] = useState("");
   const validatePayment = async () => {
@@ -18,6 +20,8 @@ const Payment = () => {
         `${process.env.REACT_APP_BASE_API_URL}user/validatePaymentCart?id=${userId}`,
         {
           paymentIntentId: paymentIntentId,
+          walletDeduction,
+          cardDeduction,
         }
       );
       console.log(data);

@@ -9,7 +9,7 @@ import {
 import api from "../../../components/utils/api";
 import PassContext from "../../../components/utils/PassContext";
 
-const CheckoutForm = ({ loggedUser }) => {
+const CheckoutForm = ({ loggedUser, cardDeduction, walletDeduction }) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -58,7 +58,7 @@ const CheckoutForm = ({ loggedUser }) => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${process.env.REACT_APP_BASE_URL}cart/payment?&userId=${loggedUser._id}`,
+        return_url: `${process.env.REACT_APP_BASE_URL}cart/payment?cardDeduction=${cardDeduction}&walletDeduction=${walletDeduction}&userId=${loggedUser._id}`,
       },
     });
 
@@ -99,13 +99,15 @@ const CheckoutForm = ({ loggedUser }) => {
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
-const StripeComponent = () => {
+const StripeComponent = ({ cardDeduction, walletDeduction }) => {
   const { loggedUser } = useContext(PassContext);
   const [clientSecret, setClientSecret] = useState("");
 
   const createIntent = async () => {
     try {
-      const { data } = await api.get("/user/createIntentCart");
+      const { data } = await api.post("/user/createIntentCart", {
+        amount: cardDeduction.toFixed(2),
+      });
       setClientSecret(data.clientSecret);
     } catch (err) {
       console.log(err);
@@ -129,7 +131,11 @@ const StripeComponent = () => {
     <>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm loggedUser={loggedUser} />
+          <CheckoutForm
+            loggedUser={loggedUser}
+            cardDeduction={cardDeduction}
+            walletDeduction={walletDeduction}
+          />
         </Elements>
       )}
     </>

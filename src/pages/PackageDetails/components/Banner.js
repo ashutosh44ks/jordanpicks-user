@@ -1,6 +1,7 @@
 import { useUserContext } from "../../../components/utils/useUserContext";
 import { useCountdown } from "../../../components/utils/useCountdown";
 import api from "../../../components/utils/api";
+import myToast from "../../../components/utils/myToast";
 import Button from "../../../components/common/Button";
 
 const RenderPrice = ({ price, loading, wallet, defaultDiscount }) => {
@@ -44,8 +45,10 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
       const { data } = await api.post("/user/addItemToCart", { packageId });
       console.log(data);
       getProfileShort();
+      myToast(data.msg, "success");
     } catch (err) {
       console.log(err);
+      myToast(err?.response?.data?.error, "failure");
     }
   };
 
@@ -113,7 +116,7 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
               <Button
                 theme={
                   loggedUser.cart.find(
-                    (cartItem) => cartItem._id === packageDetails._id
+                    (cartItem) => cartItem === packageDetails._id
                   )
                     ? "lightgrey"
                     : "yellow"
@@ -124,7 +127,7 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
                 onClick={() => {
                   if (
                     loggedUser.cart.find(
-                      (cartItem) => cartItem._id === packageDetails._id
+                      (cartItem) => cartItem === packageDetails._id
                     )
                   )
                     return;
@@ -132,7 +135,7 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
                 }}
               >
                 {loggedUser.cart.find(
-                  (cartItem) => cartItem._id === packageDetails._id
+                  (cartItem) => cartItem === packageDetails._id
                 )
                   ? "Added to Cart"
                   : "Add to Cart"}
