@@ -8,6 +8,9 @@ import {
 } from "@stripe/react-stripe-js";
 import api from "../../../components/utils/api";
 import PassContext from "../../../components/utils/PassContext";
+import myToast from "../../../components/utils/myToast";
+import Button from "../../../components/common/Button";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const CheckoutForm = ({ storeId, loggedUser }) => {
   const stripe = useStripe();
@@ -82,15 +85,21 @@ const CheckoutForm = ({ storeId, loggedUser }) => {
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" options={paymentElementOptions} />
-      <button
-        className="w-full font-medium mt-4 btn btn-yellow btn-md hover:bg-yellow2 rounded-md"
-        disabled={isLoading || !stripe || !elements}
+      <Button
+        theme="yellow"
+        className="w-full font-medium mt-4 flex justify-center"
         id="submit"
+        disabled={isLoading || !stripe || !elements}
+        type="submit"
       >
         <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+          {isLoading ? (
+            <AiOutlineLoading3Quarters className="animate-spin text-2xl" />
+          ) : (
+            "Pay now"
+          )}
         </span>
-      </button>
+      </Button>
       {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
     </form>
@@ -111,6 +120,7 @@ const StripeComponent = ({ storeId }) => {
       setClientSecret(data.clientSecret);
     } catch (err) {
       console.log(err);
+      myToast(err?.response?.data?.error, "failure");
     }
   };
 
