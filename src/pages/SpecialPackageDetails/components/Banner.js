@@ -1,7 +1,7 @@
 import Button from "../../../components/common/Button";
 
 const RenderBannerPrice = ({ loading, packageDetails, showModal }) => {
-  if (!packageDetails.isBought) {
+  if (packageDetails.isBought) {
     return (
       <Button
         theme="lightgrey"
