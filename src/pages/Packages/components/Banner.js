@@ -1,5 +1,4 @@
-// import { useState, useEffect } from "react";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useWindowWidth } from "../../../components/utils/useWindowWidth";
 import PassContext from "../../../components/utils/PassContext";
@@ -42,15 +41,19 @@ const Banner = () => {
     else navigate("/auth/register");
   };
 
+  const [activeIndex, setActiveIndex] = useState(0);
+  useEffect(() => {
+    if (loggedUser._id !== "") {
+      if (loggedUser.defaultDiscount > 0) setActiveIndex(2);
+      else setActiveIndex(1);
+    } else setActiveIndex(0);
+  }, [loggedUser._id, loggedUser.defaultDiscount]);
+
   if (width < 480) {
     return (
       <div className="transform -translate-y-10">
         <img
-          src={
-            loggedUser
-              ? "/assets/slider1-mobile.jpg"
-              : "/assets/slider0-mobile.jpg"
-          }
+          src={`/assets/slider${activeIndex}-mobile.jpg`}
           alt="banner-mobile"
           className="cursor-pointer w-full"
           onClick={handleClick}
@@ -62,7 +65,7 @@ const Banner = () => {
   return (
     <div className="transform -translate-y-10">
       <img
-        src={loggedUser ? "/assets/slider1.jpg" : "/assets/slider0.jpg"}
+        src={`/assets/slider${activeIndex}.jpg`}
         alt="banner-desktop"
         className="cursor-pointer w-full"
         onClick={handleClick}

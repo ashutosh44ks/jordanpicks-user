@@ -7,11 +7,26 @@ const Banner = () => {
   const { loggedUser } = useContext(PassContext);
 
   if (loggedUser.defaultDiscount !== 0) {
-    //  show banner strip saying "We're offering all Penthouse Club members a discount of 20% on all standard packages*"
     if (width < 480) {
-      return null;
+      return (
+        <div className="transform -translate-y-10">
+          <img
+            src="/assets/slider2-mobile.jpg"
+            alt="banner-mobile"
+            className="w-full"
+          />
+        </div>
+      );
     }
-    return null;
+    return (
+      <div className="transform -translate-y-10">
+        <img
+          src="/assets/slider2.jpg"
+          alt="banner-desktop"
+          className="w-full"
+        />
+      </div>
+    );
   }
 
   if (width < 480) {
