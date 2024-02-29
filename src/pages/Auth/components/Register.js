@@ -130,6 +130,11 @@ const Register = () => {
           </span>
         </label>
       </div>
+      <div className="mb-4 w-full text-xs">
+        By submitting your mobile phone number, you're authorising us (opting
+        in) to send you informational and marketing related texts. Message/data
+        rates apply. Reply STOP to unsubscribe.
+      </div>
       <div className="w-full mb-4">
         <Button
           theme="yellow"

@@ -27,6 +27,14 @@ const Terms = () => {
             using this site.
           </p>
         </section>
+        <section className="my-8">
+          <h4 className="mb-2">Mobile Phone Number Authorization</h4>
+          <p>
+            By submitting your mobile phone number during registration, you're
+            authorising us (opting in) to send you informational and marketing
+            related texts. Message/data rates apply. Reply STOP to unsubscribe.
+          </p>
+        </section>
       </div>
       <div>
         <h2>Privacy Policy</h2>
