@@ -25,6 +25,12 @@ const Orders = () => {
     getTransactions();
   }, [page]);
 
+  const appendItems = (desc, cartLength) => {
+    let myDesc = desc;
+    if (cartLength > 0) myDesc += " - " + cartLength + " items";
+    return myDesc;
+  };
+
   return (
     <div>
       <Table
@@ -40,10 +46,7 @@ const Orders = () => {
                   transaction?.store?.name ||
                   transaction?.vslPackage?.name ||
                   transaction?.specialPackage?.name ||
-                  transaction.desc +
-                    " - " +
-                    transaction?.cart?.length +
-                    " items"}
+                  appendItems(transaction.desc)}
               </td>
               <td className="border-b-2 border-dark">
                 {dateFormatter(transaction.createdAt)}
