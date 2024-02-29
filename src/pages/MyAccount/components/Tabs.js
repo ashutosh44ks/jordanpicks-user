@@ -55,14 +55,14 @@ const Sidebar = () => {
         >
           Account Details
         </Button>
-        {/* <Button
+        <Button
           theme={active === "referrals" ? "yellow" : "transparent"}
           size="md-rect"
           rounded="sm"
           onClick={() => navigate("/my-account/referrals")}
         >
           Referrals
-        </Button> */}
+        </Button>
       </div>
     </div>
   );

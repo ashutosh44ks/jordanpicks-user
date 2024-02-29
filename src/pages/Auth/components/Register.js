@@ -14,6 +14,7 @@ const Register = () => {
   const [cPassword, setCPassword] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [refBy, setRefBy] = useState("");
   const [terms, setTerms] = useState(false);
   const [loading, setLoading] = useState(false);
   const registerUser = async () => {
@@ -24,6 +25,7 @@ const Register = () => {
         email,
         mobile: phone,
         password,
+        ...(refBy && { refBy }),
       });
       console.log(data);
       navigate(`/auth/verify-account?email=${email}`);
@@ -105,6 +107,15 @@ const Register = () => {
           onChange={(e) => setCPassword(e.target.value)}
           className="w-full min-w-[20rem]"
           required
+        />
+      </div>
+      <div className="mb-4 w-full">
+        <input
+          type="text"
+          placeholder="Referral Code (optional)"
+          value={refBy}
+          onChange={(e) => setRefBy(e.target.value)}
+          className="w-full min-w-[20rem]"
         />
       </div>
       <div className="mb-4 w-full">
