@@ -202,12 +202,19 @@ const Cart = () => {
                 <>
                   <div className="flex gap-3 sm:justify-normal justify-between">
                     <div className="w-36">Premium Discount:</div>
-                    <div>- ${(total * loggedUser.defaultDiscount) / 100}</div>
+                    <div>
+                      - $
+                      {((total * loggedUser.defaultDiscount) / 100)?.toFixed(2)}
+                    </div>
                   </div>
                   <div className="flex gap-2 md:justify-normal justify-between text-yellow">
                     <div className="w-40">Grand Total:</div>
                     <div>
-                      ${total - (total * loggedUser.defaultDiscount) / 100}
+                      $
+                      {(
+                        total -
+                        (total * loggedUser.defaultDiscount) / 100
+                      )?.toFixed(2)}
                     </div>
                   </div>
                 </>
