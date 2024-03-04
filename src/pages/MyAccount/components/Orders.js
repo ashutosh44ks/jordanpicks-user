@@ -26,9 +26,19 @@ const Orders = () => {
   }, [page]);
 
   const appendItems = (desc, cartLength) => {
-    let myDesc = desc;
-    if (cartLength > 0) myDesc += " - " + cartLength + " items";
-    return myDesc;
+    if (cartLength > 0) return ("Cart - " + cartLength + " items");
+    return desc;
+  };
+
+  const decorateType = (transaction) => {
+    if (transaction.type === "Credit")
+      if (
+        transaction?.package ||
+        transaction?.vslPackage?.name ||
+        transaction?.specialPackage?.name
+      )
+        return "Wallet Refund";
+    return transaction.type;
   };
 
   return (
@@ -46,12 +56,14 @@ const Orders = () => {
                   transaction?.store?.name ||
                   transaction?.vslPackage?.name ||
                   transaction?.specialPackage?.name ||
-                  appendItems(transaction.desc)}
+                  appendItems(transaction.desc, transaction.cart.length)}
               </td>
               <td className="border-b-2 border-dark">
                 {dateFormatter(transaction.createdAt)}
               </td>
-              <td className="border-b-2 border-dark">{transaction.type}</td>
+              <td className="border-b-2 border-dark">
+                {decorateType(transaction)}
+              </td>
               <td className="border-b-2 border-dark">
                 {transaction?.price?.toFixed(2)}
               </td>
