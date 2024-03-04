@@ -1,9 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Button from "../../../components/common/Button";
 import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { PiSealCheck } from "react-icons/pi";
+
+const RenderReferral = ({ refBy, setRefBy }) => {
+  const [searchParams] = useSearchParams();
+  useEffect(() => {
+    if (searchParams.get("referralCode")) {
+      setRefBy(searchParams.get("referralCode"));
+    }
+  }, [searchParams]);
+  const [showReferral, setShowReferral] = useState(false);
+
+  if (searchParams.get("referralCode")) {
+    return <p className="text-yellow text-sm mb-4 flex gap-1 items-center"><PiSealCheck /> Referral Code Applied</p>;
+  }
+  if (showReferral)
+    return (
+      <div className="mb-4 w-full">
+        <input
+          type="text"
+          placeholder="Referral Code (optional)"
+          value={refBy}
+          onChange={(e) => setRefBy(e.target.value)}
+          className="w-full min-w-[20rem]"
+        />
+      </div>
+    );
+  return (
+    <p
+      className="cursor-pointer text-yellow text-sm mb-4"
+      onClick={() => setShowReferral(true)}
+    >
+      Do you have a referral code?
+    </p>
+  );
+};
 
 const Register = () => {
   const [searchParams] = useSearchParams();
@@ -35,6 +70,7 @@ const Register = () => {
     }
     setLoading(false);
   };
+
   return (
     <form
       onSubmit={(e) => {
@@ -45,16 +81,12 @@ const Register = () => {
       }}
       className="max-w-[26rem]"
     >
-      <div className="mb-6 flex flex-col justify-center items-center">
-        <div className="mb-6">
-          <h2 className="font-medium text-center mb-2">
-            Register Your Account
-          </h2>
-          <p className="text-center text-lightgrey2">
-            Secure Your Spot! After registering you'll instantly receive your
-            $25 bonus credits
-          </p>
-        </div>
+      <div className="mb-12">
+        <h2 className="font-medium text-center mb-2">Register Your Account</h2>
+        <p className="text-center text-lightgrey2">
+          Secure Your Spot! After registering you'll instantly receive your $25
+          bonus credits
+        </p>
       </div>
       <div className="mb-4 w-full">
         <input
@@ -111,15 +143,6 @@ const Register = () => {
       </div>
       <div className="mb-4 w-full">
         <input
-          type="text"
-          placeholder="Referral Code (optional)"
-          value={refBy}
-          onChange={(e) => setRefBy(e.target.value)}
-          className="w-full min-w-[20rem]"
-        />
-      </div>
-      <div className="mb-4 w-full">
-        <input
           type="checkbox"
           value={terms}
           onChange={(e) => {
@@ -146,6 +169,7 @@ const Register = () => {
         in) to send you informational and marketing related texts. Message/data
         rates apply. Reply STOP to unsubscribe.
       </div>
+      <RenderReferral refBy={refBy} setRefBy={setRefBy} />
       <div className="w-full mb-4">
         <Button
           theme="yellow"
