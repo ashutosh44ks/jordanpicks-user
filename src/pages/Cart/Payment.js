@@ -20,8 +20,8 @@ const Payment = () => {
         `${process.env.REACT_APP_BASE_API_URL}user/validatePaymentCart?id=${userId}`,
         {
           paymentIntentId: paymentIntentId,
-          walletDeduction,
-          cardDeduction,
+          walletDeduction: +walletDeduction,
+          cardDeduction: +cardDeduction,
         }
       );
       console.log(data);

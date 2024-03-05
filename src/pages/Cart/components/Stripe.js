@@ -115,7 +115,7 @@ const StripeComponent = ({ cardDeduction, walletDeduction }) => {
   const createIntent = async () => {
     try {
       const { data } = await api.post("/user/createIntentCart", {
-        amount: cardDeduction.toFixed(2),
+        amount: +cardDeduction.toFixed(2),
       });
       setClientSecret(data.clientSecret);
     } catch (err) {

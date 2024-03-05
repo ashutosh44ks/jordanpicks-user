@@ -121,7 +121,7 @@ const StripeComponent = ({ packageId, cardDeduction, walletDeduction }) => {
     try {
       const { data } = await api.post("/user/createIntentVslPackage", {
         packageId: packageId,
-        amount: cardDeduction.toFixed(2),
+        amount: +cardDeduction.toFixed(2),
       });
       setClientSecret(data.clientSecret);
     } catch (err) {

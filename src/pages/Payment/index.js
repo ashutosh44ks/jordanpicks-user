@@ -22,8 +22,8 @@ const Payment = () => {
         {
           paymentIntentId: paymentIntentId,
           packageId: id,
-          walletDeduction,
-          cardDeduction,
+          walletDeduction: +walletDeduction,
+          cardDeduction: +cardDeduction,
         }
       );
       console.log(data);
