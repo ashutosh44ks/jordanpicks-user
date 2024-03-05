@@ -108,7 +108,7 @@ const Cart = () => {
     setWalletLoading(true);
     try {
       const { data } = await api.post("/user/walletWithdrawCart", {
-        amount: grandTotal,
+        amount: +grandTotal,
       });
       console.log(data);
       getProfileShort();
