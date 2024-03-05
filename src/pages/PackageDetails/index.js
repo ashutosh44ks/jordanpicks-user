@@ -157,9 +157,10 @@ const PackageDetails = () => {
               <p>Are you sure you want to pay with wallet?</p>
               <p>
                 After payment, $
-                {packageDetails.price -
-                  packageDetails.price *
-                    (loggedUser.defaultDiscount / 100)}{" "}
+                {(
+                  packageDetails.price -
+                  packageDetails.price * (loggedUser.defaultDiscount / 100)
+                ).toFixed(2)}{" "}
                 will be deducted from your wallet.
               </p>
               <div className="flex justify-end mt-4">
