@@ -19,8 +19,8 @@ const PackageBox = ({ item }) => {
         {item._id ? diffTimeData.diffSec : 0} secs left
       </div>
       <div className="package-box-body">
-        <div className="h-[12rem] flex flex-col justify-center">
-          <div className="flex justify-center items-center gap-4 mb-4">
+        <div className="h-[10rem] xs:h-[12rem] flex flex-col justify-center">
+          <div className="flex justify-center items-center gap-4">
             <div
               className={`flex items-start ${
                 loggedUser.defaultDiscount !== 0 ? "line-through" : ""
@@ -41,17 +41,17 @@ const PackageBox = ({ item }) => {
               </div>
             )}
           </div>
-          <h2 className="text-center limit-to-2-lines">{item.name}</h2>
-          <h5 className="text-center mt-4 limit-to-2-lines">
+          <h2 className="text-center limit-to-2-lines my-2 xs:my-4">{item.name}</h2>
+          <h5 className="text-center limit-to-2-lines">
             {item.gamePreview}
           </h5>
         </div>
-        <hr className="my-6 mx-6 border-black" />
+        <hr className="my-4 xs:my-6 mx-6 border-black hidden xs:block" />
         <div
-          className="text-center limit-to-5-lines break-words h-[6rem]"
+          className="text-center limit-to-5-lines break-words xs:h-[6rem] h-0"
           dangerouslySetInnerHTML={{ __html: item.description }}
         ></div>
-        <div className="mt-8">
+        <div className="mt-4 xs:mt-8 flex flex-row xs:flex-col gap-4">
           <Button
             className="w-full font-medium"
             theme="yellow"
@@ -62,6 +62,17 @@ const PackageBox = ({ item }) => {
             }}
           >
             Buy Now
+          </Button>
+          <Button
+            className="w-full font-medium"
+            theme="lightgrey"
+            rounded="md"
+            size="md"
+            onClick={() => {
+              navigate("/packages/" + item._id);
+            }}
+          >
+            Add to Cart
           </Button>
         </div>
       </div>

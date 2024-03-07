@@ -22,7 +22,7 @@
   color: var(--darkblack);
   width: 100%;
   text-align: center;
-  padding: 1.5rem 1.8rem;
+  padding: 1rem 1.5rem;
   font-weight: 500;
   font-size: 1.15rem;
 }
@@ -41,11 +41,6 @@
   margin-left: 2rem;
 }
 
-.home-welcome-iframe {
-  position: relative;
-  top: -10rem;
-}
-
 @media screen and (max-width: 500px) {
   .package-box .package-box-header {
     padding: 1.5rem;
@@ -57,12 +52,37 @@
 }
 
 @media screen and (max-height: 950px) and (max-width: 420px) {
-  .home-welcome-iframe {
-    position: static;
-    margin-bottom: 6rem;
-  }
   .banner {
     height: 100%;
     max-height: 100%;
+  }
+  .package-box {
+    border-radius: 0.5rem;
+  }
+  .package-box .package-box-header {
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 1rem;
+    border-radius: 0.45rem 0.45rem 0 0;
+  }
+  .package-box .package-box-body {
+    padding: 1rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
+  .package-box .package-box-body h1{
+    font-size: 2rem;
+  }
+  .package-box .package-box-body h2{
+    font-size: 1.5rem;
+  }
+  .package-box .package-box-body h5{
+    font-size: 1rem;
+  }
+  .package-box .package-box-body h5{
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  .package-box .package-box-body .btn-md{
+    padding: 0.5rem 1rem;
   }
 }
