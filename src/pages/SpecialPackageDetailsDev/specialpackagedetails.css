@@ -1,0 +1,18 @@
+.package-details-banner {
+  display: flex;
+  transform: translateY(-2rem);
+  gap: 2rem;
+}
+.package-details-banner iframe {
+  width: 80rem;
+  border: solid 1px var(--yellow);
+  border-radius: 1rem;
+}
+@media screen and (max-width: 768px) {
+  .package-details-banner {
+    flex-direction: column;
+  }
+  .package-details-banner iframe {
+    width: 100%;
+  }
+}
