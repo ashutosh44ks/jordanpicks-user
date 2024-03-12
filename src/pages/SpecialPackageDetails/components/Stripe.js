@@ -1,90 +1,148 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import {
-  PaymentElement,
   Elements,
   useStripe,
   useElements,
+  CardNumberElement,
+  CardExpiryElement,
+  CardCvcElement,
 } from "@stripe/react-stripe-js";
 import api from "../../../components/utils/api";
 import PassContext from "../../../components/utils/PassContext";
-import myToast from "../../../components/utils/myToast";
 import Button from "../../../components/common/Button";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-const CheckoutForm = ({ packageId, loggedUser }) => {
+const CheckoutForm = ({ packageId, loggedUser, plan }) => {
   const stripe = useStripe();
   const elements = useElements();
+  
+  const [cardNumberElement, setCardNumberElement] = useState(null);
+  const [cardExpiryElement, setCardExpiryElement] = useState(null);
+  const [cardCvcElement, setCardCvcElement] = useState(null);
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (!stripe) return;
-
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
-    );
-    if (!clientSecret) {
-      console.log("No client secret found in query string");
-      return;
-    }
-
-    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-      switch (paymentIntent.status) {
-        case "succeeded":
-          setMessage("Payment succeeded!");
-          break;
-        case "processing":
-          setMessage("Your payment is processing.");
-          break;
-        case "requires_payment_method":
-          setMessage("Your payment was not successful, please try again.");
-          break;
-        default:
-          setMessage("Something went wrong.");
-          break;
-      }
-    });
-  }, [stripe]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Stripe.js hasn't yet loaded.
-    // Make sure to disable form submission until Stripe.js has loaded.
-    if (!stripe || !elements) return;
-
+  const createSubscription = async () => {
     setIsLoading(true);
+    try {
+      // create a payment method
+      const cardNumberElement = elements?.getElement(CardNumberElement);
+      const cardExpiryElement = elements?.getElement(CardExpiryElement);
+      const cardCvcElement = elements?.getElement(CardCvcElement);
 
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: `${process.env.REACT_APP_BASE_URL}special-packages/${packageId}/payment?userId=${loggedUser._id}`,
-      },
-    });
+      if (cardNumberElement && cardExpiryElement && cardCvcElement) {
+        const paymentMethod = await stripe?.createPaymentMethod({
+          type: "card",
+          card: cardNumberElement,
+          billing_details: {
+            name: loggedUser.name,
+            email: loggedUser.email,
+          },
+        });
+        if (paymentMethod.error) {
+          setMessage(paymentMethod.error.message);
+          setIsLoading(false);
+          return;
+        }
+        let url = "";
+        if (plan === "monthly") url = "/user/createReccuringOrderMonthly";
+        else if (plan === "yearly") url = "/user/createReccuringOrderYearly";
+        const { data } = await api.post(url, {
+          specialPackageId: packageId,
+          paymentMethod: paymentMethod?.paymentMethod?.id,
+        });
+        const confirmPayment = await stripe?.confirmCardPayment(data.dta);
 
-    // This point will only be reached if there is an immediate error when
-    // confirming the payment. Otherwise, your customer will be redirected to
-    // your `return_url`. For some payment methods like iDEAL, your customer will
-    // be redirected to an intermediate site first to authorize the payment, then
-    // redirected to the `return_url`.
-    console.log(error);
-    if (error.type === "card_error" || error.type === "validation_error")
-      setMessage(error.message);
-    else setMessage("An unexpected error occurred.");
-
+        if (confirmPayment?.error) {
+          setMessage(confirmPayment.error.message);
+        } else {
+          const paymentIntentId = confirmPayment.paymentIntent.id;
+          window.location.href = `${process.env.REACT_APP_BASE_URL}special-packages/${packageId}/payment?payment_intent=${paymentIntentId}&userId=${loggedUser._id}&plan=${plan}`;
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
     setIsLoading(false);
   };
 
   const paymentElementOptions = {
-    layout: "tabs",
+    style: {
+      base: {
+        color: "white",
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: "antialiased",
+        fontSize: "16px",
+        "::placeholder": {
+          color: "#888",
+        },
+      },
+      invalid: {
+        color: "#fa755a",
+        iconColor: "#fa755a",
+      },
+    },
   };
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
-      <PaymentElement id="payment-element" options={paymentElementOptions} />
+    <form
+      id="payment-form"
+      onSubmit={(e) => {
+        e.preventDefault();
+        createSubscription();
+      }}
+    >
+      <div>
+        <label className="text-sm">Card Number</label>
+        <div
+          className="bg-[#30313D] p-3 rounded mb-4"
+          onClick={() => {
+            cardNumberElement.focus();
+          }}
+        >
+          <CardNumberElement
+            options={paymentElementOptions}
+            onReady={(element) => {
+              setCardNumberElement(element);
+            }}
+          />
+        </div>
+      </div>
+      <div className="flex items-center gap-4">
+        <div className="flex-1">
+          <label className="text-sm">Expiration</label>
+          <div
+            className="bg-[#30313D] p-3 rounded mb-4"
+            onClick={() => {
+              cardExpiryElement.focus();
+            }}
+          >
+            <CardExpiryElement
+              options={paymentElementOptions}
+              onReady={(element) => {
+                setCardExpiryElement(element);
+              }}
+            />
+          </div>
+        </div>
+        <div className="flex-1">
+          <label className="text-sm">CVC</label>
+          <div
+            className="bg-[#30313D] p-3 rounded mb-4"
+            onClick={() => {
+              cardCvcElement.focus();
+            }}
+          >
+            <CardCvcElement
+              options={paymentElementOptions}
+              onReady={(element) => {
+                setCardCvcElement(element);
+              }}
+            />
+          </div>
+        </div>
+      </div>
       <Button
         theme="yellow"
         className="w-full font-medium mt-4 flex justify-center"
@@ -108,42 +166,18 @@ const CheckoutForm = ({ packageId, loggedUser }) => {
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
-const StripeComponent = ({ packageId }) => {
+const StripeComponent = ({ packageId, plan }) => {
   const { loggedUser } = useContext(PassContext);
-  const [clientSecret, setClientSecret] = useState("");
 
-  const createIntent = async () => {
-    try {
-      const { data } = await api.post("/user/createIntentSpecialPackage", {
-        packageId: packageId,
-      });
-      setClientSecret(data.clientSecret);
-    } catch (err) {
-      console.log(err);
-      myToast(err?.response?.data?.error, "failure");
-    }
-  };
-
-  useEffect(() => {
-    // Create PaymentIntent as soon as the page loads
-    if (packageId) createIntent();
-  }, [packageId]);
-
-  const appearance = {
-    theme: "night",
-  };
-  const options = {
-    clientSecret,
-    appearance,
-  };
-  return (
-    <>
-      {clientSecret && (
-        <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm packageId={packageId} loggedUser={loggedUser} />
-        </Elements>
-      )}
-    </>
-  );
+  if (stripePromise)
+    return (
+      <Elements stripe={stripePromise}>
+        <CheckoutForm
+          packageId={packageId}
+          loggedUser={loggedUser}
+          plan={plan}
+        />
+      </Elements>
+    );
 };
 export default StripeComponent;

@@ -30,13 +30,15 @@ const PackageDetails = () => {
   }, []);
 
   const dialogRef = useRef();
+  const [plan, setPlan] = useState("");
 
   return (
     <>
       <div>
         <Banner
           packageDetails={packageDetails}
-          showModal={() => {
+          showModal={(plan) => {
+            setPlan(plan);
             dialogRef.current.showModal();
           }}
           loading={loading}
@@ -88,6 +90,7 @@ const PackageDetails = () => {
           <Stripe
             packageId={packageDetails._id}
             packageName={packageDetails.name}
+            plan={plan}
           />
         }
       />
