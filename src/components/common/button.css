@@ -10,14 +10,15 @@
 .btn.btn-yellow:hover {
   background-color: var(--yellow2);
 }
-.btn.btn-lightgrey {
-  background-color: var(--lightgrey3);
-  color: var(--darkblack);
-}
-.btn.btn-lightgrey:hover {
-  background-color: var(--lightgrey);
-}
 .btn.btn-dark {
+  background-color: var(--dark);
+  color: var(--white);
+  border: solid 1px var(--black);
+}
+.btn.btn-dark:hover {
+  border-color: var(--yellow);
+}
+.btn.btn-dark-noborder {
   background-color: var(--dark);
   color: var(--white);
 }

@@ -84,7 +84,7 @@ const PackageBox = ({ item }) => {
           </Button>
           <Button
             className="w-full font-medium"
-            theme="lightgrey"
+            theme="dark"
             rounded="md"
             size="md"
             onClick={() => {

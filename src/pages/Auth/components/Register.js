@@ -191,7 +191,7 @@ const Register = () => {
       </div>
       <div className="w-full">
         <Button
-          theme="lightgrey"
+          theme="dark"
           className="w-full font-semibold"
           type="button"
           onClick={() => {

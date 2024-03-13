@@ -90,7 +90,7 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
         <div className="flex flex-col gap-4 items-center">
           {packageDetails.isBought ? (
             <Button
-              theme="lightgrey"
+              theme="dark"
               size="lg"
               className="w-full font-semibold cursor-default"
               rounded="md"

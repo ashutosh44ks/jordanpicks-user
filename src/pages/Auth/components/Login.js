@@ -6,6 +6,7 @@ import Button from "../../../components/common/Button";
 import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+// import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const { loggedUser, setLoggedUser } = useContext(PassContext);
@@ -115,6 +116,20 @@ const Login = () => {
           Sign In
         </Button>
       </div>
+      {/* <Button
+        className="w-full mt-2 font-semibold flex justify-center items-center gap-x-4"
+        theme="dark"
+        rounded="md"
+        onClick={() => {
+          window.open(
+            process.env.REACT_APP_BASE_API_URL + "/auth/google",
+            "_self"
+          );
+        }}
+      >
+        <FcGoogle size={20} className="hide-on-sm-devices" /> Continue with
+        Google
+      </Button> */}
       <div className="flex items-center gap-2 my-4">
         <hr className="w-full border-black" />
         <span className="text-sm">or</span>
@@ -122,7 +137,7 @@ const Login = () => {
       </div>
       <div className="w-full">
         <Button
-          theme="lightgrey"
+          theme="dark"
           className="w-full font-semibold"
           type="button"
           onClick={() => {

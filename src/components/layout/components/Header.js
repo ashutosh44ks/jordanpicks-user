@@ -132,7 +132,7 @@ const Header = () => {
           ) : (
             <div className="header-section">
               <Button
-                theme="dark"
+                theme="dark-noborder"
                 onClick={() => {
                   navigate("/store");
                 }}

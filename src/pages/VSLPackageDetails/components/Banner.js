@@ -64,7 +64,7 @@ const Banner = ({
           <div>
             {packageDetails.isBought ? (
               <Button
-                theme="lightgrey"
+                theme="dark"
                 size="lg"
                 className="w-full font-semibold cursor-default"
                 rounded="md"

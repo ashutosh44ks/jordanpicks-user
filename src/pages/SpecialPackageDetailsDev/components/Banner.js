@@ -4,7 +4,7 @@ const RenderBannerPrice = ({ loading, packageDetails, showModal }) => {
   if (packageDetails.isBought) {
     return (
       <Button
-        theme="lightgrey"
+        theme="dark"
         size="lg"
         className="w-full font-semibold cursor-default"
         rounded="md"
