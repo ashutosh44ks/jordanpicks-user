@@ -113,33 +113,30 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
                   ? "Buy Now with Wallet"
                   : "Buy Now with Card"}
               </Button>
-              <Button
-                theme={
-                  loggedUser.cart.find(
-                    (cartItem) => cartItem === packageDetails._id
-                  )
-                    ? "lightgrey"
-                    : "yellow"
-                }
-                size="md"
-                className="w-full font-semibold"
-                rounded="md"
-                onClick={() => {
-                  if (
-                    loggedUser.cart.find(
-                      (cartItem) => cartItem === packageDetails._id
-                    )
-                  )
-                    return;
-                  addToCart(packageDetails._id);
-                }}
-              >
-                {loggedUser.cart.find(
-                  (cartItem) => cartItem === packageDetails._id
-                )
-                  ? "Added to Cart"
-                  : "Add to Cart"}
-              </Button>
+              {loggedUser.cart.find(
+                (cartItem) => cartItem === packageDetails._id
+              ) ? (
+                <Button
+                  theme="dark-noborder"
+                  size="md"
+                  className="w-full font-semibold cursor-default"
+                  rounded="md"
+                >
+                  Added to Cart
+                </Button>
+              ) : (
+                <Button
+                  theme="dark"
+                  size="md"
+                  className="w-full font-semibold"
+                  rounded="md"
+                  onClick={() => {
+                    addToCart(packageDetails._id);
+                  }}
+                >
+                  Add to Cart
+                </Button>
+              )}
             </>
           )}
         </div>

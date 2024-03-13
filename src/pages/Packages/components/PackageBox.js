@@ -82,17 +82,19 @@ const PackageBox = ({ item }) => {
           >
             Buy Now
           </Button>
-          <Button
-            className="w-full font-medium"
-            theme="dark"
-            rounded="md"
-            size="md"
-            onClick={() => {
-              addToCart(item._id);
-            }}
-          >
-            {cartText}
-          </Button>
+          {loggedUser._id !== "" && (
+            <Button
+              className="w-full font-medium"
+              theme="dark"
+              rounded="md"
+              size="md"
+              onClick={() => {
+                addToCart(item._id);
+              }}
+            >
+              {cartText}
+            </Button>
+          )}
         </div>
       </div>
     </div>
