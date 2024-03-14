@@ -30,13 +30,15 @@ const PackageDetails = () => {
   }, []);
 
   const dialogRef = useRef();
+  const [plan, setPlan] = useState("");
 
   return (
     <>
       <div>
         <Banner
           packageDetails={packageDetails}
-          showModal={() => {
+          showModal={(plan) => {
+            setPlan(plan);
             dialogRef.current.showModal();
           }}
           loading={loading}
@@ -47,10 +49,21 @@ const PackageDetails = () => {
             {loading ? (
               <SkeletonLines lines={5} />
             ) : (
-              <div
-                className="limit-to-5-lines"
-                dangerouslySetInnerHTML={{ __html: packageDetails.description }}
-              ></div>
+              <div>
+                <div
+                  className="limit-to-5-lines"
+                  dangerouslySetInnerHTML={{
+                    __html: packageDetails.description,
+                  }}
+                ></div>
+
+                {packageDetails.discount > 0 && (
+                  <div>
+                    Upon purchase, you will get a discount of{" "}
+                    {packageDetails.discount}%.
+                  </div>
+                )}
+              </div>
             )}
           </div>
           <div className="my-8">
@@ -88,6 +101,7 @@ const PackageDetails = () => {
           <Stripe
             packageId={packageDetails._id}
             packageName={packageDetails.name}
+            plan={plan}
           />
         }
       />
