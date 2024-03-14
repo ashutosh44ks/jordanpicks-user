@@ -49,10 +49,21 @@ const PackageDetails = () => {
             {loading ? (
               <SkeletonLines lines={5} />
             ) : (
-              <div
-                className="limit-to-5-lines"
-                dangerouslySetInnerHTML={{ __html: packageDetails.description }}
-              ></div>
+              <div>
+                <div
+                  className="limit-to-5-lines"
+                  dangerouslySetInnerHTML={{
+                    __html: packageDetails.description,
+                  }}
+                ></div>
+
+                {packageDetails.discount > 0 && (
+                  <div>
+                    Upon purchase, you will get a discount of{" "}
+                    {packageDetails.discount}%.
+                  </div>
+                )}
+              </div>
             )}
           </div>
           <div className="my-8">

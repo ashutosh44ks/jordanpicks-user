@@ -98,7 +98,7 @@ const CheckoutForm = ({ packageId, loggedUser, plan }) => {
         <div
           className="bg-[#30313D] p-3 rounded mb-4"
           onClick={() => {
-            cardNumberElement.focus();
+            cardNumberElement?.focus();
           }}
         >
           <CardNumberElement
@@ -115,7 +115,7 @@ const CheckoutForm = ({ packageId, loggedUser, plan }) => {
           <div
             className="bg-[#30313D] p-3 rounded mb-4"
             onClick={() => {
-              cardExpiryElement.focus();
+              cardExpiryElement?.focus();
             }}
           >
             <CardExpiryElement
@@ -131,7 +131,7 @@ const CheckoutForm = ({ packageId, loggedUser, plan }) => {
           <div
             className="bg-[#30313D] p-3 rounded mb-4"
             onClick={() => {
-              cardCvcElement.focus();
+              cardCvcElement?.focus();
             }}
           >
             <CardCvcElement
