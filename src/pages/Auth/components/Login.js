@@ -5,8 +5,8 @@ import PassContext from "../../../components/utils/PassContext";
 import Button from "../../../components/common/Button";
 import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
+import SocialLoginBtnGroup from "./SocialLoginBtnGroup";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-// import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const { loggedUser, setLoggedUser } = useContext(PassContext);
@@ -116,30 +116,10 @@ const Login = () => {
           Sign In
         </Button>
       </div>
-      {/* <Button
-        className="w-full mt-2 font-semibold flex justify-center items-center gap-x-4"
-        theme="dark"
-        rounded="md"
-        onClick={() => {
-          window.open(
-            process.env.REACT_APP_BASE_API_URL + "/auth/google",
-            "_self"
-          );
-        }}
-      >
-        <FcGoogle size={20} className="hide-on-sm-devices" /> Continue with
-        Google
-      </Button> */}
-      <div className="flex items-center gap-2 my-4">
-        <hr className="w-full border-black" />
-        <span className="text-sm">or</span>
-        <hr className="w-full border-black" />
-      </div>
-      <div className="w-full">
-        <Button
-          theme="dark"
-          className="w-full font-semibold"
-          type="button"
+      <div className="text-sm mt-2">
+        Don't have an account?{" "}
+        <span
+          className="font-semibold text-yellow cursor-pointer"
           onClick={() => {
             if (searchParams.get("redirect"))
               navigate(
@@ -149,8 +129,14 @@ const Login = () => {
           }}
         >
           Register
-        </Button>
+        </span>
       </div>
+      <div className="flex items-center gap-2 my-4">
+        <hr className="w-full border-black" />
+        <span className="text-sm">OR</span>
+        <hr className="w-full border-black" />
+      </div>
+      {/* <SocialLoginBtnGroup /> */}
     </form>
   );
 };

@@ -5,6 +5,7 @@ import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { PiSealCheck } from "react-icons/pi";
+import SocialLoginBtnGroup from "./SocialLoginBtnGroup";
 
 const RenderReferral = ({ refBy, setRefBy }) => {
   const [searchParams] = useSearchParams();
@@ -16,7 +17,11 @@ const RenderReferral = ({ refBy, setRefBy }) => {
   const [showReferral, setShowReferral] = useState(false);
 
   if (searchParams.get("referralCode")) {
-    return <p className="text-yellow text-sm mb-4 flex gap-1 items-center"><PiSealCheck /> Referral Code Applied</p>;
+    return (
+      <p className="text-yellow text-sm mb-4 flex gap-1 items-center">
+        <PiSealCheck /> Referral Code Applied
+      </p>
+    );
   }
   if (showReferral)
     return (
@@ -170,7 +175,7 @@ const Register = () => {
         rates apply. Reply STOP to unsubscribe.
       </div>
       <RenderReferral refBy={refBy} setRefBy={setRefBy} />
-      <div className="w-full mb-4">
+      <div className="w-full">
         <Button
           theme="yellow"
           className="w-full font-semibold flex justify-center"
@@ -184,25 +189,25 @@ const Register = () => {
           )}
         </Button>
       </div>
-      <div className="flex items-center gap-2 my-4">
-        <hr className="w-full border-black" />
-        <span className="text-sm">or</span>
-        <hr className="w-full border-black" />
-      </div>
-      <div className="w-full">
-        <Button
-          theme="dark"
-          className="w-full font-semibold"
-          type="button"
+      <div className="text-sm mt-2">
+        Already have an account?{" "}
+        <span
+          className="font-semibold text-yellow cursor-pointer"
           onClick={() => {
             if (searchParams.get("redirect"))
               navigate(`/auth/login?redirect=${searchParams.get("redirect")}`);
             else navigate("/auth/login");
           }}
         >
-          Sign In
-        </Button>
+          Login
+        </span>
       </div>
+      <div className="flex items-center gap-2 my-4">
+        <hr className="w-full border-black" />
+        <span className="text-sm">OR</span>
+        <hr className="w-full border-black" />
+      </div>
+      {/* <SocialLoginBtnGroup /> */}
     </form>
   );
 };
