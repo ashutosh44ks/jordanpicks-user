@@ -49,7 +49,15 @@ const RenderMyPackagesData = ({ myPackages, loading }) => {
                 </ul>
               </td>
               <td className="capitalize border-b-2 border-dark">
-                {updateResultTerminalogy(p.result)}
+                {p.result ? (
+                  <span>
+                    {updateResultTerminalogy(p.result)}
+                  </span>
+                ) : (
+                  <span className="text-sm">
+                    {p.discount}% discount
+                  </span>
+                )}
               </td>
             </tr>
           ))

@@ -1,14 +1,33 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import PassContext from "../../../components/utils/PassContext";
 import { useNavigate } from "react-router-dom";
 import { useCountdown } from "../../../components/utils/useCountdown";
 import Button from "../../../components/common/Button";
+import api from "../../../components/utils/api";
+import myToast from "../../../components/utils/myToast";
 
 const PackageBox = ({ item }) => {
   const navigate = useNavigate();
-  const { loggedUser } = useContext(PassContext);
+  const { loggedUser, getProfileShort } = useContext(PassContext);
 
   const { diffTimeData } = useCountdown(item.endDate);
+
+  const [cartText, setCartText] = useState("Add to Cart");
+
+  const addToCart = async (packageId) => {
+    try {
+      const { data } = await api.post("/user/addItemToCart", { packageId });
+      console.log(data);
+      getProfileShort();
+      myToast(data.msg, "success");
+      setCartText("Added in Cart");
+    } catch (err) {
+      console.log(err);
+      myToast(err?.response?.data?.error, "failure");
+      if (err?.response?.data?.error === "Item already in cart")
+        setCartText("Already in Cart");
+    }
+  };
 
   return (
     <div className="package-box">
@@ -41,10 +60,10 @@ const PackageBox = ({ item }) => {
               </div>
             )}
           </div>
-          <h2 className="text-center limit-to-2-lines my-2 xs:my-4">{item.name}</h2>
-          <h5 className="text-center limit-to-2-lines">
-            {item.gamePreview}
-          </h5>
+          <h2 className="text-center limit-to-2-lines my-2 xs:my-4">
+            {item.name}
+          </h2>
+          <h5 className="text-center limit-to-2-lines">{item.gamePreview}</h5>
         </div>
         <hr className="my-4 xs:my-6 mx-6 border-black hidden xs:block" />
         <div
@@ -63,17 +82,19 @@ const PackageBox = ({ item }) => {
           >
             Buy Now
           </Button>
-          <Button
-            className="w-full font-medium"
-            theme="lightgrey"
-            rounded="md"
-            size="md"
-            onClick={() => {
-              navigate("/packages/" + item._id);
-            }}
-          >
-            Add to Cart
-          </Button>
+          {loggedUser._id !== "" && (
+            <Button
+              className="w-full font-medium"
+              theme="dark"
+              rounded="md"
+              size="md"
+              onClick={() => {
+                addToCart(item._id);
+              }}
+            >
+              {cartText}
+            </Button>
+          )}
         </div>
       </div>
     </div>

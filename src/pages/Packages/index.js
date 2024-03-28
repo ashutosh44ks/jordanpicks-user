@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useUserContext } from "../../components/utils/useUserContext";
 import api from "../../components/utils/api";
 import Banner from "./components/Banner";
 import Steps from "./components/Steps";
@@ -9,6 +10,8 @@ import PackageMenu from "./components/PackageMenu";
 import "./packages.css";
 
 const Packages = () => {
+  const { loggedUser } = useUserContext();
+
   const [loading, setLoading] = useState(true);
   const [specialLoading, setSpecialLoading] = useState(true);
   const [packages, setPackages] = useState([]);
@@ -91,7 +94,7 @@ const Packages = () => {
   return (
     <div>
       <Banner />
-      <Steps />
+      {loggedUser._id === "" && <Steps />}
       <div className="my-20">
         <div>
           <h2 className="font-medium text-center mb-2">

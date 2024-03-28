@@ -20,7 +20,7 @@ const Sidebar = () => {
       <div className="flex justify-between gap-4 items-center">
         <h3 className="font-medium">My Account</h3>
         <Button
-          theme="dark"
+          theme="dark-noborder"
           onClick={() => {
             navigate("/store");
           }}

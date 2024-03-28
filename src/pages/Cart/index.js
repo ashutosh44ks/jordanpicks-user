@@ -222,7 +222,7 @@ const Cart = () => {
             </div>
             <div className="flex gap-4 sm:flex-row flex-col">
               <Button
-                theme="lightgrey"
+                theme="dark"
                 className="font-semibold"
                 size="md-rect"
                 onClick={clearCart}
