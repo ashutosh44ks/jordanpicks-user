@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import PassContext from "../../components/utils/PassContext";
 import api from "../../components/utils/api";
 import myToast from "../../components/utils/myToast";
-import Stripe from "./components/Stripe";
+import Authorize from "./components/Authorize.net";
 import Banner from "./components/Banner";
 import Modal from "../../components/common/Modal";
 import Button from "../../components/common/Button";
@@ -78,7 +78,7 @@ const PackageDetails = () => {
   };
   const dialogRef = useRef();
   useEffect(() => {
-    if (paymentRoute === "wallet" || paymentRoute === "stripe")
+    if (paymentRoute === "wallet" || paymentRoute === "card")
       dialogRef.current.showModal();
   }, [paymentRoute]);
 
@@ -131,12 +131,12 @@ const PackageDetails = () => {
           </div>
         </div>
       </div>
-      {paymentRoute === "stripe" && (
+      {paymentRoute === "card" && (
         <Modal
           ref={dialogRef}
           title="Pay with Card"
           content={
-            <Stripe
+            <Authorize
               packageId={packageDetails._id}
               packageName={packageDetails.name}
               cardDeduction={cardDeduction}
