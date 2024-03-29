@@ -3,34 +3,30 @@ import { useNavigate } from "react-router-dom";
 import api from "../../../components/utils/api";
 import PaymentCard from "../../../components/common/PaymentCard";
 
-const Authorize = ({
-  packageId,
-  cardDeduction,
-  walletDeduction,
-  loggedUser,
-}) => {
+const Authorize = ({ packageId, plan, loggedUser }) => {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
   const authorizePayment = async (cardNumber, cardExpiryDate, cardCvc) => {
     setIsLoading(true);
     try {
-      const { data } = await api.post("/user/buyPackageAuthorize", {
-        packageId,
+      let url = "";
+      if (plan === "monthly") url = "/user/createReccuringOrderMonthlyAuthorize";
+      else if (plan === "yearly") url = "/user/createReccuringOrderYearlyAuthorize";
+      const { data } = await api.post(url, {
+        specialPackageId: packageId,
         cardNumber,
         cardExpiryDate,
         cardCvc,
-        cardDeduction,
-        walletDeduction,
       });
       console.log(data);
       navigate(
-        `/payment/${packageId}?cardDeduction=${cardDeduction}&walletDeduction=${walletDeduction}&userId=${loggedUser._id}&status=success`
+        `/payment/${packageId}?plan=${plan}&userId=${loggedUser._id}&status=success`
       );
     } catch (error) {
       console.log(error);
       navigate(
-        `/payment/${packageId}?cardDeduction=${cardDeduction}&walletDeduction=${walletDeduction}&userId=${loggedUser._id}&status=failed&message=${error?.response?.data?.error}`
+        `/payment/${packageId}?plan=${plan}&userId=${loggedUser._id}&status=failed&message=${error?.response?.data?.error}`
       );
     }
     setIsLoading(false);

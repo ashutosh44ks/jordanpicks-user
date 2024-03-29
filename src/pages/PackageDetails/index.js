@@ -138,9 +138,9 @@ const PackageDetails = () => {
           content={
             <Authorize
               packageId={packageDetails._id}
-              packageName={packageDetails.name}
               cardDeduction={cardDeduction}
               walletDeduction={walletDeduction}
+              loggedUser={loggedUser}
             />
           }
           closeDialog={() => {

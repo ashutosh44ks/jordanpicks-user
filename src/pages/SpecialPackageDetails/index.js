@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useUserContext } from "../../components/utils/useUserContext";
 import api from "../../components/utils/api";
-import Stripe from "./components/Stripe";
+import Authorize from "./components/Authorize.net";
 import Banner from "./components/Banner";
 import Modal from "../../components/common/Modal";
 import SkeletonLines from "../../components/common/SkeletonLines";
@@ -10,6 +11,7 @@ import "./specialpackagedetails.css";
 
 const PackageDetails = () => {
   const { id } = useParams();
+  const { loggedUser } = useUserContext();
 
   const [packageDetails, setPackageDetails] = useState({});
   const [loading, setLoading] = useState(true);
@@ -98,10 +100,10 @@ const PackageDetails = () => {
         ref={dialogRef}
         title="Pay with Card"
         content={
-          <Stripe
+          <Authorize
             packageId={packageDetails._id}
-            packageName={packageDetails.name}
             plan={plan}
+            loggedUser={loggedUser}
           />
         }
       />

@@ -6,7 +6,7 @@ import myToast from "../../components/utils/myToast";
 import dateFormatter from "../../components/utils/dateFormatter";
 import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
-import Stripe from "./components/Stripe";
+import Authorize from "./components/Authorize.net";
 import { MdClose } from "react-icons/md";
 
 const Cart = () => {
@@ -121,7 +121,7 @@ const Cart = () => {
   };
   const dialogRef = useRef(null);
   useEffect(() => {
-    if (paymentRoute === "wallet" || paymentRoute === "stripe")
+    if (paymentRoute === "wallet" || paymentRoute === "card")
       dialogRef.current.showModal();
   }, [paymentRoute]);
 
@@ -242,7 +242,7 @@ const Cart = () => {
                     );
                   if (loggedUser.wallet >= grandTotal)
                     setPaymentRoute("wallet");
-                  else setPaymentRoute("stripe");
+                  else setPaymentRoute("card");
                 }}
               >
                 {loggedUser.wallet >= grandTotal
@@ -253,14 +253,15 @@ const Cart = () => {
           </div>
         </div>
       </div>
-      {paymentRoute === "stripe" && (
+      {paymentRoute === "card" && (
         <Modal
           ref={dialogRef}
           title="Pay with Card"
           content={
-            <Stripe
+            <Authorize
               cardDeduction={cardDeduction}
               walletDeduction={walletDeduction}
+              loggedUser={loggedUser}
             />
           }
           closeDialog={() => {
