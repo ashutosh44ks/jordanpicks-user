@@ -10,7 +10,7 @@ const Authorize = ({ cardDeduction, walletDeduction, loggedUser }) => {
   const authorizePayment = async (cardNumber, cardExpiryDate, cardCvc) => {
     setIsLoading(true);
     try {
-      const { data } = await api.post("/user/buyCartAuthorize", {
+      const { data } = await api.post("/user/paymentCartAuthorize", {
         cardNumber,
         cardExpiryDate,
         cardCvc,
