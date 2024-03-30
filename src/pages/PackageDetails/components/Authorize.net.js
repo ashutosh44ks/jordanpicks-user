@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../../components/utils/api";
 import PaymentCard from "../../../components/common/PaymentCard";
+import encryptData from "../../../components/utils/encryptData";
 
 const Authorize = ({
   packageId,
@@ -14,12 +15,13 @@ const Authorize = ({
   const [isLoading, setIsLoading] = useState(false);
   const authorizePayment = async (cardNumber, cardExpiryDate, cardCvc) => {
     setIsLoading(true);
+    const encryptedCardDetails = encryptData(
+      `${cardNumber},${cardExpiryDate},${cardCvc}`
+    );
     try {
       const { data } = await api.post("/user/buyPackageAuthorize", {
         packageId,
-        cardNumber,
-        cardExpiryDate,
-        cardCvc,
+        encryptedCardDetails,
         cardDeduction,
         walletDeduction,
       });

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import encryptData from "../../../components/utils/encryptData";
 import api from "../../../components/utils/api";
 import PaymentCard from "../../../components/common/PaymentCard";
 
@@ -9,15 +10,18 @@ const Authorize = ({ packageId, plan, loggedUser }) => {
   const [isLoading, setIsLoading] = useState(false);
   const authorizePayment = async (cardNumber, cardExpiryDate, cardCvc) => {
     setIsLoading(true);
+    const encryptedCardDetails = encryptData(
+      `${cardNumber},${cardExpiryDate},${cardCvc}`
+    );
     try {
       let url = "";
-      if (plan === "monthly") url = "/user/createReccuringOrderMonthlyAuthorize";
-      else if (plan === "yearly") url = "/user/createReccuringOrderYearlyAuthorize";
+      if (plan === "monthly")
+        url = "/user/createReccuringOrderMonthlyAuthorize";
+      else if (plan === "yearly")
+        url = "/user/createReccuringOrderYearlyAuthorize";
       const { data } = await api.post(url, {
         specialPackageId: packageId,
-        cardNumber,
-        cardExpiryDate,
-        cardCvc,
+        encryptedCardDetails,
       });
       console.log(data);
       navigate(
