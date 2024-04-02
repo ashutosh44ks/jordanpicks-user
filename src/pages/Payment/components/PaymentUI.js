@@ -5,7 +5,7 @@ import { RiCheckboxCircleLine } from "react-icons/ri";
 import { RxCrossCircled } from "react-icons/rx";
 import { GoDotFill } from "react-icons/go";
 
-const PaymentUI = ({ status, validatePayment }) => {
+const PaymentUI = ({ status, validatePayment, message }) => {
   const navigate = useNavigate();
 
   const [numberOfDots, setNumberOfDots] = useState(0);
@@ -48,7 +48,7 @@ const PaymentUI = ({ status, validatePayment }) => {
           </p>
           <p className="text-center">Do NOT refresh the page or go back.</p>
         </div>
-      ) : status === "succeeded" ? (
+      ) : status === "success" ? (
         <div>
           <h3 className="font-medium flex justify-center items-center gap-2 mb-2">
             <RiCheckboxCircleLine className="text-yellow" />
@@ -74,12 +74,17 @@ const PaymentUI = ({ status, validatePayment }) => {
             <RxCrossCircled className="text-yellow" />
             Payment Failed
           </h3>
+          {message && (
+            <>
+              <p className="text-center mb-2">{message}</p>
+              <p className="text-center text-lightgrey2">
+                If you think this is an error, you can raise an issue in the support page.
+              </p>
+            </>
+          )}
           <p className="text-center text-lightgrey2">
             Please copy the url and mention it while you raise an issue in the
-            support page.
-          </p>
-          <p className="text-center text-lightgrey2">
-            We will get back to you shortly.
+            support page. We will get back to you shortly.
           </p>
           <div className="flex justify-center mt-8">
             <Button

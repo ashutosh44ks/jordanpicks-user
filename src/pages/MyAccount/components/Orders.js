@@ -61,7 +61,7 @@ const Orders = () => {
 
   const cancelRecurrence = async (id) => {
     try {
-      const { data } = await api.delete(`/user/cancelRecurringOrder/${id}`);
+      const { data } = await api.delete(`/user/cancelRecurringOrderAuthorize/${id}`);
       console.log(data);
       myToast(data.msg, "success");
       getProfileShort();

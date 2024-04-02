@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect } from "react";
+import { useUserContext } from "../../components/utils/useUserContext";
 import api from "../../components/utils/api";
 import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
-import Stripe from "./components/Stripe";
+import Authorize from "./components/Authorize.net";
 
 const Store = () => {
+  const { loggedUser } = useUserContext();
+
   const [store, setStore] = useState([]);
   const getStore = async () => {
     try {
@@ -62,7 +65,7 @@ const Store = () => {
       <Modal
         ref={dialogRef}
         title="Pay with Card"
-        content={<Stripe storeId={openModal._id} />}
+        content={<Authorize storeId={openModal._id} loggedUser={loggedUser} />}
         closeDialog={() => {
           setOpenModal({});
         }}

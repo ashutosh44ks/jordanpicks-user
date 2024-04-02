@@ -106,7 +106,7 @@ const Banner = ({ loading, packageDetails, wallet, setPaymentRoute }) => {
                 rounded="md"
                 onClick={() => {
                   if (wallet >= packageDetails.price) setPaymentRoute("wallet");
-                  else setPaymentRoute("stripe");
+                  else setPaymentRoute("card");
                 }}
               >
                 {wallet >= packageDetails.price
