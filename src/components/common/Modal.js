@@ -4,6 +4,9 @@ import "./modal.css";
 
 const Modal = forwardRef(({ content, title, closeDialog = () => {} }, ref) => {
   const hideDialog = (event) => {
+    // Do not close dialog if the submit button is clicked
+    if (event.srcElement?.id === "submit") return;
+
     var rect = ref.current.getBoundingClientRect();
     var isInDialog =
       rect.top <= event.clientY &&
