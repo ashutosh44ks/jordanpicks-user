@@ -7,6 +7,7 @@ const PassContext = React.createContext({
     wallet: 0,
     defaultDiscount: 0,
     cart: [],
+    isAddress: false,
   },
   setLoggedUser: () => {},
   getProfileShort: () => {},

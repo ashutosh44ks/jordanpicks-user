@@ -29,16 +29,13 @@ import PackageDetails from "./pages/PackageDetails";
 import SpecialPackageDetails from "./pages/SpecialPackageDetails";
 import VSLPackageDetails from "./pages/VSLPackageDetails";
 import Payment from "./pages/Payment";
-import VSLPayment from "./pages/VSLPayment";
-import SpecialPayment from "./pages/SpecialPackageDetails/Payment";
-import StorePayment from "./pages/Store/Payment";
+// import SpecialPayment from "./pages/SpecialPackageDetails/Payment";
 // import AddReward from "./pages/AddReward";
 import ForgotPassword from "./pages/Auth/components/ForgotPassword";
 import Faq from "./pages/Faq";
 import Store from "./pages/Store";
 import VerifyAccount from "./pages/Auth/components/Verify";
 import Cart from "./pages/Cart";
-import CartPayment from "./pages/Cart/Payment";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState({
@@ -47,6 +44,7 @@ function App() {
     wallet: 0,
     defaultDiscount: 0,
     cart: [],
+    isAddress: false,
   });
   const [loading, setLoading] = useState(true);
   const handleReturningUser = async () => {
@@ -76,6 +74,7 @@ function App() {
         name: data.dta.name,
         defaultDiscount: data.dta.defaultDiscount,
         cart: data.dta.cart || [],
+        isAddress: data.dta.isAddress,
       });
     } catch (err) {
       console.log(err);
@@ -120,7 +119,7 @@ function App() {
           element: <Packages />,
         },
         {
-          path: "/packages/:id/payment",
+          path: "/payment/:id",
           element: <Payment />,
         },
         {
@@ -144,10 +143,6 @@ function App() {
           ],
         },
         {
-          path: "/special-packages/:id/payment",
-          element: <SpecialPayment />,
-        },
-        {
           path: "/vsl-packages/:id",
           element: <ProtectedRoute />,
           children: [
@@ -156,10 +151,6 @@ function App() {
               element: <VSLPackageDetails />,
             },
           ],
-        },
-        {
-          path: "/vsl-packages/:id/payment",
-          element: <VSLPayment />,
         },
         {
           path: "/my-account",
@@ -202,14 +193,6 @@ function App() {
               element: <Store />,
             },
           ],
-        },
-        {
-          path: "/cart/payment",
-          element: <CartPayment />,
-        },
-        {
-          path: "/store/payment",
-          element: <StorePayment />,
         },
         {
           path: "/faq",

@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect } from "react";
+import { useUserContext } from "../../components/utils/useUserContext";
 import api from "../../components/utils/api";
 import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
-import Stripe from "./components/Stripe";
+import Authorize from "./components/Authorize.net";
 
 const Store = () => {
+  const { loggedUser } = useUserContext();
+
   const [store, setStore] = useState([]);
   const getStore = async () => {
     try {
@@ -33,7 +36,7 @@ const Store = () => {
           {store.map((p, i) => (
             <div
               key={i}
-              className="p-4 my-4 rounded-2xl bg-dark2 border border-yellow"
+              className="p-4 my-4 rounded-2xl bg-dark2 border border-yellow w-96"
             >
               <h2 className="mt-2 mb-4 mx-2 text-center">{p.name}</h2>
               <div className="flex justify-center items-start mb-4">
@@ -62,7 +65,7 @@ const Store = () => {
       <Modal
         ref={dialogRef}
         title="Pay with Card"
-        content={<Stripe storeId={openModal._id} />}
+        content={<Authorize storeId={openModal._id} loggedUser={loggedUser} />}
         closeDialog={() => {
           setOpenModal({});
         }}
