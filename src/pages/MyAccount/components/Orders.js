@@ -61,7 +61,9 @@ const Orders = () => {
 
   const cancelRecurrence = async (id) => {
     try {
-      const { data } = await api.delete(`/user/cancelRecurringOrderAuthorize/${id}`);
+      const { data } = await api.delete(
+        `/user/cancelRecurringOrderAuthorize/${id}`
+      );
       console.log(data);
       myToast(data.msg, "success");
       getProfileShort();
@@ -75,6 +77,7 @@ const Orders = () => {
   return (
     <div>
       <div>
+        <h4>Standard Transactions</h4>
         <Table
           tHead={["S.No.", "Package Name", "Date", "Type", "Price", "Method"]}
           wrapperClass="my-8"
@@ -113,6 +116,7 @@ const Orders = () => {
         <Pagination lastPage={totalPages} page={page} setPage={setPage} />
       </div>
       <div className="mt-6">
+        <h4>Subscription Transactions</h4>
         <Table
           tHead={["S.No.", "Package Name", "Date", "Price", "Status", "Action"]}
           wrapperClass="my-8"
@@ -128,13 +132,13 @@ const Orders = () => {
                   {dateFormatter(transaction.createdAt)}
                 </td>
                 <td className="border-b-2 border-dark">
-                  {transaction?.price?.toFixed(2)}/
+                  ${transaction?.price?.toFixed(2)}/
                   {decorateType(transaction).split("ly")[0]}
                 </td>
                 <td className="border-b-2 border-dark capitalize">
                   {transaction.status}
                 </td>
-                <td>
+                <td className="border-b-2 border-dark">
                   {transaction.status === "active" && (
                     <Button
                       theme="yellow"

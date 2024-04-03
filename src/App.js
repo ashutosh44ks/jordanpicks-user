@@ -44,6 +44,7 @@ function App() {
     wallet: 0,
     defaultDiscount: 0,
     cart: [],
+    isAddress: false,
   });
   const [loading, setLoading] = useState(true);
   const handleReturningUser = async () => {
@@ -73,6 +74,7 @@ function App() {
         name: data.dta.name,
         defaultDiscount: data.dta.defaultDiscount,
         cart: data.dta.cart || [],
+        isAddress: data.dta.isAddress,
       });
     } catch (err) {
       console.log(err);

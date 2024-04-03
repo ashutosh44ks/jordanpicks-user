@@ -38,6 +38,7 @@ const Header = () => {
       wallet: 0,
       defaultDiscount: 0,
       cart: [],
+      isAddress: false,
     });
     navigate("/auth/login");
   };
