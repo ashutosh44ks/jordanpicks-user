@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useUserContext } from "../utils/useUserContext";
 import Button from "./Button";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const PaymentCard = ({ isLoading, submitFn }) => {
+  const { loggedUser } = useUserContext();
+
   const handleCardNumberChange = (event) => {
     // Get the user's input
     const userInput = event.target.value;
@@ -65,6 +69,21 @@ const PaymentCard = ({ isLoading, submitFn }) => {
   const [cardExpiryDate, setCardExpiryDate] = useState(null);
   const [cardCvc, setCardCvc] = useState(null);
   const [message, setMessage] = useState(null);
+
+  if (!loggedUser.isAddress) {
+    return (
+      <div>
+        <h5 className="font-medium text-center mb-4">
+          Please complete your address details before proceeding to payment
+        </h5>
+        <Link to="/my-account/account-details">
+          <Button theme="yellow" className="mt-4 w-full">
+            Open Edit Profile
+          </Button>
+        </Link>
+      </div>
+    );
+  }
 
   return (
     <form

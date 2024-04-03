@@ -36,7 +36,7 @@ const Store = () => {
           {store.map((p, i) => (
             <div
               key={i}
-              className="p-4 my-4 rounded-2xl bg-dark2 border border-yellow"
+              className="p-4 my-4 rounded-2xl bg-dark2 border border-yellow w-96"
             >
               <h2 className="mt-2 mb-4 mx-2 text-center">{p.name}</h2>
               <div className="flex justify-center items-start mb-4">
