@@ -32,7 +32,7 @@ const Contact = () => {
       setMsg("");
     } catch (err) {
       console.log(err);
-      myToast(err?.response?.data?.error || "Something went wrong", "failure");
+      myToast(err?.response?.data?.error, "failure");
     }
   };
   const getProfile = async () => {

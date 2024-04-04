@@ -115,7 +115,7 @@ const Cart = () => {
       navigate("/my-account/transactions");
     } catch (err) {
       console.log(err);
-      myToast(err?.response?.data?.error || "Something went wrong", "failure");
+      myToast(err?.response?.data?.error, "failure");
     }
     setWalletLoading(false);
   };

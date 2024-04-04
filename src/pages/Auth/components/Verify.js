@@ -34,7 +34,7 @@ const VerifyAccount = () => {
       }
     } catch (err) {
       console.log(err);
-      myToast(err?.response?.data?.error || "Something went wrong", "failure");
+      myToast(err?.response?.data?.error, "failure");
     }
   };
 
@@ -51,7 +51,7 @@ const VerifyAccount = () => {
       setPage(1);
     } catch (err) {
       console.log(err);
-      myToast(err?.response?.data?.error || "Something went wrong", "failure");
+      myToast(err?.response?.data?.error, "failure");
       setShowResend(true);
     }
     setLoading(false);

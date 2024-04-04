@@ -56,7 +56,7 @@ const AccountDetails = () => {
       getDashboard();
     } catch (err) {
       console.log(err);
-      myToast(err?.response?.data?.error || "Something went wrong", "failure");
+      myToast(err?.response?.data?.error, "failure");
     }
   };
   const handleChangePassword = async () => {
@@ -76,7 +76,7 @@ const AccountDetails = () => {
       getDashboard();
     } catch (err) {
       console.log(err);
-      myToast(err?.response?.data?.error || "Something went wrong", "failure");
+      myToast(err?.response?.data?.error, "failure");
     }
   };
 
@@ -95,7 +95,7 @@ const AccountDetails = () => {
       getProfileShort();
     } catch (err) {
       console.log(err);
-      myToast(err?.response?.data?.error || "Something went wrong", "failure");
+      myToast(err?.response?.data?.error, "failure");
     }
   };
 

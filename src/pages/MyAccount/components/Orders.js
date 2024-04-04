@@ -68,9 +68,9 @@ const Orders = () => {
       myToast(data.msg, "success");
       getProfileShort();
       getRecurringTransactions();
-    } catch (error) {
-      console.log(error);
-      myToast(error?.response?.data?.message, "failure");
+    } catch (err) {
+      console.log(err);
+      myToast(err?.response?.data?.error, "failure");
     }
   };
 
