@@ -5,7 +5,7 @@ import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { PiSealCheck } from "react-icons/pi";
-import SocialLoginBtnGroup from "./SocialLoginBtnGroup";
+// import SocialLoginBtnGroup from "./SocialLoginBtnGroup";
 
 const RenderReferral = ({ refBy, setRefBy }) => {
   const [searchParams] = useSearchParams();
@@ -202,12 +202,12 @@ const Register = () => {
           Login
         </span>
       </div>
-      <div className="flex items-center gap-2 my-4">
+      {/* <div className="flex items-center gap-2 my-4">
         <hr className="w-full border-black" />
         <span className="text-sm">OR</span>
         <hr className="w-full border-black" />
       </div>
-      {/* <SocialLoginBtnGroup /> */}
+      <SocialLoginBtnGroup /> */}
     </form>
   );
 };
