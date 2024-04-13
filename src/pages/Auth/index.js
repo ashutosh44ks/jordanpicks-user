@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import "./auth.css";
 
 const Auth = () => {
   const { pathname } = useLocation();
