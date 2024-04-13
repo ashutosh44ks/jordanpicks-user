@@ -5,7 +5,7 @@ import PassContext from "../../../components/utils/PassContext";
 import Button from "../../../components/common/Button";
 import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
-import SocialLoginBtnGroup from "./SocialLoginBtnGroup";
+// import SocialLoginBtnGroup from "./SocialLoginBtnGroup";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
@@ -131,12 +131,12 @@ const Login = () => {
           Register
         </span>
       </div>
-      <div className="flex items-center gap-2 my-4">
+      {/* <div className="flex items-center gap-2 my-4">
         <hr className="w-full border-black" />
         <span className="text-sm">OR</span>
         <hr className="w-full border-black" />
       </div>
-      {/* <SocialLoginBtnGroup /> */}
+      <SocialLoginBtnGroup /> */}
     </form>
   );
 };
