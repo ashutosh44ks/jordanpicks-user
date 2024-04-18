@@ -94,7 +94,7 @@ const Login = () => {
         </span>
       </div>
       <div className="w-full flex justify-between mb-4">
-        <span className="text-sm flex gap-2 items-center" onClick={() => {}}>
+        <span className="text-sm flex gap-2 items-center">
           <input
             type="checkbox"
             checked={rememberMe}
