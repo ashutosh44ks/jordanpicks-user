@@ -1,10 +1,9 @@
-import { useContext } from "react";
 import { useWindowWidth } from "../../../components/utils/useWindowWidth";
-import PassContext from "../../../components/utils/PassContext";
+import { useUserContext } from "../../../components/utils/useUserContext";
 
 const Banner = () => {
   const width = useWindowWidth();
-  const { loggedUser } = useContext(PassContext);
+  const { loggedUser } = useUserContext();
 
   if (loggedUser.defaultDiscount !== 0) {
     if (width < 480) {

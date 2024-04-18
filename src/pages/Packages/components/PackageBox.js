@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import PassContext from "../../../components/utils/PassContext";
+import { useState } from "react";
+import { useUserContext } from "../../../components/utils/useUserContext";
 import { useNavigate } from "react-router-dom";
 import { useCountdown } from "../../../components/utils/useCountdown";
 import Button from "../../../components/common/Button";
@@ -8,7 +8,7 @@ import myToast from "../../../components/utils/myToast";
 
 const PackageBox = ({ item }) => {
   const navigate = useNavigate();
-  const { loggedUser, getProfileShort } = useContext(PassContext);
+  const { loggedUser, getProfileShort } = useUserContext();
 
   const { diffTimeData } = useCountdown(item.endDate);
 

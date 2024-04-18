@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import PassContext from "../../utils/PassContext";
+import { useUserContext } from "../../utils/useUserContext";
 import Breadcrumbs from "../../common/Breadcrumbs";
 import Button from "../../common/Button";
 import Sidebar from "./Sidebar";
@@ -26,8 +26,7 @@ const Menu = ({ route, activeRoute }) => {
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { loggedUser, setLoggedUser, getProfileShort } =
-    useContext(PassContext);
+  const { loggedUser, setLoggedUser, getProfileShort } = useUserContext();
 
   const logout = () => {
     localStorage.removeItem("jordanToken");

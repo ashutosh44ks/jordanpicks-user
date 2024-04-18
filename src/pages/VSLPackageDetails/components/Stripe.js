@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   PaymentElement,
@@ -7,7 +7,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import api from "../../../components/utils/api";
-import PassContext from "../../../components/utils/PassContext";
+import { useUserContext } from "../../../components/utils/useUserContext";
 import myToast from "../../../components/utils/myToast";
 import Button from "../../../components/common/Button";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -114,7 +114,7 @@ const CheckoutForm = ({
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
 
 const StripeComponent = ({ packageId, cardDeduction, walletDeduction }) => {
-  const { loggedUser } = useContext(PassContext);
+  const { loggedUser } = useUserContext();
   const [clientSecret, setClientSecret] = useState("");
 
   const createIntent = async () => {

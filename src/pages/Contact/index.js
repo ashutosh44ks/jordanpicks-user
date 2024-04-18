@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from "react";
-import PassContext from "../../components/utils/PassContext";
+import { useState, useEffect } from "react";
+import { useUserContext } from "../../components/utils/useUserContext";
 import api from "../../components/utils/api";
 import myToast from "../../components/utils/myToast";
 import Button from "../../components/common/Button";
@@ -7,7 +7,7 @@ import { RiTelegramFill } from "react-icons/ri";
 import "./contact.css";
 
 const Contact = () => {
-  const { loggedUser } = useContext(PassContext);
+  const { loggedUser } = useUserContext();
 
   const [fName, setFName] = useState("");
   const [lName, setLName] = useState("");
@@ -172,7 +172,7 @@ const Contact = () => {
               window.open("https://t.me/jordanspicks", "_blank");
             }}
           >
-            <RiTelegramFill className="text-2xl"/> Chat with us on Telegram
+            <RiTelegramFill className="text-2xl" /> Chat with us on Telegram
           </button>
         </div>
       </form>

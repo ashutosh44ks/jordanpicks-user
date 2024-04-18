@@ -1,7 +1,7 @@
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import PassContext from "../../../components/utils/PassContext";
+import { useUserContext } from "../../../components/utils/useUserContext";
 import Button from "../../../components/common/Button";
 import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
@@ -9,7 +9,7 @@ import myToast from "../../../components/utils/myToast";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
-  const { loggedUser, setLoggedUser } = useContext(PassContext);
+  const { loggedUser, setLoggedUser } = useUserContext();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 

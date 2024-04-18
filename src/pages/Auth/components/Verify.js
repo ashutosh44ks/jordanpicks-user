@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import PassContext from "../../../components/utils/PassContext";
+import { useUserContext } from "../../../components/utils/useUserContext";
 import api from "../../../components/utils/api";
 import myToast from "../../../components/utils/myToast";
 import Button from "../../../components/common/Button";
@@ -9,7 +9,7 @@ import { AiOutlineLoading } from "react-icons/ai";
 const VerifyAccount = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { loggedUser } = useContext(PassContext);
+  const { loggedUser } = useUserContext();
 
   const [emailInput, setEmailInput] = useState("");
   useEffect(() => {

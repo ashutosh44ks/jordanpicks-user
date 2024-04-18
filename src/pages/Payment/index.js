@@ -1,11 +1,11 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import PassContext from "../../components/utils/PassContext";
+import { useUserContext } from "../../components/utils/useUserContext";
 import PaymentUI from "./components/PaymentUI";
 
 const Payment = () => {
   const location = useLocation();
-  const { getProfileShort } = useContext(PassContext);
+  const { getProfileShort } = useUserContext();
 
   const searchParams = new URLSearchParams(location.search);
   const [status, setStatus] = useState("");

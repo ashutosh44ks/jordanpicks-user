@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import PassContext from "../../components/utils/PassContext";
+import { useUserContext } from "../../components/utils/useUserContext";
 import api from "../../components/utils/api";
 import myToast from "../../components/utils/myToast";
 import Authorize from "./components/Authorize.net";
@@ -13,7 +13,7 @@ import "./packagedetails.css";
 
 const PackageDetails = () => {
   const { id } = useParams();
-  const { loggedUser, getProfileShort } = useContext(PassContext);
+  const { loggedUser, getProfileShort } = useUserContext();
   const navigate = useNavigate();
 
   const [packageDetails, setPackageDetails] = useState({});

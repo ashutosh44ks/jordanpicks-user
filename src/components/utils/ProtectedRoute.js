@@ -1,13 +1,13 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import { useUserContext } from "./useUserContext";
 import updateToken from "./updateToken";
-import PassContext from "./PassContext";
 
 const ProtectedRoute = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { loggedUser, setLoggedUser } = useContext(PassContext);
+  const { loggedUser, setLoggedUser } = useUserContext();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (loggedUser._id === "") {
