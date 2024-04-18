@@ -1,7 +1,7 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useWindowWidth } from "../../../components/utils/useWindowWidth";
-import PassContext from "../../../components/utils/PassContext";
+import { useUserContext } from "../../../components/utils/useUserContext";
 // import { TbCircleFilled } from "react-icons/tb";
 
 // const BtnGrp = ({ activeIndex }) => {
@@ -20,7 +20,7 @@ import PassContext from "../../../components/utils/PassContext";
 const Banner = () => {
   const navigate = useNavigate();
   const width = useWindowWidth();
-  const { loggedUser } = useContext(PassContext);
+  const { loggedUser } = useUserContext();
 
   // const [activeIndex, setActiveIndex] = useState(0);
   // const [hover, setHover] = useState(false);
