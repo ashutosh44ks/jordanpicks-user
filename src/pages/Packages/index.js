@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useUserContext } from "../../components/utils/useUserContext";
 import api from "../../components/utils/api";
 import Banner from "./components/Banner";
+import Banner2 from "./components/Banner2";
 import Steps from "./components/Steps";
 import PackageContainer from "./components/PackageContainer";
 import SpecialPackageContainer from "./components/SpecialPackageContainer";
@@ -105,7 +106,10 @@ const Packages = () => {
             to kickstart your gaming journey with an unbeatable edge.
           </p>
         </div>
-        <div className="flex justify-center mt-12">
+        <div className="my-12">
+          <Banner2 />
+        </div>
+        <div className="flex justify-center my-12">
           <PackageMenu
             sports={sports}
             activeSportsIndex={activeSportsIndex}
